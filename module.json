@@ -3,7 +3,7 @@
   "name": "lyynix-more-journal-enrichers",
   "title": "Lyynix: More Journal Enrichers",
   "description": "n/A",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "10",
   "compatibility": {
