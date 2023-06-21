@@ -2,14 +2,6 @@
 
 CONFIG.TextEditor.enrichers.push(
     {
-        pattern: /@Em\[(.*?)\]/g,
-        enricher: async(match, options) => {
-            const content = match[1]
-            return $(`
-            <a class="content-link"><em>${content}</em>`)[0]
-        }
-    },
-    {
         pattern: /@SceneMenu\[(.*?)\]/g,
         enricher: async(match, options) => {
             const uuid = match[1]
