@@ -7,9 +7,9 @@
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "10",
   "compatibility": {
-    "minimum": "0.8.6",
-    "verified": "10",
-    "maximum": "10"
+    "minimum": "11",
+    "verified": "11",
+    "maximum": "11"
   },
   "author": "Lyynix",
   "authors": [
