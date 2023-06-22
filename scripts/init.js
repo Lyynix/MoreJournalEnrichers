@@ -26,6 +26,9 @@ CONFIG.TextEditor.enrichers.push({
                     ${sceneDocument.name}
             </a>
             `;
+      var sceneName = sceneDocument.navName ? 
+        `${sceneDocument.navName} (${sceneDocument.name})` : 
+        sceneDocument.name
 
       var sceneControl = /* html */ `
             <a onclick="
@@ -50,7 +53,7 @@ CONFIG.TextEditor.enrichers.push({
 
       menuHtml += /* html */ `    
             <tr>
-                <td>${sceneRefHtml}</td>
+                <td>${sceneName}</td>
                 <td style="display: flex; justify-content: flex-end">${sceneControl}</td>
             </tr>
             `;
