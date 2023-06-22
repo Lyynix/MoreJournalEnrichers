@@ -35,7 +35,6 @@ CONFIG.TextEditor.enrichers.push({
                 <i class="fas fa-eye" style="margin: 5px"></i>
             </a>
             <a onclick="
-                    //game.scenes.get('${uuid}')?.update({ active: true }); 
                     game.scenes.get('${uuid}')?.activate(); 
                     return false;
                     ">
@@ -64,22 +63,6 @@ CONFIG.TextEditor.enrichers.push({
     return $(menuHtml)[0];
   },
 });
-
-class LMJEfunctionality {
-  static viewScene(uuid) {
-    var sceneDocument = game.scenes.get(uuid);
-
-    return false;
-  }
-
-  static activateScene(uuid) {
-    var sceneDocument = game.scenes.get(uuid);
-
-    sceneDocument.update({ active: true });
-
-    return false;
-  }
-}
 
 /* Scene Object:
 {
