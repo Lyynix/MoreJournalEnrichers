@@ -1,10 +1,11 @@
 // Module specific code goes here. See https://foundryvtt.com/article/module-development/ for help.
 
 CONFIG.TextEditor.enrichers.push({
-  pattern: /@SceneMenu\[(.*?)\]/g,
+  pattern: /@SceneMenu\[((\s*[a-zA-Z0-9]+)+\s*?)\]/g,
   enricher: async (match, options) => {
-    const uuids = match[1].split(" ");
+    const uuids = match[1].split(/\s+/g);
 
+    
     var menuHtml = /* html */ `
       <table>
         <tr>
@@ -16,6 +17,7 @@ CONFIG.TextEditor.enrichers.push({
       var uuid = uuids[i];
 
       var sceneDocument = game.scenes.get(uuid);
+      if(!sceneDocument) continue;
 
       var sceneName = sceneDocument.navName
         ? `${sceneDocument.navName} (${sceneDocument.name})`
