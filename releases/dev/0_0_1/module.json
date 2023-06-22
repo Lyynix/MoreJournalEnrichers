@@ -44,8 +44,8 @@
       "flags": {}
     }
   ],
-  "url": "",
-  "manifest": "",
-  "download": "",
+  "url": "https://github.com/Lyynix/MoreJournalEnrichers",
+  "manifest": "https://github.com/Lyynix/MoreJournalEnrichers/raw/dev/releases/dev/0_0_1/module.json",
+  "download": "https://github.com/Lyynix/MoreJournalEnrichers/raw/dev/releases/dev/0_0_1/lyynix-more-journal-enrichers_0_0_1.zip",
   "manifestPlusVersion": "1.2.0"
 }
