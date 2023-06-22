@@ -22,26 +22,26 @@ CONFIG.TextEditor.enrichers.push({
         : sceneDocument.name;
 
       var sceneControl = /* html */ `
-        <a onclick="
+        <a title="Szene anzeigen" onclick="
           game.scenes.get('${uuid}')?.view(); 
           return false;
           ">
           <i class="fas fa-eye" style="margin: 5px"></i>
         </a>
-        <a onclick="
+        <a title="Szene aktivieren" onclick="
             game.scenes.get('${uuid}')?.activate(); 
             return false;
             ">
           <i class="fas fa-bullseye" style="margin: 5px"></i>
         </a>
-        <a onclick="
+        <a title="Szene in Navigation anzeigen" onclick="
             var document = game.scenes.get('${uuid}'); 
             document.update({navigation: !document.navigation})
             return false;
             ">
           <i class="fas fa-compass" style="margin: 5px"></i>
         </a>
-        <a onclick="
+        <a title="Szene bearbeiten" onclick="
             new SceneConfig(game.scenes.get('${uuid}')).render(true);
             return false;
             ">
