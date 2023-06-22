@@ -1,0 +1,11 @@
+{
+    "SCENEMENU": {
+        "Title": "Scene menu",
+        "Tooltip": {
+            "Show": "Show scene",
+            "Activate": "Acitvate scene",
+            "ToggleNav": "Toggle scene in navigation",
+            "Edit": "Edit scene"
+        }
+    }
+}
