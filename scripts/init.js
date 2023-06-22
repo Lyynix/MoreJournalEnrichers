@@ -29,17 +29,21 @@ CONFIG.TextEditor.enrichers.push({
 
       var sceneControl = /* html */ `
             <a onclick="
-                    LMJEfunctionality.viewScene(${uuid})
+                    game.scenes.get('${uuid}')?.view(); 
+                    return false;
                     ">
                 <i class="fas fa-eye" style="margin: 5px"></i>
             </a>
             <a onclick="
-                    game.scenes.get('${uuid}')?.update({ active: true }); 
+                    //game.scenes.get('${uuid}')?.update({ active: true }); 
+                    game.scenes.get('${uuid}')?.activate(); 
                     return false;
                     ">
                 <i class="fas fa-bullseye" style="margin: 5px"></i>
             </a>
             <a onclick="
+                    new SceneConfig(game.scenes.get('${uuid}')).render(true);
+                    return false;
                     ">
                 <i class="fas fa-cogs" style="margin: 5px"></i>
             </a>
