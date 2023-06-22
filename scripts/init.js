@@ -5,7 +5,7 @@ CONFIG.TextEditor.enrichers.push({
   enricher: async (match, options) => {
     const uuids = match[1].split(" ");
 
-    var menuHtml = /*html*/ `
+    var menuHtml = /* html */ `
         <table>
             <tr>
                 <td colspan="2">Szenenmenü</td>
