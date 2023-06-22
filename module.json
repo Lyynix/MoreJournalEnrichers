@@ -30,6 +30,20 @@
   "esmodules": [
     "./scripts/init.js"
   ],
+  "languages": [
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json",
+      "flags": {}
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
   "url": "",
   "manifest": "",
   "download": "",
