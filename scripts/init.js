@@ -52,7 +52,7 @@ CONFIG.TextEditor.enrichers.push({
       menuHtml += /* html */ `    
             <tr>
                 <td>${sceneRefHtml}</td>
-                <td width="100em">${sceneControl}</td>
+                <td style="display: flex; justify-content: flex-end">${sceneControl}</td>
             </tr>
             `;
     }
