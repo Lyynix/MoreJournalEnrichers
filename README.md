@@ -18,7 +18,7 @@ To use any of the enrichers, write or paste the enricher into the text editor of
 Every enhancer in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
 
 - `@SceneMenu[sceneID1 sceneID2 ...]` [wiki page](#):\
-  This enhancer adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar\
+  This enhancer adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
 
 ## Contact & Support
 You need help with the module or you want to share an idea for another enhancer i didn't think of?\
