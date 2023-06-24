@@ -1,29 +1,29 @@
 // Module specific code goes here. See https://foundryvtt.com/article/module-development/ for help.
 
-CONFIG.TextEditor.enrichers.push({
-  pattern: /@SceneMenu\[((\s*[a-zA-Z0-9]+)+\s*?)\]/g,
-  enricher: async (match, options) => {
-    const uuids = match[1].split(/\s+/g);
+CONFIG.TextEditor.enrichers.push(
+  {
+    pattern: /@SceneMenu\[((\s*[a-zA-Z0-9]+)+\s*?)\]/g,
+    enricher: async (match, options) => {
+      const uuids = match[1].split(/\s+/g);
 
-    
-    var menuHtml = /* html */ `
+      var menuHtml = /* html */ `
       <table>
         <tr>
           <td colspan="2">${game.i18n.localize("SCENEMENU.Title")}</td>
         </tr>
       `;
 
-    for (var i = 0; i < uuids.length; i++) {
-      var uuid = uuids[i];
+      for (var i = 0; i < uuids.length; i++) {
+        var uuid = uuids[i];
 
-      var sceneDocument = game.scenes.get(uuid);
-      if(!sceneDocument) continue;
+        var sceneDocument = game.scenes.get(uuid);
+        if (!sceneDocument) continue;
 
-      var sceneName = sceneDocument.navName
-        ? `${sceneDocument.navName} (${sceneDocument.name})`
-        : sceneDocument.name;
+        var sceneName = sceneDocument.navName
+          ? `${sceneDocument.navName} (${sceneDocument.name})`
+          : sceneDocument.name;
 
-      var sceneControl = /* html */ `
+        var sceneControl = /* html */ `
         <a title="${game.i18n.localize("SCENEMENU.Tooltip.Show")}" onclick="
           game.scenes.get('${uuid}')?.view(); 
           return false;
@@ -36,7 +36,9 @@ CONFIG.TextEditor.enrichers.push({
             ">
           <i class="fas fa-bullseye" style="margin: 5px"></i>
         </a>
-        <a title="${game.i18n.localize("SCENEMENU.Tooltip.ToggleNav")}" onclick="
+        <a title="${game.i18n.localize(
+          "SCENEMENU.Tooltip.ToggleNav"
+        )}" onclick="
             var document = game.scenes.get('${uuid}'); 
             document.update({navigation: !document.navigation})
             return false;
@@ -51,18 +53,31 @@ CONFIG.TextEditor.enrichers.push({
         </a>
         `;
 
-      menuHtml += /* html */ `    
+        menuHtml += /* html */ `    
         <tr>
           <td>${sceneName}</td>
           <td style="display: flex; justify-content: flex-end">${sceneControl}</td>
         </tr>
         `;
-    }
+      }
 
-    menuHtml += /* html */ `
+      menuHtml += /* html */ `
       </table>
       `;
 
-    return $(menuHtml)[0];
+      return $(menuHtml)[0];
+    },
   },
-});
+  {
+    pattern: /(@ToC)(?!\[)/g,
+    enricher: async (match, options) => {
+
+    }
+  },
+  {
+    pattern: /(@ToC)(\[((\s*[a-zA-Z0-9]+)+\s*?)\])/g,
+    enricher: async (match, options) => {
+      
+    }
+  }
+);
