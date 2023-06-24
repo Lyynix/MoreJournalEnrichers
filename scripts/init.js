@@ -71,33 +71,51 @@ CONFIG.TextEditor.enrichers.push(
   {
     pattern: /(@ToC)(?!\[)/g,
     enricher: async (match, options) => {
-      //console.log(options.relativeTo.parent)
+      //console.log(options.relativeTo.parent);
 
-      var tocHtml = /* html */ `
-        <ul>
-      `
+      var tocHtml = ``;
 
-      var journalPage = options.relativeTo.parent
-      var thisPageId = options.relativeTo._id
+      var journalPage = options.relativeTo.parent;
+      var thisPageId = options.relativeTo._id;
 
-      journalPage.pages.forEach(element => {
+      var pages = journalPage.pages
+        .map((e) => e)
+        .sort((a, b) => {
+          return a.sort - b.sort;
+        });
+      //console.log(pages);
+
+      var prevTitleLevel = 0;
+      pages.forEach((page) => {
+        if (prevTitleLevel < page.title.level) {
+          for (let i = 0; i < page.title.level - prevTitleLevel; i++) {
+            tocHtml += /* html */ `
+              <ul>
+            `;
+          }
+        } else if (prevTitleLevel > page.title.level) {
+          for (let i = 0; i < prevTitleLevel - page.title.level; i++) {
+            tocHtml += /* html */ `
+              </ul>
+            `;
+          }
+        }
         tocHtml += /* html */ `
-          <li><a>${element.name}</a></li>
-        `
+          <li><a>${page.name}</a></li>
+        `;
+
+        prevTitleLevel = page.title.level;
       });
 
-      
       tocHtml += /* html */ `
         </ul>
-      `
+      `;
 
       return $(tocHtml)[0];
-    }
+    },
   },
   {
     pattern: /(@ToC)(\[((\s*[a-zA-Z0-9]+)+\s*?)\])/g,
-    enricher: async (match, options) => {
-      
-    }
+    enricher: async (match, options) => {},
   }
 );
