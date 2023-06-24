@@ -75,10 +75,10 @@ CONFIG.TextEditor.enrichers.push(
 
       var tocHtml = ``;
 
-      var journalPage = options.relativeTo.parent;
+      var journal = options.relativeTo.parent;
       var thisPageId = options.relativeTo._id;
 
-      var pages = journalPage.pages
+      var pages = journal.pages
         .map((e) => e)
         .sort((a, b) => {
           return a.sort - b.sort;
@@ -101,7 +101,16 @@ CONFIG.TextEditor.enrichers.push(
           }
         }
         tocHtml += /* html */ `
-          <li><a>${page.name}</a></li>
+          <li>
+          <a class="content-link"
+            style="background: none; border: none; "
+            data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
+            data-id="${page._id}"
+            data-type="JournalEntryPage"
+            data-tooltip="${journal.name}: ${page.name}">
+              ${page.name}
+          </a>
+          </li>
         `;
 
         prevTitleLevel = page.title.level;
