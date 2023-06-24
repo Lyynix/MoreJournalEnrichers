@@ -71,7 +71,27 @@ CONFIG.TextEditor.enrichers.push(
   {
     pattern: /(@ToC)(?!\[)/g,
     enricher: async (match, options) => {
+      //console.log(options.relativeTo.parent)
 
+      var tocHtml = /* html */ `
+        <ul>
+      `
+
+      var journalPage = options.relativeTo.parent
+      var thisPageId = options.relativeTo._id
+
+      journalPage.pages.forEach(element => {
+        tocHtml += /* html */ `
+          <li><a>${element.name}</a></li>
+        `
+      });
+
+      
+      tocHtml += /* html */ `
+        </ul>
+      `
+
+      return $(tocHtml)[0];
     }
   },
   {
