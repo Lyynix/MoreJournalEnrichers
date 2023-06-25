@@ -124,11 +124,11 @@ CONFIG.TextEditor.enrichers.push(
     },
   },
   {
-    pattern: /@ToC\[((\s*[a-zA-Z0-9]+)+\s*?)\]/g,
+    pattern: /@ToC\[(\s*[a-zA-Z0-9]+)\]/g,
     enricher: async (match, options) => {
       var tocHtml = ``;
 
-      console.log(match)
+      //console.log(match)
       var journal = game.journal.get(match[1]);
 
       var pages = journal.pages
