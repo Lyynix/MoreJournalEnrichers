@@ -9,7 +9,7 @@ CONFIG.TextEditor.enrichers.push({
     var menuHtml = /* html */ `
       <table>
         <tr>
-          <td colspan="2">${game.i18n.localize("SCENEMENU.Title")}</td>
+          <td colspan="2">${game.i18n.localize("LMJE.SCENEMENU.Title")}</td>
         </tr>
       `;
 
@@ -24,26 +24,26 @@ CONFIG.TextEditor.enrichers.push({
         : sceneDocument.name;
 
       var sceneControl = /* html */ `
-        <a title="${game.i18n.localize("SCENEMENU.Tooltip.Show")}" onclick="
+        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Show")}" onclick="
           game.scenes.get('${uuid}')?.view(); 
           return false;
           ">
           <i class="fas fa-eye" style="margin: 5px"></i>
         </a>
-        <a title="${game.i18n.localize("SCENEMENU.Tooltip.Activate")}" onclick="
+        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Activate")}" onclick="
             game.scenes.get('${uuid}')?.activate(); 
             return false;
             ">
           <i class="fas fa-bullseye" style="margin: 5px"></i>
         </a>
-        <a title="${game.i18n.localize("SCENEMENU.Tooltip.ToggleNav")}" onclick="
+        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.ToggleNav")}" onclick="
             var document = game.scenes.get('${uuid}'); 
             document.update({navigation: !document.navigation})
             return false;
             ">
           <i class="fas fa-compass" style="margin: 5px"></i>
         </a>
-        <a title="${game.i18n.localize("SCENEMENU.Tooltip.Edit")}" onclick="
+        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" onclick="
             new SceneConfig(game.scenes.get('${uuid}')).render(true);
             return false;
             ">
