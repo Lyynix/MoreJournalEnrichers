@@ -90,7 +90,7 @@ CONFIG.TextEditor.enrichers.push(
         if (prevTitleLevel < page.title.level) {
           for (let i = 0; i < page.title.level - prevTitleLevel; i++) {
             tocHtml += /* html */ `
-              <ul>
+              <ul style="list-style: none;">
             `;
           }
         } else if (prevTitleLevel > page.title.level) {
@@ -102,14 +102,14 @@ CONFIG.TextEditor.enrichers.push(
         }
         tocHtml += /* html */ `
           <li>
-          <a class="content-link"
-            style="background: none; border: none; "
-            data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
-            data-id="${page._id}"
-            data-type="JournalEntryPage"
-            data-tooltip="${journal.name}: ${page.name}">
-              ${page.name}
-          </a>
+            <a class="content-link"
+              style="background: none; border: none; font-size: ${(4-page.title.level)*3+13}pt"
+              data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
+              data-id="${page._id}"
+              data-type="JournalEntryPage"
+              data-tooltip="${journal.name}: ${page.name}">
+                ${page.name}
+            </a>
           </li>
         `;
 
@@ -124,7 +124,56 @@ CONFIG.TextEditor.enrichers.push(
     },
   },
   {
-    pattern: /(@ToC)(\[((\s*[a-zA-Z0-9]+)+\s*?)\])/g,
-    enricher: async (match, options) => {},
+    pattern: /@ToC\[((\s*[a-zA-Z0-9]+)+\s*?)\]/g,
+    enricher: async (match, options) => {
+      var tocHtml = ``;
+
+      console.log(match)
+      var journal = game.journal.get(match[1]);
+
+      var pages = journal.pages
+        .map((e) => e)
+        .sort((a, b) => {
+          return a.sort - b.sort;
+        });
+      //console.log(pages);
+
+      var prevTitleLevel = 0;
+      pages.forEach((page) => {
+        if (prevTitleLevel < page.title.level) {
+          for (let i = 0; i < page.title.level - prevTitleLevel; i++) {
+            tocHtml += /* html */ `
+              <ul style="list-style: none;">
+            `;
+          }
+        } else if (prevTitleLevel > page.title.level) {
+          for (let i = 0; i < prevTitleLevel - page.title.level; i++) {
+            tocHtml += /* html */ `
+              </ul>
+            `;
+          }
+        }
+        tocHtml += /* html */ `
+          <li>
+            <a class="content-link"
+              style="background: none; border: none; font-size: ${(4-page.title.level)*3+13}pt"
+              data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
+              data-id="${page._id}"
+              data-type="JournalEntryPage"
+              data-tooltip="${journal.name}: ${page.name}">
+                ${page.name}
+            </a>
+          </li>
+        `;
+
+        prevTitleLevel = page.title.level;
+      });
+
+      tocHtml += /* html */ `
+        </ul>
+      `;
+
+      return $(tocHtml)[0];
+    }
   }
 );
