@@ -28,7 +28,8 @@
     }
   ],
   "esmodules": [
-    "./scripts/init.js"
+    "./scripts/general.js",
+    "./scripts/hooks.js"
   ],
   "languages": [
     {
