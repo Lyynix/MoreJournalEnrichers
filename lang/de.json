@@ -1,11 +1,13 @@
 {
+  "LMJE": {
     "SCENEMENU": {
-        "Title": "Szenenmenü",
-        "Tooltip": {
-            "Show": "Szene anzeigen",
-            "Activate": "Szene aktivieren",
-            "ToggleNav": "Szene in Navigation umschalten",
-            "Edit": "Szene bearbeiten"
-        }
+      "Title": "Szenenmenü",
+      "Tooltip": {
+        "Show": "Szene anzeigen",
+        "Activate": "Szene aktivieren",
+        "ToggleNav": "Szene in Navigation umschalten",
+        "Edit": "Szene bearbeiten"
+      }
     }
+  }
 }
