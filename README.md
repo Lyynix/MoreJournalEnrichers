@@ -16,13 +16,15 @@ Or you can paste the manifest URL in said window:\
 ## Usage & Features
 To use any of the enrichers, write or paste the enricher into the text editor of FoundryVTT and fill in the missing elements.
 
-Every enhancer in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
+Every enricher in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
 
-- `@SceneMenu[sceneID1 sceneID2 ...]` [wiki page](#):\
-  This enhancer adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
+- `@SceneMenu[sceneID1 sceneID2 ...]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_SceneMenu):\
+  This enricher adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
+- `@ToC` und `@ToC[journalID]` [Wikieintrag](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
+  This enricher adds an interactive table of contents to the journal page.
 
 ## Contact & Support
-You need help with the module or you want to share an idea for another enhancer i didn't think of?\
+You need help with the module or you want to share an idea for another enricher i didn't think of?\
 Contact me on discord (lyyinx, formerly Lyynix#7777) or create an issue in this repository.
 
 There also is a discord server oriented themed on map making and FoundryVTT, where im really active.\
