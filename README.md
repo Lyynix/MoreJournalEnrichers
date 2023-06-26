@@ -20,7 +20,7 @@ Every enricher in the following list has a link to the corresponding wiki page, 
 
 - `@SceneMenu[sceneID1 sceneID2 ...]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_SceneMenu):\
   This enricher adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
-- `@ToC` und `@ToC[journalID]` [Wikieintrag](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
+- `@ToC` und `@ToC[journalID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
   This enricher adds an interactive table of contents to the journal page.
 
 ## Contact & Support
