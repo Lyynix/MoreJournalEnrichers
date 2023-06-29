@@ -3,9 +3,12 @@ Hooks.on("init", () => {
     console.log("LMJE | Initializing enrichers for dnd5e");
 
     CONFIG.TextEditor.enrichers.push({
-      pattern: /@Character\[([a-zA-Z0-9]+)\]/g,
+      pattern: /@Character\[([a-zA-Z0-9]+)\](\{(((attr|bio)\s?)+)\})?/g,
       enricher: async (match, options) => {
-        var html = "testing";
+        var char = game.characters.get(match[1])
+        var charOptions = match[3].split(/\s/g)
+
+        var html = "<p>testing</p>";
         return $(html)[0];
       },
     });
