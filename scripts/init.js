@@ -23,27 +23,35 @@ CONFIG.TextEditor.enrichers.push(
           ? `${sceneDocument.navName} (${sceneDocument.name})`
           : sceneDocument.name;
 
-      var sceneControl = /* html */ `
-        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Show")}" onclick="
+        var sceneControl = /* html */ `
+        <a title="${game.i18n.localize(
+          "LMJE.SCENEMENU.Tooltip.Show"
+        )}" onclick="
           game.scenes.get('${uuid}')?.view(); 
           return false;
           ">
           <i class="fas fa-eye" style="margin: 5px"></i>
         </a>
-        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Activate")}" onclick="
+        <a title="${game.i18n.localize(
+          "LMJE.SCENEMENU.Tooltip.Activate"
+        )}" onclick="
             game.scenes.get('${uuid}')?.activate(); 
             return false;
             ">
           <i class="fas fa-bullseye" style="margin: 5px"></i>
         </a>
-        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.ToggleNav")}" onclick="
+        <a title="${game.i18n.localize(
+          "LMJE.SCENEMENU.Tooltip.ToggleNav"
+        )}" onclick="
             var document = game.scenes.get('${uuid}'); 
             document.update({navigation: !document.navigation})
             return false;
             ">
           <i class="fas fa-compass" style="margin: 5px"></i>
         </a>
-        <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" onclick="
+        <a title="${game.i18n.localize(
+          "LMJE.SCENEMENU.Tooltip.Edit"
+        )}" onclick="
             new SceneConfig(game.scenes.get('${uuid}')).render(true);
             return false;
             ">
@@ -101,8 +109,12 @@ CONFIG.TextEditor.enrichers.push(
         tocHtml += /* html */ `
           <li>
             <a class="content-link"
-              style="background: none; border: none; font-size: ${(4-page.title.level)*3+13}pt"
-              data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
+              style="background: none; border: none; font-size: ${
+                (4 - page.title.level) * 3 + 13
+              }pt"
+              data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${
+          page._id
+        }"
               data-id="${page._id}"
               data-type="JournalEntryPage"
               data-tooltip="${journal.name}: ${page.name}">
@@ -154,8 +166,12 @@ CONFIG.TextEditor.enrichers.push(
         tocHtml += /* html */ `
           <li>
             <a class="content-link"
-              style="background: none; border: none; font-size: ${(4-page.title.level)*3+13}pt"
-              data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
+              style="background: none; border: none; font-size: ${
+                (4 - page.title.level) * 3 + 13
+              }pt"
+              data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${
+          page._id
+        }"
               data-id="${page._id}"
               data-type="JournalEntryPage"
               data-tooltip="${journal.name}: ${page.name}">
@@ -172,6 +188,6 @@ CONFIG.TextEditor.enrichers.push(
       `;
 
       return $(tocHtml)[0];
-    }
+    },
   }
 );
