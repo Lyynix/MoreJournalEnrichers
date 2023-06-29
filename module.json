@@ -28,7 +28,8 @@
     }
   ],
   "esmodules": [
-    "./scripts/init.js"
+    "./scripts/init.js",
+    "./scripts/dnd.js"
   ],
   "languages": [
     {
