@@ -8,6 +8,21 @@
         "ToggleNav": "Toggle scene in navigation",
         "Edit": "Edit scene"
       }
+    },
+    "DND": {
+      "CHARACTER": {
+        "imageAlt": "Portrait of the Character",
+        "race": "Race",
+        "alignment": "Alignment",
+        "attr": {
+          "str": "STR",
+          "dex": "DEX",
+          "con": "CON",
+          "int": "INT",
+          "wis": "WIS",
+          "cha": "CHA"
+        }
+      }
     }
   }
 }

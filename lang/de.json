@@ -8,6 +8,21 @@
         "ToggleNav": "Szene in Navigation umschalten",
         "Edit": "Szene bearbeiten"
       }
+    },
+    "DND": {
+      "CHARACTER": {
+        "imageAlt": "Porträt des Charakters",
+        "race": "Rasse",
+        "alignment": "Ausrichtung",
+        "attr": {
+          "str": "STR",
+          "dex": "DEX",
+          "con": "CON",
+          "int": "INT",
+          "wis": "WIS",
+          "cha": "CHA"
+        }
+      }
     }
   }
 }
