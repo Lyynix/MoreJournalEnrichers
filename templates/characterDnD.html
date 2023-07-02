@@ -2,58 +2,111 @@
   <style>
     table.dndCharacter {
       border: 1px black solid;
-      border-bottom: none;
     }
-    table.dndCharacter tr{
+    table.dndCharacter tr {
       padding: 0px;
     }
     table.dndCharacter tr td {
       padding: 0px;
       width: fit-content;
     }
+
+    .dndStat {
+      border: 1px black solid;
+      margin: 5px;
+      border-radius: 4px;
+    }
   </style>
-  <tr style="height: 30px; padding: 0px;">
-    <td style="width: 150px; height: 150px; padding: 0px;" rowspan="2">
-      <img height="150px" style="border: none;" src="{{img}}" alt="{{localize 'LMJE.DND.CHARACTER.imageAlt'}}" />
+  <tr style="height: 30px; padding: 0px">
+    <td style="width: 150px; height: 150px; padding: 0px" rowspan="2">
+      <img
+        height="150px"
+        style="border: none"
+        src="{{img}}"
+        alt="{{localize 'LMJE.DND.CHARACTER.imageAlt'}}"
+      />
     </td>
     <td>
       <!--a class="content-link" ><i class="fas fa-user"></i>New Actor</a-->
-      <a class="content-link" draggable="true" data-uuid="Actor.{{id}}" data-id="{{id}}" data-type="Actor" data-tooltip="Player Character Actor" style="margin-left: 1em; font-size: large; border: none; background-color: transparent; font-weight: bold;">{{name}}</a>
+      <a
+        class="content-link"
+        draggable="true"
+        data-uuid="Actor.{{id}}"
+        data-id="{{id}}"
+        data-type="Actor"
+        data-tooltip="Player Character Actor"
+        style="
+          margin-left: 1em;
+          font-size: large;
+          border: none;
+          background-color: transparent;
+          font-weight: bold;
+        "
+        >{{name}}</a
+      >
     </td>
   </tr>
-  <tr style="height: 110px;">
+  <tr style="height: 110px">
     <td>
-      <p style="margin-left: 1.5em;"><b>{{localize 'LMJE.DND.CHARACTER.race'}}:</b> {{race}}</p>
-      <p style="margin-left: 1.5em;"><b>{{localize 'LMJE.DND.CHARACTER.alignment'}}:</b> {{alignment}}</p>
+      <p style="margin-left: 1.5em">
+        <b>{{localize 'LMJE.DND.CHARACTER.race'}}:</b> {{race}}
+      </p>
+      <p style="margin-left: 1.5em">
+        <b>{{localize 'LMJE.DND.CHARACTER.alignment'}}:</b> {{alignment}}
+      </p>
     </td>
   </tr>
   <tr>
     <td colspan="2" width="100%">
-      <table style="margin: 0px;">
+      <table style="margin: 0px; border-bottom: 0px;">
         <tr>
-          <td style="width: 16.667%; border: 1px black solid; border-bottom: none; border-left: none;">
-            <p style="margin-left: 1em; font-weight: bold;">{{localize 'LMJE.DND.CHARACTER.attr.str'}}</p>
-            <p style="text-align: center;">{{stats.str}}</p>
+          <td>
+            <div class="dndStat">
+              <p style="padding-left: 0.5em; font-weight: bold; border-bottom: 1px black solid;;">
+                {{localize 'LMJE.DND.CHARACTER.attr.str'}}
+              </p>
+              <p style="text-align: center;">{{stats.str}}</p>
+            </div>
           </td>
-          <td style="width: 16.667%; border: 1px black solid; border-bottom: none;">
-            <p style="margin-left: 1em; font-weight: bold;">{{localize 'LMJE.DND.CHARACTER.attr.dex'}}</p>
-            <p style="text-align: center;">{{stats.dex}}</p>
+          <td>
+            <div class="dndStat">
+              <p style="padding-left: 0.5em; font-weight: bold; border-bottom: 1px black solid">
+                {{localize 'LMJE.DND.CHARACTER.attr.dex'}}
+              </p>
+              <p style="text-align: center">{{stats.dex}}</p>
+            </div>
           </td>
-          <td style="width: 16.667%; border: 1px black solid; border-bottom: none;">
-            <p style="margin-left: 1em; font-weight: bold;">{{localize 'LMJE.DND.CHARACTER.attr.con'}}</p>
-            <p style="text-align: center;">{{stats.con}}</p>
+          <td>
+            <div class="dndStat">
+              <p style="padding-left: 0.5em; font-weight: bold; border-bottom: 1px black solid">
+                {{localize 'LMJE.DND.CHARACTER.attr.con'}}
+              </p>
+              <p style="text-align: center">{{stats.con}}</p>
+            </div>
           </td>
-          <td style="width: 16.667%; border: 1px black solid; border-bottom: none;">
-            <p style="margin-left: 1em; font-weight: bold;">{{localize 'LMJE.DND.CHARACTER.attr.int'}}</p>
-            <p style="text-align: center;">{{stats.int}}</p>
+          <td>
+            <div class="dndStat">
+              <p style="padding-left: 0.5em; font-weight: bold; border-bottom: 1px black solid">
+                {{localize 'LMJE.DND.CHARACTER.attr.int'}}
+              </p>
+              <p style="text-align: center">{{stats.int}}</p>
+            </div>
           </td>
-          <td style="width: 16.667%; border: 1px black solid; border-bottom: none;">
-            <p style="margin-left: 1em; font-weight: bold;">{{localize 'LMJE.DND.CHARACTER.attr.wis'}}</p>
-            <p style="text-align: center;">{{stats.wis}}</p>
+          <td>
+            <div class="dndStat">
+              <p style="padding-left: 0.5em; font-weight: bold; border-bottom: 1px black solid">
+                {{localize 'LMJE.DND.CHARACTER.attr.wis'}}
+              </p>
+              <p style="text-align: center">{{stats.wis}}</p>
+            </div>
           </td>
-          <td style="width: 16.667%; border: 1px black solid; border-bottom: none; border-right: none;">
-            <p style="margin-left: 1em; font-weight: bold;">{{localize 'LMJE.DND.CHARACTER.attr.cha'}}</p>
-            <p style="text-align: center;">{{stats.cha}}</p>
+          <td>
+            <div class="dndStat">
+              <p style="padding-left: 0.5em; font-weight: bold; border-bottom: 1px black solid">
+                {{localize 'LMJE.DND.CHARACTER.attr.cha'}}
+              </p>
+              <p style="text-align: center">{{stats.cha}}</p>
+            </div>
           </td>
         </tr>
       </table>
