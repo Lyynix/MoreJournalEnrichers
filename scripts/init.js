@@ -197,6 +197,17 @@ Hooks.on("init", () => {
 
         return $(tocHtml)[0];
       },
+    },
+    //#endregion
+    //#region @Playlist[playlistID]
+    {
+      pattern: /@Playlist\[(\s*[a-zA-Z0-9]+)\]/g,
+      enricher: async (match, options) => {
+        var playlist = game.playlists.get(match[1])
+
+        console.log(playlist)
+        playlist.playNext();
+      }
     }
     //#endregion
   );
