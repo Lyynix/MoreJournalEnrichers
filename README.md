@@ -23,9 +23,9 @@ Every enricher in the following list has a link to the corresponding wiki page, 
 - `@ToC` und `@ToC[journalID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
   This enricher adds an interactive table of contents to the journal page.
 
-### System dependent modules
+### System dependent enrichers
 - `@Character[actorID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Character):\
-  This enricher adds a summary of a charactersheet
+  This enricher adds a summary of a charactersheet\
   **Systems:** `dnd5e`
 
 ## Contact & Support
