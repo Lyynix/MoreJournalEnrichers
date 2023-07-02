@@ -23,9 +23,17 @@ Every enricher in the following list has a link to the corresponding wiki page, 
 - `@ToC` und `@ToC[journalID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
   This enricher adds an interactive table of contents to the journal page.
 
+### System dependent modules
+- `@Character[actorID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Character):\
+  This enricher adds a summary of a charactersheet
+  **Systems:** `dnd5e`
+
 ## Contact & Support
 You need help with the module or you want to share an idea for another enricher i didn't think of?\
 Contact me on discord (lyyinx, formerly Lyynix#7777) or create an issue in this repository.
+
+You can also join our Map-Making oriented [Discord Server](https://discord.gg/3fA4VGQeup). It is a german Server, but most members are able and happy to speak in english if you have something to talk about.
+Also you can ping me anytime at the official (and english) [Foundry VTT Discord Server](https://discord.gg/foundryvtt).
 
 There also is a discord server oriented themed on map making and FoundryVTT, where im really active.\
 This is a german discord server, but most users will speak in english if you have questions or want to talk about something else.
