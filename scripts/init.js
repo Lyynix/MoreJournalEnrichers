@@ -197,6 +197,58 @@ Hooks.on("init", () => {
 
         return $(tocHtml)[0];
       },
+    },
+    //#endregion
+    //#region @Scene[sceneID]{alias}
+    {
+      pattern: /@Scene\[(\s*[a-zA-Z0-9]+)\]/g,
+      enricher: async (match, options) => {
+        var uuid = match[1];
+
+        var sceneDocument = game.scenes.get(uuid);
+        if (!sceneDocument) return match[0];
+
+        var sceneName = sceneDocument.navName
+          ? `${sceneDocument.navName} (${sceneDocument.name})`
+          : sceneDocument.name;
+
+        var sceneControl = /* html */ `
+        ${sceneName}
+        <a 
+          title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Show")}" 
+          onclick="
+            game.scenes.get('${uuid}')?.view(); 
+            return false;
+          ">
+            <i class="fas fa-eye" style="margin: 5px"></i>
+        </a>
+        <a 
+          title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Activate")}" 
+          onclick="
+            game.scenes.get('${uuid}')?.activate(); 
+            return false;
+          ">
+            <i class="fas fa-bullseye" style="margin: 5px"></i>
+        </a>
+        <a 
+          title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.ToggleNav")}" 
+          onclick="
+            var document = game.scenes.get('${uuid}'); 
+            document.update({navigation: !document.navigation})
+            return false;
+          ">
+            <i class="fas fa-compass" style="margin: 5px"></i>
+        </a>
+        <a 
+          title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" 
+          onclick="
+            new SceneConfig(game.scenes.get('${uuid}')).render(true);
+            return false;
+          ">
+            <i class="fas fa-cogs" style="margin: 5px"></i>
+        </a>
+        `;
+      },
     }
     //#endregion
   );
