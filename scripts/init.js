@@ -201,18 +201,32 @@ Hooks.on("init", () => {
     //#endregion
     //#region @Scene[sceneID]{alias}
     {
-      pattern: /@Scene\[(\s*[a-zA-Z0-9]+)\]/g,
+      pattern: /@InlineScene\[([a-zA-Z0-9]+)\](\{(.+)\})?/g,
       enricher: async (match, options) => {
         var uuid = match[1];
-
         var sceneDocument = game.scenes.get(uuid);
         if (!sceneDocument) return match[0];
 
-        var sceneName = sceneDocument.navName
-          ? `${sceneDocument.navName} (${sceneDocument.name})`
-          : sceneDocument.name;
+        console.log(match)
 
-        var sceneControl = /* html */ `
+        var sceneName = match[2] === undefined
+          ? sceneDocument.navName
+            ? `${sceneDocument.navName} (${sceneDocument.name})`
+            : sceneDocument.name
+          : match[3];
+
+        var sceneHtml = /* html */ `
+        <i style="
+          border: 1px var(--color-border-dark-tertiary) solid;
+          border-radius: 3px;
+          padding: 1px 4px;
+          margin-right: 0.3em;
+
+          white-space: nowrap;
+          word-break: break-all;
+
+          background: #DDD;
+        ">
         ${sceneName}
         <a 
           title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Show")}" 
@@ -220,7 +234,7 @@ Hooks.on("init", () => {
             game.scenes.get('${uuid}')?.view(); 
             return false;
           ">
-            <i class="fas fa-eye" style="margin: 5px"></i>
+            <i class="fas fa-eye" style="margin-left: 4px; color: var(--color-text-dark-inactive);"></i>
         </a>
         <a 
           title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Activate")}" 
@@ -228,7 +242,7 @@ Hooks.on("init", () => {
             game.scenes.get('${uuid}')?.activate(); 
             return false;
           ">
-            <i class="fas fa-bullseye" style="margin: 5px"></i>
+            <i class="fas fa-bullseye" style="color: var(--color-text-dark-inactive);"></i>
         </a>
         <a 
           title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.ToggleNav")}" 
@@ -237,7 +251,7 @@ Hooks.on("init", () => {
             document.update({navigation: !document.navigation})
             return false;
           ">
-            <i class="fas fa-compass" style="margin: 5px"></i>
+            <i class="fas fa-compass" style="color: var(--color-text-dark-inactive);"></i>
         </a>
         <a 
           title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" 
@@ -245,9 +259,12 @@ Hooks.on("init", () => {
             new SceneConfig(game.scenes.get('${uuid}')).render(true);
             return false;
           ">
-            <i class="fas fa-cogs" style="margin: 5px"></i>
+            <i class="fas fa-cogs" style="color: var(--color-text-dark-inactive);"></i>
         </a>
+        </i>
         `;
+
+        return $(sceneHtml)[0];
       },
     }
     //#endregion
