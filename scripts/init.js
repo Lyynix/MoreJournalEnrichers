@@ -206,7 +206,32 @@ Hooks.on("init", () => {
         var playlist = game.playlists.get(match[1])
 
         console.log(playlist)
-        playlist.playNext();
+
+        var html = /* html */`
+        <div>
+        <a 
+          class="content-link" 
+          draggable="true" 
+          data-uuid="Playlist.${match[0]}" 
+          data-id="${match[0]}" 
+          data-type="Playlist" 
+          data-tooltip="Playlist"
+          > 
+            ${playlist.name}
+        </a>
+        <a> 
+            <i class="fas fa-backward-fast"></i>
+        </a> 
+        <a> 
+            <i class="fas fa-play-pause"></i>
+        </a> 
+        <a> 
+            <i class="fas fa-forward-fast"></i>
+        </a>
+        </div>
+        `
+
+        return $(html)[0]
       }
     }
     //#endregion
