@@ -10,6 +10,7 @@
       }
     },
     "PLAYLIST": {
+      "Title": "Playlistenmenü",
       "Tooltip": {
         "PlayPause": "Play / Pause",
         "FastForward": "Nächster Sound"
