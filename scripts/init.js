@@ -201,14 +201,16 @@ Hooks.on("init", () => {
     //#endregion
     //#region @Playlist[playlistID]
     {
-      pattern: /@Playlist\[(\s*[a-zA-Z0-9]+)\]/g,
+      pattern: /@Playlist\[(\s*[a-zA-Z0-9]+)\](\{(.+)\})?/g,
       enricher: async (match, options) => {
-        var uuid = match[1];  
-        var playlist = game.playlists.get(uuid)
+        var uuid = match[1];
+        var playlist = game.playlists.get(uuid);
 
-        console.log(playlist)
+        var playlistName = match[2] === undefined ? playlist.name  : match[3];
 
-        var html = /* html */`
+        console.log(playlist);
+
+        var html = /* html */ `
         <i style="
           border: 1px var(--color-border-dark-tertiary) solid;
           border-radius: 3px;
@@ -220,7 +222,7 @@ Hooks.on("init", () => {
 
           background: #DDD;
         ">
-        ${playlist.name}
+        ${playlistName}
         <a 
           title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
           onclick="
@@ -239,10 +241,10 @@ Hooks.on("init", () => {
             <i class="fas fa-forward-fast" style="color: var(--color-text-dark-inactive);"></i>
         </a>
         </i>
-        `
+        `;
 
-        return $(html)[0]
-      }
+        return $(html)[0];
+      },
     }
     //#endregion
   );
