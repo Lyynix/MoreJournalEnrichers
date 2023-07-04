@@ -266,6 +266,54 @@ Hooks.on("init", () => {
 
         return $(sceneHtml)[0];
       },
+    },
+    //#endregion
+    //#region @Playlist[playlistID]{alias}
+    {
+      pattern: /@Playlist\[(\s*[a-zA-Z0-9]+)\](\{(.+)\})?/g,
+      enricher: async (match, options) => {
+        var uuid = match[1];
+        var playlist = game.playlists.get(uuid);
+
+        var playlistName = match[2] === undefined ? playlist.name  : match[3];
+
+        console.log(playlist);
+
+        var html = /* html */ `
+        <i style="
+          border: 1px var(--color-border-dark-tertiary) solid;
+          border-radius: 3px;
+          padding: 1px 4px;
+          margin-right: 0.3em;
+
+          white-space: nowrap;
+          word-break: break-all;
+
+          background: #DDD;
+        ">
+        ${playlistName}
+        <a 
+          title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
+          onclick="
+            var playlist = game.playlists.get('${uuid}')
+            playlist?.playing ? playlist.stopAll() : playlist.playAll(); 
+            return false;
+          "> 
+            <i class="fas fa-play-pause" style="margin-left: 4px; color: var(--color-text-dark-inactive);"></i>
+        </a> 
+        <a 
+          title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastForward")}" 
+          onclick="
+          game.playlists.get('${uuid}')?.playNext(); 
+            return false;
+          "> 
+            <i class="fas fa-forward-fast" style="color: var(--color-text-dark-inactive);"></i>
+        </a>
+        </i>
+        `;
+
+        return $(html)[0];
+      },
     }
     //#endregion
   );

@@ -9,6 +9,12 @@
         "Edit": "Edit scene"
       }
     },
+    "PLAYLIST": {
+      "Tooltip": {
+        "PlayPause": "Play / Pause",
+        "FastForward": "Next Audio"
+      }
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait of the Character",
