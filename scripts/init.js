@@ -199,7 +199,7 @@ Hooks.on("init", () => {
       },
     },
     //#endregion
-    //#region @Playlist[playlistID]
+    //#region @Playlist[playlistID]{alias}
     {
       pattern: /@Playlist\[(\s*[a-zA-Z0-9]+)\](\{(.+)\})?/g,
       enricher: async (match, options) => {
