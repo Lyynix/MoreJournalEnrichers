@@ -32,6 +32,8 @@ Every enricher in the following list has a link to the corresponding wiki page, 
   This enricher adds a summary of a charactersheet\
   **Systems:** `dnd5e`
 
+If you didn't find the functionality you were looking for, just contact me and describe what you were searching.
+
 ## Contact & Support
 You need help with the module or you want to share an idea for another enricher i didn't think of?\
 Contact me on discord (lyyinx, formerly Lyynix#7777) or create an issue in this repository.
