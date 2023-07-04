@@ -199,7 +199,7 @@ Hooks.on("init", () => {
       },
     },
     //#endregion
-    //#region @Scene[sceneID]{alias}
+    //#region @InlineScene[sceneID]{alias}
     {
       pattern: /@InlineScene\[([a-zA-Z0-9]+)\](\{(.+)\})?/g,
       enricher: async (match, options) => {
