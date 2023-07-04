@@ -18,10 +18,14 @@ To use any of the enrichers, write or paste the enricher into the text editor of
 
 Every enricher in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
 
-- `@SceneMenu[sceneID1 sceneID2 ...]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_SceneMenu):\
-  This enricher adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
 - `@ToC` und `@ToC[journalID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
   This enricher adds an interactive table of contents to the journal page.
+- `@SceneMenu[sceneID1 sceneID2 ...]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_SceneMenu):\
+  This enricher adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
+- `@InlineScene[sceneID]{alias}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_InlineScene):\
+  This Journal Enricher inserts an inline scene reference, with the interactions from `@SceneMenu`.
+- `@Playlist[playlistID]{alias}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist):\
+  This Journal Enricher inserts an inline playlist controller.
 
 ### System dependent enrichers
 - `@Character[actorID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Character):\
