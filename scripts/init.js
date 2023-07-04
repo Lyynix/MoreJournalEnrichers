@@ -203,14 +203,24 @@ Hooks.on("init", () => {
     {
       pattern: /@Playlist\[(\s*[a-zA-Z0-9]+)\]/g,
       enricher: async (match, options) => {
-        var playlist = game.playlists.get(match[1])
+        var uuid = match[1];  
+        var playlist = game.playlists.get(uuid)
 
         console.log(playlist)
 
         var html = /* html */`
-        <div>
-        <a 
-          class="content-link" 
+        <i style="
+          border: 1px var(--color-border-dark-tertiary) solid;
+          border-radius: 3px;
+          padding: 1px 4px;
+          margin-right: 0.3em;
+
+          white-space: nowrap;
+          word-break: break-all;
+
+          background: #DDD;
+        ">
+        <a  
           draggable="true" 
           data-uuid="Playlist.${match[0]}" 
           data-id="${match[0]}" 
@@ -219,16 +229,31 @@ Hooks.on("init", () => {
           > 
             ${playlist.name}
         </a>
-        <a> 
-            <i class="fas fa-backward-fast"></i>
+        <a 
+          title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastBackward")}" 
+          onclick="
+            game.scenes.get('${uuid}')?.view(); 
+            return false;
+          "> 
+            <i class="fas fa-backward-fast" style="margin-left: 4px; color: var(--color-text-dark-inactive);"></i>
         </a> 
-        <a> 
-            <i class="fas fa-play-pause"></i>
+        <a 
+          title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
+          onclick="
+            game.scenes.get('${uuid}')?.view(); 
+            return false;
+          "> 
+            <i class="fas fa-play-pause" style="color: var(--color-text-dark-inactive);"></i>
         </a> 
-        <a> 
-            <i class="fas fa-forward-fast"></i>
+        <a 
+          title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastForward")}" 
+          onclick="
+            game.scenes.get('${uuid}')?.view(); 
+            return false;
+          "> 
+            <i class="fas fa-forward-fast" style="color: var(--color-text-dark-inactive);"></i>
         </a>
-        </div>
+        </i>
         `
 
         return $(html)[0]
