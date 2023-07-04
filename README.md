@@ -1,4 +1,4 @@
-![Banner Image of Lyynix](LyynixBanner.png)
+![Banner Image of Lyynix](.github/Assets/LyynixBanner.png)
 # Lyynix' More Journal Enrichers
 This is a module for FoundryVTT.\
 FoundryVTTs text editor natively supports the enricher `@UUID`, which is extended by enrichers like `@Scene`, `@Actor`, ...\
