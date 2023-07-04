@@ -220,35 +220,20 @@ Hooks.on("init", () => {
 
           background: #DDD;
         ">
-        <a  
-          draggable="true" 
-          data-uuid="Playlist.${match[0]}" 
-          data-id="${match[0]}" 
-          data-type="Playlist" 
-          data-tooltip="Playlist"
-          > 
-            ${playlist.name}
-        </a>
-        <a 
-          title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastBackward")}" 
-          onclick="
-            game.scenes.get('${uuid}')?.view(); 
-            return false;
-          "> 
-            <i class="fas fa-backward-fast" style="margin-left: 4px; color: var(--color-text-dark-inactive);"></i>
-        </a> 
+        ${playlist.name}
         <a 
           title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
           onclick="
-            game.scenes.get('${uuid}')?.view(); 
+            var playlist = game.playlists.get('${uuid}')
+            playlist?.playing ? playlist.stopAll() : playlist.playAll(); 
             return false;
           "> 
-            <i class="fas fa-play-pause" style="color: var(--color-text-dark-inactive);"></i>
+            <i class="fas fa-play-pause" style="margin-left: 4px; color: var(--color-text-dark-inactive);"></i>
         </a> 
         <a 
           title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastForward")}" 
           onclick="
-            game.scenes.get('${uuid}')?.view(); 
+          game.playlists.get('${uuid}')?.playNext(); 
             return false;
           "> 
             <i class="fas fa-forward-fast" style="color: var(--color-text-dark-inactive);"></i>

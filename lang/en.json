@@ -11,7 +11,6 @@
     },
     "PLAYLIST": {
       "Tooltip": {
-        "FastBackward": "Previous Audio",
         "PlayPause": "Play / Pause",
         "FastForward": "Next Audio"
       }
