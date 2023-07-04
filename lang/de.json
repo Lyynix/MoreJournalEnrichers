@@ -10,9 +10,11 @@
       }
     },
     "PLAYLIST": {
+      "Title": "Playlistenmenü",
       "Tooltip": {
         "PlayPause": "Play / Pause",
-        "FastForward": "Nächster Sound"
+        "FastForward": "Nächster Sound",
+        "Edit": "Playlist bearbeiten"
       }
     },
     "DND": {
