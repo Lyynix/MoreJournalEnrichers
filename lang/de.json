@@ -9,6 +9,13 @@
         "Edit": "Szene bearbeiten"
       }
     },
+    "PLAYLIST": {
+      "Tooltip": {
+        "FastBackward": "Letzter Sound",
+        "PlayPause": "Play / Pause",
+        "FastForward": "Nächster Sound"
+      }
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Porträt des Charakters",
