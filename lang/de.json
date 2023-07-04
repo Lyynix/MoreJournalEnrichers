@@ -19,9 +19,23 @@
     },
     "DND": {
       "CHARACTER": {
-        "imageAlt": "Porträt des Charakters",
+        "imageAlt": "Portrait des Charakters",
         "race": "Rasse",
         "alignment": "Ausrichtung",
+        "attr": {
+          "str": "STR",
+          "dex": "DEX",
+          "con": "CON",
+          "int": "INT",
+          "wis": "WIS",
+          "cha": "CHA"
+        }
+      }
+    },
+    "PF2E": {
+      "CHARACTER": {
+        "imageAlt": "Portrait des Charakters",
+        "level": "Level",
         "attr": {
           "str": "STR",
           "dex": "DEX",
