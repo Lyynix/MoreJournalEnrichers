@@ -277,8 +277,6 @@ Hooks.on("init", () => {
 
         var playlistName = match[2] === undefined ? playlist.name  : match[3];
 
-        console.log(playlist);
-
         var html = /* html */ `
         <i style="
           border: 1px var(--color-border-dark-tertiary) solid;
