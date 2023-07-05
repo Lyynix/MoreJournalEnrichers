@@ -1,0 +1,53 @@
+{
+  "id": "lyynix-more-journal-enrichers",
+  "name": "lyynix-more-journal-enrichers",
+  "title": "Lyynix: More Journal Enrichers",
+  "description": "n/A",
+  "version": "0.1.0",
+  "minimumCoreVersion": "0.8.6",
+  "compatibleCoreVersion": "10",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11",
+    "maximum": "11"
+  },
+  "author": "Lyynix",
+  "authors": [
+    {
+      "name": "Lyynix",
+      "discord": "Lyynix#7777"
+    }
+  ],
+  "packs": [
+    {
+      "name": "journals",
+      "label": "Lyynix: More Journal Enrichers",
+      "path": "/packs/journals.db",
+      "entity": "JournalEntry",
+      "type": "JournalEntry"
+    }
+  ],
+  "esmodules": [
+    "./scripts/init.js",
+    "./scripts/dnd.js",
+    "./scripts/pf2e.js"
+  ],
+  "languages": [
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json",
+      "flags": {}
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
+  "url": "https://github.com/Lyynix/MoreJournalEnrichers",
+  "manifest": "https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v0.1.0/manifest.json",
+  "download": "https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v0.1.0/lmje-v0_1_0.zip",
+  "manifestPlusVersion": "1.2.0"
+}
