@@ -11,7 +11,7 @@ A list of all added enrichers can be found under [Usage & Features](#usage--feat
 ## Installation
 You can simply use the install module screen within the FoundryVTT setup.\
 Or you can paste the manifest URL in said window:\
-!! Paste manifest URL of recent release !!
+***Latest manifest:*** https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json
 
 ## Usage & Features
 To use any of the enrichers, write or paste the enricher into the text editor of FoundryVTT and fill in the missing elements.
