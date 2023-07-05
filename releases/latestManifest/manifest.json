@@ -47,7 +47,7 @@
     }
   ],
   "url": "https://github.com/Lyynix/MoreJournalEnrichers",
-  "manifest": "https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v0.1.0/manifest.json",
+  "manifest": "https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json",
   "download": "https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v0.1.0/lmje-v0_1_0.zip",
   "manifestPlusVersion": "1.2.0"
 }
