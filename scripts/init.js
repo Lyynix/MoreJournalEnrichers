@@ -1,4 +1,11 @@
 // Module specific code goes here. See https://foundryvtt.com/article/module-development/ for help.
+function invalidHtml(error) {
+  return  /* html */ `
+    <a class="content-link broken" draggable="true" data-id="null" data-uuid="asd">
+      <i class="fas fa-unlink"></i>LMJE: ${error}
+    </a>
+  `;
+}
 
 Hooks.on("init", () => {
   console.log("LMJE | Initializing generic enrichers");
@@ -148,6 +155,7 @@ Hooks.on("init", () => {
 
         //console.log(match)
         var journal = game.journal.get(match[1]);
+        if (!journal) return $(invalidHtml("invalid journalID"))[0];
 
         var pages = journal.pages
           .map((e) => e)
@@ -205,7 +213,7 @@ Hooks.on("init", () => {
       enricher: async (match, options) => {
         var uuid = match[1];
         var sceneDocument = game.scenes.get(uuid);
-        if (!sceneDocument) return match[0];
+        if (!sceneDocument) return $(invalidHtml("invalid sceneID"))[0];
 
         console.log(match)
 
@@ -274,6 +282,7 @@ Hooks.on("init", () => {
       enricher: async (match, options) => {
         var uuid = match[1];
         var playlist = game.playlists.get(uuid);
+        if(!playlist) return $(invalidHtml("invalid playlistID"))[0];
 
         var playlistName = match[2] === undefined ? playlist.name  : match[3];
 
@@ -331,7 +340,7 @@ Hooks.on("init", () => {
           var uuid = uuids[i];
 
           var playlistDocument = game.playlists.get(uuid);
-          if (playlistDocument === undefined) continue;
+          if (!playlistDocument) continue;
 
           var playlistName = playlistDocument.name;
 
