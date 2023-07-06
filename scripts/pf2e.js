@@ -1,3 +1,5 @@
+import { invalidHtml } from "./init.js"
+
 Hooks.on("init", () => {
   loadTemplates(["modules/lyynix-more-journal-enrichers/templates/characterPF2e.html"])
 
@@ -9,6 +11,7 @@ Hooks.on("init", () => {
       enricher: async (match, options) => {
 
         var char = game.actors.get(match[1])
+        if (!char) return $(invalidHtml("invalid actorID"))[0]
         //var charOptions = match[3].split(/\s/g)
         //console.log(char)
 

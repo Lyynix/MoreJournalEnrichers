@@ -1,5 +1,5 @@
 // Module specific code goes here. See https://foundryvtt.com/article/module-development/ for help.
-function invalidHtml(error) {
+export function invalidHtml(error) {
   return  /* html */ `
     <a class="content-link broken" draggable="true" data-id="null" data-uuid="asd">
       <i class="fas fa-unlink"></i>LMJE: ${error}
