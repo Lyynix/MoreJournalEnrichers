@@ -17,6 +17,9 @@
         "Edit": "Playlist bearbeiten"
       }
     },
+    "WHISPER": {
+      "Title": "Nachricht flüstern"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait des Charakters",

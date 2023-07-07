@@ -353,7 +353,49 @@ Hooks.on("init", () => {
 
         return $(menuHtml)[0];
       },
-    }
+    },
+    //#endregion
+    //#region @Whisper
+    {
+      pattern: /@Whisper(\[([a-zA-Z0-9]+)\])?\{([\s\S]+?)\}/gm,
+      enricher: async (match, options) => {
+        var whisperTarget = match[2]
+        var selectWhisperTarget = match[2] === undefined
+        var message = match[3]
+
+        console.log({
+          target: whisperTarget,
+          needs_to_be_selected: selectWhisperTarget,
+          whisperMessage: message,
+        })
+
+        // fa-walkie-talkie
+        var html = /* html */ `
+        <table>
+          <tr>
+            <th>
+              ${game.i18n.localize("LMJE.WHISPER.Title")}
+            </th>
+            <th>
+              <a onclick="
+                var message = document.getElementById('LMJE-Whisper_Message').textContent.trim()
+                console.log(message)
+              ">
+                <i class="fas fa-message"></i> 
+              </a>
+            </th>
+          </tr>
+          <tr>
+            <td colspan="2" id="LMJE-Whisper_Message">
+              ${message}
+            </td>
+          </tr>
+        </table>
+        `
+
+        return $(html)[0]
+      }
+    },
     //#endregion
   );
 });

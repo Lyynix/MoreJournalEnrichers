@@ -17,6 +17,9 @@
         "Edit": "Edit Playlist"
       }
     },
+    "WHISPER": {
+      "Title": "Whisper message"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait of the Character",
