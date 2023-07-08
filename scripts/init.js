@@ -1,4 +1,7 @@
-// Module specific code goes here. See https://foundryvtt.com/article/module-development/ for help.
+const templates = {
+  whisperTable: "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
+}
+
 export function invalidHtml(error) {
   return /* html */ `
     <a class="content-link broken" draggable="true" data-id="null" data-uuid="asd">
@@ -8,6 +11,11 @@ export function invalidHtml(error) {
 }
 
 Hooks.on("init", () => {
+  console.log("LMJE | Loading templates")
+  loadTemplates([
+    templates.whisperTable,
+  ])
+
   console.log("LMJE | Initializing generic enrichers");
 
   CONFIG.TextEditor.enrichers.push(
@@ -363,35 +371,65 @@ Hooks.on("init", () => {
         var selectWhisperTarget = match[2] === undefined
         var message = match[3]
 
-        console.log({
-          target: whisperTarget,
-          needs_to_be_selected: selectWhisperTarget,
-          whisperMessage: message,
-        })
+        var otherUsers = game.users.filter(x => {return !x.isSelf})
 
-        // fa-walkie-talkie
-        var html = /* html */ `
-        <table>
-          <tr>
-            <th>
-              ${game.i18n.localize("LMJE.WHISPER.Title")}
-            </th>
-            <th>
-              <a onclick="
-                var message = document.getElementById('LMJE-Whisper_Message').textContent.trim()
-                console.log(message)
-              ">
-                <i class="fas fa-message"></i> 
-              </a>
-            </th>
-          </tr>
-          <tr>
-            <td colspan="2" id="LMJE-Whisper_Message">
-              ${message}
-            </td>
-          </tr>
-        </table>
+        var dialogContent = `
+          <table>`
+        for (var i = 0; i < otherUsers.length; i++) {
+        dialogContent += `
+            <tr>
+              <td id="LMJE-Whisper_Dialog_User" style="display: flex; align-content:center">
+                <img src="${otherUsers[i].avatar}" height="20px">
+                <a style="
+                  display: block;
+                  width: 10px; height: 10px;
+                  border-radius: 5px;
+                  border: 1px black solid;
+                  background-color: ${otherUsers[i].border.css};
+          
+                  margin-left: 10px;
+                  margin-top: 4px;
+                  margin-right: 10px;
+                "></a>
+                <a onclick="
+                  ChatMessage.create({
+                    user: game.users.current,
+                    whisper: [\`${otherUsers[i]._id}\`],
+                    content: \`${message}\`
+                  })
+                ">
+                    ${otherUsers[i].name}
+                </a>
+              </td>
+            </tr>`
+        }
+          `</table>
         `
+
+        var onClick = `
+          new Dialog({
+            title: game.i18n.localize('LMJE.WHISPER.Dialog.Title'),
+            content: '${dialogContent.trim().replace(/(\r\n|\n|\r)/gm, '')}',
+            buttons: {
+              close: {
+                label: "close",
+              }
+            },
+            default: close,
+            close: () => {}
+          }).render(true)
+        `
+
+        var enricherData = {
+          click: onClick,
+          message: message
+        }
+
+        var html = await renderTemplate(templates.whisperTable, enricherData)
+
+        console.log(dialogContent)
+        console.log(`Message: ${message}`)
+        console.log(html)
 
         return $(html)[0]
       }

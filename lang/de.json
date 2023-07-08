@@ -18,7 +18,10 @@
       }
     },
     "WHISPER": {
-      "Title": "Nachricht flüstern"
+      "Title": "Nachricht flüstern",
+      "Dialog": {
+        "Title": "Wähle den Spieler"
+      }
     },
     "DND": {
       "CHARACTER": {

@@ -18,7 +18,10 @@
       }
     },
     "WHISPER": {
-      "Title": "Whisper message"
+      "Title": "Whisper message",
+      "Dialog": {
+        "Title": "Whisper to Player"
+      }
     },
     "DND": {
       "CHARACTER": {
