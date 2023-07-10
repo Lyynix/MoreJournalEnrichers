@@ -23,7 +23,6 @@ Hooks.on("init", () => {
   CONFIG.TextEditor.enrichers.push(
     //#region @SceneMenu[...]
     {
-      //pattern: /@SceneMenu\[((\s*[a-zA-Z0-9]+)+\s*?)\]/g,
       pattern: /@SceneMenu\[((([a-zA-Z0-9])(\;\s[a-zA-Z0-9])*)+)\]/g,
       enricher: async (match, options) => {
         const uuids = match[1].split(/\;\s+/g);
@@ -303,9 +302,9 @@ Hooks.on("init", () => {
     //#endregion
     //#region @PlaylistMenu
     {
-      pattern: /@PlaylistMenu\[((\s*[a-zA-Z0-9]+)+\s*?)\]/g,
+      pattern: /@PlaylistMenu\[((([a-zA-Z0-9])(\;\s[a-zA-Z0-9])*)+)\]/g,
       enricher: async (match, options) => {
-        const uuids = match[1].split(/\s+/g);
+        const uuids = match[1].split(/\;\s/g);
 
         var menuHtml = /* html */ `
       <table>
