@@ -28,11 +28,23 @@ Hooks.on("init", () => {
         const uuids = match[1].split(/\;\s+/g);
 
         var menuHtml = /* html */ `
-      <table>
-        <tr>
-          <td colspan="2">${game.i18n.localize("LMJE.SCENEMENU.Title")}</td>
-        </tr>
-      `;
+        <table class="LMJE-Playlist_Table">
+          <style>
+            .LMJE-Playlist_Table {
+              border-spacing: 0;
+              border-collapse: separate;
+              border-radius: 10px;
+              overflow: hidden;
+              border: 1.5px var(--color-border-dark-5) solid;
+            }
+            .LMJE-Playlist_Table tr th {
+              background: #00000030
+            }
+          </style>
+            <tr>
+              <th colspan="2">${game.i18n.localize("LMJE.SCENEMENU.Title")}</td>
+            </tr>
+        `;
 
         for (var i = 0; i < uuids.length; i++) {
           var uuid = uuids[i];
@@ -307,11 +319,23 @@ Hooks.on("init", () => {
         const uuids = match[1].split(/\;\s/g);
 
         var menuHtml = /* html */ `
-      <table>
-        <tr>
-          <td colspan="2">${game.i18n.localize("LMJE.PLAYLIST.Title")}</td>
-        </tr>
-      `;
+          <table class="LMJE-Playlist_Table">
+            <style>
+              .LMJE-Playlist_Table {
+                border-spacing: 0;
+                border-collapse: separate;
+                border-radius: 10px;
+                overflow: hidden;
+                border: 1.5px var(--color-border-dark-5) solid;
+              }
+              .LMJE-Playlist_Table tr th {
+                background: #00000030
+              }
+            </style>
+            <tr>
+              <th colspan="2">${game.i18n.localize("LMJE.PLAYLIST.Title")}</td>
+            </tr>
+        `;
 
         for (var i = 0; i < uuids.length; i++) {
           var uuid = uuids[i];
