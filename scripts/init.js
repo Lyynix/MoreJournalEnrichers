@@ -28,16 +28,16 @@ Hooks.on("init", () => {
         const uuids = match[1].split(/\;\s+/g);
 
         var menuHtml = /* html */ `
-        <table class="LMJE-Playlist_Table">
+        <table class="LMJE-SceneMenu_Table">
           <style>
-            .LMJE-Playlist_Table {
+            .LMJE-SceneMenu_Table {
               border-spacing: 0;
               border-collapse: separate;
               border-radius: 10px;
               overflow: hidden;
               border: 1.5px var(--color-border-dark-5) solid;
             }
-            .LMJE-Playlist_Table tr th {
+            .LMJE-SceneMenu_Table tr th {
               background: #00000030
             }
           </style>
