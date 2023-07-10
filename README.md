@@ -28,6 +28,8 @@ Every enricher in the following list has a link to the corresponding wiki page, 
   This Journal Enricher adds a list of playlists and a set of buttons for each playlist, like play and skip.
 - `@Playlist[playlistID]{alias}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist):\
   This Journal Enricher inserts an inline playlist controller.
+- `@Chat{text}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Whisper):\
+  This Journal Enricher inserts text, that can be posted in chat to all other players.
 - `@Whisper{text}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Whisper):\
   This Journal Enricher inserts text, that can be whispered to another player.
 
