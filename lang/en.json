@@ -20,7 +20,8 @@
     "WHISPER": {
       "Title": "Whisper message",
       "Dialog": {
-        "Title": "Whisper to Player"
+        "Title": "Whisper to Player",
+        "Cancel": "Cancel"
       }
     },
     "DND": {

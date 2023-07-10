@@ -365,11 +365,9 @@ Hooks.on("init", () => {
     //#endregion
     //#region @Whisper
     {
-      pattern: /@Whisper(\[([a-zA-Z0-9]+)\])?\{([\s\S]+?)\}/gm,
+      pattern: /@Whisper\{([\s\S]+?)\}/gm,
       enricher: async (match, options) => {
-        var whisperTarget = match[2]
-        var selectWhisperTarget = match[2] === undefined
-        var message = match[3]
+        var message = match[1]
 
         var otherUsers = game.users.filter(x => {return !x.isSelf})
 
@@ -408,11 +406,11 @@ Hooks.on("init", () => {
 
         var onClick = `
           new Dialog({
-            title: game.i18n.localize('LMJE.WHISPER.Dialog.Title'),
+            title: '${game.i18n.localize('LMJE.WHISPER.Dialog.Title')}',
             content: '${dialogContent.trim().replace(/(\r\n|\n|\r)/gm, '')}',
             buttons: {
               close: {
-                label: "close",
+                label: '${game.i18n.localize('LMJE.WHISPER.Dialog.Cancel')}',
               }
             },
             default: close,

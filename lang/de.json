@@ -20,7 +20,8 @@
     "WHISPER": {
       "Title": "Nachricht flüstern",
       "Dialog": {
-        "Title": "Wähle den Spieler"
+        "Title": "Wähle den Spieler",
+        "Cancel": "Abbrechen"
       }
     },
     "DND": {
