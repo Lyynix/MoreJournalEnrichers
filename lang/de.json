@@ -24,6 +24,9 @@
         "Cancel": "Abbrechen"
       }
     },
+    "CHAT": {
+      "Title": "In den Chat posten"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait des Charakters",

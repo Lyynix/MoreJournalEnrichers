@@ -24,6 +24,9 @@
         "Cancel": "Cancel"
       }
     },
+    "CHAT": {
+      "Title": "Chat message"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait of the Character",

@@ -1,5 +1,6 @@
 const templates = {
   whisperTable: "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
+  chatTable: "modules/lyynix-more-journal-enrichers/templates/chatTable.hbs",
 }
 
 export function invalidHtml(error) {
@@ -14,6 +15,7 @@ Hooks.on("init", () => {
   console.log("LMJE | Loading templates")
   loadTemplates([
     templates.whisperTable,
+    templates.chatTable,
   ])
 
   console.log("LMJE | Initializing generic enrichers");
@@ -425,7 +427,30 @@ Hooks.on("init", () => {
 
         var html = await renderTemplate(templates.whisperTable, enricherData)
 
-        console.log(dialogContent)
+        return $(html)[0]
+      }
+    },
+    //#endregion
+    //#region @Chat
+    {
+      pattern: /@Chat\{([\s\S]+?)\}/gm,
+      enricher: async (match, options) => {
+        var message = match[1]
+
+        var onClick = `
+          ChatMessage.create({
+            user: game.users.current,
+            content: \`${message}\`
+          })
+        `
+
+        var enricherData = {
+          click: onClick,
+          message: message
+        }
+
+        var html = await renderTemplate(templates.chatTable, enricherData)
+
         console.log(`Message: ${message}`)
         console.log(html)
 
