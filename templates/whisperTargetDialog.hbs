@@ -1,0 +1,29 @@
+<table>
+  {{#each users}}
+  <tr>
+    <td id='LMJE-Whisper_Dialog_User' style='display: flex; align-content:center'>
+      <img src='{{this.avatar}}' height='20px'>
+      <a style='
+        display: block;
+        width: 10px; height: 10px;
+        border-radius: 5px;
+        border: 1px black solid;
+        background-color: {{this.border.css}};
+
+        margin-left: 10px;
+        margin-top: 4px;
+        margin-right: 10px;
+      '></a>
+      <a onclick='
+        ChatMessage.create({
+          user: game.users.current,
+          whisper: [`{{this._id}}`],
+          content: `{{content}}`
+        })
+      '>
+          {{this.name}}
+      </a>
+    </td>
+  </tr>
+  {{/each}}
+</table>

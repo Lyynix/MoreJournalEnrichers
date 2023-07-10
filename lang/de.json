@@ -17,6 +17,16 @@
         "Edit": "Playlist bearbeiten"
       }
     },
+    "WHISPER": {
+      "Title": "Nachricht flüstern",
+      "Dialog": {
+        "Title": "Wähle den Spieler",
+        "Cancel": "Abbrechen"
+      }
+    },
+    "CHAT": {
+      "Title": "In den Chat posten"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait des Charakters",

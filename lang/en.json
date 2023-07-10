@@ -17,6 +17,16 @@
         "Edit": "Edit Playlist"
       }
     },
+    "WHISPER": {
+      "Title": "Whisper message",
+      "Dialog": {
+        "Title": "Whisper to Player",
+        "Cancel": "Cancel"
+      }
+    },
+    "CHAT": {
+      "Title": "Chat message"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait of the Character",

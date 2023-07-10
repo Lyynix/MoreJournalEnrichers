@@ -1,0 +1,35 @@
+<table class="LMJE-Whisper_Table">
+  <style>
+    .LMJE-Whisper_Table {
+      border-spacing: 0;
+      border-collapse: separate;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px var(--color-underline-active) solid;
+    }
+    .LMJE-Whisper_Table tr th {
+      background-color: var(--color-underline-active);
+      color: var(--color-text-light-highlight);
+      padding: 9px 14px;
+    }
+    .LMJE-Whisper_Table tr td {
+      background-color: #00000010;
+      color: var(--color-text-light-9 );
+      padding: 9px 14px;
+    }
+  </style>
+  <tr>
+    <th class="LMJE-Whisper_Title" align="left">
+        <i class="fas fa-mask"></i>
+      {{localize 'LMJE.WHISPER.Title'}}
+    </th>
+    <th class="LMJE-Whisper_Button" width="30px">
+      <a onclick="{{click}}">
+        <i class="fas fa-message"></i>
+      </a>
+    </th>
+  </tr>
+  <tr>
+    <td colspan="2" id="LMJE-Whisper_Message">{{message}}</td>
+  </tr>
+</table>

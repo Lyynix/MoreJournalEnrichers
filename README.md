@@ -20,14 +20,18 @@ Every enricher in the following list has a link to the corresponding wiki page, 
 
 - `@ToC` und `@ToC[journalID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
   This enricher adds an interactive table of contents to the journal page.
-- `@SceneMenu[sceneID1 sceneID2 ...]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_SceneMenu):\
+- `@SceneMenu[sceneID1; sceneID2; ...]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_SceneMenu):\
   This enricher adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
 - `@InlineScene[sceneID]{alias}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_InlineScene):\
   This Journal Enricher inserts an inline scene reference, with the interactions from `@SceneMenu`.
-- `@PlaylistMenu[playlistID1 playlistID2 ...]` [wiki page](Enricher_PlaylistMenu):\
+- `@PlaylistMenu[playlistID1; playlistID2; ...]` [wiki page](Enricher_PlaylistMenu):\
   This Journal Enricher adds a list of playlists and a set of buttons for each playlist, like play and skip.
 - `@Playlist[playlistID]{alias}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist):\
   This Journal Enricher inserts an inline playlist controller.
+- `@Chat{text}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Whisper):\
+  This Journal Enricher inserts text, that can be posted in chat to all other players.
+- `@Whisper{text}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Whisper):\
+  This Journal Enricher inserts text, that can be whispered to another player.
 
 ### System dependent enrichers
 - `@Character[actorID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Character):\
