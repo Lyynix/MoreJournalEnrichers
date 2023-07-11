@@ -6,6 +6,7 @@ import { sceneMenu, inlineScene } from "./enrichers/sceneEnrichers.js";
 import { patterns, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
+  //load templates for generic enrichers
   try {
     loadTemplates([templates.whisperTable, templates.chatTable]);
     console.log("LMJE | Loaded templates");
@@ -13,6 +14,7 @@ Hooks.on("init", () => {
     console.error("LMJE | Failed to load templates\n", error);
   }
 
+  //add generic enrichers to TextEditor
   try {
     CONFIG.TextEditor.enrichers.push(
       {
@@ -49,6 +51,7 @@ Hooks.on("init", () => {
     console.error("LMJE | Failed to initialize generic enrichers\n", error);
   }
 
+  // Repeat for system specific enrichers
   switch (game.system.id) {
     case "dnd5e":
       try {
@@ -86,6 +89,7 @@ Hooks.on("init", () => {
       } catch (error) {
         console.error("LMJE | Failed to initialize pf2e enrichers\n", error);
       }
+      break;
 
     default:
       break;
