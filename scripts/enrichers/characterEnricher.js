@@ -1,4 +1,4 @@
-import { invalidHtml } from "../helpers.js";
+import { invalidHtml, templates } from "../helpers.js";
 
 export async function characterDnD(match, options) {
   var char = game.actors.get(match[1]);
@@ -22,7 +22,7 @@ export async function characterDnD(match, options) {
     },
   };
   var returnHtml = await renderTemplate(
-    "modules/lyynix-more-journal-enrichers/templates/characterDnD.html",
+    templates.character.dnd,
     templateEntries
   );
   return $(returnHtml)[0];
@@ -49,7 +49,7 @@ export async function characterPF2e(match, options) {
     },
   };
   var returnHtml = await renderTemplate(
-    "modules/lyynix-more-journal-enrichers/templates/characterPF2e.html",
+    templates.character.pf2e,
     templateEntries
   );
   return $(returnHtml)[0];
