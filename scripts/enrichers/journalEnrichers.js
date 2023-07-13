@@ -46,7 +46,13 @@ export async function tableOfContents(match, options) {
     if (prevTitleLevel < page.title.level) {
       for (let i = 0; i < page.title.level - prevTitleLevel; i++) {
         tocHtml += /* html */ `
-          <ul style="list-style: none;">
+          <ul style="list-style: none;" class="no-list-style">
+          <style>
+            .system-dsa5 .window-app .window-content .journal-entry-content .scrollable article .journal-page-content 
+            ul.no-list-style > li::before {
+                display: none;
+            }
+          </style>
         `;
       }
     } else if (prevTitleLevel > page.title.level) {
