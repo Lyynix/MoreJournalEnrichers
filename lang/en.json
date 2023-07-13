@@ -1,5 +1,9 @@
 {
   "LMJE": {
+    "CONVERT": {
+      "Tooltip": "Click to convert journal<br><i>This will add a copy of this journal and convert all @Enrichers to html code.</i>",
+      "TooltipWarning": "!! Keep the original journal !!<br>!! This is not revertable !!"
+    },
     "SCENEMENU": {
       "Title": "Scene menu",
       "Tooltip": {

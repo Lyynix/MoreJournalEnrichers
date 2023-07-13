@@ -1,3 +1,4 @@
+import { convertJournal } from "./converter.js";
 import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import { toc } from "./enrichers/journalEnrichers.js";
@@ -94,4 +95,31 @@ Hooks.on("init", () => {
     default:
       break;
   }
+});
+
+Hooks.on("getJournalSheetHeaderButtons", (sheet, buttons) => {
+  var journalID = sheet.object._id;
+
+  try {
+    buttons.unshift({
+      class: "lmje-convert",
+      icon: "fas fa-arrow-progress",
+      onclick: async () => convertJournal(journalID),
+    });
+    console.log("LMJE | Added convertion button");
+  } catch (error) {
+    console.error("LMJE | Failed to add convertion button\n", error);
+  }
+});
+
+Hooks.on("renderJournalSheet", (obj, html, data) => {
+  html
+    .find(".lmje-convert")
+    .attr(
+      "data-tooltip",
+      game.i18n.localize("LMJE.CONVERT.Tooltip") +
+        "<br><b style='color: gold'>" +
+        game.i18n.localize("LMJE.CONVERT.TooltipWarning") +
+        "<b>"
+    );
 });

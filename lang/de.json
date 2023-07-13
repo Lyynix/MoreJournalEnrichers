@@ -1,5 +1,9 @@
 {
   "LMJE": {
+    "CONVERT": {
+      "Tooltip": "Klicken um das Journal umzuwandeln<br><i>Hierdurch wird eine Kopie des Journals erstellt, in der alle @Enrichers zu HTML-Code umgewandelt wurden.</i>",
+      "TooltipWarning": "!! Behalte das originale Journal !!<br>!! Dieser Schritt ist nicht umkehrbar !!"
+    },
     "SCENEMENU": {
       "Title": "Szenenmenü",
       "Tooltip": {
