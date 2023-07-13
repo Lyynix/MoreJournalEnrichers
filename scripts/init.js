@@ -98,6 +98,9 @@ Hooks.on("init", () => {
 });
 
 Hooks.on("getJournalSheetHeaderButtons", (sheet, buttons) => {
+  if (!sheet.options.editable) return
+  if (sheet.object.ownership[game.userId] != 3) return
+
   var journalID = sheet.object._id;
 
   try {
