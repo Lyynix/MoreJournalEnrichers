@@ -1,6 +1,6 @@
 import { invalidHtml } from "../helpers.js";
 
-export async function toc(match, options) {
+export async function tableOfContents(match, options) {
   // extract data from match
   var journalID = match[3] ? match[3] : options.relativeTo.parent._id;
   var headerOffset;

@@ -1,3 +1,9 @@
+import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
+import { chat, whisper } from "./enrichers/chatEnrichers.js";
+import { tableOfContents } from "./enrichers/journalEnrichers.js";
+import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
+import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
+
 export const templates = {
   whisperTable:
     "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
@@ -22,6 +28,26 @@ export const patterns = {
   playlist: {
     menu: /@PlaylistMenu\[((([a-zA-Z0-9])(\;\s[a-zA-Z0-9])*)+)\]/g,
     inline: /@Playlist\[(\s*[a-zA-Z0-9]+)\](\{(.+)\})?/g,
+  },
+};
+
+export const enricherFunctions = {
+  toc: tableOfContents,
+  character: {
+    dnd: characterDnD,
+    pf2e: characterPF2e,
+  },
+  chat: {
+    chat: chat,
+    whisper: whisper,
+  },
+  scene: {
+    menu: sceneMenu,
+    inline: inlineScene,
+  },
+  playlist: {
+    menu: playlistMenu,
+    inline: inlinePlaylist,
   },
 };
 

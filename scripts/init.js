@@ -1,10 +1,5 @@
-import { convertJournal } from "./converter.js";
-import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
-import { chat, whisper } from "./enrichers/chatEnrichers.js";
-import { toc } from "./enrichers/journalEnrichers.js";
-import { playlistMenu, inlinePlaylist } from "./enrichers/playlistEnrichers.js";
-import { sceneMenu, inlineScene } from "./enrichers/sceneEnrichers.js";
-import { patterns, templates } from "./helpers.js";
+import { initConvertion } from "./converter.js";
+import { enricherFunctions, patterns, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
   //load templates for generic enrichers
@@ -20,31 +15,31 @@ Hooks.on("init", () => {
     CONFIG.TextEditor.enrichers.push(
       {
         pattern: patterns.scene.menu,
-        enricher: sceneMenu,
+        enricher: enricherFunctions.scene.menu,
       },
       {
         pattern: patterns.toc,
-        enricher: toc,
+        enricher: enricherFunctions.toc,
       },
       {
         pattern: patterns.scene.inline,
-        enricher: inlineScene,
+        enricher: enricherFunctions.scene.inline,
       },
       {
         pattern: patterns.playlist.inline,
-        enricher: inlinePlaylist,
+        enricher: enricherFunctions.playlist.inline,
       },
       {
         pattern: patterns.playlist.menu,
-        enricher: playlistMenu,
+        enricher: enricherFunctions.playlist.menu,
       },
       {
         pattern: patterns.chat.whisper,
-        enricher: whisper,
+        enricher: enricherFunctions.chat.whisper,
       },
       {
         pattern: patterns.chat.chat,
-        enricher: chat,
+        enricher: enricherFunctions.chat.chat,
       }
     );
     console.log("LMJE | Initialized generic enrichers");
@@ -65,7 +60,7 @@ Hooks.on("init", () => {
       try {
         CONFIG.TextEditor.enrichers.push({
           pattern: patterns.character,
-          enricher: characterDnD,
+          enricher: enricherFunctions.character.dnd,
         });
         console.log("LMJE | Initialized enrichers for dnd5e");
       } catch (error) {
@@ -84,7 +79,7 @@ Hooks.on("init", () => {
       try {
         CONFIG.TextEditor.enrichers.push({
           pattern: patterns.character,
-          enricher: characterPF2e,
+          enricher: enricherFunctions.character.pf2e,
         });
         console.log("LMJE | Initialized enrichers for pf2e");
       } catch (error) {
@@ -95,37 +90,7 @@ Hooks.on("init", () => {
     default:
       break;
   }
-});
 
-Hooks.on("getJournalSheetHeaderButtons", (sheet, buttons) => {
-  if (!sheet.options.editable) return
-  if (sheet.object.ownership[game.userId] != 3) return
-
-  var journalID = sheet.object._id;
-
-  try {
-    buttons.unshift({
-      class: "lmje-convert",
-      icon: "fas fa-arrow-progress",
-      onclick: async () => {
-        console.log("LMJE | ", journalID)
-        convertJournal(journalID)
-      },
-    });
-    console.log("LMJE | Added convertion button");
-  } catch (error) {
-    console.error("LMJE | Failed to add convertion button\n", error);
-  }
-});
-
-Hooks.on("renderJournalSheet", (obj, html, data) => {
-  html
-    .find(".lmje-convert")
-    .attr(
-      "data-tooltip",
-      game.i18n.localize("LMJE.CONVERT.Tooltip") +
-        "<br><b style='color: gold'>" +
-        game.i18n.localize("LMJE.CONVERT.TooltipWarning") +
-        "<b>"
-    );
+  //initialize other functions
+  initConvertion();
 });
