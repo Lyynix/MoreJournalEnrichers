@@ -1,9 +1,5 @@
-import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
-import { chat, whisper } from "./enrichers/chatEnrichers.js";
-import { toc } from "./enrichers/journalEnrichers.js";
-import { playlistMenu, inlinePlaylist } from "./enrichers/playlistEnrichers.js";
-import { sceneMenu, inlineScene } from "./enrichers/sceneEnrichers.js";
-import { patterns, templates } from "./helpers.js";
+import { initConvertion } from "./converter.js";
+import { enricherFunctions, patterns, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
   //load templates for generic enrichers
@@ -19,31 +15,31 @@ Hooks.on("init", () => {
     CONFIG.TextEditor.enrichers.push(
       {
         pattern: patterns.scene.menu,
-        enricher: sceneMenu,
+        enricher: enricherFunctions.scene.menu,
       },
       {
         pattern: patterns.toc,
-        enricher: toc,
+        enricher: enricherFunctions.toc,
       },
       {
         pattern: patterns.scene.inline,
-        enricher: inlineScene,
+        enricher: enricherFunctions.scene.inline,
       },
       {
         pattern: patterns.playlist.inline,
-        enricher: inlinePlaylist,
+        enricher: enricherFunctions.playlist.inline,
       },
       {
         pattern: patterns.playlist.menu,
-        enricher: playlistMenu,
+        enricher: enricherFunctions.playlist.menu,
       },
       {
         pattern: patterns.chat.whisper,
-        enricher: whisper,
+        enricher: enricherFunctions.chat.whisper,
       },
       {
         pattern: patterns.chat.chat,
-        enricher: chat,
+        enricher: enricherFunctions.chat.chat,
       }
     );
     console.log("LMJE | Initialized generic enrichers");
@@ -64,7 +60,7 @@ Hooks.on("init", () => {
       try {
         CONFIG.TextEditor.enrichers.push({
           pattern: patterns.character,
-          enricher: characterDnD,
+          enricher: enricherFunctions.character.dnd,
         });
         console.log("LMJE | Initialized enrichers for dnd5e");
       } catch (error) {
@@ -83,7 +79,7 @@ Hooks.on("init", () => {
       try {
         CONFIG.TextEditor.enrichers.push({
           pattern: patterns.character,
-          enricher: characterPF2e,
+          enricher: enricherFunctions.character.pf2e,
         });
         console.log("LMJE | Initialized enrichers for pf2e");
       } catch (error) {
