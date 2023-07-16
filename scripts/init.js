@@ -107,7 +107,10 @@ Hooks.on("getJournalSheetHeaderButtons", (sheet, buttons) => {
     buttons.unshift({
       class: "lmje-convert",
       icon: "fas fa-arrow-progress",
-      onclick: async () => convertJournal(journalID),
+      onclick: async () => {
+        console.log("LMJE | ", journalID)
+        convertJournal(journalID)
+      },
     });
     console.log("LMJE | Added convertion button");
   } catch (error) {
