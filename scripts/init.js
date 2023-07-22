@@ -1,4 +1,3 @@
-import { initConvertion } from "./converter.js";
 import { enricherFunctions, patterns, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
