@@ -1,5 +1,5 @@
 import { sceneMenu } from "./enrichers/sceneEnrichers.js";
-import { patterns } from "./helpers.js";
+import { enricherFunctions, patterns } from "./helpers.js";
 
 export function initConvertion() {
   Hooks.on("getJournalSheetHeaderButtons", (sheet, buttons) => {
@@ -14,10 +14,12 @@ export function initConvertion() {
         icon: "fas fa-arrow-progress",
         onclick: async () => {
           try {
-            convertJournal(journalID);
-            console.log(`LMJE | Converted journal "${journalID}" into new journal`)
+            await convertJournal(journalID);
+            console.log(
+              `LMJE | Converted journal "${journalID}" into new journal`
+            );
           } catch (error) {
-            console.error(`LMJE | Failed to convert journal "${journalID}"`)
+            console.error(`LMJE | Failed to convert journal "${journalID}"`);
           }
         },
       });
@@ -43,11 +45,13 @@ export function initConvertion() {
 export async function convertJournal(journalID) {
   var journal = game.journal.get(journalID);
 
+  console.log("LMJE | ", journal)
+
   // create new Journal with the data of original
   var newJournal = {
     name: `${journal.name} - ${game.i18n.localize("LMJE.CONVERT.NameSuffix")}`,
     folder: journal.folder,
-    ownership: journal.ownership,
+    //ownership: journal.ownership,
     flags: journal.flags,
     _stats: journal._stats,
   };
@@ -58,8 +62,19 @@ export async function convertJournal(journalID) {
     var oldContent = page.text.content;
 
     // change content of page
-    var newContent =
-      oldContent + "<p><strong>This Content has been edited!!!</strong></p>";
+    var newContent = oldContent
+      .replace(patterns.scene.menu, (match, ...attr) => {
+        var patternMatch = [match].concat(attr);
+        var enricher = enricherFunctions.scene.menu(patternMatch, {});
+        return enricher.outerHTML;
+      })
+      .replace(patterns.scene.inline, (match, ...attr) => {
+        var patternMatch = [match].concat(attr);
+        var enricher = enricherFunctions.scene.inline(patternMatch, {});
+        return enricher.outerHTML;
+      });
+
+    console.log("LMJE | New Content: ", newContent);
 
     // create new Page
     var newPage = {

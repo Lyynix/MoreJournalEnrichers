@@ -1,6 +1,6 @@
 import { invalidHtml } from "../helpers.js";
 
-export async function sceneMenu(match, options) {
+export function sceneMenu(match, options) {
   const uuids = match[1].split(/\;\s+/g);
 
   var menuHtml = /* html */ `
@@ -79,7 +79,7 @@ export async function sceneMenu(match, options) {
   return $(menuHtml)[0];
 }
 
-export async function inlineScene(match, options) {
+export function inlineScene(match, options) {
   var uuid = match[1];
   var sceneDocument = game.scenes.get(uuid);
   if (!sceneDocument) return $(invalidHtml("invalid sceneID"))[0];
