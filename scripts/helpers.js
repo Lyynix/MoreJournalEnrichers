@@ -1,5 +1,6 @@
 import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
+import { compendiumFull, compendiumMenu, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { tableOfContents } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
@@ -16,6 +17,11 @@ export const templates = {
 
 export const patterns = {
   toc: /(@ToC)(\[([a-zA-Z0-9]+)\])?(\{(big|bigger|medium|smaller|small)?\})?/g,
+  compendium: {
+    menu: /(?:@CompendiumMenu)(?:\[((?:(?:[a-zA-Z0-9])(?:\;\s[a-zA-Z0-9])*)+)\])(?:\{(.+)\})?/g,
+    inline: /(?:@InlineCompendium)(?:\[([a-zA-Z0-9]+)\])(?:\{(.+)\})?/g,
+    full: /(?:@Compendium)(?:\[([a-zA-Z0-9]+)\])(?:\{(.+)\})?/g,
+  },
   character: /@Character\[([a-zA-Z0-9]+)\]/g,
   chat: {
     chat: /@Chat\{([\s\S]+?)\}/gm,
@@ -33,6 +39,11 @@ export const patterns = {
 
 export const enricherFunctions = {
   toc: tableOfContents,
+  compendium: {
+    menu: compendiumMenu,
+    inline: inlineCompendium,
+    full: compendiumFull,
+  },
   character: {
     dnd: characterDnD,
     pf2e: characterPF2e,
