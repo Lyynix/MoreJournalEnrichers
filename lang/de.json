@@ -9,6 +9,18 @@
         "Edit": "Szene bearbeiten"
       }
     },
+    "COMPENDIUM": {
+      "INLINE": {
+        "Show": "Kompendium anzeigen"
+      },
+      "MENU": {
+        "Title": "Kompendienmenü"
+      },
+      "ERROR": {
+        "NotFound": "Kein Kompendium mit diesem Namen",
+        "Multiple": "Mehrere Kompendien mit diesem Namen"
+      }
+    },
     "PLAYLIST": {
       "Title": "Playlistenmenü",
       "Tooltip": {

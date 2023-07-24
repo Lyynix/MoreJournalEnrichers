@@ -13,13 +13,16 @@ export const templates = {
     dnd: "modules/lyynix-more-journal-enrichers/templates/characterDnD.html",
     pf2e: "modules/lyynix-more-journal-enrichers/templates/characterPF2e.html",
   },
+  compendium: {
+    inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
+  }
 };
 
 export const patterns = {
   toc: /(@ToC)(\[([a-zA-Z0-9]+)\])?(\{(big|bigger|medium|smaller|small)?\})?/g,
   compendium: {
     menu: /(?:@CompendiumMenu)(?:\[((?:(?:[a-zA-Z0-9])(?:\;\s[a-zA-Z0-9])*)+)\])(?:\{(.+)\})?/g,
-    inline: /(?:@InlineCompendium)(?:\[([a-zA-Z0-9]+)\])(?:\{(.+)\})?/g,
+    inline: /(?:@InlineCompendium)(?:\[(\S+)(?:(?:\;\s)(\S+?))?\])(?:\{(.+)\})?/g,
     full: /(?:@Compendium)(?:\[([a-zA-Z0-9]+)\])(?:\{(.+)\})?/g,
   },
   character: /@Character\[([a-zA-Z0-9]+)\]/g,
