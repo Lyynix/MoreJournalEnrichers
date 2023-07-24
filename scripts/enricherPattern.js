@@ -2,7 +2,7 @@ export class EnricherPattern {
   #ID = /[a-zA-Z0-9]+/;
   #TEXT = /[\S\s]+/;
   #WORD = /\S+/;
-  #SIZE = /(big|bigger|medium|smaller|small)/
+  #SIZE = /(?:big|bigger|medium|smaller|small)/
   #SEPARATOR = /(?:\;\s+)/;
 
   #ready = false;
