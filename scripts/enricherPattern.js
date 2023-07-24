@@ -1,6 +1,7 @@
 export class EnricherPattern {
   #ID = /[a-zA-Z0-9]+/;
-  #TEXT = /\S+/;
+  #TEXT = /[\S\s]+/;
+  #WORD = /\S+/;
   #SIZE = /(big|bigger|medium|smaller|small)/
   #SEPARATOR = /(?:\;\s+)/;
 
@@ -153,18 +154,3 @@ export class EnricherPattern {
     return this;
   }
 }
-
-Hooks.on("ready", () => {
-  console.log(`LMJE | Loaded EnricherPattern class`);
-
-  try {
-    var pattern = new EnricherPattern()
-      .addName("ToC")
-      .setReferenceTypes("ID", "SINGLE", true)
-      .setConfigTypes("SIZE", "SINGLE", true)
-      .getRegex();
-    console.log(`LMJE | Created Pattern:`, pattern);
-  } catch (error) {
-    console.error("LMJE | ERROR: ", error);
-  }
-});
