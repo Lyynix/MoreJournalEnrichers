@@ -1,4 +1,4 @@
-import { invalidHtml, patterns } from "../helpers.js";
+import { getDocument, invalidHtml } from "../helpers.js";
 
 export async function tableOfContents(match, options) {
   // extract data from match
@@ -27,8 +27,12 @@ export async function tableOfContents(match, options) {
   }
 
   // get referenced pages
-  var journal = game.journal.get(journalID);
-  if (!journal) return $(invalidHtml("invalid journalID"))[0];
+  var journal
+  try {
+    journal = await getDocument(journalID, "JournalEntry");
+  } catch (error) {
+    return $(invalidHtml(game.i18n.localize(error)))[0]
+  }
   var pages = journal.pages
     .map((e) => e)
     .sort((a, b) => {
