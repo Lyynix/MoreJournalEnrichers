@@ -18,12 +18,12 @@ export const templates = {
 export const patterns = {
   toc: new EnricherPattern()
     .addName("ToC")
-    .setReferenceTypes("ID", "SINGLE", true)
+    .setReferenceTypes("IDENTIFIER", "SINGLE", true)
     .setConfigTypes("SIZE", "SINGLE", true)
     .getRegex(),
   character: new EnricherPattern()
     .addName("Character")
-    .setReferenceTypes("ID", "SINGLE", false)
+    .setReferenceTypes("IDENTIFIER", "SINGLE", false)
     .getRegex(),
   chat: {
     chat: new EnricherPattern()
@@ -38,23 +38,23 @@ export const patterns = {
   scene: {
     menu: new EnricherPattern()
       .addName("SceneMenu")
-      .setReferenceTypes("ID", "MULTIPLE", false)
+      .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("InlineScene")
-      .setReferenceTypes("ID", "SINGLE", false)
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
   },
   playlist: {
     menu: new EnricherPattern()
       .addName("PlaylistMenu")
-      .setReferenceTypes("ID", "MULTIPLE", false)
+      .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("Playlist") // DEPRECATED
       .addName("InlinePlaylist")
-      .setReferenceTypes("ID", "SINGLE", false)
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
   },

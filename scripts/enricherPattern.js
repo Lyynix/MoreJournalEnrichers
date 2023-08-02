@@ -1,6 +1,8 @@
 export class EnricherPattern {
-  static ID = /[a-zA-Z0-9-\.]+/;
+  static ID = /[a-zA-Z0-9]{16}/;
+  static UUID = new RegExp(`${/(?:[a-zA-Z0-9-]+\.)+/.source}${EnricherPattern.ID.source}`)
   static TEXT = /[\S\s]+/;
+  static IDENTIFIER = new RegExp(`(?:${EnricherPattern.ID.source}|${EnricherPattern.UUID.source}|${EnricherPattern.TEXT.Source})`)
   static WORD = /\S+/;
   static SIZE = /(?:big|bigger|medium|smaller|small)/;
   static SEPARATOR = /(?:\;\s+)/;
@@ -88,7 +90,7 @@ export class EnricherPattern {
 
   /**
    * Sets types of references for pattern.
-   * @param {string} type the type of the string. Should be either "ID", "TEXT", "SIZE"
+   * @param {string} type the type of the string. Should be either "IDENTIFIER", "TEXT", "SIZE"
    * @param {string} amount the amount of desired occurances. Should be either "SINGLE", "MULTIPLE"
    * @param {boolean} optional Sets if the field is optional.
    * @returns builder for chaining of method calls.
@@ -99,7 +101,7 @@ export class EnricherPattern {
 
   /**
    * Sets types of labels for pattern.
-   * @param {string} type the type of the string. Should be either "ID", "TEXT", "SIZE"
+   * @param {string} type the type of the string. Should be either "IDENTIFIER", "TEXT", "SIZE"
    * @param {string} amount the amount of desired occurances. Should be either "SINGLE", "MULTIPLE"
    * @param {boolean} optional Sets if the field is optional.
    * @returns builder for chaining of method calls.
@@ -110,7 +112,7 @@ export class EnricherPattern {
 
   /**
    * Sets types of configurations for pattern.
-   * @param {string} type the type of the string. Should be either "ID", "TEXT", "SIZE"
+   * @param {string} type the type of the string. Should be either "IDENTIFIER", "TEXT", "SIZE"
    * @param {string} amount the amount of desired occurances. Should be either "SINGLE", "MULTIPLE"
    * @param {boolean} optional Sets if the field is optional.
    * @returns builder for chaining of method calls.
@@ -121,7 +123,7 @@ export class EnricherPattern {
 
   /**
    * Sets field of the pattern.
-   * @param {string} type Sets the pattern. Should be either "ID", "TEXT", "SIZE"
+   * @param {string} type Sets the pattern. Should be either "IDENTIFIER", "TEXT", "SIZE"
    * @param {string} amount Sets the amount. Should be either "SINGLE", "MULTIPLE"
    * @param {boolean} optional Sets if the field is optional.
    * @param field Defines the field to be changed.
@@ -132,8 +134,8 @@ export class EnricherPattern {
     this.#ready = false;
 
     switch (type) {
-      case "ID":
-        field.type = EnricherPattern.ID;
+      case "IDENTIFIER":
+        field.type = EnricherPattern.IDENTIFIER;
         break;
       case "TEXT":
         field.type = EnricherPattern.TEXT;
