@@ -1,6 +1,7 @@
 import { EnricherPattern } from "./enricherPattern.js";
 import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
+import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { tableOfContents } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
@@ -25,6 +26,18 @@ export const patterns = {
     .addName("Character")
     .setReferenceTypes("ID", "SINGLE", false)
     .getRegex(),
+  compenidum: {
+    full: new EnricherPattern()
+      .addName("Compendium")
+      .setReferenceTypes("ID", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("InlineCompendium")
+      .setReferenceTypes("ID", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex()
+  },
   chat: {
     chat: new EnricherPattern()
       .addName("Chat")
@@ -65,6 +78,10 @@ export const enricherFunctions = {
   character: {
     dnd: characterDnD,
     pf2e: characterPF2e,
+  },
+  compenidum: {
+    full: compendiumFull,
+    inline: inlineCompendium
   },
   chat: {
     chat: chat,
