@@ -1,7 +1,8 @@
+import { EnricherPattern } from "../enricherPattern.js";
 import { getDocument, invalidHtml } from "../helpers.js";
 
 export async function sceneMenu(match, options) {
-  const ids = match[1].split(/\;\s+/g);
+  const ids = match[1].split(EnricherPattern.SEPARATOR);
 
   var menuHtml = /* html */ `
     <table class="LMJE-SceneMenu_Table">
