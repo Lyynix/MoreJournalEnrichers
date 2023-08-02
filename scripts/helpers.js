@@ -80,10 +80,8 @@ export const enricherFunctions = {
   },
 };
 
-export async function getDocument(
-  identifier,
-  expectedDocumentType = undefined
-) {
+export async function getDocument(identifier, expectedDocumentType) {
+
   // try identifier as uuid
   var doc = await fromUuid(identifier);
   if (doc !== null) {
@@ -96,44 +94,39 @@ export async function getDocument(
       throw "LMJE.SYSTEM.getDocument.wrongType";
     }
   }
-  // try identifier as ID oder als Name
+  // get collection from expected type
+  var collection
   switch (expectedDocumentType) {
     case undefined:
-      throw "LMJE.SYSTEM.getDocument.noExpectedDocumentType"
+      throw "LMJE.SYSTEM.getDocument.noExpectedDocumentType";
     case "Actor":
-      doc = game.actors.get(identifier);
-      if (doc !== undefined) {
-        return doc;
-      }
-      doc = game.actors.getName(identifier);
-      if (doc !== undefined) {
-        return doc;
-      }
+      collection = game.actors
+      break;
+    case "Scene":
+      collection = game.scenes
       break;
     case "Playlist":
-      doc = game.playlists.get(identifier);
-      if (doc !== undefined) {
-        return doc;
-      }
-      doc = game.actors.getName(identifier);
-      if (doc !== undefined) {
-        return doc;
-      }
+      collection = game.playlists
       break;
     case "JournalEntry":
-      doc = game.journals.get(identifier);
-      if (doc !== undefined) {
-        return doc;
-      }
-      doc = game.actors.getName(identifier);
-      if (doc !== undefined) {
-        return doc;
-      }
+      collection = game.journal
       break;
 
     default:
       throw "LMJE.SYSTEM.getDocument.expectedTypeNotFound";
   }
+
+  // try identifier as ID
+  doc = collection.get(identifier);
+  if (doc) {
+    return doc;
+  }
+  // try identifier as Name
+  doc = collection.getName(identifier);
+  if (doc) {
+    return doc;
+  }
+  
   throw "LMJE.SYSTEM.getDocument.noDocumentFound";
 }
 
