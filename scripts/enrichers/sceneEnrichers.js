@@ -1,7 +1,7 @@
 import { getDocument, invalidHtml } from "../helpers.js";
 
 export async function sceneMenu(match, options) {
-  const uuids = match[1].split(/\;\s+/g);
+  const ids = match[1].split(/\;\s+/g);
 
   var menuHtml = /* html */ `
     <table class="LMJE-SceneMenu_Table">
@@ -22,11 +22,17 @@ export async function sceneMenu(match, options) {
         </tr>
     `;
 
-  for (var i = 0; i < uuids.length; i++) {
-    var uuid = uuids[i];
+  for (var i = 0; i < ids.length; i++) {
+    var id = ids[i];
 
-    var sceneDocument = game.scenes.get(uuid);
-    if (!sceneDocument) continue;
+    var sceneDocument
+    try {
+      sceneDocument = await getDocument(id, "Scene");
+    } catch (error) {
+      //ignore error
+      //TODO: feedback on error
+      continue;
+    }
 
     var sceneName = sceneDocument.navName
       ? `${sceneDocument.navName} (${sceneDocument.name})`
@@ -34,7 +40,7 @@ export async function sceneMenu(match, options) {
 
     var sceneControl = /* html */ `
     <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Show")}" onclick="
-      game.scenes.get('${uuid}')?.view(); 
+      game.scenes.get('${sceneDocument.id}')?.view(); 
       return false;
       ">
       <i class="fas fa-eye" style="margin: 5px"></i>
@@ -42,7 +48,7 @@ export async function sceneMenu(match, options) {
     <a title="${game.i18n.localize(
       "LMJE.SCENEMENU.Tooltip.Activate"
     )}" onclick="
-        game.scenes.get('${uuid}')?.activate(); 
+        game.scenes.get('${sceneDocument.id}')?.activate(); 
         return false;
         ">
       <i class="fas fa-bullseye" style="margin: 5px"></i>
@@ -50,14 +56,14 @@ export async function sceneMenu(match, options) {
     <a title="${game.i18n.localize(
       "LMJE.SCENEMENU.Tooltip.ToggleNav"
     )}" onclick="
-        var document = game.scenes.get('${uuid}'); 
+        var document = game.scenes.get('${sceneDocument.id}'); 
         document.update({navigation: !document.navigation})
         return false;
         ">
       <i class="fas fa-compass" style="margin: 5px"></i>
     </a>
     <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" onclick="
-        new SceneConfig(game.scenes.get('${uuid}')).render(true);
+        new SceneConfig(game.scenes.get('${sceneDocument.id}')).render(true);
         return false;
         ">
       <i class="fas fa-cogs" style="margin: 5px"></i>
@@ -84,7 +90,6 @@ export async function inlineScene(match, options) {
   var sceneDocument
   try {
     sceneDocument = await getDocument(id, "Scene");
-    console.log("LMJE | DOCUMENT", sceneDocument);
   } catch (error) {
     return $(invalidHtml(game.i18n.localize(error)))[0]
   }
@@ -95,7 +100,6 @@ export async function inlineScene(match, options) {
         ? `${sceneDocument.navName} (${sceneDocument.name})`
         : sceneDocument.name
       : match[2];
-  console.log("LMJE | SCENENAME: ", sceneName);
   
   var sceneHtml = /* html */ `
     <i style="
