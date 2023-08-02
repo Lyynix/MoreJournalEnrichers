@@ -1,8 +1,8 @@
 export class EnricherPattern {
-  #ID = /[a-zA-Z0-9-\.]+/;
-  #TEXT = /[\S\s]+/;
-  #WORD = /\S+/;
-  #SIZE = /(?:big|bigger|medium|smaller|small)/;
+  static ID = /[a-zA-Z0-9-\.]+/;
+  static TEXT = /[\S\s]+/;
+  static WORD = /\S+/;
+  static SIZE = /(?:big|bigger|medium|smaller|small)/;
   static SEPARATOR = /(?:\;\s+)/;
 
   #ready = false;
@@ -133,13 +133,13 @@ export class EnricherPattern {
 
     switch (type) {
       case "ID":
-        field.type = this.#ID;
+        field.type = EnricherPattern.ID;
         break;
       case "TEXT":
-        field.type = this.#TEXT;
+        field.type = EnricherPattern.TEXT;
         break;
       case "SIZE":
-        field.type = this.#SIZE;
+        field.type = EnricherPattern.SIZE;
         break;
       default:
         throw `"${type} is not a valid type. Should be: ${types.join(", ")}"`;
