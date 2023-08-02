@@ -16,19 +16,47 @@ export const templates = {
 };
 
 export const patterns = {
-  toc: new EnricherPattern().addName("ToC").setReferenceTypes("ID", "SINGLE", true).setConfigTypes("SIZE", "SINGLE", true).getRegex(),
-  character: new EnricherPattern().addName("Character").setReferenceTypes("ID", "SINGLE", false).getRegex(),
+  toc: new EnricherPattern()
+    .addName("ToC")
+    .setReferenceTypes("ID", "SINGLE", true)
+    .setConfigTypes("SIZE", "SINGLE", true)
+    .getRegex(),
+  character: new EnricherPattern()
+    .addName("Character")
+    .setReferenceTypes("ID", "SINGLE", false)
+    .getRegex(),
   chat: {
-    chat: new EnricherPattern().addName("Chat").setLabelTypes("TEXT", "SINGLE", false).getRegex(),
-    whisper: new EnricherPattern().addName("Whisper").setLabelTypes("TEXT", "SINGLE", false).getRegex()
+    chat: new EnricherPattern()
+      .addName("Chat")
+      .setLabelTypes("TEXT", "SINGLE", false)
+      .getRegex(),
+    whisper: new EnricherPattern()
+      .addName("Whisper")
+      .setLabelTypes("TEXT", "SINGLE", false)
+      .getRegex(),
   },
   scene: {
-    menu: new EnricherPattern().addName("SceneMenu").setReferenceTypes("ID", "MULTIPLE", false).getRegex(),
-    inline: new EnricherPattern().addName("InlineScene").setReferenceTypes("ID", "SINGLE", false).setLabelTypes("TEXT", "SINGLE", true).getRegex()
+    menu: new EnricherPattern()
+      .addName("SceneMenu")
+      .setReferenceTypes("ID", "MULTIPLE", false)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("InlineScene")
+      .setReferenceTypes("ID", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
   },
   playlist: {
-    menu: new EnricherPattern().addName("PlaylistMenu").setReferenceTypes("ID", "MULTIPLE", false).getRegex(),
-    inline: new EnricherPattern().addName("Playlist").setReferenceTypes("ID", "SINGLE", false).setLabelTypes("TEXT", "SINGLE", true).getRegex()
+    menu: new EnricherPattern()
+      .addName("PlaylistMenu")
+      .setReferenceTypes("ID", "MULTIPLE", false)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("Playlist") // DEPRECATED
+      .addName("InlinePlaylist")
+      .setReferenceTypes("ID", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
   },
 };
 
