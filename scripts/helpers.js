@@ -18,12 +18,12 @@ export const templates = {
 export const patterns = {
   toc: new EnricherPattern()
     .addName("ToC")
-    .setReferenceTypes("ID", "SINGLE", true)
+    .setReferenceTypes("IDENTIFIER", "SINGLE", true)
     .setConfigTypes("SIZE", "SINGLE", true)
     .getRegex(),
   character: new EnricherPattern()
     .addName("Character")
-    .setReferenceTypes("ID", "SINGLE", false)
+    .setReferenceTypes("IDENTIFIER", "SINGLE", false)
     .getRegex(),
   chat: {
     chat: new EnricherPattern()
@@ -38,23 +38,23 @@ export const patterns = {
   scene: {
     menu: new EnricherPattern()
       .addName("SceneMenu")
-      .setReferenceTypes("ID", "MULTIPLE", false)
+      .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("InlineScene")
-      .setReferenceTypes("ID", "SINGLE", false)
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
   },
   playlist: {
     menu: new EnricherPattern()
       .addName("PlaylistMenu")
-      .setReferenceTypes("ID", "MULTIPLE", false)
+      .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("Playlist") // DEPRECATED
       .addName("InlinePlaylist")
-      .setReferenceTypes("ID", "SINGLE", false)
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
   },
@@ -79,6 +79,56 @@ export const enricherFunctions = {
     inline: inlinePlaylist,
   },
 };
+
+export async function getDocument(identifier, expectedDocumentType) {
+
+  // try identifier as uuid
+  var doc = await fromUuid(identifier);
+  if (doc !== null) {
+    if (
+      expectedDocumentType === undefined ||
+      doc.documentName === expectedDocumentType
+    ) {
+      return doc;
+    } else {
+      throw "LMJE.SYSTEM.getDocument.wrongType";
+    }
+  }
+  // get collection from expected type
+  var collection
+  switch (expectedDocumentType) {
+    case undefined:
+      throw "LMJE.SYSTEM.getDocument.noExpectedDocumentType";
+    case "Actor":
+      collection = game.actors
+      break;
+    case "Scene":
+      collection = game.scenes
+      break;
+    case "Playlist":
+      collection = game.playlists
+      break;
+    case "JournalEntry":
+      collection = game.journal
+      break;
+
+    default:
+      throw "LMJE.SYSTEM.getDocument.expectedTypeNotFound";
+  }
+
+  // try identifier as ID
+  doc = collection.get(identifier);
+  if (doc) {
+    return doc;
+  }
+  // try identifier as Name
+  doc = collection.getName(identifier);
+  if (doc) {
+    return doc;
+  }
+  
+  throw "LMJE.SYSTEM.getDocument.noDocumentFound";
+}
 
 export function invalidHtml(error) {
   return /* html */ `
