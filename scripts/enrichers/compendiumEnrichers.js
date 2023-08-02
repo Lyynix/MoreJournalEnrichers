@@ -29,6 +29,7 @@ export async function compendiumFull(match, options) {
 }
 
 export async function inlineCompendium(match, options) {
+  console.log("LMJE | ", match)
   var label = match[1]
   var packageName = match[2]
 
@@ -39,11 +40,15 @@ export async function inlineCompendium(match, options) {
     return $(invalidHtml(game.i18n.localize(error)))[0]
   }
 
+  console.log("LMJE | ", compendium)
+
   var compendiumData = {
     label: label,
     packageName: packageName,
     id: compendium.metadata.id
   }
+  console.log("LMJE | ", compendiumData)
+
   var returnHtml = await renderTemplate(templates.compendium.inline, compendiumData)
   return $(returnHtml)[0];
 }

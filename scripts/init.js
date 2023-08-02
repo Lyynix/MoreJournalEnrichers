@@ -25,6 +25,14 @@ Hooks.on("init", () => {
         enricher: enricherFunctions.scene.inline,
       },
       {
+        pattern: patterns.compenidum.full,
+        enricher: enricherFunctions.compenidum.full
+      },
+      {
+        pattern: patterns.compenidum.inline,
+        enricher: enricherFunctions.compenidum.inline
+      },
+      {
         pattern: patterns.playlist.inline,
         enricher: enricherFunctions.playlist.inline,
       },
