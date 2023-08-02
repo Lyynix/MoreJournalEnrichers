@@ -80,6 +80,63 @@ export const enricherFunctions = {
   },
 };
 
+export async function getDocument(
+  identifier,
+  expectedDocumentType = undefined
+) {
+  // try identifier as uuid
+  var doc = await fromUuid(identifier);
+  if (doc !== null) {
+    if (
+      expectedDocumentType === undefined ||
+      doc.documentName === expectedDocumentType
+    ) {
+      return doc;
+    } else {
+      throw "LMJE.SYSTEM.getDocument.wrongType";
+    }
+  }
+  // try identifier as ID oder als Name
+  switch (expectedDocumentType) {
+    case undefined:
+      throw "LMJE.SYSTEM.getDocument.noExpectedDocumentType"
+    case "Actor":
+      doc = game.actors.get(identifier);
+      if (doc !== undefined) {
+        return doc;
+      }
+      doc = game.actors.getName(identifier);
+      if (doc !== undefined) {
+        return doc;
+      }
+      break;
+    case "Playlist":
+      doc = game.playlists.get(identifier);
+      if (doc !== undefined) {
+        return doc;
+      }
+      doc = game.actors.getName(identifier);
+      if (doc !== undefined) {
+        return doc;
+      }
+      break;
+    case "JournalEntry":
+      doc = game.journals.get(identifier);
+      if (doc !== undefined) {
+        return doc;
+      }
+      doc = game.actors.getName(identifier);
+      if (doc !== undefined) {
+        return doc;
+      }
+      break;
+
+    default:
+      throw "LMJE.SYSTEM.getDocument.expectedTypeNotFound";
+  }
+  throw "LMJE.SYSTEM.getDocument.noDocumentFound";
+}
+
 export function invalidHtml(error) {
   return /* html */ `
     <a class="content-link broken" draggable="true" data-id="null" data-uuid="asd">
