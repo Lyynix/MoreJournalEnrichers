@@ -78,7 +78,7 @@ export async function inlinePlaylist(match, options) {
   var playlist = game.playlists.get(uuid);
   if (!playlist) return $(invalidHtml("invalid playlistID"))[0];
 
-  var playlistName = match[2] === undefined ? playlist.name : match[3];
+  var playlistName = match[2] === undefined ? playlist.name : match[2];
 
   var html = /* html */ `
   <i style="

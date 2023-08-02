@@ -89,7 +89,7 @@ export async function inlineScene(match, options) {
       ? sceneDocument.navName
         ? `${sceneDocument.navName} (${sceneDocument.name})`
         : sceneDocument.name
-      : match[3];
+      : match[2];
 
   var sceneHtml = /* html */ `
     <i style="

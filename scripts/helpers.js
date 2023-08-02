@@ -1,6 +1,6 @@
+import { EnricherPattern } from "./enricherPattern.js";
 import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
-import { compendiumFull, compendiumMenu, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { tableOfContents } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
@@ -13,40 +13,55 @@ export const templates = {
     dnd: "modules/lyynix-more-journal-enrichers/templates/characterDnD.html",
     pf2e: "modules/lyynix-more-journal-enrichers/templates/characterPF2e.html",
   },
-  compendium: {
-    inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
-  }
 };
 
 export const patterns = {
-  toc: /(@ToC)(\[([a-zA-Z0-9]+)\])?(\{(big|bigger|medium|smaller|small)?\})?/g,
-  compendium: {
-    menu: /(?:@CompendiumMenu)(?:\[((?:(?:[a-zA-Z0-9])(?:\;\s[a-zA-Z0-9])*)+)\])(?:\{(.+)\})?/g,
-    inline: /(?:@InlineCompendium)(?:\[(\S+)(?:(?:\;\s)(\S+?))?\])(?:\{(.+)\})?/g,
-    full: /(?:@Compendium)(?:\[([a-zA-Z0-9]+)\])(?:\{(.+)\})?/g,
-  },
-  character: /@Character\[([a-zA-Z0-9]+)\]/g,
+  toc: new EnricherPattern()
+    .addName("ToC")
+    .setReferenceTypes("ID", "SINGLE", true)
+    .setConfigTypes("SIZE", "SINGLE", true)
+    .getRegex(),
+  character: new EnricherPattern()
+    .addName("Character")
+    .setReferenceTypes("ID", "SINGLE", false)
+    .getRegex(),
   chat: {
-    chat: /@Chat\{([\s\S]+?)\}/gm,
-    whisper: /@Whisper\{([\s\S]+?)\}/gm,
+    chat: new EnricherPattern()
+      .addName("Chat")
+      .setLabelTypes("TEXT", "SINGLE", false)
+      .getRegex(),
+    whisper: new EnricherPattern()
+      .addName("Whisper")
+      .setLabelTypes("TEXT", "SINGLE", false)
+      .getRegex(),
   },
   scene: {
-    menu: /@SceneMenu\[((([a-zA-Z0-9])(\;\s[a-zA-Z0-9])*)+)\]/g,
-    inline: /@InlineScene\[([a-zA-Z0-9]+)\](\{(.+)\})?/g,
+    menu: new EnricherPattern()
+      .addName("SceneMenu")
+      .setReferenceTypes("ID", "MULTIPLE", false)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("InlineScene")
+      .setReferenceTypes("ID", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
   },
   playlist: {
-    menu: /@PlaylistMenu\[((([a-zA-Z0-9])(\;\s[a-zA-Z0-9])*)+)\]/g,
-    inline: /@Playlist\[(\s*[a-zA-Z0-9]+)\](\{(.+)\})?/g,
+    menu: new EnricherPattern()
+      .addName("PlaylistMenu")
+      .setReferenceTypes("ID", "MULTIPLE", false)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("Playlist") // DEPRECATED
+      .addName("InlinePlaylist")
+      .setReferenceTypes("ID", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
   },
 };
 
 export const enricherFunctions = {
   toc: tableOfContents,
-  compendium: {
-    menu: compendiumMenu,
-    inline: inlineCompendium,
-    full: compendiumFull,
-  },
   character: {
     dnd: characterDnD,
     pf2e: characterPF2e,

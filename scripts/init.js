@@ -3,13 +3,7 @@ import { enricherFunctions, patterns, templates } from "./helpers.js";
 Hooks.on("init", () => {
   //load templates for generic enrichers
   try {
-    loadTemplates(
-      [
-        templates.whisperTable,
-        templates.chatTable,
-        templates.compendium.inline,
-      ]
-    );
+    loadTemplates([templates.whisperTable, templates.chatTable]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
     console.error("LMJE | Failed to load templates\n", error);
@@ -45,18 +39,6 @@ Hooks.on("init", () => {
       {
         pattern: patterns.chat.chat,
         enricher: enricherFunctions.chat.chat,
-      },
-      {
-        pattern: patterns.compendium.menu,
-        enricher: enricherFunctions.compendium.menu,
-      },
-      {
-        pattern: patterns.compendium.inline,
-        enricher: enricherFunctions.compendium.inline,
-      },
-      {
-        pattern: patterns.compendium.full,
-        enricher: enricherFunctions.compendium.full,
       }
     );
     console.log("LMJE | Initialized generic enrichers");

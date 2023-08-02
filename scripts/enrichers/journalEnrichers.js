@@ -1,10 +1,10 @@
-import { invalidHtml } from "../helpers.js";
+import { invalidHtml, patterns } from "../helpers.js";
 
 export async function tableOfContents(match, options) {
   // extract data from match
-  var journalID = match[3] ? match[3] : options.relativeTo.parent._id;
+  var journalID = match[1] ? match[1] : options.relativeTo.parent._id;
   var headerOffset;
-  switch (match[5]) {
+  switch (match[2]) {
     case "big":
       headerOffset = 0;
       break;
