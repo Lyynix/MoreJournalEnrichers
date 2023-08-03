@@ -1,5 +1,13 @@
 {
   "LMJE": {
+    "SYSTEM": {
+      "getDocument": {
+        "wrongType": "Expected type doesn't match type of found document",
+        "expectedTypeNotFound": "The expected type is not implemented",
+        "noExpectedDocumentType": "No expected type given",
+        "noDocumentFound": "No document found"
+      }
+    },
     "SCENEMENU": {
       "Title": "Scene menu",
       "Tooltip": {

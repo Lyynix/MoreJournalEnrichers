@@ -1,7 +1,8 @@
-import { invalidHtml } from "../helpers.js";
+import { EnricherPattern } from "../enricherPattern.js";
+import { getDocument, invalidHtml } from "../helpers.js";
 
 export async function playlistMenu(match, options) {
-  const uuids = match[1].split(/\;\s/g);
+  const ids = match[1].split(EnricherPattern.SEPARATOR);
 
   var menuHtml = /* html */ `
     <table class="LMJE-Playlist_Table">
@@ -22,11 +23,15 @@ export async function playlistMenu(match, options) {
       </tr>
   `;
 
-  for (var i = 0; i < uuids.length; i++) {
-    var uuid = uuids[i];
+  for (var i = 0; i < ids.length; i++) {
+    var id = ids[i];
 
-    var playlistDocument = game.playlists.get(uuid);
-    if (!playlistDocument) continue;
+    var playlistDocument;
+    try {
+      playlistDocument = await getDocument(id, "Playlist");
+    } catch (error) {
+      continue;
+    }
 
     var playlistName = playlistDocument.name;
 
@@ -34,7 +39,7 @@ export async function playlistMenu(match, options) {
     <a 
       title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
       onclick="
-        var playlist = game.playlists.get('${uuid}')
+        var playlist = game.playlists.get('${playlistDocument.id}')
         playlist?.playing ? playlist.stopAll() : playlist.playAll(); 
         return false;
       "> 
@@ -43,7 +48,7 @@ export async function playlistMenu(match, options) {
     <a 
       title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastForward")}" 
       onclick="
-      game.playlists.get('${uuid}')?.playNext(); 
+      game.playlists.get('${playlistDocument.id}')?.playNext(); 
         return false;
       "> 
         <i class="fas fa-forward-fast" style="margin: 5px"></i>
@@ -51,7 +56,9 @@ export async function playlistMenu(match, options) {
     <a 
       title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.Edit")}" 
       onclick="
-        new PlaylistConfig(game.playlists.get('${uuid}')).render(true);
+        new PlaylistConfig(game.playlists.get('${
+          playlistDocument.id
+        }')).render(true);
         return false;
       ">
         <i class="fas fa-cogs" style="margin: 5px"></i>
@@ -74,9 +81,13 @@ export async function playlistMenu(match, options) {
 }
 
 export async function inlinePlaylist(match, options) {
-  var uuid = match[1];
-  var playlist = game.playlists.get(uuid);
-  if (!playlist) return $(invalidHtml("invalid playlistID"))[0];
+  var id = match[1];
+  var playlist;
+  try {
+    playlist = await getDocument(id, "Playlist");
+  } catch (error) {
+    return $(invalidHtml(game.i18n.localize(error)))[0];
+  }
 
   var playlistName = match[2] === undefined ? playlist.name : match[2];
 
@@ -96,7 +107,7 @@ export async function inlinePlaylist(match, options) {
   <a 
     title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
     onclick="
-      var playlist = game.playlists.get('${uuid}')
+      var playlist = game.playlists.get('${playlist.id}')
       playlist?.playing ? playlist.stopAll() : playlist.playAll(); 
       return false;
     "> 
@@ -105,7 +116,7 @@ export async function inlinePlaylist(match, options) {
   <a 
     title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastForward")}" 
     onclick="
-    game.playlists.get('${uuid}')?.playNext(); 
+    game.playlists.get('${playlist.id}')?.playNext(); 
       return false;
     "> 
       <i class="fas fa-forward-fast" style="color: var(--color-text-dark-inactive);"></i>
