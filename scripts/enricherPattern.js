@@ -2,7 +2,7 @@ export class EnricherPattern {
   static ID = /[a-zA-Z0-9]{16}/;
   static UUID = new RegExp(`${/(?:[a-zA-Z0-9-]+\.)+/.source}${EnricherPattern.ID.source}`)
   static TEXT = /[\S\s]+/;
-  static IDENTIFIER = new RegExp(`(?:${EnricherPattern.ID.source}|${EnricherPattern.UUID.source}|${EnricherPattern.TEXT.Source})`)
+  static IDENTIFIER = new RegExp(`(?:${EnricherPattern.ID.source}|${EnricherPattern.UUID.source}|${EnricherPattern.TEXT.source})`)
   static WORD = /\S+/;
   static SIZE = /(?:big|bigger|medium|smaller|small)/;
   static SEPARATOR = /(?:\;\s+)/;
