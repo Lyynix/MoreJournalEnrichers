@@ -129,7 +129,7 @@ export class EnricherPattern {
    * @param field Defines the field to be changed.
    */
   #setField(type, amount, optional, field) {
-    var types = ["ID", "TEXT", "SIZE"];
+    var types = ["IDENTIFIER", "TEXT", "SIZE"];
     var amounts = ["SINGLE", "MULTIPLE"];
     this.#ready = false;
 

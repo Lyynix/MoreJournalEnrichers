@@ -29,12 +29,12 @@ export const patterns = {
   compenidum: {
     full: new EnricherPattern()
       .addName("Compendium")
-      .setReferenceTypes("ID", "SINGLE", false)
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("InlineCompendium")
-      .setReferenceTypes("ID", "SINGLE", false)
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex()
   },
