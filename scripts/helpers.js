@@ -79,7 +79,7 @@ export const enricherFunctions = {
     dnd: characterDnD,
     pf2e: characterPF2e,
   },
-  compenidum: {
+  compendium: {
     full: compendiumFull,
     inline: inlineCompendium
   },
