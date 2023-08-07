@@ -33,7 +33,6 @@ export async function inlineCompendium(match, options) {
   var packInfo = match[1].split(EnricherPattern.SEPARATOR);
   var label = packInfo[0]
   var packageName = packInfo[1]
-  console.log(`LMJE | Found "${match[0]}" with the label "${label}" in the package "${packageName}"`)
 
   var compendium
   try {
@@ -42,14 +41,11 @@ export async function inlineCompendium(match, options) {
     return $(invalidHtml(game.i18n.localize(error)))[0]
   }
 
-  console.log("LMJE | ", compendium)
-
   var compendiumData = {
     label: label,
     packageName: packageName,
     id: compendium.metadata.id
   }
-  console.log("LMJE | ", compendiumData)
 
   var returnHtml = await renderTemplate(templates.compendium.inline, compendiumData)
   return $(returnHtml)[0];
