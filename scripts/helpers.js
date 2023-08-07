@@ -14,6 +14,10 @@ export const templates = {
     dnd: "modules/lyynix-more-journal-enrichers/templates/characterDnD.html",
     pf2e: "modules/lyynix-more-journal-enrichers/templates/characterPF2e.html",
   },
+  compendium: {
+    inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
+    menu: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumMenu.hbs"
+  }
 };
 
 export const patterns = {

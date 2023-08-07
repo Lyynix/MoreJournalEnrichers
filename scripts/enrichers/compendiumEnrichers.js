@@ -1,3 +1,4 @@
+import { EnricherPattern } from "../enricherPattern.js";
 import { invalidHtml, templates } from "../helpers.js";
 
 export default function getCompendium(label, packageName) {
@@ -29,9 +30,10 @@ export async function compendiumFull(match, options) {
 }
 
 export async function inlineCompendium(match, options) {
-  console.log("LMJE | ", match)
-  var label = match[1]
-  var packageName = match[2]
+  var packInfo = match[1].split(EnricherPattern.SEPARATOR);
+  var label = packInfo[0]
+  var packageName = packInfo[1]
+  console.log(`LMJE | Found "${match[0]}" with the label "${label}" in the package "${packageName}"`)
 
   var compendium
   try {
