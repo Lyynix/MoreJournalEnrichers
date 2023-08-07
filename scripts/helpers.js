@@ -26,7 +26,7 @@ export const patterns = {
     .addName("Character")
     .setReferenceTypes("IDENTIFIER", "SINGLE", false)
     .getRegex(),
-  compenidum: {
+  compendium: {
     full: new EnricherPattern()
       .addName("Compendium")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
