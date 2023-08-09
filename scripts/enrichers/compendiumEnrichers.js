@@ -26,13 +26,23 @@ export default function getCompendium(label, packageName) {
 }
 
 export async function compendiumFull(match, options) {
+  var label = match[1]
+  var packageName = match[2]
+
+  var compendium
+  try {
+    compendium = getCompendium(label, packageName)
+  } catch (error) {
+    return $(invalidHtml(game.i18n.localize(error)))[0]
+  }
+
+
   return match[0];
 }
 
 export async function inlineCompendium(match, options) {
-  var packInfo = match[1].split(EnricherPattern.SEPARATOR);
-  var label = packInfo[0]
-  var packageName = packInfo[1]
+  var label = match[1]
+  var packageName = match[2]
 
   var compendium
   try {

@@ -34,11 +34,13 @@ export const patterns = {
     full: new EnricherPattern()
       .addName("Compendium")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setConfigTypes("IDENTIFIER", "SINGLE", true)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("InlineCompendium")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setConfigTypes("IDENTIFIER", "SINGLE", true)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex()
   },
