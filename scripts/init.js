@@ -13,14 +13,14 @@ Hooks.on("init", () => {
   try {
     CONFIG.TextEditor.enrichers.push(
       {
-        label: "LMJE - Scene menu",
-        pattern: patterns.scene.menu,
-        enricher: enricherFunctions.scene.menu,
-      },
-      {
         label: "LMJE - Table of Contents",
         pattern: patterns.toc,
         enricher: enricherFunctions.toc,
+      },
+      {
+        label: "LMJE - Scene menu",
+        pattern: patterns.scene.menu,
+        enricher: enricherFunctions.scene.menu,
       },
       {
         label: "LMJE - Inline scene",
@@ -38,24 +38,24 @@ Hooks.on("init", () => {
         enricher: enricherFunctions.compendium.inline
       },
       {
-        label: "LMJE - Inline playlist",
-        pattern: patterns.playlist.inline,
-        enricher: enricherFunctions.playlist.inline,
-      },
-      {
         label: "LMJE - Playlist menu",
         pattern: patterns.playlist.menu,
         enricher: enricherFunctions.playlist.menu,
       },
       {
-        label: "LMJE - Whisper post",
-        pattern: patterns.chat.whisper,
-        enricher: enricherFunctions.chat.whisper,
+        label: "LMJE - Inline playlist",
+        pattern: patterns.playlist.inline,
+        enricher: enricherFunctions.playlist.inline,
       },
       {
         label: "LMJE - Chat post",
         pattern: patterns.chat.chat,
         enricher: enricherFunctions.chat.chat,
+      },
+      {
+        label: "LMJE - Whisper post",
+        pattern: patterns.chat.whisper,
+        enricher: enricherFunctions.chat.whisper,
       }
     );
     console.log("LMJE | Initialized generic enrichers");
