@@ -75,6 +75,7 @@ Hooks.on("init", () => {
 
       try {
         CONFIG.TextEditor.enrichers.push({
+          label: "LMJE - DND5e Character",
           pattern: patterns.character,
           enricher: enricherFunctions.character.dnd,
         });
@@ -94,6 +95,7 @@ Hooks.on("init", () => {
 
       try {
         CONFIG.TextEditor.enrichers.push({
+          label: "LMJE - PF2e Character",
           pattern: patterns.character,
           enricher: enricherFunctions.character.pf2e,
         });
