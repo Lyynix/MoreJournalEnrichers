@@ -1,13 +1,21 @@
-import { enricherFunctions, patterns, templates } from "./helpers.js";
+import { enricherFunctions, initHandlebarsHelpers, patterns, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
   //load templates for generic enrichers
   try {
-    loadTemplates([templates.whisperTable, templates.chatTable]);
+    loadTemplates([
+      templates.whisperTable,
+      templates.chatTable,
+      templates.compendium.inline,
+      templates.compendium.full,
+    ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
     console.error("LMJE | Failed to load templates\n", error);
   }
+
+  //add Handlebars helpers
+  initHandlebarsHelpers()
 
   //add generic enrichers to TextEditor
   try {
@@ -30,12 +38,12 @@ Hooks.on("init", () => {
       {
         label: "LMJE - Full compendium",
         pattern: patterns.compendium.full,
-        enricher: enricherFunctions.compendium.full
+        enricher: enricherFunctions.compendium.full,
       },
       {
         label: "LMJE - Inline Compendium",
         pattern: patterns.compendium.inline,
-        enricher: enricherFunctions.compendium.inline
+        enricher: enricherFunctions.compendium.inline,
       },
       {
         label: "LMJE - Playlist menu",

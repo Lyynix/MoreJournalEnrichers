@@ -16,6 +16,7 @@ export const templates = {
   },
   compendium: {
     inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
+    full: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumFull.hbs",
     menu: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumMenu.hbs"
   }
 };
@@ -32,7 +33,7 @@ export const patterns = {
     .getRegex(),
   compendium: {
     full: new EnricherPattern()
-      .addName("Compendium")
+      .addName("CompendiumFull")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setConfigTypes("IDENTIFIER", "SINGLE", true)
       .setLabelTypes("TEXT", "SINGLE", true)
@@ -151,6 +152,12 @@ export async function getDocument(identifier, expectedDocumentType) {
   }
   
   throw "LMJE.SYSTEM.getDocument.noDocumentFound";
+}
+
+export function initHandlebarsHelpers() {
+  Handlebars.registerHelper('isdefined', function (value) {
+    return value !== undefined;
+  });  
 }
 
 export function invalidHtml(error) {

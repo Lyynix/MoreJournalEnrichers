@@ -36,8 +36,18 @@ export async function compendiumFull(match, options) {
     return $(invalidHtml(game.i18n.localize(error)))[0]
   }
 
+  console.log("LMJE |", compendium)
+  var compendiumData = {
+    label: label,
+    packageName: packageName,
+    id: compendium.metadata.id,
+    packType: compendium.metadata.type,
+    contents: compendium.index.contents
+  }
 
-  return match[0];
+
+  var returnHtml = await renderTemplate(templates.compendium.full, compendiumData)
+  return $(returnHtml)[0];
 }
 
 export async function inlineCompendium(match, options) {
