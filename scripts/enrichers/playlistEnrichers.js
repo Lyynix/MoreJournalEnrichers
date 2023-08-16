@@ -56,9 +56,7 @@ export async function playlistMenu(match, options) {
     <a 
       title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.Edit")}" 
       onclick="
-        new PlaylistConfig(game.playlists.get('${
-          playlistDocument.id
-        }')).render(true);
+        new PlaylistConfig(game.playlists.get('${playlistDocument.id}')).render(true);
         return false;
       ">
         <i class="fas fa-cogs" style="margin: 5px"></i>

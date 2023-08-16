@@ -1,0 +1,37 @@
+<table class="LMJE-Comp_Table">
+  <style>
+    .LMJE-Comp_Table {
+      border-spacing: 0;
+      border-collapse: separate;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px var(--color-border-dark-5) solid;
+    }
+    .LMJE-Comp_Table tr th {
+      background-color: var(--color-border-dark-5);
+      color: var(--color-text-light-highlight);
+      padding: 9px 14px;
+    }
+    .LMJE-Comp_Table tr td {  
+      background-color: #00000010;
+      color: var(--color-text-light-9 );
+      padding: 9px 14px;
+    }
+  </style>
+  <tr>
+    <th colspan="2" align="center">
+      {{title}}
+    </th>
+  </tr>
+  {{#each packs}}
+  <tr>
+    <td>{{label}}</td>
+    <td>
+      <a
+        onclick="game.packs.get('{{id}}').render(true)">
+        <i class="fas fa-atlas"></i>
+      </a>
+    </td>
+  </tr>
+  {{/each}}
+</table>

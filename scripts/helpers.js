@@ -1,6 +1,7 @@
 import { EnricherPattern } from "./enricherPattern.js";
 import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
+import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { tableOfContents } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
@@ -13,6 +14,11 @@ export const templates = {
     dnd: "modules/lyynix-more-journal-enrichers/templates/characterDnD.html",
     pf2e: "modules/lyynix-more-journal-enrichers/templates/characterPF2e.html",
   },
+  compendium: {
+    inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
+    full: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumFull.hbs",
+    menu: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumMenu.hbs"
+  }
 };
 
 export const patterns = {
@@ -25,6 +31,20 @@ export const patterns = {
     .addName("Character")
     .setReferenceTypes("IDENTIFIER", "SINGLE", false)
     .getRegex(),
+  compendium: {
+    full: new EnricherPattern()
+      .addName("CompendiumFull")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setConfigTypes("IDENTIFIER", "SINGLE", true)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("InlineCompendium")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setConfigTypes("IDENTIFIER", "SINGLE", true)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex()
+  },
   chat: {
     chat: new EnricherPattern()
       .addName("Chat")
@@ -65,6 +85,10 @@ export const enricherFunctions = {
   character: {
     dnd: characterDnD,
     pf2e: characterPF2e,
+  },
+  compendium: {
+    full: compendiumFull,
+    inline: inlineCompendium
   },
   chat: {
     chat: chat,
@@ -128,6 +152,12 @@ export async function getDocument(identifier, expectedDocumentType) {
   }
   
   throw "LMJE.SYSTEM.getDocument.noDocumentFound";
+}
+
+export function initHandlebarsHelpers() {
+  Handlebars.registerHelper('isdefined', function (value) {
+    return value !== undefined;
+  });  
 }
 
 export function invalidHtml(error) {

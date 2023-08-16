@@ -1,44 +1,69 @@
-import { enricherFunctions, patterns, templates } from "./helpers.js";
+import { enricherFunctions, initHandlebarsHelpers, patterns, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
   //load templates for generic enrichers
   try {
-    loadTemplates([templates.whisperTable, templates.chatTable]);
+    loadTemplates([
+      templates.whisperTable,
+      templates.chatTable,
+      templates.compendium.inline,
+      templates.compendium.full,
+    ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
     console.error("LMJE | Failed to load templates\n", error);
   }
 
+  //add Handlebars helpers
+  initHandlebarsHelpers()
+
   //add generic enrichers to TextEditor
   try {
     CONFIG.TextEditor.enrichers.push(
       {
-        pattern: patterns.scene.menu,
-        enricher: enricherFunctions.scene.menu,
-      },
-      {
+        label: "LMJE - Table of Contents",
         pattern: patterns.toc,
         enricher: enricherFunctions.toc,
       },
       {
+        label: "LMJE - Scene menu",
+        pattern: patterns.scene.menu,
+        enricher: enricherFunctions.scene.menu,
+      },
+      {
+        label: "LMJE - Inline scene",
         pattern: patterns.scene.inline,
         enricher: enricherFunctions.scene.inline,
       },
       {
-        pattern: patterns.playlist.inline,
-        enricher: enricherFunctions.playlist.inline,
+        label: "LMJE - Full compendium",
+        pattern: patterns.compendium.full,
+        enricher: enricherFunctions.compendium.full,
       },
       {
+        label: "LMJE - Inline Compendium",
+        pattern: patterns.compendium.inline,
+        enricher: enricherFunctions.compendium.inline,
+      },
+      {
+        label: "LMJE - Playlist menu",
         pattern: patterns.playlist.menu,
         enricher: enricherFunctions.playlist.menu,
       },
       {
-        pattern: patterns.chat.whisper,
-        enricher: enricherFunctions.chat.whisper,
+        label: "LMJE - Inline playlist",
+        pattern: patterns.playlist.inline,
+        enricher: enricherFunctions.playlist.inline,
       },
       {
+        label: "LMJE - Chat post",
         pattern: patterns.chat.chat,
         enricher: enricherFunctions.chat.chat,
+      },
+      {
+        label: "LMJE - Whisper post",
+        pattern: patterns.chat.whisper,
+        enricher: enricherFunctions.chat.whisper,
       }
     );
     console.log("LMJE | Initialized generic enrichers");
@@ -58,6 +83,7 @@ Hooks.on("init", () => {
 
       try {
         CONFIG.TextEditor.enrichers.push({
+          label: "LMJE - DND5e Character",
           pattern: patterns.character,
           enricher: enricherFunctions.character.dnd,
         });
@@ -77,6 +103,7 @@ Hooks.on("init", () => {
 
       try {
         CONFIG.TextEditor.enrichers.push({
+          label: "LMJE - PF2e Character",
           pattern: patterns.character,
           enricher: enricherFunctions.character.pf2e,
         });

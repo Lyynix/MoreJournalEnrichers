@@ -1,0 +1,112 @@
+<table class="LMJE-Compendium_Table">
+  <style>
+    .LMJE-Compendium_Table {
+      border-spacing: 0;
+      border-collapse: separate;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px var(--color-border-dark-5) solid;
+    }
+
+    .LMJE-Compendium_Table tr th {
+      background-color: var(--color-border-dark-5);
+      color: var(--color-text-light-highlight);
+      padding: 9px 14px;
+    }
+
+    .LMJE-Compendium_Table tr td {
+      background-color: #00000010;
+      color: var(--color-text-light-9);
+      padding: 3px 14px;
+    }
+
+    .LMJE-Compendium_Table tr td div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .LMJE-Compendium_Table tr td div a {
+      display: inline;
+      text-align: center;
+
+      font-size: larger;
+    }
+  </style>
+  <tr>
+    <th class="LMJE-Compendium_Title" align="left">
+      <a onclick="game.packs.get('{{id}}').render(true)">
+        <i class="fas fa-atlas"></i>
+        {{label}}
+      </a>
+    </th>
+  </tr>
+  {{#each folders as |folder|}}
+  <tr>
+    <td colspan="2" style="
+      background-color: var(--color-text-dark-6);
+      color: var(--color-text-light-highlight);
+    ">
+      <div style="
+      display: block;
+      width: 100%;
+      height: 100%;
+      font-size: large;
+      ">
+        {{#if (isdefined folder.name)}}
+        {{folder.name}}
+        {{/if}}
+      </div>
+    </td>
+  </tr>
+  {{#each folder.content as |item|}}
+  <tr>
+    <td colspan="2" id="LMJE-Compendium_Item">
+      <div>
+        <div style="height: 100%; width: 20px;"></div>
+        {{#if (isdefined item.img)}}
+        <img src="{{item.img}}" height="40px" style="margin: 10px 14px 10px 0px;">
+        {{/if}}
+        <a class="content-link" draggable="true" data-uuid="{{item.uuid}}" data-id="{{item._id}}"
+          data-type="{{packType}}" data-pack="{{id}}" style="
+              background: none;
+              border: none;
+              border-radius: 0px;
+              white-space: nowrap;
+              word-break: break-all;
+            ">
+          {{item.name}}
+        </a>
+      </div>
+    </td>
+  </tr>
+  {{/each}}
+  {{/each}}
+  {{#each contents as |item|}}
+  <tr>
+    <td colspan="2" id="LMJE-Compendium_Item">
+      <div>
+        {{#if (isdefined item.img)}}
+        <img src="{{item.img}}" height="40px" style="margin: 10px 14px 10px 0px;">
+        {{/if}}
+        <a class="content-link" draggable="true" data-uuid="{{item.uuid}}" data-id="{{item._id}}"
+          data-type="{{packType}}" data-pack="{{id}}" style="
+              background: none;
+              border: none;
+              border-radius: 0px;
+              white-space: nowrap;
+              word-break: break-all;
+            ">
+          {{item.name}}
+        </a>
+      </div>
+    </td>
+  </tr>
+  {{/each}}
+</table>
+
+<a class="content-link" draggable="true" data-uuid="Compendium.dsa5-core.corebestiary.Actor.hTcB9Cnd4JNZ7rtR"
+  data-id="hTcB9Cnd4JNZ7rtR" data-type="Actor" data-pack="dsa5-core.corebestiary" data-tooltip="Kreatur Akteur">
+  <i class="fas fa-user"></i>
+  Feuerdschinn
+</a>

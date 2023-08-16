@@ -17,6 +17,18 @@
         "Edit": "Edit scene"
       }
     },
+    "COMPENDIUM": {
+      "INLINE": {
+        "Show": "Show compendium pack"
+      },
+      "MENU": {
+        "Title": "Compendium pack menu"
+      },
+      "ERROR": {
+        "NotFound": "No compendium pack found",
+        "Multiple": "Multiple packs with this name found"
+      }
+    },
     "PLAYLIST": {
       "Title": "Playlist Menu",
       "Tooltip": {
