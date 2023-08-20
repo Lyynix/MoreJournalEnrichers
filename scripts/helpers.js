@@ -1,5 +1,4 @@
 import { EnricherPattern } from "./enricherPattern.js";
-import { characterDnD, characterPF2e } from "./enrichers/characterEnricher.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { tableOfContents } from "./enrichers/journalEnrichers.js";
@@ -10,10 +9,6 @@ export const templates = {
   whisperTable:
     "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
   chatTable: "modules/lyynix-more-journal-enrichers/templates/chatTable.hbs",
-  character: {
-    dnd: "modules/lyynix-more-journal-enrichers/templates/characterDnD.html",
-    pf2e: "modules/lyynix-more-journal-enrichers/templates/characterPF2e.html",
-  },
   compendium: {
     inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
     full: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumFull.hbs",
@@ -26,10 +21,6 @@ export const patterns = {
     .addName("ToC")
     .setReferenceTypes("IDENTIFIER", "SINGLE", true)
     .setConfigTypes("SIZE", "SINGLE", true)
-    .getRegex(),
-  character: new EnricherPattern()
-    .addName("Character")
-    .setReferenceTypes("IDENTIFIER", "SINGLE", false)
     .getRegex(),
   compendium: {
     full: new EnricherPattern()
@@ -82,10 +73,6 @@ export const patterns = {
 
 export const enricherFunctions = {
   toc: tableOfContents,
-  character: {
-    dnd: characterDnD,
-    pf2e: characterPF2e,
-  },
   compendium: {
     full: compendiumFull,
     inline: inlineCompendium

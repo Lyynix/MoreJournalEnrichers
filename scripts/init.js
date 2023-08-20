@@ -75,18 +75,14 @@ Hooks.on("init", () => {
   switch (game.system.id) {
     case "dnd5e":
       try {
-        loadTemplates([templates.character.dnd]);
+        // loadTemplates([]);
         console.log("LMJE | Loaded templates for dnd5e");
       } catch (error) {
         console.error("LMJE | Failed to load dnd5 templates\n", error);
       }
 
       try {
-        CONFIG.TextEditor.enrichers.push({
-          label: "LMJE - DND5e Character",
-          pattern: patterns.character,
-          enricher: enricherFunctions.character.dnd,
-        });
+        // CONFIG.TextEditor.enrichers.push();
         console.log("LMJE | Initialized enrichers for dnd5e");
       } catch (error) {
         console.error("LMJE | Failed to initialize dnd5 enrichers\n", error);
@@ -95,18 +91,14 @@ Hooks.on("init", () => {
 
     case "pf2e":
       try {
-        loadTemplates([templates.character.pf2e]);
+        // loadTemplates([]);
         console.log("LMJE | Loaded templates for pf2e");
       } catch (error) {
         console.error("LMJE | Failed to load pf2e templates\n", error);
       }
 
       try {
-        CONFIG.TextEditor.enrichers.push({
-          label: "LMJE - PF2e Character",
-          pattern: patterns.character,
-          enricher: enricherFunctions.character.pf2e,
-        });
+        // CONFIG.TextEditor.enrichers.push();
         console.log("LMJE | Initialized enrichers for pf2e");
       } catch (error) {
         console.error("LMJE | Failed to initialize pf2e enrichers\n", error);
