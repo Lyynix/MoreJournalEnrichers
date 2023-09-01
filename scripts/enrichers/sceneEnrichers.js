@@ -5,21 +5,12 @@ export async function sceneMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
 
   var menuHtml = /* html */ `
-    <table class="LMJE-SceneMenu_Table">
-      <style>
-        .LMJE-SceneMenu_Table {
-          border-spacing: 0;
-          border-collapse: separate;
-          border-radius: 10px;
-          overflow: hidden;
-          border: 1.5px var(--color-border-dark-5) solid;
-        }
-        .LMJE-SceneMenu_Table tr th {
-          background: #00000030
-        }
-      </style>
+    <table class="LMJE-SceneMenu_Table LMJE-Table">
         <tr>
-          <th colspan="2">${game.i18n.localize("LMJE.SCENEMENU.Title")}</td>
+          <th align="left" colspan="2">
+            <i class="fas fa-map"></i>
+            ${game.i18n.localize("LMJE.SCENEMENU.Title")}
+          </td>
         </tr>
     `;
 

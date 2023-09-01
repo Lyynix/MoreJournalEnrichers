@@ -1,0 +1,50 @@
+/* Colors */
+:root {
+  --lmje-color-light: #7a6f99b0;
+  --lmje-color-dark: #2b253bb0;
+
+  --lmje-text-light: #f0f0e0;
+  --lmje-text-dark: #1a1a17;
+}
+
+/* Base Elements */
+.LMJE-Table {
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px var(--lmje-color-light) solid;
+}
+.LMJE-Table tr th {
+  background-color: var(--lmje-color-light);
+  color: var(--lmje-text-light);
+  padding: 9px 14px;
+}
+.LMJE-Table tr th i {
+  padding-right: 10px;
+}
+.LMJE-Table tr td {
+  background-color: #00000010;
+  padding: 9px 14px;
+}
+
+/* Changes for enrichers */
+
+.LMJE-Whisper_Table {
+  border-color: var(--lmje-color-dark);
+}
+.LMJE-Whisper_Table tr th {
+  background-color: var(--lmje-color-dark);
+}
+
+.LMJE-Compendium_Table tr td div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.LMJE-Compendium_Table tr td div a {
+  display: inline;
+  text-align: center;
+
+  font-size: larger;
+}
