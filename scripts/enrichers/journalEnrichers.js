@@ -40,6 +40,14 @@ export async function tableOfContents(match, options) {
     });
 
   var tocHtml = ``;
+  // tocHtml += /* html */`
+  // <style>
+  //   .system-dsa5 .window-app .window-content .journal-entry-content .scrollable article .journal-page-content 
+  //   ul.no-list-style > li::before {
+  //       display: none;
+  //   }
+  // </style>
+  // `
   var prevTitleLevel = 0;
   pages.forEach((page) => {
     // add tags for different indentations
@@ -47,12 +55,6 @@ export async function tableOfContents(match, options) {
       for (let i = 0; i < page.title.level - prevTitleLevel; i++) {
         tocHtml += /* html */ `
           <ul style="list-style: none;" class="no-list-style">
-          <style>
-            .system-dsa5 .window-app .window-content .journal-entry-content .scrollable article .journal-page-content 
-            ul.no-list-style > li::before {
-                display: none;
-            }
-          </style>
         `;
       }
     } else if (prevTitleLevel > page.title.level) {
@@ -66,8 +68,8 @@ export async function tableOfContents(match, options) {
     // add reference
     tocHtml += /* html */ `
       <li>
-        <a class="content-link"
-          style="background: none; border: none; font-size: ${
+        <a class="LMJE-no-link content-link"
+          style="font-size: ${
             (7 - (page.title.level + headerOffset)) * 2 + 6
           }pt"
           data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"

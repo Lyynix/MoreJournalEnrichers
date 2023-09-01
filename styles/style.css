@@ -1,7 +1,7 @@
 /* Colors */
 :root {
-  --lmje-color-light: #7a6f99b0;
-  --lmje-color-dark: #2b253bb0;
+  --lmje-color-light: #9a91b2b0;
+  --lmje-color-dark: #29272fb0;
 
   --lmje-text-light: #f0f0e0;
   --lmje-text-dark: #1a1a17;
@@ -27,6 +27,28 @@
   background-color: #00000010;
   padding: 9px 14px;
 }
+.LMJE-no-link{
+  background: none !important;
+  border: none !important;
+}
+.LMJE-link {
+  border: 1px var(--color-border-dark-tertiary) solid;
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-right: 0.3em;
+
+  white-space: nowrap;
+  word-break: break-all;
+
+  background: #DDD;
+}
+.LMJE-link a:first i{
+  margin-left: 4px;
+}
+.LMJE-link a i {
+  color: var(--color-text-dark-inactive);
+}
+
 
 /* Changes for enrichers */
 
