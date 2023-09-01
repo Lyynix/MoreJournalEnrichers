@@ -5,21 +5,12 @@ export async function sceneMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
 
   var menuHtml = /* html */ `
-    <table class="LMJE-SceneMenu_Table">
-      <style>
-        .LMJE-SceneMenu_Table {
-          border-spacing: 0;
-          border-collapse: separate;
-          border-radius: 10px;
-          overflow: hidden;
-          border: 1.5px var(--color-border-dark-5) solid;
-        }
-        .LMJE-SceneMenu_Table tr th {
-          background: #00000030
-        }
-      </style>
+    <table class="LMJE-SceneMenu_Table LMJE-Table">
         <tr>
-          <th colspan="2">${game.i18n.localize("LMJE.SCENEMENU.Title")}</td>
+          <th align="left" colspan="2">
+            <i class="fas fa-map"></i>
+            ${game.i18n.localize("LMJE.SCENEMENU.Title")}
+          </td>
         </tr>
     `;
 
@@ -103,17 +94,7 @@ export async function inlineScene(match, options) {
       : match[2];
   
   var sceneHtml = /* html */ `
-    <i style="
-      border: 1px var(--color-border-dark-tertiary) solid;
-      border-radius: 3px;
-      padding: 1px 4px;
-      margin-right: 0.3em;
-
-      white-space: nowrap;
-      word-break: break-all;
-
-      background: #DDD;
-    ">
+    <span class="LMJE-link">
     ${sceneName}
     <a 
       title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Show")}" 
@@ -121,7 +102,7 @@ export async function inlineScene(match, options) {
         game.scenes.get('${sceneDocument.id}')?.view(); 
         return false;
       ">
-        <i class="fas fa-eye" style="margin-left: 4px; color: var(--color-text-dark-inactive);"></i>
+        <i class="fas fa-eye"></i>
     </a>
     <a 
       title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Activate")}" 
@@ -129,7 +110,7 @@ export async function inlineScene(match, options) {
         game.scenes.get('${sceneDocument.id}')?.activate(); 
         return false;
       ">
-        <i class="fas fa-bullseye" style="color: var(--color-text-dark-inactive);"></i>
+        <i class="fas fa-bullseye"></i>
     </a>
     <a 
       title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.ToggleNav")}" 
@@ -138,7 +119,7 @@ export async function inlineScene(match, options) {
         document.update({navigation: !document.navigation})
         return false;
       ">
-        <i class="fas fa-compass" style="color: var(--color-text-dark-inactive);"></i>
+        <i class="fas fa-compass"></i>
     </a>
     <a 
       title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" 
@@ -146,9 +127,9 @@ export async function inlineScene(match, options) {
         new SceneConfig(game.scenes.get('${sceneDocument.id}')).render(true);
         return false;
       ">
-        <i class="fas fa-cogs" style="color: var(--color-text-dark-inactive);"></i>
+        <i class="fas fa-cogs"></i>
     </a>
-    </i>
+    </span>
     `;
 
   return $(sceneHtml)[0];

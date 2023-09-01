@@ -1,29 +1,10 @@
-<table class="LMJE-Chat_Table">
-  <style>
-    .LMJE-Chat_Table {
-      border-spacing: 0;
-      border-collapse: separate;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1.5px var(--color-border-dark-5) solid;
-    }
-    .LMJE-Chat_Table tr th {
-      background-color: var(--color-border-dark-5);
-      color: var(--color-text-light-highlight);
-      padding: 9px 14px;
-    }
-    .LMJE-Chat_Table tr td {  
-      background-color: #00000010;
-      color: var(--color-text-light-9 );
-      padding: 13px 14px;
-    }
-  </style>
+<table class="LMJE-Chat_Table LMJE-Table">
   <tr>
-    <th class="LMJE-Chat_Title" align="left">
+    <th align="left">
         <i class="fas fa-megaphone"></i>
       {{localize 'LMJE.CHAT.Title'}}
     </th>
-    <th class="LMJE-Chat_Button" width="30px">
+    <th width="30px">
       <a onclick="{{click}}">
         <i class="fas fa-message"></i>
       </a>

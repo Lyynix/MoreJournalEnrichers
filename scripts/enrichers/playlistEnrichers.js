@@ -5,21 +5,12 @@ export async function playlistMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
 
   var menuHtml = /* html */ `
-    <table class="LMJE-Playlist_Table">
-      <style>
-        .LMJE-Playlist_Table {
-          border-spacing: 0;
-          border-collapse: separate;
-          border-radius: 10px;
-          overflow: hidden;
-          border: 1.5px var(--color-border-dark-5) solid;
-        }
-        .LMJE-Playlist_Table tr th {
-          background: #00000030
-        }
-      </style>
+    <table class="LMJE-Playlist_Table LMJE-Table">
       <tr>
-        <th colspan="2">${game.i18n.localize("LMJE.PLAYLIST.Title")}</td>
+        <th align="left" colspan="2">
+          <i class="fas fa-music"></i>
+          ${game.i18n.localize("LMJE.PLAYLIST.Title")}
+        </td>
       </tr>
   `;
 
@@ -90,17 +81,7 @@ export async function inlinePlaylist(match, options) {
   var playlistName = match[2] === undefined ? playlist.name : match[2];
 
   var html = /* html */ `
-  <i style="
-    border: 1px var(--color-border-dark-tertiary) solid;
-    border-radius: 3px;
-    padding: 1px 4px;
-    margin-right: 0.3em;
-
-    white-space: nowrap;
-    word-break: break-all;
-
-    background: #DDD;
-  ">
+  <span class="LMJE-link">
   ${playlistName}
   <a 
     title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
@@ -109,7 +90,7 @@ export async function inlinePlaylist(match, options) {
       playlist?.playing ? playlist.stopAll() : playlist.playAll(); 
       return false;
     "> 
-      <i class="fas fa-play-pause" style="margin-left: 4px; color: var(--color-text-dark-inactive);"></i>
+      <i class="fas fa-play-pause"></i>
   </a> 
   <a 
     title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastForward")}" 
@@ -117,9 +98,9 @@ export async function inlinePlaylist(match, options) {
     game.playlists.get('${playlist.id}')?.playNext(); 
       return false;
     "> 
-      <i class="fas fa-forward-fast" style="color: var(--color-text-dark-inactive);"></i>
+      <i class="fas fa-forward-fast"></i>
   </a>
-  </i>
+  </span>
   `;
 
   return $(html)[0];

@@ -28,6 +28,7 @@
     }
   ],
   "esmodules": ["./scripts/init.js"],
+  "styles": ["./styles/style.css"],
   "languages": [
     {
       "lang": "de",
