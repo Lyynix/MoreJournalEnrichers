@@ -42,7 +42,7 @@ export async function compendiumFull(match, options) {
   var dataFolders = {};
   var dataContents = [];
 
-  console.log("LMJE | Folders: ", folders)
+  // console.log("LMJE | Folders: ", folders)
 
   contents.forEach((item) => {
     if (item.folder == null) dataContents.push(item);
