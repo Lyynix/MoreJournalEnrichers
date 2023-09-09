@@ -3,13 +3,14 @@ import { getDocument, invalidHtml } from "../helpers.js";
 
 export async function playlistMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
+  const label = match[2] !== undefined ? match[2] : game.i18n.localize("LMJE.PLAYLIST.Title");
 
   var menuHtml = /* html */ `
     <table class="LMJE-Playlist_Table LMJE-Table">
       <tr>
         <th align="left" colspan="2">
           <i class="fas fa-music"></i>
-          ${game.i18n.localize("LMJE.PLAYLIST.Title")}
+          ${label}
         </td>
       </tr>
   `;

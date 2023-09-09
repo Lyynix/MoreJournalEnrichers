@@ -50,6 +50,7 @@ export const patterns = {
     menu: new EnricherPattern()
       .addName("SceneMenu")
       .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("InlineScene")
@@ -61,6 +62,7 @@ export const patterns = {
     menu: new EnricherPattern()
       .addName("PlaylistMenu")
       .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
       .addName("Playlist") // DEPRECATED
