@@ -89,7 +89,7 @@ export class EnricherPattern {
   }
 
   /**
-   * Sets types of references for pattern.
+   * [...] Sets types of references for pattern.
    * @param {string} type the type of the string. Should be either "IDENTIFIER", "TEXT", "SIZE"
    * @param {string} amount the amount of desired occurances. Should be either "SINGLE", "MULTIPLE"
    * @param {boolean} optional Sets if the field is optional.
@@ -100,7 +100,7 @@ export class EnricherPattern {
   }
 
   /**
-   * Sets types of labels for pattern.
+   * {...} Sets types of labels for pattern.
    * @param {string} type the type of the string. Should be either "IDENTIFIER", "TEXT", "SIZE"
    * @param {string} amount the amount of desired occurances. Should be either "SINGLE", "MULTIPLE"
    * @param {boolean} optional Sets if the field is optional.
@@ -111,7 +111,7 @@ export class EnricherPattern {
   }
 
   /**
-   * Sets types of configurations for pattern.
+   * (...) Sets types of configurations for pattern.
    * @param {string} type the type of the string. Should be either "IDENTIFIER", "TEXT", "SIZE"
    * @param {string} amount the amount of desired occurances. Should be either "SINGLE", "MULTIPLE"
    * @param {boolean} optional Sets if the field is optional.
