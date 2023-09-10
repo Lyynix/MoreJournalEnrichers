@@ -64,12 +64,16 @@ export async function tableOfContents(match, options, ordered) {
           tocHtml += /* html */ `
             <ul style="
                   list-style: none;
-                  font-size: ${(7 - (page.title.level + headerOffset)) * 2 + 6}pt" 
+                  font-size: ${
+                    (7 - (page.title.level + headerOffset)) * 2 + 6
+                  }pt" 
                 class="no-list-style">
           `;
         else
           tocHtml += /* html */ `
-            <ol style="font-size: ${(7 - (page.title.level + headerOffset)) * 2 + 6}pt">
+            <ol style="font-size: ${
+              (7 - (page.title.level + headerOffset)) * 2 + 6
+            }pt">
           `;
       }
     } else if (prevTitleLevel > page.title.level) {
@@ -109,6 +113,9 @@ export async function tableOfContents(match, options, ordered) {
     tocHtml += /* html */ `
       </ol>
     `;
+
+  console.log(tocHtml);
+  console.log($(tocHtml)[0]);
 
   return $(tocHtml)[0];
 }
