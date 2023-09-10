@@ -6,6 +6,7 @@ import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
+  inline: "modules/lyynix-more-journal-enrichers/templates/inlineTemplate.hbs",
   whisperTable:
     "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
   chatTable: "modules/lyynix-more-journal-enrichers/templates/chatTable.hbs",

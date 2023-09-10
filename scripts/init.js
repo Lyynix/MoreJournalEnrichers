@@ -4,6 +4,7 @@ Hooks.on("init", () => {
   //load templates for generic enrichers
   try {
     loadTemplates([
+      templates.inline,
       templates.whisperTable,
       templates.chatTable,
       templates.compendium.inline,
