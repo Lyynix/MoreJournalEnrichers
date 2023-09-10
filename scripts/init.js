@@ -71,7 +71,10 @@ Hooks.on("init", () => {
   } catch (error) {
     console.error("LMJE | Failed to initialize generic enrichers\n", error);
   }
+  //TODO: remove to add system specific enrichers
+  return;
 
+  
   // Repeat for system specific enrichers
   switch (game.system.id) {
     case "dnd5e":
