@@ -3,6 +3,7 @@ import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { tableOfContents } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
+import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rollTableEnrichers.js";
 import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
@@ -10,6 +11,10 @@ export const templates = {
   whisperTable:
     "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
   chatTable: "modules/lyynix-more-journal-enrichers/templates/chatTable.hbs",
+  rolltable: {
+    full: "modules/lyynix-more-journal-enrichers/templates/rolltable/rolltableFull.hbs",
+    menu: "modules/lyynix-more-journal-enrichers/templates/rolltable/rolltableMenu.hbs"
+  },
   compendium: {
     inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
     full: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumFull.hbs",
@@ -23,6 +28,23 @@ export const patterns = {
     .setReferenceTypes("IDENTIFIER", "SINGLE", true)
     .setConfigTypes("SIZE", "SINGLE", true)
     .getRegex(),
+  rolltable: {
+    full: new EnricherPattern()
+      .addName("InlineRollTable")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    menu: new EnricherPattern()
+      .addName("InlineRollTable")
+      .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("InlineRollTable")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex()
+  },
   compendium: {
     full: new EnricherPattern()
       .addName("CompendiumFull")
@@ -76,6 +98,11 @@ export const patterns = {
 
 export const enricherFunctions = {
   toc: tableOfContents,
+  rolltable: {
+    full: rolltableFull,
+    menu: rolltableMenu,
+    inline: rolltableInline
+  },
   compendium: {
     full: compendiumFull,
     inline: inlineCompendium
