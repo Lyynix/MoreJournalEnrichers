@@ -30,12 +30,12 @@ export const patterns = {
     .getRegex(),
   rolltable: {
     full: new EnricherPattern()
-      .addName("InlineRollTable")
+      .addName("RollTableFull")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     menu: new EnricherPattern()
-      .addName("InlineRollTable")
+      .addName("RollTableMenu")
       .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
