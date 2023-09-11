@@ -152,6 +152,9 @@ export async function getDocument(identifier, expectedDocumentType) {
     case "JournalEntry":
       collection = game.journal
       break;
+    case "RollTable":
+      collection = game.tables
+      break;
 
     default:
       throw "LMJE.SYSTEM.getDocument.expectedTypeNotFound";
