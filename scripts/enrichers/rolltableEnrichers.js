@@ -1,4 +1,4 @@
-import { getDocument } from "../helpers.js";
+import { getDocument, templates } from "../helpers.js";
 
 export async function rolltableFull(match, options) {
   return "RT FULL"
@@ -9,8 +9,6 @@ export async function rolltableMenu(match, options) {
 }
 
 export async function rolltableInline(match, options) {
-  console.log("LMJE |", match)
-
   var id = match[1];
   var rolltable;
   try {
@@ -21,7 +19,28 @@ export async function rolltableInline(match, options) {
 
   var rolltableName = match[2] === undefined ? rolltable.name : match[2];
 
-  
+  var rolltableData = {
+    faIcon: "fa-th-list",
+    label: rolltableName,
+    buttons: [
+      {
+        tooltip: "Draw one",
+        faIcon: "fa-dice-d20",
+        onclick: `
+          game.tables.get('${rolltable.id}').draw();
+          return false;
+        `
+      },
+      {
+        tooltip: "Edit",
+        faIcon: "fa-cogs",
+        onclick: `
+          new RollTableConfig(game.tables.get('${rolltable.id}')).render(true);
+          return false;
+        `
+      }
+    ]
+  }
 
-  return rolltableName
+  return $(await renderTemplate(templates.inline, rolltableData))[0]
 }
