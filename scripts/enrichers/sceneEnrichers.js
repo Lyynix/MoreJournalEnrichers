@@ -97,6 +97,11 @@ export async function inlineScene(match, options) {
   var templateData = {
     faIcon: "fa-map",
     label: sceneName,
+    documentData: {
+      uuid: sceneDocument.uuid,
+      id: sceneDocument.id,
+      type: sceneDocument.documentName
+    },
     buttons: [
       {
         tooltip: "LMJE.SCENEMENU.Tooltip.Show",

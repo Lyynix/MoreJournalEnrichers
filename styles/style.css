@@ -42,8 +42,16 @@
 
   background: #DDD;
 }
+.LMJE-link a {
+  text-decoration: none;
+  padding: 0px;
+  color: var(--color-text-dark-primary);
+}
 .LMJE-link span{
   margin-left: 1px;
+}
+.LMJE-link span a {
+  padding-right: 4px;
 }
 .LMJE-link i {
   color: var(--color-text-dark-inactive);

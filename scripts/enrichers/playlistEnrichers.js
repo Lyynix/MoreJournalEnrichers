@@ -84,6 +84,11 @@ export async function inlinePlaylist(match, options) {
   var templateData = {
     faIcon: "fa-music",
     label: playlistName,
+    documentData: {
+      uuid: playlist.uuid,
+      id: playlist.id,
+      type: playlist.documentName
+    },
     buttons: [
       {
         tooltip: "LMJE.PLAYLIST.Tooltip.PlayPause",

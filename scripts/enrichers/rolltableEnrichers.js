@@ -22,6 +22,11 @@ export async function rolltableInline(match, options) {
   var rolltableData = {
     faIcon: "fa-th-list",
     label: rolltableName,
+    documentData: {
+      uuid: rolltable.uuid,
+      id: rolltable.id,
+      type: rolltable.documentName
+    },
     buttons: [
       {
         tooltip: "Draw one",
