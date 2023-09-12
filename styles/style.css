@@ -34,7 +34,7 @@
 .LMJE-link {
   border: 1px var(--color-border-dark-tertiary) solid;
   border-radius: 3px;
-  padding: 1px 4px;
+  padding: 1px 0px 1px 4px;
   margin-right: 0.3em;
 
   white-space: nowrap;
@@ -42,10 +42,10 @@
 
   background: #DDD;
 }
-.LMJE-link a:first i{
-  margin-left: 4px;
+.LMJE-link span{
+  margin-left: 1px;
 }
-.LMJE-link a i {
+.LMJE-link i {
   color: var(--color-text-dark-inactive);
 }
 

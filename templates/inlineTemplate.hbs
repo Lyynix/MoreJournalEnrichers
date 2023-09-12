@@ -1,8 +1,11 @@
 <span class="LMJE-link">
-  {{label}}
+  <i class="fas {{faIcon}}"></i>
+  {{label}} &mdash;
+  <span>
   {{#each buttons as |button|}}
   <a title="{{localize button.tooltip}}" onclick="{{button.onclick}}">
     <i class="fas {{button.faIcon}}"></i>
   </a>
   {{/each}}
+  </span>
 </span>

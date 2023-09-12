@@ -82,6 +82,7 @@ export async function inlinePlaylist(match, options) {
   var playlistName = match[2] === undefined ? playlist.name : match[2];
 
   var templateData = {
+    faIcon: "fa-music",
     label: playlistName,
     buttons: [
       {

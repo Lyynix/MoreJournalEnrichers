@@ -95,6 +95,7 @@ export async function inlineScene(match, options) {
       : match[2];
   
   var templateData = {
+    faIcon: "fa-map",
     label: sceneName,
     buttons: [
       {
