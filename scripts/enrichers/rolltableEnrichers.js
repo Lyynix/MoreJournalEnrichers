@@ -15,16 +15,21 @@ export async function rolltableMenu(match, options) {
   } 
   for (let i = 0; i < ids.length; i++) {
     const id = ids[i];
-    var label;
+    var document;
+    var label
+    var docId
     try {
-      label = (await getDocument(id, "RollTable")).name;
+      document = (await getDocument(id, "RollTable"));
+      label = document.name
+      docId = document.id
     } catch (error) {
       label = game.i18n.localize(error)
+      docId = ""
     }
     menuData.rolltables.push(
       {
         label: label,
-        id: id
+        id: docId
       }
     )
   }
