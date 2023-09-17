@@ -24,8 +24,15 @@
   padding-right: 10px;
 }
 .LMJE-Table tr td {
-  background-color: #00000010;
-  padding: 9px 14px;
+  background-color: #00000008;
+  padding: 3px 5px;
+}
+.LMJE-Table tr td:last-child {
+  display: flex; 
+  justify-content: flex-end
+}
+.LMJE-Table tr td a {
+  margin: 5px;
 }
 .LMJE-no-link{
   background: none !important;

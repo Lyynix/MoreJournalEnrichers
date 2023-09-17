@@ -1,3 +1,4 @@
+import { EnricherPattern } from "../enricherPattern.js";
 import { getDocument, templates } from "../helpers.js";
 
 export async function rolltableFull(match, options) {
@@ -5,7 +6,30 @@ export async function rolltableFull(match, options) {
 }
 
 export async function rolltableMenu(match, options) {
-  return "RT MENU"
+  const ids = match[1].split(EnricherPattern.SEPARATOR);
+  const title = match[2] !== undefined ? match[2] : game.i18n.localize("LMJE.PLAYLIST.Title");
+
+  var menuData = {
+    title: title,
+    rolltables: []
+  } 
+  for (let i = 0; i < ids.length; i++) {
+    const id = ids[i];
+    var label;
+    try {
+      label = (await getDocument(id, "RollTable")).name;
+    } catch (error) {
+      label = game.i18n.localize(error)
+    }
+    menuData.rolltables.push(
+      {
+        label: label,
+        id: id
+      }
+    )
+  }
+
+  return $(await renderTemplate(templates.rolltable.menu, menuData))[0]
 }
 
 export async function rolltableInline(match, options) {

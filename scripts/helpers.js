@@ -121,6 +121,7 @@ export const enricherFunctions = {
   },
 };
 
+
 export async function getDocument(identifier, expectedDocumentType) {
 
   // try identifier as uuid
