@@ -3,7 +3,7 @@
   "name": "lyynix-more-journal-enrichers",
   "title": "Lyynix: More Journal Enrichers",
   "description": "Beautify your journals, by adding interactive enrichers and get easy access to your prepared stuff!",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "10",
   "compatibility": {
@@ -45,6 +45,6 @@
   ],
   "url": "https://github.com/Lyynix/MoreJournalEnrichers",
   "manifest": "https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json",
-  "download": "https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v0.2.0/lmje-v0_2_0.zip",
+  "download": "https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v0.3.1/lmje-v0_3_1.zip",
   "manifestPlusVersion": "1.2.0"
 }
