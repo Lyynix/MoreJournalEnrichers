@@ -3,7 +3,7 @@ import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { toc, otoc } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
-import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rollTableEnrichers.js";
+import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rolltableEnrichers.js";
 import { inlineScene, sceneFull, sceneMenu } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
