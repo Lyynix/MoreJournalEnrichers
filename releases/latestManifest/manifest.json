@@ -28,9 +28,7 @@
     }
   ],
   "esmodules": [
-    "./scripts/init.js",
-    "./scripts/dnd.js",
-    "./scripts/pf2e.js"
+    "./scripts/init.js"
   ],
   "languages": [
     {
