@@ -3,16 +3,25 @@ import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
 import { toc, otoc } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
-import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
+import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rollTableEnrichers.js";
+import { inlineScene, sceneFull, sceneMenu } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
+  inline: "modules/lyynix-more-journal-enrichers/templates/inlineTemplate.hbs",
   whisperTable:
     "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
   chatTable: "modules/lyynix-more-journal-enrichers/templates/chatTable.hbs",
+  rolltable: {
+    full: "modules/lyynix-more-journal-enrichers/templates/rolltable/rolltableFull.hbs",
+    menu: "modules/lyynix-more-journal-enrichers/templates/rolltable/rolltableMenu.hbs"
+  },
   compendium: {
     inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
     full: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumFull.hbs",
     menu: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumMenu.hbs"
+  },
+  scene: {
+    full: "modules/lyynix-more-journal-enrichers/templates/scene/sceneFull.hbs",
   }
 };
 
@@ -27,6 +36,22 @@ export const patterns = {
       .addName("OrderedToC")
       .setReferenceTypes("IDENTIFIER", "SINGLE", true)
       .setConfigTypes("SIZE", "SINGLE", true)
+      .getRegex(),
+  rolltable: {
+    full: new EnricherPattern()
+      .addName("RollTableFull")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    menu: new EnricherPattern()
+      .addName("RollTableMenu")
+      .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    inline: new EnricherPattern()
+      .addName("InlineRollTable")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex()
   },
   compendium: {
@@ -59,6 +84,11 @@ export const patterns = {
       .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
+    full: new EnricherPattern()
+      .addName("SceneFull")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
     inline: new EnricherPattern()
       .addName("InlineScene")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
@@ -85,6 +115,11 @@ export const enricherFunctions = {
     unordered: toc,
     ordered: otoc
   },
+  rolltable: {
+    full: rolltableFull,
+    menu: rolltableMenu,
+    inline: rolltableInline
+  },
   compendium: {
     full: compendiumFull,
     inline: inlineCompendium
@@ -95,6 +130,7 @@ export const enricherFunctions = {
   },
   scene: {
     menu: sceneMenu,
+    full: sceneFull,
     inline: inlineScene,
   },
   playlist: {
@@ -102,6 +138,7 @@ export const enricherFunctions = {
     inline: inlinePlaylist,
   },
 };
+
 
 export async function getDocument(identifier, expectedDocumentType) {
 
@@ -134,6 +171,9 @@ export async function getDocument(identifier, expectedDocumentType) {
     case "JournalEntry":
       collection = game.journal
       break;
+    case "RollTable":
+      collection = game.tables
+      break;
 
     default:
       throw "LMJE.SYSTEM.getDocument.expectedTypeNotFound";
@@ -157,6 +197,33 @@ export function initHandlebarsHelpers() {
   Handlebars.registerHelper('isdefined', function (value) {
     return value !== undefined;
   });  
+  Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+    switch (operator) {
+        case '==':
+            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+        case '===':
+            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+        case '!=':
+            return (v1 != v2) ? options.fn(this) : options.inverse(this);
+        case '!==':
+            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+        case '<':
+            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+        case '<=':
+            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+        case '>':
+            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+        case '>=':
+            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+        case '&&':
+            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+        case '||':
+            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+        default:
+            return options.inverse(this);
+    }
+});
 }
 
 export function invalidHtml(error) {

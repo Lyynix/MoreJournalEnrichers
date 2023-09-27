@@ -4,10 +4,13 @@ Hooks.on("init", () => {
   //load templates for generic enrichers
   try {
     loadTemplates([
+      templates.inline,
       templates.whisperTable,
       templates.chatTable,
       templates.compendium.inline,
       templates.compendium.full,
+      templates.rolltable.full,
+      templates.rolltable.menu
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -36,9 +39,29 @@ Hooks.on("init", () => {
         enricher: enricherFunctions.scene.menu,
       },
       {
+        label: "LMJE - Scene Full",
+        pattern: patterns.scene.full,
+        enricher: enricherFunctions.scene.full
+      },
+      {
         label: "LMJE - Inline scene",
         pattern: patterns.scene.inline,
         enricher: enricherFunctions.scene.inline,
+      },
+      {
+        label: "LMJE - Full Rolltable",
+        pattern: patterns.rolltable.full,
+        enricher: enricherFunctions.rolltable.full,
+      },
+      {
+        label: "LMJE - Rolltable menu",
+        pattern: patterns.rolltable.menu,
+        enricher: enricherFunctions.rolltable.menu,
+      },
+      {
+        label: "LMJE - Inline Rolltable",
+        pattern: patterns.rolltable.inline,
+        enricher: enricherFunctions.rolltable.inline,
       },
       {
         label: "LMJE - Full compendium",
@@ -75,7 +98,10 @@ Hooks.on("init", () => {
   } catch (error) {
     console.error("LMJE | Failed to initialize generic enrichers\n", error);
   }
+  //TODO: remove to add system specific enrichers
+  return;
 
+  
   // Repeat for system specific enrichers
   switch (game.system.id) {
     case "dnd5e":

@@ -1,0 +1,62 @@
+<table class="LMJE-Table">
+  <tr>
+    <th align="left">
+      <i class="fas fa-th-list"></i>
+      <a class="content-link LMJE-no-link" 
+        draggable="true" 
+        data-uuid="{{documentData.uuid}}"
+        data-id="{{documentData.id}}" 
+        data-type="{{documentData.type}}">
+        {{label}}
+      </a>
+    </th>
+    <th align="right">
+      <a onclick="
+          fromUuid('{{documentData.uuid}}').then(doc => {return doc.draw()});
+          return false;
+        ">
+        <i class="fas fa-dice-d20"></i>
+      {{formula}}
+      </a>
+    </th>
+  </tr>
+  {{#if description}}
+  <tr>
+    <th align="left" colspan="2" class="LMJE-Table-highlight">
+      {{{description}}}
+    </th>
+  </tr>
+  {{/if}}
+  
+  {{#each results as |result|}}
+  <tr class="LMJE-RolltableResult">
+    <td align="left">
+      <div>
+      <img src="{{result.img}}" height="40px">
+      {{#if result.type}}
+      <a class="content-link LMJE-no-link" 
+        draggable="true" 
+        data-uuid="{{result.document.uuid}}"
+        data-id="{{result.document.id}}" 
+        data-type="{{result.document.type}}">
+        {{result.text}}
+      </a>
+      {{else}}
+      <span>
+        {{result.text}}
+      </span>
+      {{/if}}
+      </div>
+    </td>
+    <td align="right">
+      <div>
+      {{result.range.[0]}}
+      &mdash;
+      {{result.range.[1]}}
+      &nbsp;
+      <i class="fas fa-dice-d20"></i>
+      </div>
+    </td>
+  </tr>
+  {{/each}}
+</table>

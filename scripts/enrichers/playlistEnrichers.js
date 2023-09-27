@@ -1,5 +1,5 @@
 import { EnricherPattern } from "../enricherPattern.js";
-import { getDocument, invalidHtml } from "../helpers.js";
+import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function playlistMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
@@ -81,28 +81,44 @@ export async function inlinePlaylist(match, options) {
 
   var playlistName = match[2] === undefined ? playlist.name : match[2];
 
-  var html = /* html */ `
-  <span class="LMJE-link">
-  ${playlistName}
-  <a 
-    title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.PlayPause")}" 
-    onclick="
-      var playlist = game.playlists.get('${playlist.id}')
-      playlist?.playing ? playlist.stopAll() : playlist.playAll(); 
-      return false;
-    "> 
-      <i class="fas fa-play-pause"></i>
-  </a> 
-  <a 
-    title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.FastForward")}" 
-    onclick="
-    game.playlists.get('${playlist.id}')?.playNext(); 
-      return false;
-    "> 
-      <i class="fas fa-forward-fast"></i>
-  </a>
-  </span>
-  `;
+  var templateData = {
+    faIcon: "fa-music",
+    label: playlistName,
+    documentData: {
+      uuid: playlist.uuid,
+      id: playlist.id,
+      type: playlist.documentName
+    },
+    buttons: [
+      {
+        tooltip: "LMJE.PLAYLIST.Tooltip.PlayPause",
+        faIcon: "fa-play-pause",
+        onclick: `
+          var playlist = game.playlists.get('${playlist.id}')
+          playlist?.playing ? playlist.stopAll() : playlist.playAll(); 
+          return false;
+        `,
+      },
+      {
+        tooltip: "LMJE.PLAYLIST.Tooltip.FastForward",
+        faIcon: "fa-forward-fast",
+        onclick: `
+          game.playlists.get('${playlist.id}')?.playNext(); 
+          return false;
+        `,
+      },
+      {
+        tooltip: "LMJE.PLAYLIST.Tooltip.Edit",
+        faIcon: "fa-cogs",
+        onclick: `
+          new PlaylistConfig(game.playlists.get('${playlist.id}')).render(true);
+          return false;
+        `,
+      }
+    ]
+  };
+
+  var html = await renderTemplate(templates.inline, templateData)
 
   return $(html)[0];
 }

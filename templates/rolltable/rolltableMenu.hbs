@@ -1,0 +1,29 @@
+<table class="LMJE-Table">
+  <tr>
+    <th colspan="2" align="left">
+      <i class="fas fa-th-list"></i>
+      {{title}}
+    </th>
+  </tr>
+  {{#each rolltables as |rolltable|}}
+  <tr>
+    <td>{{rolltable.label}}</td>
+    <td>
+      <a
+        onclick="
+          fromUuid('{{rolltable.uuid}}').then(doc => {return doc.draw()});
+          return false;
+        ">
+        <i class="fas fa-dice-d20"></i>
+      </a>
+      <a
+        onclick="
+          fromUuid('{{rolltable.uuid}}').then(doc => {return new RollTableConfig(doc).render(true)});
+          return false;
+        ">
+        <i class="fas fa-cogs"></i>
+      </a>
+    </td>
+  </tr>
+  {{/each}}
+</table>

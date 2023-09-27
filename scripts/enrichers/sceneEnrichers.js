@@ -1,5 +1,5 @@
 import { EnricherPattern } from "../enricherPattern.js";
-import { getDocument, invalidHtml } from "../helpers.js";
+import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function sceneMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
@@ -36,7 +36,7 @@ export async function sceneMenu(match, options) {
       game.scenes.get('${sceneDocument.id}')?.view(); 
       return false;
       ">
-      <i class="fas fa-eye" style="margin: 5px"></i>
+      <i class="fas fa-eye" ></i>
     </a>
     <a title="${game.i18n.localize(
       "LMJE.SCENEMENU.Tooltip.Activate"
@@ -44,7 +44,7 @@ export async function sceneMenu(match, options) {
         game.scenes.get('${sceneDocument.id}')?.activate(); 
         return false;
         ">
-      <i class="fas fa-bullseye" style="margin: 5px"></i>
+      <i class="fas fa-bullseye" ></i>
     </a>
     <a title="${game.i18n.localize(
       "LMJE.SCENEMENU.Tooltip.ToggleNav"
@@ -53,20 +53,20 @@ export async function sceneMenu(match, options) {
         document.update({navigation: !document.navigation})
         return false;
         ">
-      <i class="fas fa-compass" style="margin: 5px"></i>
+      <i class="fas fa-compass" ></i>
     </a>
     <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" onclick="
         new SceneConfig(game.scenes.get('${sceneDocument.id}')).render(true);
         return false;
         ">
-      <i class="fas fa-cogs" style="margin: 5px"></i>
+      <i class="fas fa-cogs" ></i>
     </a>
     `;
 
     menuHtml += /* html */ `    
     <tr>
       <td>${sceneName}</td>
-      <td style="display: flex; justify-content: flex-end">${sceneControl}</td>
+      <td>${sceneControl}</td>
     </tr>
     `;
   }
@@ -76,6 +76,32 @@ export async function sceneMenu(match, options) {
   `;
 
   return $(menuHtml)[0];
+}
+
+export async function sceneFull(match, options) {
+  var id = match[1];
+  var sceneDocument
+  try {
+    sceneDocument = await getDocument(id, "Scene");
+  } catch (error) {
+    return $(invalidHtml(game.i18n.localize(error)))[0]
+  }
+  
+  var sceneName =
+    match[2] === undefined
+      ? sceneDocument.navName
+        ? `${sceneDocument.navName} (${sceneDocument.name})`
+        : sceneDocument.name
+      : match[2];
+  
+  var templateData = {
+    label: sceneName,
+    uuid: sceneDocument.uuid,
+    img: sceneDocument.background.src
+  }
+  
+  var sceneHtml = await renderTemplate(templates.scene.full, templateData);
+  return $(sceneHtml)[0]
 }
 
 export async function inlineScene(match, options) {
@@ -94,44 +120,52 @@ export async function inlineScene(match, options) {
         : sceneDocument.name
       : match[2];
   
-  var sceneHtml = /* html */ `
-    <span class="LMJE-link">
-    ${sceneName}
-    <a 
-      title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Show")}" 
-      onclick="
-        game.scenes.get('${sceneDocument.id}')?.view(); 
-        return false;
-      ">
-        <i class="fas fa-eye"></i>
-    </a>
-    <a 
-      title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Activate")}" 
-      onclick="
-        game.scenes.get('${sceneDocument.id}')?.activate(); 
-        return false;
-      ">
-        <i class="fas fa-bullseye"></i>
-    </a>
-    <a 
-      title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.ToggleNav")}" 
-      onclick="
-        var document = game.scenes.get('${sceneDocument.id}'); 
-        document.update({navigation: !document.navigation})
-        return false;
-      ">
-        <i class="fas fa-compass"></i>
-    </a>
-    <a 
-      title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Edit")}" 
-      onclick="
-        new SceneConfig(game.scenes.get('${sceneDocument.id}')).render(true);
-        return false;
-      ">
-        <i class="fas fa-cogs"></i>
-    </a>
-    </span>
-    `;
+  var templateData = {
+    faIcon: "fa-map",
+    label: sceneName,
+    documentData: {
+      uuid: sceneDocument.uuid,
+      id: sceneDocument.id,
+      type: sceneDocument.documentName
+    },
+    buttons: [
+      {
+        tooltip: "LMJE.SCENEMENU.Tooltip.Show",
+        faIcon: "fa-eye",
+        onclick: `
+          game.scenes.get('${sceneDocument.id}')?.view(); 
+          return false;
+        `
+      },
+      {
+        tooltip: "LMJE.SCENEMENU.Tooltip.Activate",
+        faIcon: "fa-bullseye",
+        onclick: `
+          game.scenes.get('${sceneDocument.id}')?.activate(); 
+          return false;
+        `
+      },
+      {
+        tooltip: "LMJE.SCENEMENU.Tooltip.ToggleNav",
+        faIcon: "fa-compass",
+        onclick: `
+          var document = game.scenes.get('${sceneDocument.id}'); 
+          document.update({navigation: !document.navigation})
+          return false;
+        `
+      },
+      {
+        tooltip: "LMJE.SCENEMENU.Tooltip.Edit",
+        faIcon: "fa-cogs",
+        onclick: `
+          new SceneConfig(game.scenes.get('${sceneDocument.id}')).render(true);
+          return false;
+        `
+      }
+    ]
+  }
+  
+  var sceneHtml = await renderTemplate(templates.inline, templateData);
 
   return $(sceneHtml)[0];
 }
