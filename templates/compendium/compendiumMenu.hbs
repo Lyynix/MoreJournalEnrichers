@@ -1,0 +1,18 @@
+<table class="LMJE-Table LMJE-Table-Menu">
+  <tr>
+    <th colspan="2" align="center">
+      {{title}}
+    </th>
+  </tr>
+  {{#each packs}}
+  <tr>
+    <td>{{label}}</td>
+    <td>
+      <a
+        onclick="game.packs.get('{{id}}').render(true)">
+        <i class="fas fa-atlas"></i>
+      </a>
+    </td>
+  </tr>
+  {{/each}}
+</table>

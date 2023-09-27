@@ -1,5 +1,13 @@
 {
   "LMJE": {
+    "SYSTEM": {
+      "getDocument": {
+        "wrongType": "Erwarteter Typ stimmt nicht mit Typ des gefundenen Dokuments überein",
+        "expectedTypeNotFound": "Der erwartete Typ ist nicht implementiert",
+        "noExpectedDocumentType": "Es wurde kein erwarteter Typ übergeben",
+        "noDocumentFound": "Kein Dokument gefunden"
+      }
+    },
     "SCENEMENU": {
       "Title": "Szenenmenü",
       "Tooltip": {
@@ -7,6 +15,18 @@
         "Activate": "Szene aktivieren",
         "ToggleNav": "Szene in Navigation umschalten",
         "Edit": "Szene bearbeiten"
+      }
+    },
+    "COMPENDIUM": {
+      "INLINE": {
+        "Show": "Kompendium anzeigen"
+      },
+      "MENU": {
+        "Title": "Kompendienmenü"
+      },
+      "ERROR": {
+        "NotFound": "Kein Kompendium mit diesem Namen",
+        "Multiple": "Mehrere Kompendien mit diesem Namen"
       }
     },
     "PLAYLIST": {

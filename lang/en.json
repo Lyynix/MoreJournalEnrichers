@@ -1,5 +1,13 @@
 {
   "LMJE": {
+    "SYSTEM": {
+      "getDocument": {
+        "wrongType": "Expected type doesn't match type of found document",
+        "expectedTypeNotFound": "The expected type is not implemented",
+        "noExpectedDocumentType": "No expected type given",
+        "noDocumentFound": "No document found"
+      }
+    },
     "SCENEMENU": {
       "Title": "Scene menu",
       "Tooltip": {
@@ -7,6 +15,18 @@
         "Activate": "Acitvate scene",
         "ToggleNav": "Toggle scene in navigation",
         "Edit": "Edit scene"
+      }
+    },
+    "COMPENDIUM": {
+      "INLINE": {
+        "Show": "Show compendium pack"
+      },
+      "MENU": {
+        "Title": "Compendium pack menu"
+      },
+      "ERROR": {
+        "NotFound": "No compendium pack found",
+        "Multiple": "Multiple packs with this name found"
       }
     },
     "PLAYLIST": {

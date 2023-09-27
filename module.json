@@ -27,11 +27,8 @@
       "type": "JournalEntry"
     }
   ],
-  "esmodules": [
-    "./scripts/init.js",
-    "./scripts/dnd.js",
-    "./scripts/pf2e.js"
-  ],
+  "esmodules": ["./scripts/init.js"],
+  "styles": ["./styles/style.css"],
   "languages": [
     {
       "lang": "de",

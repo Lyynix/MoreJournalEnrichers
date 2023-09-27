@@ -1,0 +1,124 @@
+/* Colors */
+:root {
+  --lmje-color-light: #756481;
+  --lmje-color-dark: #403a44;
+
+  --lmje-text-light: #f0f0e0;
+  --lmje-text-dark: #1a1a17;
+}
+
+/* Base Elements */
+.LMJE-Table {
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px var(--lmje-color-light) solid;
+}
+.LMJE-Table tr th {
+  background-color: var(--lmje-color-light);
+  color: var(--lmje-text-light);
+  padding: 9px 14px;
+}
+.LMJE-Table tr th i {
+  padding-right: 10px;
+}
+.LMJE-Table tr th.LMJE-Table-highlight {
+  background-color: var(--lmje-color-dark);
+  color: var(--lmje-text-light);
+  font-weight: initial;
+}
+.LMJE-Table tr td {
+  background-color: #00000008;
+  padding: 3px 5px;
+}
+.LMJE-Table-Menu tr td:last-child {
+  display: flex; 
+  justify-content: flex-end
+}
+.LMJE-Table tr th.LMJE-Table-body {
+  background-color: #00000008;
+  padding: 3px 5px;
+}
+.LMJE-Table tr td a {
+  margin: 5px;
+}
+.LMJE-no-link{
+  background: none !important;
+  border: none !important;
+}
+.LMJE-link {
+  border: 1px var(--color-border-dark-tertiary) solid;
+  border-radius: 3px;
+  padding: 1px 0px 1px 4px;
+  margin-right: 0.3em;
+
+  white-space: nowrap;
+  word-break: break-all;
+
+  background: #DDD;
+}
+.LMJE-link a {
+  text-decoration: none;
+  padding: 0px;
+  color: var(--color-text-dark-primary);
+}
+.LMJE-link span{
+  margin-left: 1px;
+}
+.LMJE-link span a {
+  padding-right: 4px;
+}
+.LMJE-link i {
+  color: var(--color-text-dark-inactive);
+}
+
+
+/* Changes for enrichers */
+
+.LMJE-Whisper_Table {
+  border-color: var(--lmje-color-dark);
+}
+.LMJE-Whisper_Table tr th {
+  background-color: var(--lmje-color-dark);
+}
+
+.LMJE-Compendium_Table tr td div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.LMJE-Compendium_Table tr td div a {
+  display: inline;
+  text-align: center;
+
+  font-size: larger;
+}
+
+.LMJE-SceneFull tr th.LMJE-Table-body {
+  background-color: var(--lmje-color-light);
+  padding: 0px;
+}
+.LMJE-SceneFull tr th.LMJE-Table-body div img {
+  border: none;
+  border-radius: 10px;
+}
+
+.LMJE-Table tr.LMJE-RolltableResult td div {
+  height: 46px;
+  display: flex; 
+  flex-direction: row; 
+  justify-content: flex-start;
+  align-items: center;
+}
+.LMJE-Table tr.LMJE-RolltableResult td div img {
+  border: none;
+}
+.LMJE-Table tr.LMJE-RolltableResult td div a {
+  margin: 5px;
+  padding: 1px 4px;
+}
+.LMJE-Table tr.LMJE-RolltableResult td div span {
+  margin: 5px;
+  padding: 1px 4px;
+}
