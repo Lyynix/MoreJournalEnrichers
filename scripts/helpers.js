@@ -50,7 +50,7 @@ export const patterns = {
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
-      .addName("InlineRollTable")
+      .addName("RollTableInline")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex()
@@ -63,7 +63,7 @@ export const patterns = {
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
-      .addName("InlineCompendium")
+      .addName("CompendiumInline")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setConfigTypes("IDENTIFIER", "SINGLE", true)
       .setLabelTypes("TEXT", "SINGLE", true)
@@ -71,11 +71,11 @@ export const patterns = {
   },
   chat: {
     chat: new EnricherPattern()
-      .addName("Chat")
+      .addName("ChatPost")
       .setLabelTypes("TEXT", "SINGLE", false)
       .getRegex(),
     whisper: new EnricherPattern()
-      .addName("Whisper")
+      .addName("ChatWhisper")
       .setLabelTypes("TEXT", "SINGLE", false)
       .getRegex(),
   },
@@ -91,7 +91,7 @@ export const patterns = {
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
-      .addName("InlineScene")
+      .addName("SceneInline")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
@@ -103,8 +103,8 @@ export const patterns = {
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     inline: new EnricherPattern()
-      .addName("Playlist") // DEPRECATED
-      .addName("InlinePlaylist")
+      .addName("Playlist")
+      .addName("PlaylistInline")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),

@@ -24,72 +24,72 @@ Hooks.on("init", () => {
   try {
     CONFIG.TextEditor.enrichers.push(
       {
-        label: "LMJE - Table of Contents",
+        label: "LMJE - Journal - Table of Contents",
         pattern: patterns.toc.unordered,
         enricher: enricherFunctions.toc.unordered,
       },
       {
-        label: "LMJE - Ordered Table of Contents",
+        label: "LMJE - Journal - Ordered Table of Contents",
         pattern: patterns.toc.ordered,
         enricher: enricherFunctions.toc.ordered,
       },
       {
-        label: "LMJE - Scene menu",
+        label: "LMJE - Scene - Menu",
         pattern: patterns.scene.menu,
         enricher: enricherFunctions.scene.menu,
       },
       {
-        label: "LMJE - Scene Full",
+        label: "LMJE - Scene - Full",
         pattern: patterns.scene.full,
         enricher: enricherFunctions.scene.full
       },
       {
-        label: "LMJE - Inline scene",
+        label: "LMJE - Scene - Inline",
         pattern: patterns.scene.inline,
         enricher: enricherFunctions.scene.inline,
       },
       {
-        label: "LMJE - Full Rolltable",
+        label: "LMJE - Rolltable - Full",
         pattern: patterns.rolltable.full,
         enricher: enricherFunctions.rolltable.full,
       },
       {
-        label: "LMJE - Rolltable menu",
+        label: "LMJE - Rolltable - Menu",
         pattern: patterns.rolltable.menu,
         enricher: enricherFunctions.rolltable.menu,
       },
       {
-        label: "LMJE - Inline Rolltable",
+        label: "LMJE - Rolltable - Inline",
         pattern: patterns.rolltable.inline,
         enricher: enricherFunctions.rolltable.inline,
       },
       {
-        label: "LMJE - Full compendium",
+        label: "LMJE - Compendium - Full",
         pattern: patterns.compendium.full,
         enricher: enricherFunctions.compendium.full,
       },
       {
-        label: "LMJE - Inline Compendium",
+        label: "LMJE - Compendium - Inline",
         pattern: patterns.compendium.inline,
         enricher: enricherFunctions.compendium.inline,
       },
       {
-        label: "LMJE - Playlist menu",
+        label: "LMJE - Playlist - Menu",
         pattern: patterns.playlist.menu,
         enricher: enricherFunctions.playlist.menu,
       },
       {
-        label: "LMJE - Inline playlist",
+        label: "LMJE - Playlist - Inline",
         pattern: patterns.playlist.inline,
         enricher: enricherFunctions.playlist.inline,
       },
       {
-        label: "LMJE - Chat post",
+        label: "LMJE - Chat - Post",
         pattern: patterns.chat.chat,
         enricher: enricherFunctions.chat.chat,
       },
       {
-        label: "LMJE - Whisper post",
+        label: "LMJE - Chat - Whisper",
         pattern: patterns.chat.whisper,
         enricher: enricherFunctions.chat.whisper,
       }
