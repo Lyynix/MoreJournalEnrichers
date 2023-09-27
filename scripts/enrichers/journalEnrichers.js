@@ -1,6 +1,13 @@
 import { getDocument, invalidHtml } from "../helpers.js";
 
-export async function tableOfContents(match, options) {
+export async function toc(match, options) {
+  return tableOfContents(match, options, true);
+}
+export async function otoc(match, options) {
+  return tableOfContents(match, options, false);
+}
+
+export async function tableOfContents(match, options, ordered) {
   // extract data from match
   var journalID = match[1] ? match[1] : options.relativeTo.parent._id;
   var headerOffset;
@@ -27,11 +34,11 @@ export async function tableOfContents(match, options) {
   }
 
   // get referenced pages
-  var journal
+  var journal;
   try {
     journal = await getDocument(journalID, "JournalEntry");
   } catch (error) {
-    return $(invalidHtml(game.i18n.localize(error)))[0]
+    return $(invalidHtml(game.i18n.localize(error)))[0];
   }
   var pages = journal.pages
     .map((e) => e)
@@ -42,7 +49,7 @@ export async function tableOfContents(match, options) {
   var tocHtml = ``;
   // tocHtml += /* html */`
   // <style>
-  //   .system-dsa5 .window-app .window-content .journal-entry-content .scrollable article .journal-page-content 
+  //   .system-dsa5 .window-app .window-content .journal-entry-content .scrollable article .journal-page-content
   //   ul.no-list-style > li::before {
   //       display: none;
   //   }
@@ -53,15 +60,32 @@ export async function tableOfContents(match, options) {
     // add tags for different indentations
     if (prevTitleLevel < page.title.level) {
       for (let i = 0; i < page.title.level - prevTitleLevel; i++) {
-        tocHtml += /* html */ `
-          <ul style="list-style: none;" class="no-list-style">
-        `;
+        if (ordered)
+          tocHtml += /* html */ `
+            <ul style="
+                  list-style: none;
+                  font-size: ${
+                    (7 - (page.title.level + headerOffset)) * 2 + 6
+                  }pt" 
+                class="no-list-style">
+          `;
+        else
+          tocHtml += /* html */ `
+            <ol style="font-size: ${
+              (7 - (page.title.level + headerOffset)) * 2 + 6
+            }pt">
+          `;
       }
     } else if (prevTitleLevel > page.title.level) {
       for (let i = 0; i < prevTitleLevel - page.title.level; i++) {
-        tocHtml += /* html */ `
-          </ul>
-        `;
+        if (ordered)
+          tocHtml += /* html */ `
+            </ul>
+          `;
+        else
+          tocHtml += /* html */ `
+            </ol>
+          `;
       }
     }
 
@@ -69,9 +93,6 @@ export async function tableOfContents(match, options) {
     tocHtml += /* html */ `
       <li>
         <a class="LMJE-no-link content-link"
-          style="font-size: ${
-            (7 - (page.title.level + headerOffset)) * 2 + 6
-          }pt"
           data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
           data-id="${page._id}"
           data-type="JournalEntryPage"
@@ -84,9 +105,17 @@ export async function tableOfContents(match, options) {
     prevTitleLevel = page.title.level;
   });
 
-  tocHtml += /* html */ `
-    </ul>
-  `;
+  if (ordered)
+    tocHtml += /* html */ `
+      </ul>
+    `;
+  else
+    tocHtml += /* html */ `
+      </ol>
+    `;
+
+  // console.log(tocHtml);
+  // console.log($(tocHtml)[0]);
 
   return $(tocHtml)[0];
 }

@@ -25,8 +25,13 @@ Hooks.on("init", () => {
     CONFIG.TextEditor.enrichers.push(
       {
         label: "LMJE - Table of Contents",
-        pattern: patterns.toc,
-        enricher: enricherFunctions.toc,
+        pattern: patterns.toc.unordered,
+        enricher: enricherFunctions.toc.unordered,
+      },
+      {
+        label: "LMJE - Ordered Table of Contents",
+        pattern: patterns.toc.ordered,
+        enricher: enricherFunctions.toc.ordered,
       },
       {
         label: "LMJE - Scene menu",

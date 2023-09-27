@@ -1,7 +1,7 @@
 import { EnricherPattern } from "./enricherPattern.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
-import { tableOfContents } from "./enrichers/journalEnrichers.js";
+import { toc, otoc } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rollTableEnrichers.js";
 import { inlineScene, sceneFull, sceneMenu } from "./enrichers/sceneEnrichers.js";
@@ -26,11 +26,17 @@ export const templates = {
 };
 
 export const patterns = {
-  toc: new EnricherPattern()
-    .addName("ToC")
-    .setReferenceTypes("IDENTIFIER", "SINGLE", true)
-    .setConfigTypes("SIZE", "SINGLE", true)
-    .getRegex(),
+  toc: {
+    unordered: new EnricherPattern()
+      .addName("ToC")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", true)
+      .setConfigTypes("SIZE", "SINGLE", true)
+      .getRegex(),
+    ordered: new EnricherPattern()
+      .addName("OrderedToC")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", true)
+      .setConfigTypes("SIZE", "SINGLE", true)
+      .getRegex(),
   rolltable: {
     full: new EnricherPattern()
       .addName("RollTableFull")
@@ -105,7 +111,10 @@ export const patterns = {
 };
 
 export const enricherFunctions = {
-  toc: tableOfContents,
+  toc: {
+    unordered: toc,
+    ordered: otoc
+  },
   rolltable: {
     full: rolltableFull,
     menu: rolltableMenu,
