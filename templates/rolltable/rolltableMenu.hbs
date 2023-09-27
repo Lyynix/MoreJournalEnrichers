@@ -11,14 +11,14 @@
     <td>
       <a
         onclick="
-          game.tables.get('{{rolltable.id}}').draw();
+          fromUuid('{{rolltable.uuid}}').then(doc => {return doc.draw()});
           return false;
         ">
         <i class="fas fa-dice-d20"></i>
       </a>
       <a
         onclick="
-          new RollTableConfig(game.tables.get('{{rolltable.id}}')).render(true);
+          fromUuid('{{rolltable.uuid}}').then(doc => {return new RollTableConfig(doc).render(true)});
           return false;
         ">
         <i class="fas fa-cogs"></i>

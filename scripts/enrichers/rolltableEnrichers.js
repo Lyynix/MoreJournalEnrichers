@@ -89,14 +89,14 @@ export async function rolltableMenu(match, options) {
     try {
       document = await getDocument(id, "RollTable");
       label = document.name;
-      docId = document.id;
+      docId = document.uuid;
     } catch (error) {
       label = game.i18n.localize(error);
       docId = "";
     }
     menuData.rolltables.push({
       label: label,
-      id: docId,
+      uuid: docId,
     });
   }
 
@@ -127,7 +127,7 @@ export async function rolltableInline(match, options) {
         tooltip: "Draw one",
         faIcon: "fa-dice-d20",
         onclick: `
-          game.tables.get('${rolltable.id}').draw();
+          fromUuid('${rolltable.uuid}').then(doc => {return doc.draw()});
           return false;
         `,
       },
@@ -135,7 +135,7 @@ export async function rolltableInline(match, options) {
         tooltip: "Edit",
         faIcon: "fa-cogs",
         onclick: `
-          new RollTableConfig(game.tables.get('${rolltable.id}')).render(true);
+          fromUuid('${rolltable.uuid}').then(doc => {return new RollTableConfig(doc).render(true)});
           return false;
         `,
       },
