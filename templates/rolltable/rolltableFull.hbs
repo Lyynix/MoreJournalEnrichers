@@ -12,7 +12,7 @@
     </th>
     <th align="right">
       <a onclick="
-          game.tables.get('{{documentData.id}}').draw();
+          fromUuid('{{documentData.uuid}}').then(doc => {return doc.draw()});
           return false;
         ">
         <i class="fas fa-dice-d20"></i>
@@ -27,22 +27,35 @@
     </th>
   </tr>
   {{/if}}
-  {{#each rolltables as |rolltable|}}
-  <tr>
-    <td>{{rolltable.label}}</td>
-    <td>
-      <a onclick="
-          game.tables.get('{{rolltable.id}}').draw();
-          return false;
-        ">
-        <i class="fas fa-dice-d20"></i>
+  
+  {{#each results as |result|}}
+  <tr class="LMJE-RolltableResult">
+    <td align="left">
+      <div>
+      <img src="{{result.img}}" height="40px">
+      {{#if result.type}}
+      <a class="content-link LMJE-no-link" 
+        draggable="true" 
+        data-uuid="{{result.document.uuid}}"
+        data-id="{{result.document.id}}" 
+        data-type="{{result.document.type}}">
+        {{result.text}}
       </a>
-      <a onclick="
-          new RollTableConfig(game.tables.get('{{rolltable.id}}')).render(true);
-          return false;
-        ">
-        <i class="fas fa-cogs"></i>
-      </a>
+      {{else}}
+      <span>
+        {{result.text}}
+      </span>
+      {{/if}}
+      </div>
+    </td>
+    <td align="right">
+      <div>
+      {{result.range.[0]}}
+      &mdash;
+      {{result.range.[1]}}
+      &nbsp;
+      <i class="fas fa-dice-d20"></i>
+      </div>
     </td>
   </tr>
   {{/each}}

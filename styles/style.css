@@ -90,3 +90,23 @@
 
   font-size: larger;
 }
+
+
+.LMJE-Table tr.LMJE-RolltableResult td div {
+  height: 46px;
+  display: flex; 
+  flex-direction: row; 
+  justify-content: flex-start;
+  align-items: center;
+}
+.LMJE-Table tr.LMJE-RolltableResult td div img {
+  border: none;
+}
+.LMJE-Table tr.LMJE-RolltableResult td div a {
+  margin: 5px;
+  padding: 1px 4px;
+}
+.LMJE-Table tr.LMJE-RolltableResult td div span {
+  margin: 5px;
+  padding: 1px 4px;
+}
