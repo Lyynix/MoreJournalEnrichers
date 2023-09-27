@@ -9,6 +9,8 @@ Hooks.on("init", () => {
       templates.chatTable,
       templates.compendium.inline,
       templates.compendium.full,
+      templates.rolltable.full,
+      templates.rolltable.menu
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -35,6 +37,21 @@ Hooks.on("init", () => {
         label: "LMJE - Inline scene",
         pattern: patterns.scene.inline,
         enricher: enricherFunctions.scene.inline,
+      },
+      {
+        label: "LMJE - Full Rolltable",
+        pattern: patterns.rolltable.full,
+        enricher: enricherFunctions.rolltable.full,
+      },
+      {
+        label: "LMJE - Rolltable menu",
+        pattern: patterns.rolltable.menu,
+        enricher: enricherFunctions.rolltable.menu,
+      },
+      {
+        label: "LMJE - Inline Rolltable",
+        pattern: patterns.rolltable.inline,
+        enricher: enricherFunctions.rolltable.inline,
       },
       {
         label: "LMJE - Full compendium",
