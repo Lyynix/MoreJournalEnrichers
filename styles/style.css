@@ -23,6 +23,11 @@
 .LMJE-Table tr th i {
   padding-right: 10px;
 }
+.LMJE-Table tr th.LMJE-Table-highlight {
+  background-color: var(--lmje-color-dark);
+  color: var(--lmje-text-light);
+  font-weight: initial;
+}
 .LMJE-Table tr td {
   background-color: #00000008;
   padding: 3px 5px;

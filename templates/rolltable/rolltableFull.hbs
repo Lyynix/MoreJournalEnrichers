@@ -1,23 +1,43 @@
 <table class="LMJE-Table">
   <tr>
-    <th colspan="2" align="left">
+    <th align="left">
       <i class="fas fa-th-list"></i>
-      {{title}}
+      <a class="content-link LMJE-no-link" 
+        draggable="true" 
+        data-uuid="{{documentData.uuid}}"
+        data-id="{{documentData.id}}" 
+        data-type="{{documentData.type}}">
+        {{label}}
+      </a>
+    </th>
+    <th align="right">
+      <a onclick="
+          game.tables.get('{{documentData.id}}').draw();
+          return false;
+        ">
+        <i class="fas fa-dice-d20"></i>
+      {{formula}}
+      </a>
     </th>
   </tr>
+  {{#if description}}
+  <tr>
+    <th align="left" colspan="2" class="LMJE-Table-highlight">
+      {{{description}}}
+    </th>
+  </tr>
+  {{/if}}
   {{#each rolltables as |rolltable|}}
   <tr>
     <td>{{rolltable.label}}</td>
     <td>
-      <a
-        onclick="
+      <a onclick="
           game.tables.get('{{rolltable.id}}').draw();
           return false;
         ">
         <i class="fas fa-dice-d20"></i>
       </a>
-      <a
-        onclick="
+      <a onclick="
           new RollTableConfig(game.tables.get('{{rolltable.id}}')).render(true);
           return false;
         ">
