@@ -114,8 +114,8 @@ export async function tableOfContents(match, options, ordered) {
       </ol>
     `;
 
-  console.log(tocHtml);
-  console.log($(tocHtml)[0]);
+  // console.log(tocHtml);
+  // console.log($(tocHtml)[0]);
 
   return $(tocHtml)[0];
 }
