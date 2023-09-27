@@ -36,7 +36,8 @@ export const patterns = {
       .addName("OrderedToC")
       .setReferenceTypes("IDENTIFIER", "SINGLE", true)
       .setConfigTypes("SIZE", "SINGLE", true)
-      .getRegex(),
+      .getRegex()
+  },
   rolltable: {
     full: new EnricherPattern()
       .addName("RollTableFull")
