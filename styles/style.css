@@ -36,6 +36,10 @@
   display: flex; 
   justify-content: flex-end
 }
+.LMJE-Table tr th.LMJE-Table-body {
+  background-color: #00000008;
+  padding: 3px 5px;
+}
 .LMJE-Table tr td a {
   margin: 5px;
 }
@@ -91,6 +95,14 @@
   font-size: larger;
 }
 
+.LMJE-SceneFull tr th.LMJE-Table-body {
+  background-color: var(--lmje-color-light);
+  padding: 0px;
+}
+.LMJE-SceneFull tr th.LMJE-Table-body div img {
+  border: none;
+  border-radius: 10px;
+}
 
 .LMJE-Table tr.LMJE-RolltableResult td div {
   height: 46px;

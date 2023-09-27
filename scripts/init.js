@@ -34,6 +34,11 @@ Hooks.on("init", () => {
         enricher: enricherFunctions.scene.menu,
       },
       {
+        label: "LMJE - Scene Full",
+        pattern: patterns.scene.full,
+        enricher: enricherFunctions.scene.full
+      },
+      {
         label: "LMJE - Inline scene",
         pattern: patterns.scene.inline,
         enricher: enricherFunctions.scene.inline,

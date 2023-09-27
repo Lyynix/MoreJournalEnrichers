@@ -78,6 +78,32 @@ export async function sceneMenu(match, options) {
   return $(menuHtml)[0];
 }
 
+export async function sceneFull(match, options) {
+  var id = match[1];
+  var sceneDocument
+  try {
+    sceneDocument = await getDocument(id, "Scene");
+  } catch (error) {
+    return $(invalidHtml(game.i18n.localize(error)))[0]
+  }
+  
+  var sceneName =
+    match[2] === undefined
+      ? sceneDocument.navName
+        ? `${sceneDocument.navName} (${sceneDocument.name})`
+        : sceneDocument.name
+      : match[2];
+  
+  var templateData = {
+    label: sceneName,
+    uuid: sceneDocument.uuid,
+    img: sceneDocument.background.src
+  }
+  
+  var sceneHtml = await renderTemplate(templates.scene.full, templateData);
+  return $(sceneHtml)[0]
+}
+
 export async function inlineScene(match, options) {
   var id = match[1];
   var sceneDocument
