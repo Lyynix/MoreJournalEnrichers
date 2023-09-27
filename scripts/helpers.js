@@ -4,7 +4,7 @@ import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnricher
 import { tableOfContents } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rollTableEnrichers.js";
-import { inlineScene, sceneMenu } from "./enrichers/sceneEnrichers.js";
+import { inlineScene, sceneFull, sceneMenu } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
   inline: "modules/lyynix-more-journal-enrichers/templates/inlineTemplate.hbs",
@@ -19,6 +19,9 @@ export const templates = {
     inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
     full: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumFull.hbs",
     menu: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumMenu.hbs"
+  },
+  scene: {
+    full: "modules/lyynix-more-journal-enrichers/templates/scene/sceneFull.hbs",
   }
 };
 
@@ -75,6 +78,11 @@ export const patterns = {
       .setReferenceTypes("IDENTIFIER", "MULTIPLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
+    full: new EnricherPattern()
+      .addName("SceneFull")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
     inline: new EnricherPattern()
       .addName("InlineScene")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
@@ -113,6 +121,7 @@ export const enricherFunctions = {
   },
   scene: {
     menu: sceneMenu,
+    full: sceneFull,
     inline: inlineScene,
   },
   playlist: {

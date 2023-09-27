@@ -1,0 +1,47 @@
+<table class="LMJE-Table LMJE-SceneFull">
+  <tr>
+    <th align="left">
+      <div>
+        <i class="fas fa-map"></i>
+        {{label}}
+      </div>
+    </th>
+    <th align="right">
+      <div>
+        <a title="{{localize LMJE.SCENEMENU.Tooltip.Show}}" onclick="
+          fromUuid('{{uuid}}').then(doc => {return doc.view()}); 
+          return false;
+        ">
+          <i class="fas fa-eye"></i>
+        </a>
+        <a title="{{localize LMJE.SCENEMENU.Tooltip.Activate}}" onclick="
+          fromUuid('{{uuid}}').then(doc => {doc.activate()}); 
+          return false;
+        ">
+          <i class="fas fa-bullseye"></i>
+        </a>
+        <a title="{{localize LMJE.SCENEMENU.Tooltip.ToggleNav}}" onclick="
+          fromUuid('{{uuid}}').then(doc => {
+            doc.update({navigation: !doc.navigation})
+          }); 
+          return false;
+        ">
+          <i class="fas fa-compass"></i>
+        </a>
+        <a title="{{localize LMJE.SCENEMENU.Tooltip.Edit}}" onclick="
+          fromUuid('{{uuid}}').then(doc => {new SceneConfig(doc).render(true)})
+          return false;
+        ">
+          <i class="fas fa-cogs"></i>
+        </a>
+      </div>
+    </th>
+  </tr>
+  <tr>
+    <th colspan="2" align="right" class="LMJE-Table-body">
+      <div>
+        <img src="{{img}}">
+      </div>
+    </th>
+  </tr>
+</table>
