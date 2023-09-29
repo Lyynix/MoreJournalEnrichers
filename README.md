@@ -18,25 +18,28 @@ To use any of the enrichers, write or paste the enricher into the text editor of
 
 Every enricher in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
 
-- `@ToC` und `@ToC[journalID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_ToC):\
-  This enricher adds an interactive table of contents to the journal page.
-- `@SceneMenu[sceneID1; sceneID2; ...]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_SceneMenu):\
-  This enricher adds a list of scenes to the journal, along with buttons to view, activate, edit and toggle the scene in the nav bar
-- `@InlineScene[sceneID]{alias}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_InlineScene):\
-  This Journal Enricher inserts an inline scene reference, with the interactions from `@SceneMenu`.
-- `@PlaylistMenu[playlistID1; playlistID2; ...]` [wiki page](Enricher_PlaylistMenu):\
-  This Journal Enricher adds a list of playlists and a set of buttons for each playlist, like play and skip.
-- `@Playlist[playlistID]{alias}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist):\
-  This Journal Enricher inserts an inline playlist controller.
-- `@Chat{text}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Whisper):\
-  This Journal Enricher inserts text, that can be posted in chat to all other players.
-- `@Whisper{text}` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Whisper):\
-  This Journal Enricher inserts text, that can be whispered to another player.
+- [Journals](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal)
+  - `@ToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#toc) - Table of contents
+  - `@OrderedToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#ordered-toc) - Numbered table of contents
+- [Scenes](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes)
+  - `@SceneMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#scene-menu) - List of multiple scenes
+  - `@SceneFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#full-scene) - Single scene with image
+  - `@SceneInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#inline-scene) - Single scene to be used in text
+- [RollTable](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable)
+  - `@RollTableMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#rolltable-menu) - List of multiple rolltables
+  - `@RollTableFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#full-rolltable) - Detailed view of a rolltable
+  - `@RollTableInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#inline-rolltable) - Single rolltable to be used in text
+- [Compendium Packs](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium)
+  - `@CompendiumFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium#full-compendium) - Detailed view of a compendium pack
+  - `@CompendiumInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium#inline-compendium) - Single compendium pack to be used in text
+- [Playlist](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist)
+  - `@PlaylistMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist#playlist-menu) - List of multiple Playlist
+  - `@PlaylistInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist#inline-playlist) - Single playlist to be used in text
+- [Chat](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat)
+  - `@ChatPost` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat#post-chat) - Text that can be postet in Chat
+  - `@ChatWhisper` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat#whisper) - Text that can be whispered to a player
 
-### System dependent enrichers
-- `@Character[actorID]` [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Character):\
-  This enricher adds a summary of a charactersheet\
-  **Systems:** `dnd5e`, `pf2e`
+
 
 If you didn't find the functionality you were looking for, just contact me and describe what you were searching.
 
