@@ -45,7 +45,7 @@ If you didn't find the functionality you were looking for, just contact me and d
 
 ## Contact & Support
 You need help with the module or you want to share an idea for another enricher i didn't think of?\
-Contact me on discord (lyyinx, formerly Lyynix#7777) or create an issue in this repository.
+Contact me on discord (lyynix, formerly Lyynix#7777) or create an issue in this repository.
 
 You can also join our Map-Making oriented [Discord Server](https://discord.gg/3fA4VGQeup). It is a german Server, but most members are able and happy to speak in english if you have something to talk about.
 Also you can ping me anytime at the official (and english) [Foundry VTT Discord Server](https://discord.gg/foundryvtt).
