@@ -18,15 +18,6 @@
       "discord": "Lyynix#7777"
     }
   ],
-  "packs": [
-    {
-      "name": "journals",
-      "label": "Lyynix: More Journal Enrichers",
-      "path": "/packs/journals.db",
-      "entity": "JournalEntry",
-      "type": "JournalEntry"
-    }
-  ],
   "esmodules": ["./scripts/init.js"],
   "styles": ["./styles/style.css"],
   "languages": [
