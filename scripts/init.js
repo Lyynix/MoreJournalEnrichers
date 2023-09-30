@@ -1,9 +1,11 @@
-import { enricherFunctions, initHandlebarsHelpers, patterns, templates } from "./helpers.js";
+import { enricherFunctions, initHandlebarsHelpers, patterns, postWelcomeMessage, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
+  
   //load templates for generic enrichers
   try {
     loadTemplates([
+      templates.system.welcomeMessage,
       templates.inline,
       templates.whisperTable,
       templates.chatTable,
@@ -19,6 +21,16 @@ Hooks.on("init", () => {
 
   //add Handlebars helpers
   initHandlebarsHelpers()
+  
+  game.settings.register('lyynix-more-journal-enrichers', 'welcome-message', {
+    name: game.i18n.localize('LMJE.SYSTEM.welcomeMessage.name'),
+    hint: game.i18n.localize('LMJE.SYSTEM.welcomeMessage.hint'),
+    scope: 'world',     // "world" = sync to db, "client" = local storage
+    config: true,       // false if you dont want it to show in module config
+    type: Boolean,       // Number, Boolean, String, Object
+    default: true,
+  });
+  console.log("LMJE | Registered settings");
 
   //add generic enrichers to TextEditor
   try {
@@ -140,3 +152,8 @@ Hooks.on("init", () => {
       break;
   }
 });
+
+Hooks.on('ready', () => {
+  if (game.settings.get('lyynix-more-journal-enrichers', 'welcome-message')) 
+    postWelcomeMessage()
+})
