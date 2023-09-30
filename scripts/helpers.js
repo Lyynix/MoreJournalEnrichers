@@ -7,6 +7,9 @@ import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rollt
 import { inlineScene, sceneFull, sceneMenu } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
+  system: {
+    welcomeMessage: "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",
+  },
   inline: "modules/lyynix-more-journal-enrichers/templates/inlineTemplate.hbs",
   whisperTable:
     "modules/lyynix-more-journal-enrichers/templates/whisperTable.hbs",
@@ -225,6 +228,19 @@ export function initHandlebarsHelpers() {
             return options.inverse(this);
     }
 });
+}
+
+export async function postWelcomeMessage() {
+  var data = {
+    isGerman: game.settings.get("core", "language") === "de"
+  }
+  var html = await renderTemplate(templates.system.welcomeMessage, data)
+  ChatMessage.create({
+    user: game.users.current,
+    content: html
+  })
+  game.settings.set('lyynix-more-journal-enrichers', 'welcome-message', false)
+  console.log("LMJE | Sent welcome message")
 }
 
 export function invalidHtml(error) {

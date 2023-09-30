@@ -6,6 +6,18 @@
         "expectedTypeNotFound": "The expected type is not implemented",
         "noExpectedDocumentType": "No expected type given",
         "noDocumentFound": "No document found"
+      },
+      "welcomeMessage": {
+        "name": "Post welcome message",
+        "hint": "When checked, posts the welcome message to chat, when the world is reloaded.",
+        "message": {
+          "Thanks": "Thank you for installing Lyynix' More Journal Enrichers",
+          "Wiki": "Check out the wiki for an explanation of the enrichers",
+          "Contact": "If you have any questions or feedback, feel free to contact me on discord",
+          "wikiLinkLabel": "Wiki",
+          "FoundryVTTDiscordLabel": "Official FoundryVTT Discord",
+          "WeltenformerDiscordLabel": "Weltenformer Discord - Map Making and Foundry Community"
+        }
       }
     },
     "SCENEMENU": {
