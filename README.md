@@ -1,3 +1,5 @@
+![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/total)
+
 ![Banner Image of Lyynix](.github/Assets/LyynixBanner.png)
 # Lyynix' More Journal Enrichers
 This is a module for FoundryVTT.\
