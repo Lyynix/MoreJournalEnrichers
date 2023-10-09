@@ -1,4 +1,4 @@
-![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/total)
+![GitHub all releases](https://img.shields.io/github/downloads/:user/:repo/total?link=https%3A%2F%2Fgithub.com%2FLeague-of-Foundry-Developers%2Ffoundryvtt-forien-quest-log%2Freleases%2Flatest%2Fdownload%2Fmodule.json)
 
 ![Banner Image of Lyynix](.github/Assets/LyynixBanner.png)
 # Lyynix' More Journal Enrichers
