@@ -18,6 +18,21 @@
       "discord": "lyynix"
     }
   ],
+  "packs": [
+    {
+      "name": "introduction",
+      "label": "Introduction",
+      "path": "./packs/journals",
+      "type": "JournalEntry"
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "LMJE: Journals",
+      "sorting": "m",
+      "packs": ["introduction"]
+    }
+  ],
   "esmodules": ["./scripts/init.js"],
   "styles": ["./styles/style.css"],
   "languages": [

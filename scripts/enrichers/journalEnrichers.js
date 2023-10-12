@@ -93,10 +93,11 @@ export async function tableOfContents(match, options, ordered) {
     tocHtml += /* html */ `
       <li>
         <a class="LMJE-no-link content-link"
-          data-uuid="JournalEntry.${journal._id}.JournalEntryPage.${page._id}"
+          data-uuid="${page.uuid}"
           data-id="${page._id}"
           data-type="JournalEntryPage"
-          data-tooltip="${journal.name}: ${page.name}">
+          data-tooltip="${journal.name}: ${page.name}"
+          style="white-space: normal;">
             ${page.name}
         </a>
       </li>
