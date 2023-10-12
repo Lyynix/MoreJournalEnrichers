@@ -22,7 +22,7 @@ Hooks.on("init", () => {
   //add Handlebars helpers
   initHandlebarsHelpers()
   
-  game.settings.register('lyynix-more-journal-enrichers', 'welcome-message', {
+  game.settings.register('lyynix-more-journal-enrichers', 'intro-message', {
     name: game.i18n.localize('LMJE.SYSTEM.welcomeMessage.name'),
     hint: game.i18n.localize('LMJE.SYSTEM.welcomeMessage.hint'),
     scope: 'world',     // "world" = sync to db, "client" = local storage
@@ -154,6 +154,6 @@ Hooks.on("init", () => {
 });
 
 Hooks.on('ready', () => {
-  if (game.settings.get('lyynix-more-journal-enrichers', 'welcome-message')) 
+  if (game.settings.get('lyynix-more-journal-enrichers', 'intro-message')) 
     postWelcomeMessage()
 })
