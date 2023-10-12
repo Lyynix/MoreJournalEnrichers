@@ -52,6 +52,3 @@ Contact me on discord (lyynix, formerly Lyynix#7777) or create an issue in this 
 
 You can also join our Map-Making oriented [Discord Server](https://discord.gg/3fA4VGQeup). It is a german Server, but most members are able and happy to speak in english if you have something to talk about.
 Also you can ping me anytime at the official (and english) [Foundry VTT Discord Server](https://discord.gg/foundryvtt).
-
-There also is a discord server oriented themed on map making and FoundryVTT, where im really active.\
-This is a german discord server, but most users will speak in english if you have questions or want to talk about something else.
