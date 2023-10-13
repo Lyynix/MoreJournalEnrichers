@@ -1,7 +1,7 @@
 [![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.1.0/total
-)](https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json)
+)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.1.0/manifest.json)
 [![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.0.0/total
-)](https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json)
+)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.0.0/manifest.json)
 
 ![Banner Image of Lyynix](.github/Assets/LyynixBanner.png)
 # Lyynix' More Journal Enrichers
