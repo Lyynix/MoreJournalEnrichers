@@ -1,3 +1,5 @@
+[![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.1.0/total
+)](https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json)
 [![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.0.0/total
 )](https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json)
 
