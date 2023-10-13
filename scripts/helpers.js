@@ -231,15 +231,19 @@ export function initHandlebarsHelpers() {
 }
 
 export async function postWelcomeMessage() {
+  if (!game.users.current.isGM) return;
+
   var data = {
     isGerman: game.settings.get("core", "language") === "de"
   }
   var html = await renderTemplate(templates.system.welcomeMessage, data)
   ChatMessage.create({
     user: game.users.current,
+    whisper: [game.users.current._id],
+    speaker: {alias: "Lyynix"},
     content: html
   })
-  game.settings.set('lyynix-more-journal-enrichers', 'welcome-message', false)
+  game.settings.set('lyynix-more-journal-enrichers', 'intro-message', false)
   console.log("LMJE | Sent welcome message")
 }
 

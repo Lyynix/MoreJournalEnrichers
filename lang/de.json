@@ -11,12 +11,15 @@
         "name": "Sende Willkommensnachricht im Chat",
         "hint": "Wenn der Haken gesetzt ist, wird beim nächsten Neustart der Welt die Willkommensnachricht im Chat gepostet.",
         "message": {
-          "Thanks": "Vielen Dank fürs Installieren von Lyynix' More Journal Enrichers",
+          "Thanks": "Vielen Dank fürs Installieren von More Journal Enrichers",
           "Wiki": "Im Wiki findest du eine Liste aller Enricher und dazugehörige Erklärungen",
+          "Journal": "Alternativ kannst du dir auch das Einführungsjournal ansehen",
           "Contact": "Wenn du Fragen oder Feedback hast, kannst du mich jederzeit auf Discord erreichen",
           "wikiLinkLabel": "Wiki",
           "FoundryVTTDiscordLabel": "Offizieller FoundryVTT Discord",
-          "WeltenformerDiscordLabel": "Weltenformer Discord - Map Making und Foundry Community"
+          "WeltenformerDiscordLabel": "Weltenformer Discord - Map Making und Foundry Community",
+          "IntroductionJournal": "@UUID[Compendium.lyynix-more-journal-enrichers.introduction.JournalEntry.2lAXKOLFzcpyecCW]",
+          "IntroductionJournalLinkPage": "@UUID[Compendium.lyynix-more-journal-enrichers.introduction.JournalEntry.2lAXKOLFzcpyecCW.JournalEntryPage.2GF1L5E9wpiia9WK]"
         }
       }
     },

@@ -11,12 +11,15 @@
         "name": "Post welcome message",
         "hint": "When checked, posts the welcome message to chat, when the world is reloaded.",
         "message": {
-          "Thanks": "Thank you for installing Lyynix' More Journal Enrichers",
+          "Thanks": "Thank you for installing More Journal Enrichers",
           "Wiki": "Check out the wiki for an explanation of the enrichers",
+          "Journal": "Alternatively, you can take a look at the introduction journal",
           "Contact": "If you have any questions or feedback, feel free to contact me on discord",
           "wikiLinkLabel": "Wiki",
           "FoundryVTTDiscordLabel": "Official FoundryVTT Discord",
-          "WeltenformerDiscordLabel": "Weltenformer Discord - Map Making and Foundry Community"
+          "WeltenformerDiscordLabel": "Weltenformer Discord - Map Making and Foundry Community",
+          "IntroductionJournal": "@UUID[Compendium.lyynix-more-journal-enrichers.introduction.JournalEntry.wvfPeq7yDZ57u7bO]",
+          "IntroductionJournalLinkPage": "@UUID[Compendium.lyynix-more-journal-enrichers.introduction.JournalEntry.wvfPeq7yDZ57u7bO.JournalEntryPage.o1vv5ODbL2o7bAmi]"
         }
       }
     },
