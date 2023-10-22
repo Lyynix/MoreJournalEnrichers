@@ -1,7 +1,5 @@
-[![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.1.0/total
+[![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.1.0/lmje-v1_1_0.zip
 )](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.1.0/manifest.json)
-[![GitHub all releases](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.0.0/total
-)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.0.0/manifest.json)
 
 ![Banner Image of Lyynix](.github/Assets/LyynixBanner.png)
 # Lyynix' More Journal Enrichers
