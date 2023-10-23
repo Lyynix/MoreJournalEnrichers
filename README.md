@@ -16,6 +16,21 @@ You can simply use the install module screen within the FoundryVTT setup.\
 Or you can paste the manifest URL in said window:\
 ***Latest manifest:*** https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json
 
+## Example Images
+<details>
+  <summary>Click to reveal images</summary>
+  
+  ### Table of Contents - @ToC
+  ![Image of a Table of Contents](https://user-images.githubusercontent.com/12870445/277434610-aba77451-46ab-48f5-a0b3-7cd914adc0d6.png)
+  
+  ### Full Scene visualization - @SceneFull
+  ![Image of the Scene Full Enricher](https://user-images.githubusercontent.com/12870445/277433128-6f3441e1-e091-44b7-b26e-a9e7a0061210.png)
+  
+  ### Full RollTable visualization - @RollTableFull
+  ![Image of the RollTable Full Enricher](https://user-images.githubusercontent.com/12870445/277435825-a1e6377f-b38b-4715-be57-64a61f163888.png)
+  
+</details>
+
 ## Usage & Features
 To use any of the enrichers, write or paste the enricher into the text editor of FoundryVTT and fill in the missing elements.
 
