@@ -73,10 +73,6 @@
   color: var(--color-text-dark-inactive);
 }
 
-.content-link {
-  white-space: normal !important;
-}
-
 
 /* Changes for enrichers */
 
