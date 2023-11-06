@@ -1,3 +1,4 @@
+import { editVariables } from "./enrichers/journalEnrichers.js";
 import { enricherFunctions, initHandlebarsHelpers, patterns, postWelcomeMessage, templates } from "./helpers.js";
 
 Hooks.on("init", () => {
@@ -12,7 +13,8 @@ Hooks.on("init", () => {
       templates.compendium.inline,
       templates.compendium.full,
       templates.rolltable.full,
-      templates.rolltable.menu
+      templates.rolltable.menu,
+      templates.journal.editVariables
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -30,11 +32,23 @@ Hooks.on("init", () => {
     type: Boolean,       // Number, Boolean, String, Object
     default: true,
   });
+
+  game.settings.register('lyynix-more-journal-enrichers', 'variables', {
+    scope: 'world',
+    config: false,
+    type: Object,
+    default: {keys: ['Author'], 'Author': 'Lyynix'}
+  })
   console.log("LMJE | Registered settings");
 
   //add generic enrichers to TextEditor
   try {
     CONFIG.TextEditor.enrichers.push(
+      {
+        label: "LMJE - Journal - Variables / Replacable text",
+        pattern: patterns.journal.variable,
+        enricher: enricherFunctions.journal.variable,
+      },
       {
         label: "LMJE - Journal - Table of Contents",
         pattern: patterns.toc.unordered,
@@ -152,6 +166,16 @@ Hooks.on("init", () => {
       break;
   }
 });
+
+Hooks.on('getJournalTextPageSheetHeaderButtons', (app, buttons) => {
+  var button = {
+    class: 'edit-variables',
+    label: 'Edit Variables',
+    icon: "fa-regular fa-code",
+    onclick: (event) => editVariables()
+  }
+  buttons.unshift(button)
+})
 
 Hooks.on('ready', () => {
   if (game.settings.get('lyynix-more-journal-enrichers', 'intro-message')) 

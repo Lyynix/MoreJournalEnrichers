@@ -1,14 +1,26 @@
 import { EnricherPattern } from "./enricherPattern.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
-import { compendiumFull, inlineCompendium } from "./enrichers/compendiumEnrichers.js";
-import { toc, otoc } from "./enrichers/journalEnrichers.js";
+import {
+  compendiumFull,
+  inlineCompendium,
+} from "./enrichers/compendiumEnrichers.js";
+import { toc, otoc, variable } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
-import { rolltableFull, rolltableInline, rolltableMenu } from "./enrichers/rolltableEnrichers.js";
-import { inlineScene, sceneFull, sceneMenu } from "./enrichers/sceneEnrichers.js";
+import {
+  rolltableFull,
+  rolltableInline,
+  rolltableMenu,
+} from "./enrichers/rolltableEnrichers.js";
+import {
+  inlineScene,
+  sceneFull,
+  sceneMenu,
+} from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
   system: {
-    welcomeMessage: "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",
+    welcomeMessage:
+      "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",
   },
   inline: "modules/lyynix-more-journal-enrichers/templates/inlineTemplate.hbs",
   whisperTable:
@@ -16,30 +28,43 @@ export const templates = {
   chatTable: "modules/lyynix-more-journal-enrichers/templates/chatTable.hbs",
   rolltable: {
     full: "modules/lyynix-more-journal-enrichers/templates/rolltable/rolltableFull.hbs",
-    menu: "modules/lyynix-more-journal-enrichers/templates/rolltable/rolltableMenu.hbs"
+    menu: "modules/lyynix-more-journal-enrichers/templates/rolltable/rolltableMenu.hbs",
   },
   compendium: {
-    inline: "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
+    inline:
+      "modules/lyynix-more-journal-enrichers/templates/compendium/inlineCompendium.hbs",
     full: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumFull.hbs",
-    menu: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumMenu.hbs"
+    menu: "modules/lyynix-more-journal-enrichers/templates/compendium/compendiumMenu.hbs",
   },
   scene: {
     full: "modules/lyynix-more-journal-enrichers/templates/scene/sceneFull.hbs",
+  },
+  journal: {
+    editVariables: "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs"
   }
 };
 
 export const patterns = {
+  journal: {
+    variable: new EnricherPattern()
+      .addName("Var")
+      .addName("Replace")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .getRegex()
+  },
   toc: {
     unordered: new EnricherPattern()
       .addName("ToC")
+      .addName("TableOfContents")
       .setReferenceTypes("IDENTIFIER", "SINGLE", true)
       .setConfigTypes("SIZE", "SINGLE", true)
       .getRegex(),
     ordered: new EnricherPattern()
       .addName("OrderedToC")
+      .addName("OrderedTableOfContents")
       .setReferenceTypes("IDENTIFIER", "SINGLE", true)
       .setConfigTypes("SIZE", "SINGLE", true)
-      .getRegex()
+      .getRegex(),
   },
   rolltable: {
     full: new EnricherPattern()
@@ -56,7 +81,7 @@ export const patterns = {
       .addName("RollTableInline")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
-      .getRegex()
+      .getRegex(),
   },
   compendium: {
     full: new EnricherPattern()
@@ -70,7 +95,7 @@ export const patterns = {
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setConfigTypes("IDENTIFIER", "SINGLE", true)
       .setLabelTypes("TEXT", "SINGLE", true)
-      .getRegex()
+      .getRegex(),
   },
   chat: {
     chat: new EnricherPattern()
@@ -115,18 +140,21 @@ export const patterns = {
 };
 
 export const enricherFunctions = {
+  journal: {
+    variable: variable 
+  },
   toc: {
     unordered: toc,
-    ordered: otoc
+    ordered: otoc,
   },
   rolltable: {
     full: rolltableFull,
     menu: rolltableMenu,
-    inline: rolltableInline
+    inline: rolltableInline,
   },
   compendium: {
     full: compendiumFull,
-    inline: inlineCompendium
+    inline: inlineCompendium,
   },
   chat: {
     chat: chat,
@@ -143,9 +171,7 @@ export const enricherFunctions = {
   },
 };
 
-
 export async function getDocument(identifier, expectedDocumentType) {
-
   // try identifier as uuid
   var doc = await fromUuid(identifier);
   if (doc !== null) {
@@ -159,24 +185,24 @@ export async function getDocument(identifier, expectedDocumentType) {
     }
   }
   // get collection from expected type
-  var collection
+  var collection;
   switch (expectedDocumentType) {
     case undefined:
       throw "LMJE.SYSTEM.getDocument.noExpectedDocumentType";
     case "Actor":
-      collection = game.actors
+      collection = game.actors;
       break;
     case "Scene":
-      collection = game.scenes
+      collection = game.scenes;
       break;
     case "Playlist":
-      collection = game.playlists
+      collection = game.playlists;
       break;
     case "JournalEntry":
-      collection = game.journal
+      collection = game.journal;
       break;
     case "RollTable":
-      collection = game.tables
+      collection = game.tables;
       break;
 
     default:
@@ -193,58 +219,57 @@ export async function getDocument(identifier, expectedDocumentType) {
   if (doc) {
     return doc;
   }
-  
+
   throw "LMJE.SYSTEM.getDocument.noDocumentFound";
 }
 
 export function initHandlebarsHelpers() {
-  Handlebars.registerHelper('isdefined', function (value) {
+  Handlebars.registerHelper("isdefined", function (value) {
     return value !== undefined;
-  });  
-  Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-
+  });
+  Handlebars.registerHelper("ifCond", function (v1, operator, v2, options) {
     switch (operator) {
-        case '==':
-            return (v1 == v2) ? options.fn(this) : options.inverse(this);
-        case '===':
-            return (v1 === v2) ? options.fn(this) : options.inverse(this);
-        case '!=':
-            return (v1 != v2) ? options.fn(this) : options.inverse(this);
-        case '!==':
-            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-        case '<':
-            return (v1 < v2) ? options.fn(this) : options.inverse(this);
-        case '<=':
-            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-        case '>':
-            return (v1 > v2) ? options.fn(this) : options.inverse(this);
-        case '>=':
-            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-        case '&&':
-            return (v1 && v2) ? options.fn(this) : options.inverse(this);
-        case '||':
-            return (v1 || v2) ? options.fn(this) : options.inverse(this);
-        default:
-            return options.inverse(this);
+      case "==":
+        return v1 == v2 ? options.fn(this) : options.inverse(this);
+      case "===":
+        return v1 === v2 ? options.fn(this) : options.inverse(this);
+      case "!=":
+        return v1 != v2 ? options.fn(this) : options.inverse(this);
+      case "!==":
+        return v1 !== v2 ? options.fn(this) : options.inverse(this);
+      case "<":
+        return v1 < v2 ? options.fn(this) : options.inverse(this);
+      case "<=":
+        return v1 <= v2 ? options.fn(this) : options.inverse(this);
+      case ">":
+        return v1 > v2 ? options.fn(this) : options.inverse(this);
+      case ">=":
+        return v1 >= v2 ? options.fn(this) : options.inverse(this);
+      case "&&":
+        return v1 && v2 ? options.fn(this) : options.inverse(this);
+      case "||":
+        return v1 || v2 ? options.fn(this) : options.inverse(this);
+      default:
+        return options.inverse(this);
     }
-});
+  });
 }
 
 export async function postWelcomeMessage() {
   if (!game.users.current.isGM) return;
 
   var data = {
-    isGerman: game.settings.get("core", "language") === "de"
-  }
-  var html = await renderTemplate(templates.system.welcomeMessage, data)
+    isGerman: game.settings.get("core", "language") === "de",
+  };
+  var html = await renderTemplate(templates.system.welcomeMessage, data);
   ChatMessage.create({
     user: game.users.current,
     whisper: [game.users.current._id],
-    speaker: {alias: "Lyynix"},
-    content: html
-  })
-  game.settings.set('lyynix-more-journal-enrichers', 'intro-message', false)
-  console.log("LMJE | Sent welcome message")
+    speaker: { alias: "Lyynix" },
+    content: html,
+  });
+  game.settings.set("lyynix-more-journal-enrichers", "intro-message", false);
+  console.log("LMJE | Sent welcome message");
 }
 
 export function invalidHtml(error) {

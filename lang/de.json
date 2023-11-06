@@ -23,6 +23,22 @@
         }
       }
     },
+    "JOURNAL": {
+      "VARIABLE": {
+        "editVariablesDialog": {
+          "title": "Variable bearbeiten",
+          "chooseKey": "Wähle ein Schlüsselwort",
+          "newKey": "Neue Variable",
+          "editKey": "Schlüsselwort bearbeiten",
+          "editVal": "Inhalt bearbeiten",
+          "submit": "Speichern",
+          "submitResponse": "Variable wurde erfolgreich aktualisiert",
+          "delete": "Löschen",
+          "deleteResponse": "Variable wurde erfolgreich gelöscht"
+        },
+        "keyNotFound": "Dieses Schlüsselwort hat keinen Inhalt"
+      }
+    },
     "SCENEMENU": {
       "Title": "Szenenmenü",
       "Tooltip": {

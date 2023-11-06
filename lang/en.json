@@ -23,6 +23,22 @@
         }
       }
     },
+    "JOURNAL": {
+      "VARIABLE": {
+        "editVariablesDialog": {
+          "title": "Edit Variables",
+          "chooseKey": "Choose a key to edit:",
+          "newKey": "New Key",
+          "editKey": "Edit Key:",
+          "editVal": "Edit Value:",
+          "submit": "Submit",
+          "submitResponse": "Successfully updated variable",
+          "delete": "Delete",
+          "deleteResponse": "Successfully deleted variable"
+        },
+        "keyNotFound": "The key has no value"
+      }
+    },
     "SCENEMENU": {
       "Title": "Scene menu",
       "Tooltip": {
