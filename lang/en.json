@@ -5,7 +5,9 @@
         "wrongType": "Expected type doesn't match type of found document",
         "expectedTypeNotFound": "The expected type is not implemented",
         "noExpectedDocumentType": "No expected type given",
-        "noDocumentFound": "No document found"
+        "noDocumentFound": "No document found",
+        "selfReference": "No self reference possible",
+        "multiplePagesFound": "Found multiple pages with that identifier"
       },
       "welcomeMessage": {
         "name": "Post welcome message",

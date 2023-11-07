@@ -1,58 +1,111 @@
 import { getDocument, invalidHtml, templates } from "../helpers.js";
 
+export async function insertPage(match, options) {
+  var page;
+  try {
+    page = await getDocument(match[1], "JournalEntryPage");
+  } catch (error) {
+    return $(invalidHtml(game.i18n.localize(error)))[0];
+  }
+
+  if (options.relativeTo.uuid === page.uuid)
+    return $(invalidHtml(game.i18n.localize("LMJE.SYSTEM.getDocument.selfReference")))[0];
+
+  var enrichedContent = await TextEditor.enrichHTML(page.text.content)
+  console.log("LMJE | enriched Page", $(enrichedContent))
+  var decodedHtml = await TextEditor.decodeHTML(enrichedContent)
+  console.log("LMJE | decoded HTML", decodedHtml)
+  
+  return $(`<div>${decodedHtml}</div>`)[0]
+}
+
 export function variable(match, options) {
-  var vars = game.settings.get('lyynix-more-journal-enrichers', 'variables');
-  var val = vars[match[1]]
-  if (val !== undefined) return vars[match[1]]
-  else return $(invalidHtml(game.i18n.localize('LMJE.JOURNAL.VARIABLE.keyNotFound')))[0]
+  var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
+  var val = vars[match[1]];
+  if (val !== undefined) return vars[match[1]];
+  else
+    return $(
+      invalidHtml(game.i18n.localize("LMJE.JOURNAL.VARIABLE.keyNotFound"))
+    )[0];
 }
 
 export function editVariables() {
   var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
 
-  renderTemplate(templates.journal.editVariables, { keys: vars.keys }).then(html => {
-    var dialog = new Dialog({
-      title: game.i18n.localize('LMJE.JOURNAL.VARIABLE.editVariablesDialog.title'),
-      content: html,
-      buttons: {
-        submit: {
-          label: game.i18n.localize('LMJE.JOURNAL.VARIABLE.editVariablesDialog.submit'),
-          callback: () => {
-            var vars = game.settings.get('lyynix-more-journal-enrichers', 'variables');
+  renderTemplate(templates.journal.editVariables, { keys: vars.keys }).then(
+    (html) => {
+      var dialog = new Dialog({
+        title: game.i18n.localize(
+          "LMJE.JOURNAL.VARIABLE.editVariablesDialog.title"
+        ),
+        content: html,
+        buttons: {
+          submit: {
+            label: game.i18n.localize(
+              "LMJE.JOURNAL.VARIABLE.editVariablesDialog.submit"
+            ),
+            callback: () => {
+              var vars = game.settings.get(
+                "lyynix-more-journal-enrichers",
+                "variables"
+              );
 
-            var key = document.getElementById('LMJE_key').value;
-            var value = document.getElementById('LMJE_val').value;
-            vars[key] = value;
-            if(!vars.keys.includes(key))
-              vars.keys.push(key);
+              var key = document.getElementById("LMJE_key").value;
+              var value = document.getElementById("LMJE_val").value;
+              vars[key] = value;
+              if (!vars.keys.includes(key)) vars.keys.push(key);
 
-            game.settings.set('lyynix-more-journal-enrichers', 'variables', vars);
-            ui.notifications.info(game.i18n.localize('LMJE.JOURNAL.VARIABLE.editVariablesDialog.submitResponse'))
-            console.log("LMJE | Variables updated")
+              game.settings.set(
+                "lyynix-more-journal-enrichers",
+                "variables",
+                vars
+              );
+              ui.notifications.info(
+                game.i18n.localize(
+                  "LMJE.JOURNAL.VARIABLE.editVariablesDialog.submitResponse"
+                )
+              );
+              console.log("LMJE | Variables updated");
+            },
+            icon: `<i class="fas fa-save"></i>`,
           },
-          icon: `<i class="fas fa-save"></i>`
+          delete: {
+            label: game.i18n.localize(
+              "LMJE.JOURNAL.VARIABLE.editVariablesDialog.delete"
+            ),
+            callback: () => {
+              var vars = game.settings.get(
+                "lyynix-more-journal-enrichers",
+                "variables"
+              );
+              var key = document.getElementById("LMJE_key").value;
+
+              var newKeys = vars.keys.filter((value) => {
+                return value !== key;
+              });
+              vars.keys = newKeys;
+
+              vars[key] = undefined;
+
+              game.settings.set(
+                "lyynix-more-journal-enrichers",
+                "variables",
+                vars
+              );
+              ui.notifications.info(
+                game.i18n.localize(
+                  "LMJE.JOURNAL.VARIABLE.editVariablesDialog.deleteResponse"
+                )
+              );
+              console.log("LMJE | Variable removed");
+            },
+            icon: `<i class="fas fa-x"></i>`,
+          },
         },
-        delete: {
-          label: game.i18n.localize('LMJE.JOURNAL.VARIABLE.editVariablesDialog.delete'),
-          callback: () => {
-            var vars = game.settings.get('lyynix-more-journal-enrichers', 'variables');
-            var key = document.getElementById('LMJE_key').value;
-
-            var newKeys = vars.keys.filter((value) => { return value !== key });
-            vars.keys = newKeys;
-
-            vars[key] = undefined;
-            
-            game.settings.set('lyynix-more-journal-enrichers', 'variables', vars);
-            ui.notifications.info(game.i18n.localize('LMJE.JOURNAL.VARIABLE.editVariablesDialog.deleteResponse'))
-            console.log("LMJE | Variable removed")
-          },
-          icon: `<i class="fas fa-x"></i>`
-        }
-      },
-      default: "submit"
-    }).render(true)
-  })
+        default: "submit",
+      }).render(true);
+    }
+  );
 }
 
 export async function toc(match, options) {
