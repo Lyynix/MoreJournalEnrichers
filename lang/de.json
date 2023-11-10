@@ -26,6 +26,9 @@
       }
     },
     "JOURNAL": {
+      "PAGE": {
+        "pageTypeNotSupported": "Dieser Journalseitentyp wird derzeit nicht unterstüzt"
+      },
       "VARIABLE": {
         "editVariablesDialog": {
           "title": "Variable bearbeiten",

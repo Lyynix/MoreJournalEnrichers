@@ -37,12 +37,42 @@ export async function insertPage(match, options) {
       invalidHtml(game.i18n.localize("LMJE.SYSTEM.getDocument.selfReference"))
     )[0];
 
-  var enrichedContent = await TextEditor.enrichHTML(page.text.content);
-  console.log("LMJE | enriched Page", $(enrichedContent));
-  var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
-  console.log("LMJE | decoded HTML", decodedHtml);
+  switch (page.type) {
+    case "text":
+      var enrichedContent = await TextEditor.enrichHTML(page.text.content);
+      console.log("LMJE | enriched Page", $(enrichedContent));
+      var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
+      console.log("LMJE | decoded HTML", decodedHtml);
 
-  return $(`<div class="LMJE-InsertPage">${decodedHtml}</div>`)[0];
+      return $(`
+        <div class="LMJE-InsertPage">
+          ${decodedHtml}
+        </div>`)[0];
+
+    case "image":
+      return $(/* html */ `
+        <div class="LMJE-InsertPage LMJE-insertImage" >
+          <figure>
+            <img src="${page.src}" alt="${page.name}">
+            <figcaption>${page.image.caption}</figcaption>
+          </figure> 
+        </div>`)[0];
+
+    case "video":
+      return $(/* html */ `
+      <div class="LMJE-InsertPage LMJE-insertVideo" >
+        <figure class="flex-ratio">
+          <video src="${page.src}" controls="${page.video.controls}" autoplay="${page.video.autoplay}" loop="${page.video.loop}"></video>
+        </figure>
+      </div>`)[0];
+
+    default:
+      return $(
+        invalidHtml(
+          game.i18n.localize("LMJE.JOURNAL.PAGE.pageTypeNotSupported")
+        )
+      )[0];
+  }
 }
 
 export function variable(match, options) {
