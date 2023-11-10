@@ -60,6 +60,7 @@ export const patterns = {
     page: new EnricherPattern()
       .addName("Page")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setConfigTypes("IDENTIFIER", "SINGLE", true)
       .getRegex(),
   },
   toc: {

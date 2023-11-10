@@ -3,20 +3,46 @@ import { getDocument, invalidHtml, templates } from "../helpers.js";
 export async function insertPage(match, options) {
   var page;
   try {
+    // Try to get JournalEntryPage with Reference from match[1] {}
     page = await getDocument(match[1], "JournalEntryPage");
   } catch (error) {
-    return $(invalidHtml(game.i18n.localize(error)))[0];
+    // When failed, try to get journal from Reference at match[2] ()
+    if (match[2] !== undefined) {
+      try {
+        // get Journal
+        var journal = await getDocument(match[2], "JournalEntry");
+        // try to get Page from Journal
+        page = journal.pages.get(match[1]);
+        if (page === undefined) page = journal.pages.getName(match[1]);
+        if (page === undefined)
+          // if no page is found, return error message
+          return $(
+            invalidHtml(
+              "Page: " +
+                game.i18n.localize("LMJE.SYSTEM.getDocument.noDocumentFound")
+            )
+          )[0];
+      } catch (error) {
+        // if no Journal is found, return error message
+        return $(invalidHtml("Journal: " + game.i18n.localize(error)))[0];
+      }
+    } else {
+      // if no match[2] () is given, return error message
+      return $(invalidHtml(game.i18n.localize(error)))[0];
+    }
   }
 
   if (options.relativeTo.uuid === page.uuid)
-    return $(invalidHtml(game.i18n.localize("LMJE.SYSTEM.getDocument.selfReference")))[0];
+    return $(
+      invalidHtml(game.i18n.localize("LMJE.SYSTEM.getDocument.selfReference"))
+    )[0];
 
-  var enrichedContent = await TextEditor.enrichHTML(page.text.content)
-  console.log("LMJE | enriched Page", $(enrichedContent))
-  var decodedHtml = await TextEditor.decodeHTML(enrichedContent)
-  console.log("LMJE | decoded HTML", decodedHtml)
-  
-  return $(`<div>${decodedHtml}</div>`)[0]
+  var enrichedContent = await TextEditor.enrichHTML(page.text.content);
+  console.log("LMJE | enriched Page", $(enrichedContent));
+  var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
+  console.log("LMJE | decoded HTML", decodedHtml);
+
+  return $(`<div class="LMJE-InsertPage">${decodedHtml}</div>`)[0];
 }
 
 export function variable(match, options) {
