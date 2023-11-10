@@ -44,19 +44,35 @@ export async function insertPage(match, options) {
       var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
       console.log("LMJE | decoded HTML", decodedHtml);
 
-      return $(`
+      return $(/* html */`
         <div class="LMJE-InsertPage">
           ${decodedHtml}
         </div>`)[0];
 
     case "image":
       return $(/* html */ `
-        <div class="LMJE-InsertPage LMJE-insertImage" >
-          <figure>
-            <img src="${page.src}" alt="${page.name}">
-            <figcaption>${page.image.caption}</figcaption>
-          </figure> 
-        </div>`)[0];
+      <table class="LMJE-Table LMJE-PageImage">
+        <tr>
+          <th align="left">
+            <i class="fas fa-image"></i>
+            <a class="content-link LMJE-no-link"
+              draggable="false"
+              data-uuid="${page.uuid}" 
+              data-id="${page.id}" 
+              data-type="${page.documentName}">
+              ${page.name}
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <th class="LMJE-Table-body">
+            <figure>
+              <img src="${page.src}" alt="${page.name}">
+              <figcaption>${page.image.caption}</figcaption>
+            </figure> 
+          </th>
+        </tr>
+      </table>`)[0];
 
     case "video":
       return $(/* html */ `
