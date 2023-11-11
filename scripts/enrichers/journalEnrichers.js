@@ -1,6 +1,7 @@
 import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
+  console.log(options);
   var page;
   try {
     // Try to get JournalEntryPage with Reference from match[1] {}
@@ -37,14 +38,19 @@ export async function insertPage(match, options) {
       invalidHtml(game.i18n.localize("LMJE.SYSTEM.getDocument.selfReference"))
     )[0];
 
+  var refTitle =
+    page.parent.uuid === options.relativeTo.parent.uuid
+      ? page.name
+      : `${page.parent.name} > ${page.name}`;
+
   switch (page.type) {
     case "text":
       var enrichedContent = await TextEditor.enrichHTML(page.text.content);
-      console.log("LMJE | enriched Page", $(enrichedContent));
+      // console.log("LMJE | enriched Page", $(enrichedContent));
       var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
-      console.log("LMJE | decoded HTML", decodedHtml);
+      // console.log("LMJE | decoded HTML", decodedHtml);
 
-      return $(/* html */`
+      return $(/* html */ `
         <table class="LMJE-Table LMJE-PageMedia">
           <tr>
             <th align="left">
@@ -54,7 +60,7 @@ export async function insertPage(match, options) {
                 data-uuid="${page.uuid}" 
                 data-id="${page.id}" 
                 data-type="${page.documentName}">
-                ${page.name}
+                ${refTitle}
               </a>
             </th>
           </tr>
@@ -78,7 +84,7 @@ export async function insertPage(match, options) {
               data-uuid="${page.uuid}" 
               data-id="${page.id}" 
               data-type="${page.documentName}">
-              ${page.name}
+              ${refTitle}
             </a>
           </th>
         </tr>
@@ -103,7 +109,7 @@ export async function insertPage(match, options) {
               data-uuid="${page.uuid}" 
               data-id="${page.id}" 
               data-type="${page.documentName}">
-              ${page.name}
+              ${refTitle}
             </a>
           </th>
         </tr>
