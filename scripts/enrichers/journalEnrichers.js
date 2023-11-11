@@ -45,13 +45,31 @@ export async function insertPage(match, options) {
       console.log("LMJE | decoded HTML", decodedHtml);
 
       return $(/* html */`
-        <div class="LMJE-InsertPage">
-          ${decodedHtml}
-        </div>`)[0];
+        <table class="LMJE-Table LMJE-PageMedia">
+          <tr>
+            <th align="left">
+              <i class="fas fa-text"></i>
+              <a class="content-link LMJE-no-link"
+                draggable="false"
+                data-uuid="${page.uuid}" 
+                data-id="${page.id}" 
+                data-type="${page.documentName}">
+                ${page.name}
+              </a>
+            </th>
+          </tr>
+          <tr>
+            <th class="LMJE-Table-body">
+              <div class="LMJE-InsertPage">
+                ${decodedHtml}
+              </div>
+            </th>
+          </tr>
+        </table>`)[0];
 
     case "image":
       return $(/* html */ `
-      <table class="LMJE-Table LMJE-PageImage">
+      <table class="LMJE-Table LMJE-PageMedia">
         <tr>
           <th align="left">
             <i class="fas fa-image"></i>
@@ -76,11 +94,31 @@ export async function insertPage(match, options) {
 
     case "video":
       return $(/* html */ `
-      <div class="LMJE-InsertPage LMJE-insertVideo" >
-        <figure class="flex-ratio">
-          <video src="${page.src}" controls="${page.video.controls}" autoplay="${page.video.autoplay}" loop="${page.video.loop}"></video>
-        </figure>
-      </div>`)[0];
+      <table class="LMJE-Table LMJE-PageMedia">
+        <tr>
+          <th align="left">
+            <i class="fas fa-video"></i>
+            <a class="content-link LMJE-no-link"
+              draggable="false"
+              data-uuid="${page.uuid}" 
+              data-id="${page.id}" 
+              data-type="${page.documentName}">
+              ${page.name}
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <th class="LMJE-Table-body">
+            <figure class="flex-ratio">
+              <video
+                src="${page.src}" 
+                ${page.video.controls ? `controls=""` : ``}
+                ${page.video.autoplay ? `autoplay=""` : ``}
+                ${page.video.loop ? `loop=""` : ``}"></video>
+            </figure>
+          </th>
+        </tr>
+      </table>`)[0];
 
     default:
       return $(
