@@ -33,6 +33,13 @@ Hooks.on("init", () => {
     default: true,
   });
 
+  game.settings.register('lyynix-more-journal-enrichers', 'lastLoggedVersion', {
+    scope: 'world',
+    config: false,
+    type: String,
+    default: '1.1.0'
+  })
+
   game.settings.register('lyynix-more-journal-enrichers', 'variables', {
     scope: 'world',
     config: false,
