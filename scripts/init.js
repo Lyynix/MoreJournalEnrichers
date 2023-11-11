@@ -14,7 +14,8 @@ Hooks.on("init", () => {
       templates.compendium.full,
       templates.rolltable.full,
       templates.rolltable.menu,
-      templates.journal.editVariables
+      templates.journal.editVariables,
+      templates.journal.refPage
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {

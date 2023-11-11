@@ -1,7 +1,6 @@
 import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
-  console.log(options);
   var page;
   try {
     // Try to get JournalEntryPage with Reference from match[1] {}
@@ -42,6 +41,20 @@ export async function insertPage(match, options) {
     page.parent.uuid === options.relativeTo.parent.uuid
       ? page.name
       : `${page.parent.name} > ${page.name}`;
+  
+  var decodedHtml
+  if (page.type === "text") {
+    var enrichedContent = await TextEditor.enrichHTML(page.text.content);
+    decodedHtml = await TextEditor.decodeHTML(enrichedContent);
+  }
+
+  var pageData = {
+    type: page.type,
+    page: page,
+    refTitle: refTitle,
+    decodedHtml: decodedHtml
+  }
+  return $(await renderTemplate(templates.journal.refPage, pageData))[0]
 
   switch (page.type) {
     case "text":

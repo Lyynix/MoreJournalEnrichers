@@ -47,6 +47,8 @@ export const templates = {
   journal: {
     editVariables:
       "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs",
+    refPage:
+      "modules/lyynix-more-journal-enrichers/templates/journal/refPage.hbs",
   },
 };
 
@@ -221,8 +223,8 @@ export async function getDocument(identifier, expectedDocumentType) {
       if (journals.length === 0)
         throw "LMJE.SYSTEM.getDocument.noDocumentFound";
       if (journals.length > 1)
-        throw "LMJE.SYSTEM.getDocument.multiplePagesFound"
-      collection = journals[0].pages
+        throw "LMJE.SYSTEM.getDocument.multiplePagesFound";
+      collection = journals[0].pages;
       break;
     case "RollTable":
       collection = game.tables;
@@ -252,28 +254,28 @@ export function initHandlebarsHelpers() {
   Handlebars.registerHelper("isdefined", function (value) {
     return value !== undefined;
   });
-  Handlebars.registerHelper("ifCond", function (v1, operator, v2, options) {
+  Handlebars.registerHelper("ifCond", function (v1, operator, v2) {
     switch (operator) {
       case "==":
-        return v1 == v2 ? options.fn(this) : options.inverse(this);
+        return v1 == v2;
       case "===":
-        return v1 === v2 ? options.fn(this) : options.inverse(this);
+        return v1 === v2;
       case "!=":
-        return v1 != v2 ? options.fn(this) : options.inverse(this);
+        return v1 != v2;
       case "!==":
-        return v1 !== v2 ? options.fn(this) : options.inverse(this);
+        return v1 !== v2;
       case "<":
-        return v1 < v2 ? options.fn(this) : options.inverse(this);
+        return v1 < v2;
       case "<=":
-        return v1 <= v2 ? options.fn(this) : options.inverse(this);
+        return v1 <= v2;
       case ">":
-        return v1 > v2 ? options.fn(this) : options.inverse(this);
+        return v1 > v2;
       case ">=":
-        return v1 >= v2 ? options.fn(this) : options.inverse(this);
+        return v1 >= v2;
       case "&&":
-        return v1 && v2 ? options.fn(this) : options.inverse(this);
+        return v1 && v2;
       case "||":
-        return v1 || v2 ? options.fn(this) : options.inverse(this);
+        return v1 || v2;
       default:
         return options.inverse(this);
     }
