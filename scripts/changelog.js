@@ -17,6 +17,14 @@ export const changelog_en = {
           "This enricher works for text, image and video pages"
         ]
       },
+      {
+        change: "The @​SceneFull enricher now can preview the background of a Scene, if the background is a video file",
+        explanations: []
+      },
+      {
+        change: "The @​Scene enrichers now have a button to preload the scene",
+        explanations: []
+      },
     ],
     fixes: [
       {
@@ -70,6 +78,14 @@ export const changelog_de = {
           "() wird benötigt, wenn es mehrere Journale gibt, die mindestens eine Seite mit dem Namen aus [] haben",
           "Dieser Enricher funktioniert für Text, Bild und Video Seiten",
         ]
+      },
+      {
+        change: "Der @​SceneFull Enricher kann jetzte eine Vorschau des Szenenhintergrunds anzeigen, wenn der Hintergrund ein Video ist",
+        explanations: []
+      },
+      {
+        change: "Die @​Scene Enricher haben jetzt einen Button zum Vorladen der Szene",
+        explanations: []
       },
     ],
     fixes: [
