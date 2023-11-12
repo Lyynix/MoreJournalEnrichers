@@ -55,6 +55,12 @@
   font-weight: inherit;
   text-align: left;
 }
+.LMJE-Table tr th.LMJE-Table-body div img,
+.LMJE-Table tr th.LMJE-Table-body div video {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
 .LMJE-Table tr td a {
   margin: 5px;
 }

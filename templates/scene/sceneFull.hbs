@@ -20,6 +20,12 @@
         ">
           <i class="fas fa-bullseye"></i>
         </a>
+        <a title="{{localize LMJE.SCENEMENU.Tooltip.Preload}}" onclick="
+            game.scenes.preload('{{id}}')
+            return false;
+            ">
+          <i class="fas fa-download"></i>
+        </a>
         <a title="{{localize LMJE.SCENEMENU.Tooltip.ToggleNav}}" onclick="
           fromUuid('{{uuid}}').then(doc => {
             doc.update({navigation: !doc.navigation})
@@ -40,7 +46,8 @@
   <tr>
     <th colspan="2" align="right" class="LMJE-Table-body">
       <div>
-        <img src="{{img}}">
+        <img src="{{img}}" onerror="this.style.display='none'">
+        <video src="{{img}}" autoplay="" loop="" onerror="this.style.display='none'">
       </div>
     </th>
   </tr>

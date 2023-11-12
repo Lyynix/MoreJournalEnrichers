@@ -55,6 +55,7 @@
         "Show": "Show scene",
         "Activate": "Acitvate scene",
         "ToggleNav": "Toggle scene in navigation",
+        "Preload": "Preload scene",
         "Edit": "Edit scene"
       }
     },
