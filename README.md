@@ -1,5 +1,5 @@
-[![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.1.0/lmje-v1_1_0.zip
-)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.1.0/manifest.json)
+[![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.2.0/lmje-v1_2_0.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.2.0/manifest.json)
+[![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.1.0/lmje-v1_1_0.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.1.0/manifest.json)
 [![The Forge installs](https://img.shields.io/badge/dynamic/json?label=The%20Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Flyynix-more-journal-enrichers&colorB=4aa94a)](https://forge-vtt.com/bazaar/package/lyynix-more-journal-enrichers)
 
 ![Banner Image of Lyynix](.github/Assets/LyynixBanner.png)
@@ -38,6 +38,8 @@ To use any of the enrichers, write or paste the enricher into the text editor of
 Every enricher in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
 
 - [Journals](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal)
+  - `@Var` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#variable) - Define and use Placeholders
+  - `@Page` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#page) - Insert content of another page
   - `@ToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#toc) - Table of contents
   - `@OrderedToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#ordered-toc) - Numbered table of contents
 - [Scenes](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes)
