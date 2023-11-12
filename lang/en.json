@@ -1,6 +1,11 @@
 {
   "LMJE": {
     "SYSTEM": {
+      "changelog": {
+        "intro": "An new version has been installed! Here is a list of all the changes since the last installed update.",
+        "additions": "Additions",
+        "fixes": "Bugfixes"
+      },
       "getDocument": {
         "wrongType": "Expected type doesn't match type of found document",
         "expectedTypeNotFound": "The expected type is not implemented",

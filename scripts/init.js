@@ -21,7 +21,8 @@ Hooks.on("init", () => {
       templates.compendium.full,
       templates.rolltable.full,
       templates.rolltable.menu,
-      templates.journal.editVariables
+      templates.journal.editVariables,
+      templates.system.changeLog
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -44,7 +45,7 @@ Hooks.on("init", () => {
     scope: 'world',
     config: false,
     type: String,
-    default: '1.1.0'
+    default: game.modules.get('lyynix-more-journal-enrichers').version
   })
 
   game.settings.register('lyynix-more-journal-enrichers', 'variables', {
