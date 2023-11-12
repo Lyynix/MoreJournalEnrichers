@@ -272,6 +272,10 @@ export async function postWelcomeMessage() {
   console.log("LMJE | Sent welcome message");
 }
 
+export async function postChangelogDifference() {
+  
+}
+
 export function invalidHtml(error) {
   return /* html */ `
     <a class="content-link broken" draggable="true" data-id="null" data-uuid="asd">

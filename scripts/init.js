@@ -1,5 +1,12 @@
 import { editVariables } from "./enrichers/journalEnrichers.js";
-import { enricherFunctions, initHandlebarsHelpers, patterns, postWelcomeMessage, templates } from "./helpers.js";
+import {
+  enricherFunctions,
+  initHandlebarsHelpers,
+  patterns,
+  postChangelogDifference,
+  postWelcomeMessage,
+  templates
+} from "./helpers.js";
 
 Hooks.on("init", () => {
   
@@ -187,4 +194,9 @@ Hooks.on('getJournalTextPageSheetHeaderButtons', (app, buttons) => {
 Hooks.on('ready', () => {
   if (game.settings.get('lyynix-more-journal-enrichers', 'intro-message')) 
     postWelcomeMessage()
+
+  const lastLoggedVersion = game.settings.get('lyynix-more-journal-enrichers', 'lastLoggedVersion');
+  const currentVersion = game.modules.get("lyynix-more-journal-enrichers").version;
+  if (currentVersion !== lastLoggedVersion)
+    postChangelogDifference(currentVersion, lastLoggedVersion)
 })
