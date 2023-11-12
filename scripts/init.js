@@ -1,5 +1,12 @@
 import { editVariables } from "./enrichers/journalEnrichers.js";
-import { enricherFunctions, initHandlebarsHelpers, patterns, postWelcomeMessage, templates } from "./helpers.js";
+import {
+  enricherFunctions,
+  initHandlebarsHelpers,
+  patterns,
+  postChangelogDifference,
+  postWelcomeMessage,
+  templates
+} from "./helpers.js";
 
 Hooks.on("init", () => {
   
@@ -15,7 +22,8 @@ Hooks.on("init", () => {
       templates.rolltable.full,
       templates.rolltable.menu,
       templates.journal.editVariables,
-      templates.journal.refPage
+      templates.journal.refPage,
+      templates.system.changeLog
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -33,6 +41,13 @@ Hooks.on("init", () => {
     type: Boolean,       // Number, Boolean, String, Object
     default: true,
   });
+
+  game.settings.register('lyynix-more-journal-enrichers', 'lastLoggedVersion', {
+    scope: 'world',
+    config: false,
+    type: String,
+    default: game.modules.get('lyynix-more-journal-enrichers').version
+  })
 
   game.settings.register('lyynix-more-journal-enrichers', 'variables', {
     scope: 'world',
@@ -186,4 +201,9 @@ Hooks.on('getJournalTextPageSheetHeaderButtons', (app, buttons) => {
 Hooks.on('ready', () => {
   if (game.settings.get('lyynix-more-journal-enrichers', 'intro-message')) 
     postWelcomeMessage()
+
+  const lastLoggedVersion = game.settings.get('lyynix-more-journal-enrichers', 'lastLoggedVersion');
+  const currentVersion = game.modules.get("lyynix-more-journal-enrichers").version;
+  if (currentVersion !== lastLoggedVersion)
+    postChangelogDifference(currentVersion, lastLoggedVersion)
 })

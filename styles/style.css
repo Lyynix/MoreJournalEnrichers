@@ -124,13 +124,18 @@
   border: none;
   border-radius: 10px;
 }
-
+.LMJE-Table tr.LMJE-RolltableResult td {
+  min-width: 80px;
+}
 .LMJE-Table tr.LMJE-RolltableResult td div {
-  height: 46px;
+  min-height: 46px;
   display: flex; 
   flex-direction: row; 
   justify-content: flex-start;
   align-items: center;
+}
+.LMJE-Table tr.LMJE-RolltableResult td:last-child div {
+  justify-content: flex-end;
 }
 .LMJE-Table tr.LMJE-RolltableResult td div img {
   border: none;

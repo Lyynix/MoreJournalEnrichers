@@ -1,3 +1,4 @@
+import { changelog_de, changelog_en } from "./changelog.js";
 import { EnricherPattern } from "./enricherPattern.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import {
@@ -26,6 +27,8 @@ export const templates = {
   system: {
     welcomeMessage:
       "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",
+    changeLog: 
+      "modules/lyynix-more-journal-enrichers/templates/system/changeLog.hbs",
   },
   inline: "modules/lyynix-more-journal-enrichers/templates/inlineTemplate.hbs",
   whisperTable:
@@ -297,6 +300,45 @@ export async function postWelcomeMessage() {
   });
   game.settings.set("lyynix-more-journal-enrichers", "intro-message", false);
   console.log("LMJE | Sent welcome message");
+}
+
+export async function postChangelogDifference(current, lastLogged) {
+  const allVersions = ['1.0.0', '1.1.0', '1.2.0']
+  console.log("LMJE | version difference detected", current, lastLogged)
+
+  var firstIndex = allVersions.findIndex(e => e === lastLogged);
+  if (firstIndex < 0) throw "LMJE | unknown version"
+  var unloggedVersions = allVersions.slice(firstIndex + 1)
+
+  // console.log("LMJE | those versions have not been logged:", unloggedVersions)
+
+  var unloggedChangelog;
+  switch (game.i18n.lang) {
+    case 'de':
+      unloggedChangelog = {
+        versions: unloggedVersions.map(v => changelog_de[v])
+      }
+      break;
+  
+    default:
+      unloggedChangelog = {
+        versions: unloggedVersions.map(v => changelog_en[v])
+      }
+      break;
+  }
+  var html = await renderTemplate(templates.system.changeLog, unloggedChangelog)
+  // console.log("LMJE |", unloggedChangelog);
+  // console.log("LMJE |", html);
+
+  ChatMessage.create({
+    user: game.users.current,
+    whisper: [game.users.current._id],
+    speaker: { alias: "Lyynix" },
+    content: html,
+  })
+  game.settings.set('lyynix-more-journal-enrichers', 'lastLoggedVersion',
+    game.modules.get("lyynix-more-journal-enrichers").version)
+  console.log("LMJE | created changelog")
 }
 
 export function invalidHtml(error) {
