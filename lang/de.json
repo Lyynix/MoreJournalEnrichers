@@ -10,7 +10,9 @@
         "wrongType": "Erwarteter Typ stimmt nicht mit Typ des gefundenen Dokuments überein",
         "expectedTypeNotFound": "Der erwartete Typ ist nicht implementiert",
         "noExpectedDocumentType": "Es wurde kein erwarteter Typ übergeben",
-        "noDocumentFound": "Kein Dokument gefunden"
+        "noDocumentFound": "Kein Dokument gefunden",
+        "selfReference": "Keine Selbstreferenz möglich",
+        "multiplePagesFound": "Mehrere Seiten mit dieser Identifikation gefunden"
       },
       "welcomeMessage": {
         "name": "Sende Willkommensnachricht im Chat",
@@ -29,6 +31,9 @@
       }
     },
     "JOURNAL": {
+      "PAGE": {
+        "pageTypeNotSupported": "Dieser Journalseitentyp wird derzeit nicht unterstüzt"
+      },
       "VARIABLE": {
         "editVariablesDialog": {
           "title": "Variable bearbeiten",

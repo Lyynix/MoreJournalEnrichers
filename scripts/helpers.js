@@ -5,7 +5,12 @@ import {
   compendiumFull,
   inlineCompendium,
 } from "./enrichers/compendiumEnrichers.js";
-import { toc, otoc, variable } from "./enrichers/journalEnrichers.js";
+import {
+  toc,
+  otoc,
+  variable,
+  insertPage,
+} from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import {
   rolltableFull,
@@ -43,8 +48,11 @@ export const templates = {
     full: "modules/lyynix-more-journal-enrichers/templates/scene/sceneFull.hbs",
   },
   journal: {
-    editVariables: "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs"
-  }
+    editVariables:
+      "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs",
+    refPage:
+      "modules/lyynix-more-journal-enrichers/templates/journal/refPage.hbs",
+  },
 };
 
 export const patterns = {
@@ -53,7 +61,12 @@ export const patterns = {
       .addName("Var")
       .addName("Replace")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
-      .getRegex()
+      .getRegex(),
+    page: new EnricherPattern()
+      .addName("Page")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setConfigTypes("IDENTIFIER", "SINGLE", true)
+      .getRegex(),
   },
   toc: {
     unordered: new EnricherPattern()
@@ -144,7 +157,8 @@ export const patterns = {
 
 export const enricherFunctions = {
   journal: {
-    variable: variable 
+    variable: variable,
+    page: insertPage,
   },
   toc: {
     unordered: toc,
@@ -176,6 +190,7 @@ export const enricherFunctions = {
 
 export async function getDocument(identifier, expectedDocumentType) {
   // try identifier as uuid
+  // console.log("LMJE |", identifier)
   var doc = await fromUuid(identifier);
   if (doc !== null) {
     if (
@@ -204,6 +219,16 @@ export async function getDocument(identifier, expectedDocumentType) {
     case "JournalEntry":
       collection = game.journal;
       break;
+    case "JournalEntryPage":
+      var journals = game.journal.filter((j) => {
+        return j.pages.get(identifier) || j.pages.getName(identifier);
+      });
+      if (journals.length === 0)
+        throw "LMJE.SYSTEM.getDocument.noDocumentFound";
+      if (journals.length > 1)
+        throw "LMJE.SYSTEM.getDocument.multiplePagesFound";
+      collection = journals[0].pages;
+      break;
     case "RollTable":
       collection = game.tables;
       break;
@@ -215,11 +240,13 @@ export async function getDocument(identifier, expectedDocumentType) {
   // try identifier as ID
   doc = collection.get(identifier);
   if (doc) {
+    // console.log("LMJE |", "found doc with id", doc)
     return doc;
   }
   // try identifier as Name
   doc = collection.getName(identifier);
   if (doc) {
+    // console.log("LMJE |", "found doc with name", doc)
     return doc;
   }
 
@@ -230,28 +257,28 @@ export function initHandlebarsHelpers() {
   Handlebars.registerHelper("isdefined", function (value) {
     return value !== undefined;
   });
-  Handlebars.registerHelper("ifCond", function (v1, operator, v2, options) {
+  Handlebars.registerHelper("ifCond", function (v1, operator, v2) {
     switch (operator) {
       case "==":
-        return v1 == v2 ? options.fn(this) : options.inverse(this);
+        return v1 == v2;
       case "===":
-        return v1 === v2 ? options.fn(this) : options.inverse(this);
+        return v1 === v2;
       case "!=":
-        return v1 != v2 ? options.fn(this) : options.inverse(this);
+        return v1 != v2;
       case "!==":
-        return v1 !== v2 ? options.fn(this) : options.inverse(this);
+        return v1 !== v2;
       case "<":
-        return v1 < v2 ? options.fn(this) : options.inverse(this);
+        return v1 < v2;
       case "<=":
-        return v1 <= v2 ? options.fn(this) : options.inverse(this);
+        return v1 <= v2;
       case ">":
-        return v1 > v2 ? options.fn(this) : options.inverse(this);
+        return v1 > v2;
       case ">=":
-        return v1 >= v2 ? options.fn(this) : options.inverse(this);
+        return v1 >= v2;
       case "&&":
-        return v1 && v2 ? options.fn(this) : options.inverse(this);
+        return v1 && v2;
       case "||":
-        return v1 || v2 ? options.fn(this) : options.inverse(this);
+        return v1 || v2;
       default:
         return options.inverse(this);
     }

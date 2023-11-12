@@ -22,6 +22,7 @@ Hooks.on("init", () => {
       templates.rolltable.full,
       templates.rolltable.menu,
       templates.journal.editVariables,
+      templates.journal.refPage,
       templates.system.changeLog
     ]);
     console.log("LMJE | Loaded templates");
@@ -59,6 +60,11 @@ Hooks.on("init", () => {
   //add generic enrichers to TextEditor
   try {
     CONFIG.TextEditor.enrichers.push(
+      {//needs to be first, so that all enrichers get will be drawn again
+        label: "LMJE - Journal - Insert Page",
+        pattern: patterns.journal.page,
+        enricher: enricherFunctions.journal.page,
+      },
       {
         label: "LMJE - Journal - Variables / Replacable text",
         pattern: patterns.journal.variable,
