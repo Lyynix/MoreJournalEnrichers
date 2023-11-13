@@ -46,8 +46,8 @@
   padding: 3px 5px;
 }
 .LMJE-Table-Menu tr td:last-child {
-  display: flex; 
-  justify-content: flex-end
+  display: flex;
+  justify-content: flex-end;
 }
 .LMJE-Table tr th.LMJE-Table-body {
   background-color: #00000008;
@@ -64,9 +64,10 @@
 .LMJE-Table tr td a {
   margin: 5px;
 }
-.LMJE-no-link{
+.LMJE-no-link {
   background: none !important;
   border: none !important;
+  white-space: nowrap !important;
 }
 .LMJE-link {
   border: 1px var(--color-border-dark-tertiary) solid;
@@ -77,14 +78,14 @@
   white-space: nowrap;
   word-break: break-all;
 
-  background: #DDD;
+  background: #ddd;
 }
 .LMJE-link a {
   text-decoration: none;
   padding: 0px;
   color: var(--color-text-dark-primary);
 }
-.LMJE-link span{
+.LMJE-link span {
   margin-left: 1px;
 }
 .LMJE-link span a {
@@ -93,7 +94,6 @@
 .LMJE-link i {
   color: var(--color-text-dark-inactive);
 }
-
 
 /* Changes for enrichers */
 
@@ -135,16 +135,18 @@
 }
 .LMJE-Table tr.LMJE-RolltableResult td div {
   min-height: 46px;
-  display: flex; 
-  flex-direction: row; 
+  min-width: 80px;
+  display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 .LMJE-Table tr.LMJE-RolltableResult td:last-child div {
   justify-content: flex-end;
 }
-.LMJE-Table tr.LMJE-RolltableResult td div img {
+.LMJE-Table tr.LMJE-RolltableResult td div img.RollTableResultImage {
   border: none;
+  margin: 5px !important;
 }
 .LMJE-Table tr.LMJE-RolltableResult td div a {
   margin: 5px;
