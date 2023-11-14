@@ -46,7 +46,7 @@ Hooks.on("init", () => {
     scope: 'world',
     config: false,
     type: String,
-    default: game.modules.get('lyynix-more-journal-enrichers').version
+    default: "1.1.0" //game.modules.get('lyynix-more-journal-enrichers').version
   })
 
   game.settings.register('lyynix-more-journal-enrichers', 'variables', {
