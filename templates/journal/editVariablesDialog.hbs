@@ -1,0 +1,25 @@
+<label for="LMJE_keys">{{localize 'LMJE.JOURNAL.VARIABLE.editVariablesDialog.chooseKey'}}</label>
+<select name="LMJE_keys" id="LMJE_keys" onchange="
+  var newValue = document.getElementById('LMJE_keys').value;
+  if (newValue === 'new') {
+    document.getElementById('LMJE_key').value = '';
+    document.getElementById('LMJE_val').value = '';
+  } else {
+    var vars = game.settings.get('lyynix-more-journal-enrichers', 'variables');
+
+    document.getElementById('LMJE_key').value = newValue;
+    document.getElementById('LMJE_val').value = vars[newValue];
+  }
+">
+  <option value="new">{{localize 'LMJE.JOURNAL.VARIABLE.editVariablesDialog.newKey'}}</option>
+  {{#each keys as |key|}}
+  <option value="{{key}}">{{key}}</option>
+  {{/each}}
+</select>
+<br><br>
+<label for="LMJE_key">{{localize 'LMJE.JOURNAL.VARIABLE.editVariablesDialog.editKey'}}</label>
+<input type="text" id="LMJE_key" name="LMJE_key">
+<br><br>
+<label for="LMJE_value">{{localize 'LMJE.JOURNAL.VARIABLE.editVariablesDialog.editVal'}}</label>
+<input type="text" id="LMJE_val" name="LMJE_val">
+<br><br>

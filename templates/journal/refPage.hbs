@@ -1,0 +1,33 @@
+<table class="LMJE-Table LMJE-PageMedia">
+  <tr>
+    <th align="left">
+      <i class="fas fa-{{type}}"></i>
+      <a class="content-link LMJE-no-link" draggable="false" data-uuid="{{page.uuid}}" data-id="{{page.id}}"
+        data-type="{{page.documentName}}">
+        {{refTitle}}
+      </a>
+    </th>
+  </tr>
+  <tr>
+    <th class="LMJE-Table-body">
+      {{#if (ifCond type "===" "text")}}
+      <div class="LMJE-InsertPage">
+        {{{decodedHtml}}}
+      </div>
+      {{/if}}
+      {{#if (ifCond type "===" "image")}}
+      <figure>
+        <img src="{{page.src}}" alt="{{page.name}}">
+        <figcaption>{{page.image.caption}}</figcaption>
+      </figure>
+      {{/if}}
+      {{#if (ifCond type "===" "video")}}
+      <figure class="flex-ratio">
+        <video src="{{page.src}}" {{#if page.video.controls}} controls="" {{/if}} {{#if page.video.autoplay}} autoplay=""
+          {{/if}} {{#if page.video.loop}} loop="" {{/if}}></video>
+      </figure>
+      {{/if}}
+
+    </th>
+  </tr>
+</table>

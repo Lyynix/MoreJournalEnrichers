@@ -1,0 +1,38 @@
+<p>{{localize "LMJE.SYSTEM.changelog.intro"}}</p>
+{{#each versions as |v|}}
+<h2>{{v.name}}</h2>
+<h3>{{localize "LMJE.SYSTEM.changelog.additions"}}:</h3>
+{{#if v.additions.length}}
+<ul>
+  {{#each v.additions as |a|}}
+  <li>{{a.change}}</li>
+  {{#if a.explanations.length}}
+  <ul>
+    {{#each a.explanations as |e|}}
+      <li>{{e}}</li>
+    {{/each}}
+  </ul>
+  {{/if}}
+  {{/each}}
+</ul>
+{{else}}
+-
+{{/if}}
+<h3>{{localize "LMJE.SYSTEM.changelog.fixes"}}:</h3>
+{{#if v.fixes.length}}
+<ul>
+  {{#each v.fixes as |f|}}
+  <li>{{f.change}}</li>
+  {{#if f.explanations.length}}
+  <ul>
+    {{#each f.explanations as |e|}}
+      <li>{{e}}</li>
+    {{/each}}
+  </ul>
+  {{/if}}
+  {{/each}}
+</ul>
+{{else}}
+-
+{{/if}}
+{{/each}}

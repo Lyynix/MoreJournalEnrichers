@@ -8,6 +8,19 @@
 }
 
 /* Base Elements */
+.LMJE-InsertPage {
+  padding: 5px 10px;
+
+  background: url(/ui/parchment.jpg) repeat;
+  color: var(--color-text-dark-primary);
+
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px var(--lmje-color-light) solid;
+}
+
 .LMJE-Table {
   border-spacing: 0;
   border-collapse: separate;
@@ -20,7 +33,7 @@
   color: var(--lmje-text-light);
   padding: 9px 14px;
 }
-.LMJE-Table tr th i {
+.LMJE-Table tr th:not(.LMJE-Table-body) i {
   padding-right: 10px;
 }
 .LMJE-Table tr th.LMJE-Table-highlight {
@@ -33,19 +46,28 @@
   padding: 3px 5px;
 }
 .LMJE-Table-Menu tr td:last-child {
-  display: flex; 
-  justify-content: flex-end
+  display: flex;
+  justify-content: flex-end;
 }
 .LMJE-Table tr th.LMJE-Table-body {
   background-color: #00000008;
   padding: 3px 5px;
+  font-weight: inherit;
+  text-align: left;
+}
+.LMJE-Table tr th.LMJE-Table-body div img,
+.LMJE-Table tr th.LMJE-Table-body div video {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 .LMJE-Table tr td a {
   margin: 5px;
 }
-.LMJE-no-link{
+.LMJE-no-link {
   background: none !important;
   border: none !important;
+  white-space: nowrap !important;
 }
 .LMJE-link {
   border: 1px var(--color-border-dark-tertiary) solid;
@@ -56,14 +78,14 @@
   white-space: nowrap;
   word-break: break-all;
 
-  background: #DDD;
+  background: #ddd;
 }
 .LMJE-link a {
   text-decoration: none;
   padding: 0px;
   color: var(--color-text-dark-primary);
 }
-.LMJE-link span{
+.LMJE-link span {
   margin-left: 1px;
 }
 .LMJE-link span a {
@@ -72,11 +94,6 @@
 .LMJE-link i {
   color: var(--color-text-dark-inactive);
 }
-
-.content-link {
-  white-space: normal !important;
-}
-
 
 /* Changes for enrichers */
 
@@ -99,24 +116,37 @@
   font-size: larger;
 }
 
+.LMJE-PageMedia tr th.LMJE-Table-body,
 .LMJE-SceneFull tr th.LMJE-Table-body {
   background-color: var(--lmje-color-light);
   padding: 0px;
 }
+.LMJE-PageMedia tr th.LMJE-Table-body figure img,
+.LMJE-PageMedia tr th.LMJE-Table-body figure video,
 .LMJE-SceneFull tr th.LMJE-Table-body div img {
+  width: 100%;
+  height: 100%;
+  overflow: clip;
   border: none;
   border-radius: 10px;
 }
-
+.LMJE-Table tr.LMJE-RolltableResult td {
+  min-width: 80px;
+}
 .LMJE-Table tr.LMJE-RolltableResult td div {
-  height: 46px;
-  display: flex; 
-  flex-direction: row; 
+  min-height: 46px;
+  min-width: 80px;
+  display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
-.LMJE-Table tr.LMJE-RolltableResult td div img {
+.LMJE-Table tr.LMJE-RolltableResult td:last-child div {
+  justify-content: flex-end;
+}
+.LMJE-Table tr.LMJE-RolltableResult td div img.RollTableResultImage {
   border: none;
+  margin: 5px !important;
 }
 .LMJE-Table tr.LMJE-RolltableResult td div a {
   margin: 5px;

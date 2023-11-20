@@ -47,6 +47,14 @@ export async function sceneMenu(match, options) {
       <i class="fas fa-bullseye" ></i>
     </a>
     <a title="${game.i18n.localize(
+      "LMJE.SCENEMENU.Tooltip.Preload"
+    )}" onclick="
+        game.scenes.preload('${sceneDocument.id}')
+        return false;
+        ">
+      <i class="fas fa-download"></i>
+    </a>
+    <a title="${game.i18n.localize(
       "LMJE.SCENEMENU.Tooltip.ToggleNav"
     )}" onclick="
         var document = game.scenes.get('${sceneDocument.id}'); 
@@ -97,6 +105,7 @@ export async function sceneFull(match, options) {
   var templateData = {
     label: sceneName,
     uuid: sceneDocument.uuid,
+    id: sceneDocument.id,
     img: sceneDocument.background.src
   }
   
@@ -142,6 +151,14 @@ export async function inlineScene(match, options) {
         faIcon: "fa-bullseye",
         onclick: `
           game.scenes.get('${sceneDocument.id}')?.activate(); 
+          return false;
+        `
+      },
+      {
+        tooltip: "LMJE.SCENEMENU.Tooltip.Preload",
+        faIcon: "fa-download",
+        onclick: `
+          game.scenes.preload('${sceneDocument.id}');
           return false;
         `
       },

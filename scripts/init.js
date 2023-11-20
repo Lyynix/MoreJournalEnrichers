@@ -1,4 +1,12 @@
-import { enricherFunctions, initHandlebarsHelpers, patterns, postWelcomeMessage, templates } from "./helpers.js";
+import { editVariables } from "./enrichers/journalEnrichers.js";
+import {
+  enricherFunctions,
+  initHandlebarsHelpers,
+  patterns,
+  postChangelogDifference,
+  postWelcomeMessage,
+  templates
+} from "./helpers.js";
 
 Hooks.on("init", () => {
   
@@ -12,7 +20,10 @@ Hooks.on("init", () => {
       templates.compendium.inline,
       templates.compendium.full,
       templates.rolltable.full,
-      templates.rolltable.menu
+      templates.rolltable.menu,
+      templates.journal.editVariables,
+      templates.journal.refPage,
+      templates.system.changeLog
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -30,11 +41,35 @@ Hooks.on("init", () => {
     type: Boolean,       // Number, Boolean, String, Object
     default: true,
   });
+
+  game.settings.register('lyynix-more-journal-enrichers', 'lastLoggedVersion', {
+    scope: 'world',
+    config: false,
+    type: String,
+    default: "1.1.0" //game.modules.get('lyynix-more-journal-enrichers').version
+  })
+
+  game.settings.register('lyynix-more-journal-enrichers', 'variables', {
+    scope: 'world',
+    config: false,
+    type: Object,
+    default: {keys: ['Author'], 'Author': 'Lyynix'}
+  })
   console.log("LMJE | Registered settings");
 
   //add generic enrichers to TextEditor
   try {
     CONFIG.TextEditor.enrichers.push(
+      {//needs to be first, so that all enrichers get will be drawn again
+        label: "LMJE - Journal - Insert Page",
+        pattern: patterns.journal.page,
+        enricher: enricherFunctions.journal.page,
+      },
+      {
+        label: "LMJE - Journal - Variables / Replacable text",
+        pattern: patterns.journal.variable,
+        enricher: enricherFunctions.journal.variable,
+      },
       {
         label: "LMJE - Journal - Table of Contents",
         pattern: patterns.toc.unordered,
@@ -153,7 +188,22 @@ Hooks.on("init", () => {
   }
 });
 
+Hooks.on('getJournalTextPageSheetHeaderButtons', (app, buttons) => {
+  var button = {
+    class: 'edit-variables',
+    label: 'Edit Variables',
+    icon: "fa-regular fa-code",
+    onclick: (event) => editVariables()
+  }
+  buttons.unshift(button)
+})
+
 Hooks.on('ready', () => {
   if (game.settings.get('lyynix-more-journal-enrichers', 'intro-message')) 
     postWelcomeMessage()
+
+  const lastLoggedVersion = game.settings.get('lyynix-more-journal-enrichers', 'lastLoggedVersion');
+  const currentVersion = game.modules.get("lyynix-more-journal-enrichers").version;
+  if (currentVersion !== lastLoggedVersion)
+    postChangelogDifference(currentVersion, lastLoggedVersion)
 })
