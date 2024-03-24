@@ -11,14 +11,23 @@ With More Journal Enrichers you can use similar commands to show game elements i
 
 A list of all added enrichers can be found under [Usage & Features](#usage--features).
 
+## Tutorial videos
+**VTTom** made a german review video about this module on his YouTube channel:
+
+<a href="https://www.youtube.com/watch?v=CPnleammjAo"><img src="https://img.youtube.com/vi/CPnleammjAo/0.jpg" width=200></a>
+
+
 ## Installation
+<details>
+  <summary>Click to reveal installation details</summary>
 You can simply use the install module screen within the FoundryVTT setup.\
 Or you can paste the manifest URL in said window:\
 ***Latest manifest:*** https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json
+</details>
 
 ## Example Images
 <details>
-  <summary>Click to reveal images</summary>
+  <summary>Click to reveal example images</summary>
   
   ### Table of Contents - @ToC
   ![Image of a Table of Contents](https://user-images.githubusercontent.com/12870445/277434610-aba77451-46ab-48f5-a0b3-7cd914adc0d6.png)
@@ -32,6 +41,8 @@ Or you can paste the manifest URL in said window:\
 </details>
 
 ## Usage & Features
+<details>
+  <summary>Click to reveal usage instructions and a feature list</summary>
 To use any of the enrichers, write or paste the enricher into the text editor of FoundryVTT and fill in the missing elements.
 
 Every enricher in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
@@ -62,6 +73,8 @@ Every enricher in the following list has a link to the corresponding wiki page, 
 
 
 If you didn't find the functionality you were looking for, just contact me and describe what you were searching.
+
+</details>
 
 ## Contact & Support
 You need help with the module or you want to share an idea for another enricher i didn't think of?\
