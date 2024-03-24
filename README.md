@@ -20,9 +20,11 @@ A list of all added enrichers can be found under [Usage & Features](#usage--feat
 ## Installation
 <details>
   <summary>Click to reveal installation details</summary>
-You can simply use the install module screen within the FoundryVTT setup.\
-Or you can paste the manifest URL in said window:\
-***Latest manifest:*** https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json
+  You can simply use the install module screen within the FoundryVTT setup.
+
+  Or you can paste the manifest URL in said window:
+
+  ***Latest manifest:*** https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json
 </details>
 
 ## Example Images
@@ -42,37 +44,39 @@ Or you can paste the manifest URL in said window:\
 
 ## Usage & Features
 <details>
+
   <summary>Click to reveal usage instructions and a feature list</summary>
-To use any of the enrichers, write or paste the enricher into the text editor of FoundryVTT and fill in the missing elements.
 
-Every enricher in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
+  To use any of the enrichers, write or paste the enricher into the text editor of FoundryVTT and fill in the missing elements.
 
-- [Journals](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal)
-  - `@Var` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#variable) - Define and use Placeholders
-  - `@Page` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#page) - Insert content of another page
-  - `@ToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#toc) - Table of contents
-  - `@OrderedToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#ordered-toc) - Numbered table of contents
-- [Scenes](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes)
-  - `@SceneMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#scene-menu) - List of multiple scenes
-  - `@SceneFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#full-scene) - Single scene with image
-  - `@SceneInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#inline-scene) - Single scene to be used in text
-- [RollTable](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable)
-  - `@RollTableMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#rolltable-menu) - List of multiple rolltables
-  - `@RollTableFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#full-rolltable) - Detailed view of a rolltable
-  - `@RollTableInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#inline-rolltable) - Single rolltable to be used in text
-- [Compendium Packs](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium)
-  - `@CompendiumFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium#full-compendium) - Detailed view of a compendium pack
-  - `@CompendiumInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium#inline-compendium) - Single compendium pack to be used in text
-- [Playlist](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist)
-  - `@PlaylistMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist#playlist-menu) - List of multiple Playlist
-  - `@PlaylistInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist#inline-playlist) - Single playlist to be used in text
-- [Chat](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat)
-  - `@ChatPost` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat#post-chat) - Text that can be postet in Chat
-  - `@ChatWhisper` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat#whisper) - Text that can be whispered to a player
+  Every enricher in the following list has a link to the corresponding wiki page, where its functionality and possible restrictions are explained.
+
+  - [Journals](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal)
+    - `@Var` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#variable) - Define and use Placeholders
+    - `@Page` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#page) - Insert content of another page
+    - `@ToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#toc) - Table of contents
+    - `@OrderedToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#ordered-toc) - Numbered table of contents
+  - [Scenes](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes)
+    - `@SceneMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#scene-menu) - List of multiple scenes
+    - `@SceneFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#full-scene) - Single scene with image
+    - `@SceneInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes#inline-scene) - Single scene to be used in text
+  - [RollTable](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable)
+    - `@RollTableMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#rolltable-menu) - List of multiple rolltables
+    - `@RollTableFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#full-rolltable) - Detailed view of a rolltable
+    - `@RollTableInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_RollTable#inline-rolltable) - Single rolltable to be used in text
+  - [Compendium Packs](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium)
+    - `@CompendiumFull` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium#full-compendium) - Detailed view of a compendium pack
+    - `@CompendiumInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Compendium#inline-compendium) - Single compendium pack to be used in text
+  - [Playlist](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist)
+    - `@PlaylistMenu` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist#playlist-menu) - List of multiple Playlist
+    - `@PlaylistInline` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Playlist#inline-playlist) - Single playlist to be used in text
+  - [Chat](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat)
+    - `@ChatPost` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat#post-chat) - Text that can be postet in Chat
+    - `@ChatWhisper` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Chat#whisper) - Text that can be whispered to a player
 
 
 
-If you didn't find the functionality you were looking for, just contact me and describe what you were searching.
+  If you didn't find the functionality you were looking for, just contact me and describe what you were searching.
 
 </details>
 
