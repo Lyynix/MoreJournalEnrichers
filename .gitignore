@@ -1,3 +1,4 @@
 packs/journals/*
 *.lock
 releases/v*
+*.code-workspace
