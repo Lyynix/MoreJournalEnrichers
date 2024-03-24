@@ -7,6 +7,7 @@ import {
   postWelcomeMessage,
   templates
 } from "./helpers.js";
+import { getProsemirrorDropdown } from "./prosemirror.js";
 
 Hooks.on("init", () => {
   
@@ -206,4 +207,9 @@ Hooks.on('ready', () => {
   const currentVersion = game.modules.get("lyynix-more-journal-enrichers").version;
   if (currentVersion !== lastLoggedVersion)
     postChangelogDifference(currentVersion, lastLoggedVersion)
+})
+
+Hooks.on('getProseMirrorMenuDropDowns', (proseMirrorMenu, dropdowns) => {
+  var enricherDropdown = getProsemirrorDropdown()
+  dropdowns['enrichers'] = enricherDropdown
 })
