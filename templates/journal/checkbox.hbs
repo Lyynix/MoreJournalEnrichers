@@ -1,0 +1,17 @@
+{{#if (isdefined label)}}
+<label for="{{id}}-checkbox">
+  {{label}}
+  {{/if}}
+  <input id="{{id}}-checkbox" type="checkbox" {{#if checked}}checked{{/if}} onchange="
+    var checkboxes = game.settings.get('lyynix-more-journal-enrichers','checkboxes');
+    var cbElements = $('[id={{id}}-checkbox]');
+    checkboxes.{{id}} = !checkboxes.{{id}};
+    game.settings.set('lyynix-more-journal-enrichers','checkboxes',checkboxes);
+    
+    for (let i = 0; i < cbElements.length; i++) {
+      cbElements[i].checked = checkboxes.{{id}};
+    }
+  ">
+  {{#if (isdefined label)}}
+</label>
+{{/if}}

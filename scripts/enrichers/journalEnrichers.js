@@ -41,8 +41,8 @@ export async function insertPage(match, options) {
     page.parent.uuid === options.relativeTo.parent.uuid
       ? page.name
       : `${page.parent.name} > ${page.name}`;
-  
-  var decodedHtml
+
+  var decodedHtml;
   if (page.type === "text") {
     var enrichedContent = await TextEditor.enrichHTML(page.text.content);
     decodedHtml = await TextEditor.decodeHTML(enrichedContent);
@@ -52,9 +52,9 @@ export async function insertPage(match, options) {
     type: page.type,
     page: page,
     refTitle: refTitle,
-    decodedHtml: decodedHtml
-  }
-  return $(await renderTemplate(templates.journal.refPage, pageData))[0]
+    decodedHtml: decodedHtml,
+  };
+  return $(await renderTemplate(templates.journal.refPage, pageData))[0];
 
   switch (page.type) {
     case "text":
@@ -148,6 +148,35 @@ export async function insertPage(match, options) {
   }
 }
 
+export async function checkbox(match, options) {
+  var cbId;
+  var cbLabel = match[2];
+  if (match[1].length > 0) {
+    cbId = match[1];
+  } else return $(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))[0];
+
+  var checkboxes = game.settings.get(
+    "lyynix-more-journal-enrichers",
+    "checkboxes"
+  );
+  if (checkboxes[cbId] === undefined) {
+    checkboxes[cbId] = false;
+    game.settings.set(
+      "lyynix-more-journal-enrichers",
+      "checkboxes",
+      checkboxes
+    );
+  }
+
+  var html = await renderTemplate(templates.journal.checkbox, {
+    label: cbLabel,
+    id: cbId,
+    checked: checkboxes[cbId],
+  });
+  return $(html)[0];
+}
+
+//#region Variable
 export function variable(match, options) {
   var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
   var val = vars[match[1]];
@@ -236,7 +265,9 @@ export function editVariables() {
     }
   );
 }
+//#endregion
 
+//#region Table of Contents
 export async function toc(match, options) {
   return tableOfContents(match, options, true);
 }
@@ -357,3 +388,4 @@ export async function tableOfContents(match, options, ordered) {
 
   return $(tocHtml)[0];
 }
+//#endregion
