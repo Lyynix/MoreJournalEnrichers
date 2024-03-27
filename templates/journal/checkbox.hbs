@@ -1,6 +1,5 @@
 {{#if (isdefined label)}}
-<label for="{{id}}-checkbox">
-  {{label}}
+<label for="{{id}}-checkbox" class="LMJE-Checkbox">
   {{/if}}
   <input id="{{id}}-checkbox" type="checkbox" {{#if checked}}checked{{/if}} onchange="
     var checkboxes = game.settings.get('lyynix-more-journal-enrichers','checkboxes');
@@ -13,5 +12,6 @@
     }
   ">
   {{#if (isdefined label)}}
+  {{label}}
 </label>
 {{/if}}

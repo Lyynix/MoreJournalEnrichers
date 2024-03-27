@@ -62,6 +62,7 @@ export const patterns = {
   journal: {
     checkbox: new EnricherPattern()
       .addName("Checkbox")
+      .addName("CB")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),

@@ -8,6 +8,10 @@
 }
 
 /* Base Elements */
+.LMJE-Checkbox input {
+  vertical-align: middle;
+}
+
 .LMJE-InsertPage {
   padding: 5px 10px;
 
