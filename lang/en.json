@@ -34,6 +34,10 @@
       "PAGE": {
         "pageTypeNotSupported": "This journal page type is currently not supported"
       },
+      "CHECKBOX": {
+        "invalidId": "The entered ID is invalid",
+        "idNotFound": "The entered ID doesn't exist"
+      },
       "VARIABLE": {
         "editVariablesDialog": {
           "title": "Edit Variables",

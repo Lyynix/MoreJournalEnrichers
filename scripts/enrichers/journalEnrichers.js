@@ -1,6 +1,7 @@
 import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
+  console.log(match);
   var page;
   try {
     // Try to get JournalEntryPage with Reference from match[1] {}
@@ -169,8 +170,6 @@ export async function checkbox(match, options) {
     );
   }
 
-  console.log(options);
-
   var html = await renderTemplate(templates.journal.checkbox, {
     label: cbLabel,
     id: cbId,
@@ -181,21 +180,28 @@ export async function checkbox(match, options) {
 }
 
 export async function ifChecked(match, options) {
+  console.log(match);
+
   var cbId = match[1];
   var content = match[2];
   if (match[1].length > 0) {
     cbId = match[1];
-  } else return $(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))[0];
+  } else
+    return $(
+      game.i18n.localize(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))
+    )[0];
 
   var checkboxes = game.settings.get(
     "lyynix-more-journal-enrichers",
     "checkboxes"
   );
   if (checkboxes[cbId] === undefined)
-    return $(invalidHtml("LMJE.JOURNAL.CHECKBOX.idNotFound"))[0];
+    return $(
+      invalidHtml(game.i18n.localize("LMJE.JOURNAL.CHECKBOX.idNotFound"))
+    )[0];
 
   var html = "<span>" + content + "</span>";
-  var enriched = await TextEditor.enrichHTML(html);
+  var enriched = await TextEditor.enrichHTML(html, options);
   var dependent = checkboxes[cbId] ? enriched : "<span/>";
   return $(dependent)[0];
 }

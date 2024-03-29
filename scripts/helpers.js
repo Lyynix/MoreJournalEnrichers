@@ -68,7 +68,7 @@ export const patterns = {
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
     ifChecked: new EnricherPattern()
-      .addName("ifChecked")
+      .addName("IfChecked")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", false)
       .getRegex(),
