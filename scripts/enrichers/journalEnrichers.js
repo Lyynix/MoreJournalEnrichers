@@ -148,6 +148,7 @@ export async function insertPage(match, options) {
   }
 }
 
+//#region checkbox
 export async function checkbox(match, options) {
   var cbId;
   var cbLabel = match[2];
@@ -175,6 +176,27 @@ export async function checkbox(match, options) {
   });
   return $(html)[0];
 }
+
+export async function ifChecked(match, options) {
+  var cbId = match[1];
+  var content = match[2];
+  if (match[1].length > 0) {
+    cbId = match[1];
+  } else return $(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))[0];
+
+  var checkboxes = game.settings.get(
+    "lyynix-more-journal-enrichers",
+    "checkboxes"
+  );
+  if (checkboxes[cbId] === undefined)
+    return $(invalidHtml("LMJE.JOURNAL.CHECKBOX.idNotFound"))[0];
+
+  var html = "<span>" + content + "</span>";
+  var enriched = await TextEditor.enrichHTML(html);
+  var dependent = checkboxes[cbId] ? enriched : "<span/>";
+  return $(dependent)[0];
+}
+//#endregion
 
 //#region Variable
 export function variable(match, options) {

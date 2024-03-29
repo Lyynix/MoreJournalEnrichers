@@ -11,6 +11,7 @@ import {
   variable,
   insertPage,
   checkbox,
+  ifChecked,
 } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
 import {
@@ -65,6 +66,11 @@ export const patterns = {
       .addName("CB")
       .setReferenceTypes("IDENTIFIER", "SINGLE", false)
       .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    ifChecked: new EnricherPattern()
+      .addName("ifChecked")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", false)
       .getRegex(),
     variable: new EnricherPattern()
       .addName("Var")
@@ -167,6 +173,7 @@ export const patterns = {
 export const enricherFunctions = {
   journal: {
     checkbox: checkbox,
+    ifChecked: ifChecked,
     variable: variable,
     page: insertPage,
   },

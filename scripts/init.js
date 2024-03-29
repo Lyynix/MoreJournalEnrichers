@@ -83,6 +83,11 @@ Hooks.on("init", () => {
         enricher: enricherFunctions.journal.checkbox,
       },
       {
+        label: "LMJE - Journal - If Checked",
+        pattern: patterns.journal.ifChecked,
+        enricher: enricherFunctions.journal.ifChecked,
+      },
+      {
         label: "LMJE - Journal - Table of Contents",
         pattern: patterns.toc.unordered,
         enricher: enricherFunctions.toc.unordered,
