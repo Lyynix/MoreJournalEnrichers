@@ -169,10 +169,13 @@ export async function checkbox(match, options) {
     );
   }
 
+  console.log(options);
+
   var html = await renderTemplate(templates.journal.checkbox, {
     label: cbLabel,
     id: cbId,
     checked: checkboxes[cbId],
+    journalId: options.relativeTo.parent.id,
   });
   return $(html)[0];
 }

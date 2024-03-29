@@ -7,9 +7,7 @@
     checkboxes.{{id}} = !checkboxes.{{id}};
     game.settings.set('lyynix-more-journal-enrichers','checkboxes',checkboxes);
     
-    for (let i = 0; i < cbElements.length; i++) {
-      cbElements[i].checked = checkboxes.{{id}};
-    }
+    game.journal.get('{{journalId}}').sheet.render()
   ">
   {{#if (isdefined label)}}
   {{label}}
