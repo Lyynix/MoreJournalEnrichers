@@ -174,7 +174,7 @@ export async function checkbox(match, options) {
     label: cbLabel,
     id: cbId,
     checked: checkboxes[cbId],
-    journalId: options.relativeTo.parent.id,
+    journalId: options.relativeTo.parent.uuid,
   });
   return $(html)[0];
 }

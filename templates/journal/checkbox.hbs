@@ -4,10 +4,10 @@
   <input id="{{id}}-checkbox" type="checkbox" {{#if checked}}checked{{/if}} onchange="
     var checkboxes = game.settings.get('lyynix-more-journal-enrichers','checkboxes');
     var cbElements = $('[id={{id}}-checkbox]');
-    checkboxes.{{id}} = !checkboxes.{{id}};
+    checkboxes['{{id}}'] = !checkboxes['{{id}}'];
     game.settings.set('lyynix-more-journal-enrichers','checkboxes',checkboxes);
     
-    game.journal.get('{{journalId}}').sheet.render()
+    fromUuidSync('{{journalId}}').sheet.render()
   ">
   {{#if (isdefined label)}}
   {{label}}
