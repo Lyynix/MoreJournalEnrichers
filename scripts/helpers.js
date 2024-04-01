@@ -1,4 +1,9 @@
-import { changelog_de, changelog_en } from "./changelog.js";
+import {
+  allVersions,
+  allVersions,
+  changelog_de,
+  changelog_en,
+} from "./changelog.js";
 import { EnricherPattern } from "./enricherPattern.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import {
@@ -303,7 +308,6 @@ export async function postWelcomeMessage() {
 }
 
 export async function postChangelogDifference(current, lastLogged) {
-  const allVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
   console.log("LMJE | version difference detected", current, lastLogged);
 
   var firstIndex = allVersions.findIndex((e) => e === lastLogged);
