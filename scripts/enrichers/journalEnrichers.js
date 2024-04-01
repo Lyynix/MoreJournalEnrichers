@@ -38,11 +38,12 @@ export async function insertPage(match, options) {
     )[0];
 
   var refTitle =
+    options.relativeTo.documentName === "JournalEntryPage" &&
     page.parent.uuid === options.relativeTo.parent.uuid
       ? page.name
       : `${page.parent.name} > ${page.name}`;
-  
-  var decodedHtml
+
+  var decodedHtml;
   if (page.type === "text") {
     var enrichedContent = await TextEditor.enrichHTML(page.text.content);
     decodedHtml = await TextEditor.decodeHTML(enrichedContent);
@@ -52,9 +53,9 @@ export async function insertPage(match, options) {
     type: page.type,
     page: page,
     refTitle: refTitle,
-    decodedHtml: decodedHtml
-  }
-  return $(await renderTemplate(templates.journal.refPage, pageData))[0]
+    decodedHtml: decodedHtml,
+  };
+  return $(await renderTemplate(templates.journal.refPage, pageData))[0];
 
   switch (page.type) {
     case "text":

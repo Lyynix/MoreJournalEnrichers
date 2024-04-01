@@ -75,7 +75,7 @@ export async function rolltableMenu(match, options) {
   const title =
     match[2] !== undefined
       ? match[2]
-      : game.i18n.localize("LMJE.PLAYLIST.Title");
+      : game.i18n.localize("LMJE.ROLLTABLE.Title");
 
   var menuData = {
     title: title,
