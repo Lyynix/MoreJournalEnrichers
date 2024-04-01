@@ -5,11 +5,10 @@ import {
   patterns,
   postChangelogDifference,
   postWelcomeMessage,
-  templates
+  templates,
 } from "./helpers.js";
 
 Hooks.on("init", () => {
-  
   //load templates for generic enrichers
   try {
     loadTemplates([
@@ -22,8 +21,9 @@ Hooks.on("init", () => {
       templates.rolltable.full,
       templates.rolltable.menu,
       templates.journal.editVariables,
+      templates.journal.checkbox,
       templates.journal.refPage,
-      templates.system.changeLog
+      templates.system.changeLog,
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -31,36 +31,43 @@ Hooks.on("init", () => {
   }
 
   //add Handlebars helpers
-  initHandlebarsHelpers()
-  
-  game.settings.register('lyynix-more-journal-enrichers', 'intro-message', {
-    name: game.i18n.localize('LMJE.SYSTEM.welcomeMessage.name'),
-    hint: game.i18n.localize('LMJE.SYSTEM.welcomeMessage.hint'),
-    scope: 'world',     // "world" = sync to db, "client" = local storage
-    config: true,       // false if you dont want it to show in module config
-    type: Boolean,       // Number, Boolean, String, Object
+  initHandlebarsHelpers();
+
+  game.settings.register("lyynix-more-journal-enrichers", "intro-message", {
+    name: game.i18n.localize("LMJE.SYSTEM.welcomeMessage.name"),
+    hint: game.i18n.localize("LMJE.SYSTEM.welcomeMessage.hint"),
+    scope: "world", // "world" = sync to db, "client" = local storage
+    config: true, // false if you dont want it to show in module config
+    type: Boolean, // Number, Boolean, String, Object
     default: true,
   });
 
-  game.settings.register('lyynix-more-journal-enrichers', 'lastLoggedVersion', {
-    scope: 'world',
+  game.settings.register("lyynix-more-journal-enrichers", "lastLoggedVersion", {
+    scope: "world",
     config: false,
     type: String,
-    default: "1.1.0" //game.modules.get('lyynix-more-journal-enrichers').version
-  })
+    default: "1.1.0", //game.modules.get('lyynix-more-journal-enrichers').version
+  });
 
-  game.settings.register('lyynix-more-journal-enrichers', 'variables', {
-    scope: 'world',
+  game.settings.register("lyynix-more-journal-enrichers", "variables", {
+    scope: "world",
     config: false,
     type: Object,
-    default: {keys: ['Author'], 'Author': 'Lyynix'}
-  })
+    default: { keys: ["Author"], Author: "Lyynix" },
+  });
+  game.settings.register("lyynix-more-journal-enrichers", "checkboxes", {
+    scope: "world",
+    config: false,
+    type: Object,
+    default: {},
+  });
   console.log("LMJE | Registered settings");
 
   //add generic enrichers to TextEditor
   try {
     CONFIG.TextEditor.enrichers.push(
-      {//needs to be first, so that all enrichers get will be drawn again
+      {
+        //needs to be first, so that all enrichers get will be drawn again
         label: "LMJE - Journal - Insert Page",
         pattern: patterns.journal.page,
         enricher: enricherFunctions.journal.page,
@@ -69,6 +76,16 @@ Hooks.on("init", () => {
         label: "LMJE - Journal - Variables / Replacable text",
         pattern: patterns.journal.variable,
         enricher: enricherFunctions.journal.variable,
+      },
+      {
+        label: "LMJE - Journal - Checkbox",
+        pattern: patterns.journal.checkbox,
+        enricher: enricherFunctions.journal.checkbox,
+      },
+      {
+        label: "LMJE - Journal - If Checked",
+        pattern: patterns.journal.ifChecked,
+        enricher: enricherFunctions.journal.ifChecked,
       },
       {
         label: "LMJE - Journal - Table of Contents",
@@ -88,7 +105,7 @@ Hooks.on("init", () => {
       {
         label: "LMJE - Scene - Full",
         pattern: patterns.scene.full,
-        enricher: enricherFunctions.scene.full
+        enricher: enricherFunctions.scene.full,
       },
       {
         label: "LMJE - Scene - Inline",
@@ -148,7 +165,6 @@ Hooks.on("init", () => {
   //TODO: remove to add system specific enrichers
   return;
 
-  
   // Repeat for system specific enrichers
   switch (game.system.id) {
     case "dnd5e":
@@ -188,22 +204,27 @@ Hooks.on("init", () => {
   }
 });
 
-Hooks.on('getJournalTextPageSheetHeaderButtons', (app, buttons) => {
+Hooks.on("getJournalTextPageSheetHeaderButtons", (app, buttons) => {
   var button = {
-    class: 'edit-variables',
-    label: 'Edit Variables',
+    class: "edit-variables",
+    label: "Edit Variables",
     icon: "fa-regular fa-code",
-    onclick: (event) => editVariables()
-  }
-  buttons.unshift(button)
-})
+    onclick: (event) => editVariables(),
+  };
+  buttons.unshift(button);
+});
 
-Hooks.on('ready', () => {
-  if (game.settings.get('lyynix-more-journal-enrichers', 'intro-message')) 
-    postWelcomeMessage()
+Hooks.on("ready", () => {
+  if (game.settings.get("lyynix-more-journal-enrichers", "intro-message"))
+    postWelcomeMessage();
 
-  const lastLoggedVersion = game.settings.get('lyynix-more-journal-enrichers', 'lastLoggedVersion');
-  const currentVersion = game.modules.get("lyynix-more-journal-enrichers").version;
+  const lastLoggedVersion = game.settings.get(
+    "lyynix-more-journal-enrichers",
+    "lastLoggedVersion"
+  );
+  const currentVersion = game.modules.get(
+    "lyynix-more-journal-enrichers"
+  ).version;
   if (currentVersion !== lastLoggedVersion)
-    postChangelogDifference(currentVersion, lastLoggedVersion)
-})
+    postChangelogDifference(currentVersion, lastLoggedVersion);
+});
