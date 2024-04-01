@@ -25,8 +25,8 @@
           "wikiLinkLabel": "Wiki",
           "FoundryVTTDiscordLabel": "Official FoundryVTT Discord",
           "WeltenformerDiscordLabel": "Weltenformer Discord - Map Making and Foundry Community",
-          "IntroductionJournal": "@UUID[Compendium.lyynix-more-journal-enrichers.introduction.JournalEntry.wvfPeq7yDZ57u7bO]",
-          "IntroductionJournalLinkPage": "@UUID[Compendium.lyynix-more-journal-enrichers.introduction.JournalEntry.wvfPeq7yDZ57u7bO.JournalEntryPage.o1vv5ODbL2o7bAmi]"
+          "IntroductionJournal": "@UUID[Compendium.lyynix-more-journal-enrichers.lmje-introduction.JournalEntry.wvfPeq7yDZ57u7bO]",
+          "IntroductionJournalLinkPage": "@UUID[Compendium.lyynix-more-journal-enrichers.lmje-introduction.JournalEntry.wvfPeq7yDZ57u7bO.JournalEntryPage.o1vv5ODbL2o7bAmi]"
         }
       }
     },

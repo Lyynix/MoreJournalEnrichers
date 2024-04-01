@@ -23,17 +23,17 @@
   ],
   "packs": [
     {
-      "name": "introduction",
-      "label": "Introduction",
+      "name": "lmje-introduction",
+      "label": "LMJE Introduction",
       "path": "./packs/journals",
       "type": "JournalEntry"
     }
   ],
   "packFolders": [
     {
-      "name": "LMJE: Journals",
+      "name": "Lyynix: Journals",
       "sorting": "m",
-      "packs": ["introduction"]
+      "packs": ["lmje-introduction"]
     }
   ],
   "esmodules": ["./scripts/init.js"],
