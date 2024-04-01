@@ -1,4 +1,9 @@
-import { changelog_de, changelog_en } from "./changelog.js";
+import {
+  allVersions,
+  allVersions,
+  changelog_de,
+  changelog_en,
+} from "./changelog.js";
 import { EnricherPattern } from "./enricherPattern.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import {
@@ -27,7 +32,7 @@ export const templates = {
   system: {
     welcomeMessage:
       "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",
-    changeLog: 
+    changeLog:
       "modules/lyynix-more-journal-enrichers/templates/system/changeLog.hbs",
   },
   inline: "modules/lyynix-more-journal-enrichers/templates/inlineTemplate.hbs",
@@ -303,30 +308,32 @@ export async function postWelcomeMessage() {
 }
 
 export async function postChangelogDifference(current, lastLogged) {
-  const allVersions = ['1.0.0', '1.1.0', '1.2.0']
-  console.log("LMJE | version difference detected", current, lastLogged)
+  console.log("LMJE | version difference detected", current, lastLogged);
 
-  var firstIndex = allVersions.findIndex(e => e === lastLogged);
-  if (firstIndex < 0) throw "LMJE | unknown version"
-  var unloggedVersions = allVersions.slice(firstIndex + 1)
+  var firstIndex = allVersions.findIndex((e) => e === lastLogged);
+  if (firstIndex < 0) throw "LMJE | unknown version";
+  var unloggedVersions = allVersions.slice(firstIndex + 1);
 
   // console.log("LMJE | those versions have not been logged:", unloggedVersions)
 
   var unloggedChangelog;
   switch (game.i18n.lang) {
-    case 'de':
+    case "de":
       unloggedChangelog = {
-        versions: unloggedVersions.map(v => changelog_de[v])
-      }
+        versions: unloggedVersions.map((v) => changelog_de[v]),
+      };
       break;
-  
+
     default:
       unloggedChangelog = {
-        versions: unloggedVersions.map(v => changelog_en[v])
-      }
+        versions: unloggedVersions.map((v) => changelog_en[v]),
+      };
       break;
   }
-  var html = await renderTemplate(templates.system.changeLog, unloggedChangelog)
+  var html = await renderTemplate(
+    templates.system.changeLog,
+    unloggedChangelog
+  );
   // console.log("LMJE |", unloggedChangelog);
   // console.log("LMJE |", html);
 
@@ -335,10 +342,13 @@ export async function postChangelogDifference(current, lastLogged) {
     whisper: [game.users.current._id],
     speaker: { alias: "Lyynix" },
     content: html,
-  })
-  game.settings.set('lyynix-more-journal-enrichers', 'lastLoggedVersion',
-    game.modules.get("lyynix-more-journal-enrichers").version)
-  console.log("LMJE | created changelog")
+  });
+  game.settings.set(
+    "lyynix-more-journal-enrichers",
+    "lastLoggedVersion",
+    game.modules.get("lyynix-more-journal-enrichers").version
+  );
+  console.log("LMJE | created changelog");
 }
 
 export function invalidHtml(error) {

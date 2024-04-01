@@ -59,6 +59,9 @@
         "Edit": "Edit scene"
       }
     },
+    "ROLLTABLE": {
+      "Title": "Rolltable menu"
+    },
     "COMPENDIUM": {
       "INLINE": {
         "Show": "Show compendium pack"
