@@ -9,7 +9,7 @@ export class EnricherPattern {
   );
   static WORD = /\S+/;
   static SIZE = /(?:big|bigger|medium|smaller|small)/;
-  static SEPARATOR = /(?:\;\s+)/;
+  static SEPARATOR = /(?:\;\s*)/;
 
   #ready = false;
   names = [];
