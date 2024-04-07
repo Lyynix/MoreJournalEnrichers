@@ -1,20 +1,26 @@
 import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
-  console.log(match);
   var page;
   try {
     // Try to get JournalEntryPage with Reference from match[1] {}
-    page = await getDocument(match[1], "JournalEntryPage");
+    page = await getDocument(
+      await TextEditor.enrichHTML(match[1]),
+      "JournalEntryPage"
+    );
   } catch (error) {
     // When failed, try to get journal from Reference at match[2] ()
     if (match[2] !== undefined) {
       try {
         // get Journal
-        var journal = await getDocument(match[2], "JournalEntry");
+        var journal = await getDocument(
+          await TextEditor.enrichHTML(match[2]),
+          "JournalEntry"
+        );
         // try to get Page from Journal
-        page = journal.pages.get(match[1]);
-        if (page === undefined) page = journal.pages.getName(match[1]);
+        page = journal.pages.get(await TextEditor.enrichHTML(match[1]));
+        if (page === undefined)
+          page = journal.pages.getName(await TextEditor.enrichHTML(match[1]));
         if (page === undefined)
           // if no page is found, return error message
           return $(
@@ -152,9 +158,9 @@ export async function insertPage(match, options) {
 //#region checkbox
 export async function checkbox(match, options) {
   var cbId;
-  var cbLabel = match[2];
+  var cbLabel = await TextEditor.enrichHTML(match[2]);
   if (match[1].length > 0) {
-    cbId = match[1];
+    cbId = await TextEditor.enrichHTML(match[1]);
   } else return $(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))[0];
 
   var checkboxes = game.settings.get(
@@ -182,7 +188,7 @@ export async function checkbox(match, options) {
 export async function ifChecked(match, options) {
   console.log(match);
 
-  var cbId = match[1];
+  var cbId = await TextEditor.enrichHTML(match[1]);
   var content = match[2];
   if (match[1].length > 0) {
     cbId = match[1];
@@ -208,10 +214,11 @@ export async function ifChecked(match, options) {
 //#endregion
 
 //#region Variable
-export function variable(match, options) {
+export async function variable(match, options) {
   var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
-  var val = vars[match[1]];
-  if (val !== undefined) return vars[match[1]];
+  var input = await TextEditor.enrichHTML(match[1]);
+  var val = vars[input];
+  if (val !== undefined) return vars[input];
   else
     return $(
       invalidHtml(game.i18n.localize("LMJE.JOURNAL.VARIABLE.keyNotFound"))
@@ -308,7 +315,9 @@ export async function otoc(match, options) {
 
 export async function tableOfContents(match, options, ordered) {
   // extract data from match
-  var journalID = match[1] ? match[1] : options.relativeTo.parent._id;
+  var journalID = match[1]
+    ? await TextEditor.enrichHTML(match[1])
+    : options.relativeTo.parent._id;
   var headerOffset;
   switch (match[2]) {
     case "big":

@@ -2,7 +2,7 @@ import { EnricherPattern } from "../enricherPattern.js";
 import { getDocument, templates } from "../helpers.js";
 
 export async function rolltableFull(match, options) {
-  var id = match[1];
+  var id = await TextEditor.enrichHTML(match[1]);
   var rolltable;
   try {
     rolltable = await getDocument(id, "RollTable");
@@ -10,7 +10,10 @@ export async function rolltableFull(match, options) {
     return $(invalidHtml(game.i18n.localize(error)))[0];
   }
 
-  var rolltableName = match[2] === undefined ? rolltable.name : match[2];
+  var rolltableName =
+    match[2] === undefined
+      ? rolltable.name
+      : await TextEditor.enrichHTML(match[2]);
 
   var rolltableData = {
     label: rolltableName,
@@ -74,7 +77,7 @@ export async function rolltableMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
   const title =
     match[2] !== undefined
-      ? match[2]
+      ? await TextEditor.enrichHTML(match[2])
       : game.i18n.localize("LMJE.PLAYLIST.Title");
 
   var menuData = {
@@ -82,7 +85,7 @@ export async function rolltableMenu(match, options) {
     rolltables: [],
   };
   for (let i = 0; i < ids.length; i++) {
-    const id = ids[i];
+    const id = await TextEditor.enrichHTML(ids[i]);
     var document;
     var label;
     var docId;
@@ -104,7 +107,7 @@ export async function rolltableMenu(match, options) {
 }
 
 export async function rolltableInline(match, options) {
-  var id = match[1];
+  var id = await TextEditor.enrichHTML(match[1]);
   var rolltable;
   try {
     rolltable = await getDocument(id, "RollTable");
@@ -112,7 +115,10 @@ export async function rolltableInline(match, options) {
     return $(invalidHtml(game.i18n.localize(error)))[0];
   }
 
-  var rolltableName = match[2] === undefined ? rolltable.name : match[2];
+  var rolltableName =
+    match[2] === undefined
+      ? rolltable.name
+      : await TextEditor.enrichHTML(match[2]);
 
   var rolltableData = {
     faIcon: "fa-th-list",

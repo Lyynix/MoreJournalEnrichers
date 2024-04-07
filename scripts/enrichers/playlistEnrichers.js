@@ -3,7 +3,10 @@ import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function playlistMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
-  const label = match[2] !== undefined ? match[2] : game.i18n.localize("LMJE.PLAYLIST.Title");
+  const label =
+    match[2] !== undefined
+      ? await TextEditor.enrichHTML(match[2])
+      : game.i18n.localize("LMJE.PLAYLIST.Title");
 
   var menuHtml = /* html */ `
     <table class="LMJE-Playlist_Table LMJE-Table">
@@ -16,7 +19,7 @@ export async function playlistMenu(match, options) {
   `;
 
   for (var i = 0; i < ids.length; i++) {
-    var id = ids[i];
+    var id = await TextEditor.enrichHTML(ids[i]);
 
     var playlistDocument;
     try {
@@ -48,7 +51,9 @@ export async function playlistMenu(match, options) {
     <a 
       title="${game.i18n.localize("LMJE.PLAYLIST.Tooltip.Edit")}" 
       onclick="
-        new PlaylistConfig(game.playlists.get('${playlistDocument.id}')).render(true);
+        new PlaylistConfig(game.playlists.get('${
+          playlistDocument.id
+        }')).render(true);
         return false;
       ">
         <i class="fas fa-cogs" style="margin: 5px"></i>
@@ -71,7 +76,7 @@ export async function playlistMenu(match, options) {
 }
 
 export async function inlinePlaylist(match, options) {
-  var id = match[1];
+  var id = await TextEditor.enrichHTML(match[1]);
   var playlist;
   try {
     playlist = await getDocument(id, "Playlist");
@@ -79,7 +84,10 @@ export async function inlinePlaylist(match, options) {
     return $(invalidHtml(game.i18n.localize(error)))[0];
   }
 
-  var playlistName = match[2] === undefined ? playlist.name : match[2];
+  var playlistName =
+    match[2] === undefined
+      ? playlist.name
+      : await TextEditor.enrichHTML(match[2]);
 
   var templateData = {
     faIcon: "fa-music",
@@ -87,7 +95,7 @@ export async function inlinePlaylist(match, options) {
     documentData: {
       uuid: playlist.uuid,
       id: playlist.id,
-      type: playlist.documentName
+      type: playlist.documentName,
     },
     buttons: [
       {
@@ -114,11 +122,11 @@ export async function inlinePlaylist(match, options) {
           new PlaylistConfig(game.playlists.get('${playlist.id}')).render(true);
           return false;
         `,
-      }
-    ]
+      },
+    ],
   };
 
-  var html = await renderTemplate(templates.inline, templateData)
+  var html = await renderTemplate(templates.inline, templateData);
 
   return $(html)[0];
 }

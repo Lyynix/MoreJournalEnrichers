@@ -3,7 +3,10 @@ import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function sceneMenu(match, options) {
   const ids = match[1].split(EnricherPattern.SEPARATOR);
-  const label = match[2] !== undefined ? match[2] : game.i18n.localize("LMJE.SCENEMENU.Title");
+  const label =
+    match[2] !== undefined
+      ? await TextEditor.enrichHTML(match[2])
+      : game.i18n.localize("LMJE.SCENEMENU.Title");
 
   var menuHtml = /* html */ `
     <table class="LMJE-SceneMenu_Table LMJE-Table LMJE-Table-Menu">
@@ -16,9 +19,9 @@ export async function sceneMenu(match, options) {
     `;
 
   for (var i = 0; i < ids.length; i++) {
-    var id = ids[i];
+    var id = await TextEditor.enrichHTML(ids[i]);
 
-    var sceneDocument
+    var sceneDocument;
     try {
       sceneDocument = await getDocument(id, "Scene");
     } catch (error) {
@@ -46,9 +49,7 @@ export async function sceneMenu(match, options) {
         ">
       <i class="fas fa-bullseye" ></i>
     </a>
-    <a title="${game.i18n.localize(
-      "LMJE.SCENEMENU.Tooltip.Preload"
-    )}" onclick="
+    <a title="${game.i18n.localize("LMJE.SCENEMENU.Tooltip.Preload")}" onclick="
         game.scenes.preload('${sceneDocument.id}')
         return false;
         ">
@@ -87,39 +88,39 @@ export async function sceneMenu(match, options) {
 }
 
 export async function sceneFull(match, options) {
-  var id = match[1];
-  var sceneDocument
+  var id = await TextEditor.enrichHTML(match[1]);
+  var sceneDocument;
   try {
     sceneDocument = await getDocument(id, "Scene");
   } catch (error) {
-    return $(invalidHtml(game.i18n.localize(error)))[0]
+    return $(invalidHtml(game.i18n.localize(error)))[0];
   }
-  
+
   var sceneName =
     match[2] === undefined
       ? sceneDocument.navName
         ? `${sceneDocument.navName} (${sceneDocument.name})`
         : sceneDocument.name
-      : match[2];
-  
+      : await TextEditor.enrichHTML(match[2]);
+
   var templateData = {
     label: sceneName,
     uuid: sceneDocument.uuid,
     id: sceneDocument.id,
-    img: sceneDocument.background.src
-  }
-  
+    img: sceneDocument.background.src,
+  };
+
   var sceneHtml = await renderTemplate(templates.scene.full, templateData);
-  return $(sceneHtml)[0]
+  return $(sceneHtml)[0];
 }
 
 export async function inlineScene(match, options) {
-  var id = match[1];
-  var sceneDocument
+  var id = await TextEditor.enrichHTML(match[1]);
+  var sceneDocument;
   try {
     sceneDocument = await getDocument(id, "Scene");
   } catch (error) {
-    return $(invalidHtml(game.i18n.localize(error)))[0]
+    return $(invalidHtml(game.i18n.localize(error)))[0];
   }
 
   var sceneName =
@@ -127,15 +128,15 @@ export async function inlineScene(match, options) {
       ? sceneDocument.navName
         ? `${sceneDocument.navName} (${sceneDocument.name})`
         : sceneDocument.name
-      : match[2];
-  
+      : await TextEditor.enrichHTML(match[2]);
+
   var templateData = {
     faIcon: "fa-map",
     label: sceneName,
     documentData: {
       uuid: sceneDocument.uuid,
       id: sceneDocument.id,
-      type: sceneDocument.documentName
+      type: sceneDocument.documentName,
     },
     buttons: [
       {
@@ -144,7 +145,7 @@ export async function inlineScene(match, options) {
         onclick: `
           game.scenes.get('${sceneDocument.id}')?.view(); 
           return false;
-        `
+        `,
       },
       {
         tooltip: "LMJE.SCENEMENU.Tooltip.Activate",
@@ -152,7 +153,7 @@ export async function inlineScene(match, options) {
         onclick: `
           game.scenes.get('${sceneDocument.id}')?.activate(); 
           return false;
-        `
+        `,
       },
       {
         tooltip: "LMJE.SCENEMENU.Tooltip.Preload",
@@ -160,7 +161,7 @@ export async function inlineScene(match, options) {
         onclick: `
           game.scenes.preload('${sceneDocument.id}');
           return false;
-        `
+        `,
       },
       {
         tooltip: "LMJE.SCENEMENU.Tooltip.ToggleNav",
@@ -169,7 +170,7 @@ export async function inlineScene(match, options) {
           var document = game.scenes.get('${sceneDocument.id}'); 
           document.update({navigation: !document.navigation})
           return false;
-        `
+        `,
       },
       {
         tooltip: "LMJE.SCENEMENU.Tooltip.Edit",
@@ -177,11 +178,11 @@ export async function inlineScene(match, options) {
         onclick: `
           new SceneConfig(game.scenes.get('${sceneDocument.id}')).render(true);
           return false;
-        `
-      }
-    ]
-  }
-  
+        `,
+      },
+    ],
+  };
+
   var sceneHtml = await renderTemplate(templates.inline, templateData);
 
   return $(sceneHtml)[0];
