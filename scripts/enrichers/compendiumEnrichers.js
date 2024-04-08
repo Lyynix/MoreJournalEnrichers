@@ -26,8 +26,8 @@ export default function getCompendium(label, packageName) {
 }
 
 export async function compendiumFull(match, options) {
-  var label = match[1];
-  var packageName = match[2];
+  var label = await TextEditor.enrichHTML(match[1]);
+  var packageName = await TextEditor.enrichHTML(match[2]);
 
   var compendium;
   try {
@@ -93,8 +93,8 @@ export async function compendiumFull(match, options) {
 }
 
 export async function inlineCompendium(match, options) {
-  var label = match[1];
-  var packageName = match[2];
+  var label = await TextEditor.enrichHTML(match[1]);
+  var packageName = await TextEditor.enrichHTML(match[2]);
 
   var compendium;
   try {

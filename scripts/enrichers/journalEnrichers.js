@@ -39,12 +39,14 @@ export async function insertPage(match, options) {
     }
   }
 
-  if (options.relativeTo.uuid === page.uuid)
+  if (options.relativeTo !== undefined &&
+    options.relativeTo.uuid === page.uuid)
     return $(
       invalidHtml(game.i18n.localize("LMJE.SYSTEM.getDocument.selfReference"))
     )[0];
 
   var refTitle =
+    options.relativeTo !== undefined &&
     options.relativeTo.documentName === "JournalEntryPage" &&
     page.parent.uuid === options.relativeTo.parent.uuid
       ? page.name
