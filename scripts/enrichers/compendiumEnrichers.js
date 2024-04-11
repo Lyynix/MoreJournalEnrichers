@@ -1,4 +1,3 @@
-import { EnricherPattern } from "../enricherPattern.js";
 import { invalidHtml, templates } from "../helpers.js";
 
 export default function getCompendium(label, packageName) {
@@ -85,10 +84,10 @@ export async function compendiumFull(match, options) {
   };
   // console.log("LMJE |", compendiumData);
 
-  var returnHtml = await renderTemplate(
+  var returnHtml = await TextEditor.enrichHTML(await renderTemplate(
     templates.compendium.full,
     compendiumData
-  );
+  ));
   return $(returnHtml)[0];
 }
 
