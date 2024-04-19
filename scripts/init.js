@@ -41,6 +41,15 @@ Hooks.on("init", () => {
     type: Boolean, // Number, Boolean, String, Object
     default: true,
   });
+  
+  game.settings.register("lyynix-more-journal-enrichers", "optionalHintPosted", {
+    name: game.i18n.localize("LMJE.SYSTEM.optionalHint.name"),
+    hint: game.i18n.localize("LMJE.SYSTEM.optionalHint.hint"),
+    scope: "world", // "world" = sync to db, "client" = local storage
+    config: true, // false if you dont want it to show in module config
+    type: Boolean, // Number, Boolean, String, Object
+    default: true,
+  });
 
   game.settings.register("lyynix-more-journal-enrichers", "lastLoggedVersion", {
     scope: "world",

@@ -27,6 +27,8 @@ import {
 
 export const templates = {
   system: {
+    optionalHint:
+      "modules/lyynix-more-journal-enrichers/templates/system/optionalHint.hbs",
     welcomeMessage:
       "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",
     changeLog:
@@ -362,6 +364,26 @@ export async function postChangelogDifference(current, lastLogged) {
     game.modules.get("lyynix-more-journal-enrichers").version
   );
   console.log("LMJE | created changelog");
+}
+
+export async function postOptionalHint() {
+  if (!(await game.settings.get("lyynix-more-journal-enrichers", "optionalHintPosted")))
+    return;
+
+  var html = await renderTemplate(templates.system.optionalHint);
+
+  ChatMessage.create({
+    user: game.users.current,
+    whisper: [game.users.current._id],
+    speaker: { alias: "Lyynix" },
+    content: html,
+  });
+
+  game.settings.set(
+    "lyynix-more-journal-enrichers",
+    "optionalHintPosted",
+    false
+  );
 }
 
 export function invalidHtml(error) {

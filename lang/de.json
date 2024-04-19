@@ -1,6 +1,17 @@
 {
   "LMJE": {
     "SYSTEM": {
+      "optionalHint": {
+        "name": "Hinweis auf optionale Verwendung in Modulkompendien",
+        "hint": "Wenn der Haken aktiv ist, wird beim nächsten öffnen eines Kompendium Journals mit einem Enricher der Hinweis erneut gesendet, dass dieses Modul als optional eingestellt werden kann, wenn man ein Modul erstellt.",
+        "header": "Verwendung in Modulkompendium entdeckt",
+        "detected": "Ein oder mehrere Enricher aus dem Modul <b>\"Lyynix: More Journal Enrichers\"</b> wurden in einem Modulkompendium entdeckt.",
+        "dependency": "Wenn du dieses Modul erstellst und das Modul zum Teilen vorgesehen ist, dann müssen die Nutzer ebenfalls <b>\"Lyynix: More Journal Enrichers\"</b> installiert haben, damit die Journalverbesserungen angezeigt werden können.",
+        "makeOptional": "Es gibt die Möglichkeit diese Abhängigkeit optional zu machen. Dazu muss die JavaScript-Datei vom unten stehenden Link heruntergeladen werden und in das Modulverzeichnis gelegt werden.",
+        "explanation": "Wenn die Datei heruntergeladen wurde, muss sie in das Modulverzeichnis, im selben Ordner wie die <span style=\"font-family: 'Courier New', monospace;\">module.json</span> gespeichert werden.",
+        "explanation2": "Anschließend muss in der <span style=\"font-family: 'Courier New', monospace;\">module.json</span> die Zeile <span style=\"font-family: 'Courier New', monospace;\">\"esmodules\": [\"./optionalLMJE.js\"],</span> eingefügt werden",
+        "contact": "Bei Problemen oder Fragen kontaktiere mich gerne auf GitHub, über einen der FoundryVTT Discord Server oder auch gerne per Discord Nachricht"
+      },
       "changelog": {
         "intro": "Es wurde eine neue Version installiert! Hier ist eine Liste mit all den Änderungen seit der letzten installierten Version.",
         "additions": "Neuerungen",

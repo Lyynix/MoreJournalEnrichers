@@ -1,6 +1,17 @@
 {
   "LMJE": {
     "SYSTEM": {
+      "optionalHint": {
+        "name": "Hint optional usage in modules again",
+        "hint": "If actiavted, next time someone opens a compendium journal that conatins an enricher, they get hinted for optional use of this module again.",
+        "header": "Detected usage in module compendium",
+        "detected": "One or more enrichers from the module <b>\"Lyynix: More Journal Enrichers\"</b> have been detected to be used inside of a module compendium.",
+        "dependency": "If you are creator of this module and want to share it to others, the users need to also install <b>\"Lyynix: More Journal Enrichers\"</b>, so that all journal improvements will be displayed.",
+        "makeOptional": "There is also the possibility, to make this dependency optional. Therefor, the linked JavaScript-File must be downloaded and saved into the module directory.",
+        "explanation": "When the file got downloaded, it must be saved into the module directory, in the same directory as the <span style=\"font-family: 'Courier New', monospace;\">module.json</span>.",
+        "explanation2": "Next, the  <span style=\"font-family: 'Courier New', monospace;\">module.json</span> must be edited, to include the line <span style=\"font-family: 'Courier New', monospace;\">\"esmodules\": [\"./optionalLMJE.js\"],</span>.",
+        "contact": "IF you have any Questions or Problems, feel free to contact me on GitHub, through the FoundryVTT Discord Server or via discord direct message."
+      },
       "changelog": {
         "intro": "An new version has been installed! Here is a list of all the changes since the last installed update.",
         "additions": "Additions",
