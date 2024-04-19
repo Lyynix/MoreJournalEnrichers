@@ -1,4 +1,17 @@
 export const changelog_en = {
+  '1.3.0': {
+    name: "1.3.0",
+    additions: [
+      {
+        change: "Enrichers now evaluate their content",
+        explanations: [
+          "An enricher now can contain other enrichers inside of their content parameters.",
+          "This makes it possible, to chain multiple enrichers, for example @Page​[@Var​[PageName]]{@Var​[PageTitle]} would now be evaluated as expected."
+        ]
+      }
+    ],
+    fixes: []
+  },
   '1.2.0': {
     name: "1.2.0",
     additions: [
