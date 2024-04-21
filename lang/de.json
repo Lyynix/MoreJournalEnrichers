@@ -93,6 +93,9 @@
     "CHAT": {
       "Title": "In den Chat posten"
     },
+    "POLYGLOT": {
+      "UnknownLanguage": "Unbekannte Sprache"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait des Charakters",
