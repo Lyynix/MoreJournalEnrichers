@@ -93,6 +93,9 @@
     "CHAT": {
       "Title": "Chat message"
     },
+    "POLYGLOT": {
+      "UnknownLanguage": "Unknown Language"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait of the Character",

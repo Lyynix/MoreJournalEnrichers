@@ -14,6 +14,7 @@ import {
   ifChecked,
 } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
+import { polyglot } from "./enrichers/polyglot.js";
 import {
   rolltableFull,
   rolltableInline,
@@ -56,6 +57,10 @@ export const templates = {
       "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs",
     refPage:
       "modules/lyynix-more-journal-enrichers/templates/journal/refPage.hbs",
+  },
+  modules: {
+    polyglot: 
+      "modules/lyynix-more-journal-enrichers/templates/polyglot/polyglot.hbs",
   },
 };
 
@@ -168,6 +173,14 @@ export const patterns = {
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
   },
+  modules: {
+    polyglot: new EnricherPattern()
+      .addName("Polyglot")
+      .addName("Translate")
+      .setReferenceTypes("TEXT", "SINGLE", false)
+      .setLabelTypes("TEXT", "MULTIPLE", false)
+      .getRegex()
+  }
 };
 
 export const enricherFunctions = {
@@ -203,6 +216,9 @@ export const enricherFunctions = {
     menu: playlistMenu,
     inline: inlinePlaylist,
   },
+  modules: {
+    polyglot: polyglot
+  }
 };
 
 export async function getDocument(identifier, expectedDocumentType) {

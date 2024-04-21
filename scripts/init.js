@@ -24,6 +24,7 @@ Hooks.on("init", () => {
       templates.journal.checkbox,
       templates.journal.refPage,
       templates.system.changeLog,
+      templates.modules.polyglot,
     ]);
     console.log("LMJE | Loaded templates");
   } catch (error) {
@@ -156,6 +157,11 @@ Hooks.on("init", () => {
         label: "LMJE - Chat - Whisper",
         pattern: patterns.chat.whisper,
         enricher: enricherFunctions.chat.whisper,
+      },
+      {
+        label: "LMJE - Module Integration - Polyglot",
+        pattern: patterns.modules.polyglot,
+        enricher: enricherFunctions.modules.polyglot,
       }
     );
     console.log("LMJE | Initialized generic enrichers");
