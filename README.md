@@ -15,7 +15,7 @@ A list of all added enrichers can be found under [Usage & Features](#usage--feat
 ## Tutorial videos
 **VTTom** made a german review video about this module on his YouTube channel:
 
-<a href="https://www.youtube.com/watch?v=CPnleammjAo" target="_blank"><img src="https://img.youtube.com/vi/CPnleammjAo/0.jpg" width=200></a>
+<a href="https://www.youtube.com/watch?v=CPnleammjAo" target="_blank"><img src="https://i3.ytimg.com/vi/CPnleammjAo/maxresdefault.jpg" width=200></a>
 
 
 ## Installation
