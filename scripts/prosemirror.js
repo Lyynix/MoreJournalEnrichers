@@ -5,27 +5,7 @@ var functions = {
   insertToC: async function () {
     console.log("LMJE |", this.prosemirror);
 
-    let prevWindows = []
-
-    Object.values(ui.windows).forEach(w => {
-      // check if window is maximized
-      if (w._minimized) return;
-      // add maximized window and position to list
-      prevWindows.push({
-        window: w,
-        position: { ...w.position }
-      })
-
-      w.minimize();
-      w.setPosition({ ...w.position, ...{left: 0, top: 0} })
-    })
-
-    setTimeout(() => {
-      prevWindows.forEach(prev => {
-        prev.window.setPosition(prev.position)
-        prev.window.maximize()
-      })
-    }, 2000)
+    selectDocument();
 
     this.prosemirror.view.dispatch(
       this.prosemirror.view.state.tr
@@ -34,6 +14,34 @@ var functions = {
     );
   },
 };
+
+function selectDocument() {
+  // array to store all maximized windows
+  let prevWindows = [];
+
+  // loop over all windows
+  Object.values(ui.windows).forEach(w => {
+    // check if window is maximized
+    if (w._minimized) return;
+    // add maximized window and position to list
+    prevWindows.push({
+      window: w,
+      position: { ...w.position }
+    });
+
+    // minimize window and move to top left
+    w.minimize();
+    w.setPosition({ ...w.position, ...{ left: 0, top: 0 } });
+  });
+
+  
+  setTimeout(() => {
+    prevWindows.forEach(prev => {
+      prev.window.setPosition(prev.position);
+      prev.window.maximize();
+    });
+  }, 2000);
+}
 
 export function initProsemirrorButtons() {
   // Hooks.on("createProseMirrorEditor", (...args) => {
