@@ -27,6 +27,10 @@ import {
 } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
+  prosemirror: {
+    insertEnricher:
+    "modules/lyynix-more-journal-enrichers/templates/prosemirror/inser-enricher.hbs",
+  },
   system: {
     welcomeMessage:
       "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",

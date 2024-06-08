@@ -7,6 +7,7 @@ import {
   postWelcomeMessage,
   templates,
 } from "./helpers.js";
+import { initProsemirrorButtons } from "./prosemirror.js";
 
 Hooks.on("init", () => {
   //load templates for generic enrichers
@@ -33,6 +34,9 @@ Hooks.on("init", () => {
 
   //add Handlebars helpers
   initHandlebarsHelpers();
+
+  //inti Prosemirror buttons
+  initProsemirrorButtons();
 
   game.settings.register("lyynix-more-journal-enrichers", "intro-message", {
     name: game.i18n.localize("LMJE.SYSTEM.welcomeMessage.name"),

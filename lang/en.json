@@ -96,6 +96,9 @@
     "POLYGLOT": {
       "UnknownLanguage": "Unknown Language"
     },
+    "PROSEMIRROR": {
+      "InsertEnricher": "Insert new enricher"
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait of the Character",
