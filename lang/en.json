@@ -97,7 +97,43 @@
       "UnknownLanguage": "Unknown Language"
     },
     "PROSEMIRROR": {
-      "InsertEnricher": "Insert new enricher"
+      "ENRICHERS": {
+        "MenuTitle": "Insert Enricher",
+        "TOC": {
+          "Category": "Table of Contents",
+          "toc": "Table of Contents - Other Journal",
+          "tocs": "Table of Contents - This Journal",
+          "otoc": "Ordered Table of Contents - Other Journal",
+          "otocs": "Ordered Table of Contents - This Journal"
+        },
+        "SCENES": {
+          "Category": "Scene Enrichers",
+          "Menu": "Scene Menu",
+          "Full": "Full Scene",
+          "Inline": "Inline Scene"
+        },
+        "ROLLTABLES": {
+          "Category": "Rolltable Enrichers",
+          "Menu": "Rolltable Menu",
+          "Full": "Full Rolltable",
+          "Inline": "Inline Rolltable"
+        },
+        "PLAYLIST": {
+          "Category": "Playlist Enrichers",
+          "Menu": "Playlist Menu",
+          "Inline": "Inline Playlist"
+        },
+        "COMPENDIUM": {
+          "Category": "Compendium Pack Enrichers",
+          "Full": "Full Compendium",
+          "Inline": "Inline Compendium"
+        },
+        "CHAT": {
+          "Category": "Chat Enrichers",
+          "Post": "Post paragraph to chat",
+          "Whisper": "Whisper paragraph to users"
+        }
+      }
     },
     "DND": {
       "CHARACTER": {
