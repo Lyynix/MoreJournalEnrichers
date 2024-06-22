@@ -97,6 +97,11 @@
       "UnknownLanguage": "Unknown Language"
     },
     "PROSEMIRROR": {
+      "INFO": {
+        "Cancel": "Press [{keybinding}] to cancel the selection process.",
+        "Cancelled": "Selection process cancelled.",
+        "WrongType": "The selected document has the wrong type."
+      },
       "ENRICHERS": {
         "MenuTitle": "Insert Enricher",
         "TOC": {

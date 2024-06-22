@@ -97,6 +97,11 @@
       "UnknownLanguage": "Unbekannte Sprache"
     },
     "PROSEMIRROR": {
+      "INFO": {
+        "Cancel": "[{keybinding}] drücken, um das Auswählen abzubrechen.",
+        "Cancelled": "Auswählen wurde abgebrochen.",
+        "WrongType": "Das ausgewählte Dokument ist vom falschen Typ."
+      },
       "ENRICHERS": {
         "MenuTitle": "Enricher Einfügen",
         "TOC": {

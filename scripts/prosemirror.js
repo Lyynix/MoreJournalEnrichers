@@ -1,20 +1,24 @@
 import { templates } from "./helpers.js";
 
-var activeSelectDocumentPromiseResolve
-var activeSelectDocumentPromiseReject
+var activeSelectDocumentPromiseResolve;
+var activeSelectDocumentPromiseReject;
+var activeSelectDocumentPrevMaxed;
+var activeSelectDocumentPrevWindows;
 
 export function initProsemirrorButtons() {
-  game.keybindings.register("lyynix-more-journal-enrichers", "escapeFromSelectDocument", {
-    name: "Excape from select Socument",
-    editable: [
-      {key: "Escape"}
-    ],
-    onDown: () => {
-      if (activeSelectDocumentPromiseReject != undefined)
-        activeSelectDocumentPromiseReject("Cancelled select document")
+  game.keybindings.register(
+    "lyynix-more-journal-enrichers",
+    "escapeFromSelectDocument",
+    {
+      name: "Excape from select Socument",
+      editable: [{ key: "Escape" }],
+      onDown: () => {
+        if (activeSelectDocumentPromiseReject != undefined)
+          activeSelectDocumentPromiseReject("LMJE.PROSEMIRROR.INFO.Cancelled");
+      },
     }
-  })
-  
+  );
+
   Hooks.on("getProseMirrorMenuDropDowns", (proseMirrorMenu, dropdowns) => {
     // console.log("LMJE |", proseMirrorMenu, dropdowns);
 
@@ -91,7 +95,11 @@ export function initProsemirrorButtons() {
             {
               title: "LMJE.PROSEMIRROR.ENRICHERS.ROLLTABLES.Inline",
               action: "rolltable-inline",
-              cmd: functions.insertInline.bind(options, "RollTable", "RollTable"),
+              cmd: functions.insertInline.bind(
+                options,
+                "RollTable",
+                "RollTable"
+              ),
             },
           ],
         },
@@ -118,12 +126,20 @@ export function initProsemirrorButtons() {
             {
               title: "LMJE.PROSEMIRROR.ENRICHERS.COMPENDIUM.Full",
               action: "compendium-full",
-              cmd: functions.insertFull.bind(options, "Compendium", "CompendiumCollection"),
+              cmd: functions.insertFull.bind(
+                options,
+                "Compendium",
+                "CompendiumCollection"
+              ),
             },
             {
               title: "LMJE.PROSEMIRROR.ENRICHERS.COMPENDIUM.Inline",
               action: "compendium-inline",
-              cmd: functions.insertInline.bind(options, "Compendium", "CompendiumCollection"),
+              cmd: functions.insertInline.bind(
+                options,
+                "Compendium",
+                "CompendiumCollection"
+              ),
             },
           ],
         },
@@ -150,17 +166,27 @@ export function initProsemirrorButtons() {
 
 async function selectDocument(expectedType) {
   // array to store all maximized windows
-  let prevMaximized = [];
-  let prevWindows = [];
+  activeSelectDocumentPrevMaxed = [];
+  activeSelectDocumentPrevWindows = [];
+
+  // teach user how to cancel selection
+  let humanBinding = KeybindingsConfig._humanizeBinding(
+    game.keybindings.bindings.get(
+      "lyynix-more-journal-enrichers.escapeFromSelectDocument"
+    )[0]
+  );
+  ui.notifications.info(
+    game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", { keybinding: humanBinding })
+  );
 
   // loop over all windows
   Object.values(ui.windows).forEach(async (w) => {
-    prevWindows.push(w);
+    activeSelectDocumentPrevWindows.push(w);
     // ignore minimized windows
     if (w._minimized) return;
 
     // add maximized window and position to list
-    prevMaximized.push({
+    activeSelectDocumentPrevMaxed.push({
       window: w,
       position: { ...w.position },
       minimized: w._minimized,
@@ -178,44 +204,44 @@ async function selectDocument(expectedType) {
     activeSelectDocumentPromiseReject = reject;
   });
 
-  let hook
-  let sidebarTab
+  let hook;
+  let sidebarTab;
   switch (expectedType) {
     case "CompendiumCollection":
-      hook = "renderCompendium"
-      sidebarTab = "compendium"
+      hook = "renderCompendium";
+      sidebarTab = "compendium";
       break;
     case "Scene":
-      hook = "renderDocumentSheet"
-      sidebarTab = "scenes"
+      hook = "renderDocumentSheet";
+      sidebarTab = "scenes";
       break;
     case "Playlist":
-      hook = "renderDocumentSheet"
-      sidebarTab = "playlists"
+      hook = "renderDocumentSheet";
+      sidebarTab = "playlists";
       break;
     case "RollTable":
-      hook = "renderDocumentSheet"
-      sidebarTab = "tables"
+      hook = "renderDocumentSheet";
+      sidebarTab = "tables";
       break;
     case "JournalEntry":
-      hook = "renderDocumentSheet"
-      sidebarTab = "journal"
+      hook = "renderDocumentSheet";
+      sidebarTab = "journal";
       break;
-  
+
     default:
-      hook = "renderDocumentSheet"
-      sidebarTab = ui.sidebar.activeTab
+      hook = "renderDocumentSheet";
+      sidebarTab = ui.sidebar.activeTab;
       break;
   }
 
-  ui.sidebar.activateTab(sidebarTab)
+  ui.sidebar.activateTab(sidebarTab);
 
   // Hooks on open Document Sheet (needs to be edited)
   Hooks.once(hook, (config, dom, options) => {
     setTimeout(() => {
       Object.values(ui.windows).forEach((window) => {
         let included = false;
-        prevWindows.forEach((prevWindow) => {
+        activeSelectDocumentPrevWindows.forEach((prevWindow) => {
           if (window.id === prevWindow.id) {
             included = true;
             // console.log("windows have same id: ", window, prevWindow)
@@ -224,31 +250,32 @@ async function selectDocument(expectedType) {
         if (!included) window.close();
       });
 
-      prevMaximized.forEach((prev) => {
-        prev.window.setPosition(prev.position);
-        if (!prev.minimized) prev.window.maximize();
-      });
+      resetPrevWindows();
 
       switch (expectedType) {
         case "CompendiumCollection":
           if (config.collection.name === expectedType) {
             activeSelectDocumentPromiseResolve(config.collection);
           } else {
-            activeSelectDocumentPromiseReject("Wrong Type. Expected: " + expectedType + " and got: " + config.collection.name);
+            activeSelectDocumentPromiseReject(
+              "LMJE.PROSEMIRROR.INFO.WrongType"
+            );
           }
           break;
-      
+
         default:
           if (config.document.documentName === expectedType) {
             activeSelectDocumentPromiseResolve(config.document);
           } else {
-            console.log(expectedType)
-            activeSelectDocumentPromiseReject("Wrong Type. Expected: " + expectedType + " and got: " + config.document.documentName);
+            console.log(expectedType);
+            activeSelectDocumentPromiseReject(
+              "LMJE.PROSEMIRROR.INFO.WrongType"
+            );
           }
           break;
       }
-      activeSelectDocumentPromiseResolve = undefined
-      activeSelectDocumentPromiseReject = undefined
+      activeSelectDocumentPromiseResolve = undefined;
+      activeSelectDocumentPromiseReject = undefined;
     }, 500);
   });
 
@@ -272,19 +299,22 @@ var functions = {
           // console.log(document);
           this.prosemirror.view.dispatch(
             this.prosemirror.view.state.tr
-              .insertText(`@${ordered ? "Ordered" : ""}ToC${getIdentifier(document)}`)
+              .insertText(
+                `@${ordered ? "Ordered" : ""}ToC${getIdentifier(document)}`
+              )
               .scrollIntoView()
           );
         })
         .catch((reason) => {
-          ui.notifications.warn("Test Warning: " + reason);
+          ui.notifications.warn(reason, { localize: true });
+          resetPrevWindows();
         });
     }
   },
-  insertMenu: function (type, docType ) {
+  insertMenu: function (type, docType) {
     // TODO select multiple documents
   },
-  insertFull: function (type, docType ) {
+  insertFull: function (type, docType) {
     selectDocument(docType)
       .then((document) => {
         // console.log(document);
@@ -295,7 +325,8 @@ var functions = {
         );
       })
       .catch((reason) => {
-        ui.notifications.warn("Test Warning: " + reason);
+        ui.notifications.warn(reason, { localize: true });
+        resetPrevWindows();
       });
   },
   insertInline: function (type, docType) {
@@ -309,7 +340,8 @@ var functions = {
         );
       })
       .catch((reason) => {
-        ui.notifications.warn("Test Warning: " + reason);
+        ui.notifications.warn(reason, { localize: true });
+        resetPrevWindows();
       });
   },
   insertChat: function (type) {
@@ -321,12 +353,19 @@ var functions = {
   },
 };
 
+function resetPrevWindows() {
+  activeSelectDocumentPrevMaxed.forEach((prev) => {
+    prev.window.setPosition(prev.position);
+    if (!prev.minimized) prev.window.maximize();
+  });
+}
+
 function getIdentifier(document, docType = "nan") {
   switch (docType) {
     case "CompendiumCollection":
-      return `[${document.title}](${document.metadata.packageName})`
-  
+      return `[${document.title}](${document.metadata.packageName})`;
+
     default:
-      return `[${document.uuid}]`
+      return `[${document.uuid}]`;
   }
 }
