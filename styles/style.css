@@ -83,6 +83,7 @@
   background: none !important;
   border: none !important;
   white-space: nowrap !important;
+  text-decoration: none !important;
 }
 .LMJE-link {
   border: 1px var(--color-border-dark-tertiary) solid;

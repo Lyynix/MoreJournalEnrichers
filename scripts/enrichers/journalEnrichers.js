@@ -396,6 +396,7 @@ export async function tableOfContents(match, options, ordered) {
           data-id="${page._id}"
           data-type="JournalEntryPage"
           data-tooltip="${journal.name}: ${page.name}"
+          data-link
           style="white-space: normal;">
             ${page.name}
         </a>
