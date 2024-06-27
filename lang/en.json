@@ -100,10 +100,11 @@
       "INFO": {
         "Cancel": "Press [{keybinding}] to cancel the selection process.",
         "Cancelled": "Selection process cancelled.",
-        "WrongType": "The selected document has the wrong type."
+        "WrongType": "The selected document has the wrong type.",
+        "AddedDocument": "The selected document was added to the enricher: {docName}"
       },
       "ENRICHERS": {
-        "MenuTitle": "Insert Enricher",
+        "MenuTitle": "Enrichers",
         "TOC": {
           "Category": "Table of Contents",
           "toc": "Table of Contents - Other Journal",

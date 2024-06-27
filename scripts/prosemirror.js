@@ -169,16 +169,6 @@ async function selectDocument(expectedType) {
   activeSelectDocumentPrevMaxed = [];
   activeSelectDocumentPrevWindows = [];
 
-  // teach user how to cancel selection
-  let humanBinding = KeybindingsConfig._humanizeBinding(
-    game.keybindings.bindings.get(
-      "lyynix-more-journal-enrichers.escapeFromSelectDocument"
-    )[0]
-  );
-  ui.notifications.info(
-    game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", { keybinding: humanBinding })
-  );
-
   // loop over all windows
   Object.values(ui.windows).forEach(async (w) => {
     activeSelectDocumentPrevWindows.push(w);
@@ -239,17 +229,6 @@ async function selectDocument(expectedType) {
   // Hooks on open Document Sheet (needs to be edited)
   Hooks.once(hook, (config, dom, options) => {
     setTimeout(() => {
-      Object.values(ui.windows).forEach((window) => {
-        let included = false;
-        activeSelectDocumentPrevWindows.forEach((prevWindow) => {
-          if (window.id === prevWindow.id) {
-            included = true;
-            // console.log("windows have same id: ", window, prevWindow)
-          }
-        });
-        if (!included) window.close();
-      });
-
       resetPrevWindows();
 
       switch (expectedType) {
@@ -294,6 +273,9 @@ var functions = {
           .scrollIntoView()
       );
     } else {
+      // teach user how to cancel selection
+      notifyCancelBinding();
+
       selectDocument("JournalEntry")
         .then((document) => {
           // console.log(document);
@@ -311,10 +293,60 @@ var functions = {
         });
     }
   },
-  insertMenu: function (type, docType) {
-    // TODO select multiple documents
+  insertMenu: async function (type, docType) {
+    let cancelled = false;
+    let selectedIds = [];
+
+    notifyCancelBinding();
+
+    while (!cancelled) {
+      try {
+        let document = await selectDocument(docType);
+
+        // console.log(document);
+        selectedIds.push(getIdentifier(document, docType).match(/\[(.*)\]/)[1]);
+        ui.notifications.info(
+          game.i18n.format("LMJE.PROSEMIRROR.INFO.AddedDocument", {
+            docName: document.name,
+          })
+        );
+
+        // close selected document
+        setTimeout(() => {
+          Object.values(ui.windows).forEach((window) => {
+            let included = false;
+            activeSelectDocumentPrevWindows.forEach((prevWindow) => {
+              if (window.id === prevWindow.id) {
+                included = true;
+                // console.log("windows have same id: ", window, prevWindow)
+              }
+            });
+            if (!included) window.close();
+          });
+        }, 50);
+      } catch (reason) {
+        switch (reason) {
+          case "LMJE.PROSEMIRROR.INFO.WrongType":
+            ui.notifications.warn(reason, { localize: true });
+            break;
+
+          default:
+            cancelled = true;
+            break;
+        }
+      }
+    }
+    resetPrevWindows();
+
+    this.prosemirror.view.dispatch(
+      this.prosemirror.view.state.tr
+        .insertText(`@${type}Menu[${selectedIds.join("; ")}]`)
+        .scrollIntoView()
+    );
   },
   insertFull: function (type, docType) {
+    notifyCancelBinding();
+
     selectDocument(docType)
       .then((document) => {
         // console.log(document);
@@ -330,6 +362,8 @@ var functions = {
       });
   },
   insertInline: function (type, docType) {
+    notifyCancelBinding();
+
     selectDocument(docType)
       .then((document) => {
         // console.log(document);
@@ -353,7 +387,30 @@ var functions = {
   },
 };
 
+function notifyCancelBinding() {
+  let humanBinding = KeybindingsConfig._humanizeBinding(
+    game.keybindings.bindings.get(
+      "lyynix-more-journal-enrichers.escapeFromSelectDocument"
+    )[0]
+  );
+  ui.notifications.info(
+    game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", {
+      keybinding: humanBinding,
+    })
+  );
+}
+
 function resetPrevWindows() {
+  Object.values(ui.windows).forEach((window) => {
+    let included = false;
+    activeSelectDocumentPrevWindows.forEach((prevWindow) => {
+      if (window.id === prevWindow.id) {
+        included = true;
+        // console.log("windows have same id: ", window, prevWindow)
+      }
+    });
+    if (!included) window.close();
+  });
   activeSelectDocumentPrevMaxed.forEach((prev) => {
     prev.window.setPosition(prev.position);
     if (!prev.minimized) prev.window.maximize();

@@ -100,10 +100,11 @@
       "INFO": {
         "Cancel": "[{keybinding}] drücken, um das Auswählen abzubrechen.",
         "Cancelled": "Auswählen wurde abgebrochen.",
-        "WrongType": "Das ausgewählte Dokument ist vom falschen Typ."
+        "WrongType": "Das ausgewählte Dokument ist vom falschen Typ.",
+        "AddedDocument": "Das ausgewählte Dokument wurde zum Enricher hinzugefügt: {docName}"
       },
       "ENRICHERS": {
-        "MenuTitle": "Enricher Einfügen",
+        "MenuTitle": "Enricher",
         "TOC": {
           "Category": "Inhaltsverzeichnis",
           "toc": "Inhaltsverzeichnis - Anderes Journal",
