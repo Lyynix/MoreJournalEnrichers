@@ -23,7 +23,7 @@ jobs:
         download: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/vttoms-tower-map.zip
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip -r ./vttoms-tower-map.zip module.json README.md scripts/ packs maps
+    - run: zip -r ./lmje.zip assets/ lang/ packs/ scripts/ styles/ templates/ LICENSE module.json README.md
 
     # Create a release for this specific version
     - name: Update Release with Files
@@ -35,6 +35,6 @@ jobs:
         draft: false
         prerelease: false
         token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: './module.json, ./vttoms-tower-map.zip'
+        artifacts: './module.json, ./lmje.zip'
         tag: ${{ github.event.release.tag_name }}
         body: ${{ github.event.release.body }}
