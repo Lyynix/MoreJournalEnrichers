@@ -2,7 +2,7 @@
   "id": "lyynix-more-journal-enrichers",
   "title": "Lyynix: More Journal Enrichers",
   "description": "Beautify your journals, by adding interactive enrichers and get easy access to your prepared stuff!",
-  "version": "1.2.0",
+  "version": "#{VERSION}#",
   "compatibility": {
     "minimum": "11",
     "verified": "11",
