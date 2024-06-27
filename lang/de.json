@@ -96,6 +96,50 @@
     "POLYGLOT": {
       "UnknownLanguage": "Unbekannte Sprache"
     },
+    "PROSEMIRROR": {
+      "INFO": {
+        "Cancel": "[{keybinding}] drücken, um das Auswählen abzubrechen.",
+        "Cancelled": "Auswählen wurde abgebrochen.",
+        "WrongType": "Das ausgewählte Dokument ist vom falschen Typ."
+      },
+      "ENRICHERS": {
+        "MenuTitle": "Enricher Einfügen",
+        "TOC": {
+          "Category": "Inhaltsverzeichnis",
+          "toc": "Inhaltsverzeichnis - Anderes Journal",
+          "tocs": "Inhaltsverzeichnis - Dieses Journal",
+          "otoc": "Nummeriertes Inhaltsverzeichnis - Anderes Journal",
+          "otocs": "Nummeriertes Inhaltsverzeichnis - Dieses Journal"
+        },
+        "SCENES": {
+          "Category": "Szenen Enricher",
+          "Menu": "Szenen Liste",
+          "Full": "Komplette Szene",
+          "Inline": "Inline Szene"
+        },
+        "ROLLTABLES": {
+          "Category": "Rolltable Enricher",
+          "Menu": "Rolltable Liste",
+          "Full": "Kompletten Rolltable",
+          "Inline": "Inline Rolltable"
+        },
+        "PLAYLIST": {
+          "Category": "Playlist Enricher",
+          "Menu": "Playlist Liste",
+          "Inline": "Inline Playlist"
+        },
+        "COMPENDIUM": {
+          "Category": "Kompendium Enricher",
+          "Full": "Full Kompendium",
+          "Inline": "Inline Kompendium"
+        },
+        "CHAT": {
+          "Category": "Chat Enricher",
+          "Post": "Absatz im Chat Posten",
+          "Whisper": "Absatz an Spieler flüstern"
+        }
+      }
+    },
     "DND": {
       "CHARACTER": {
         "imageAlt": "Portrait des Charakters",
