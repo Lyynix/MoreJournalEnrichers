@@ -50,7 +50,7 @@
       "path": "lang/en.json"
     }
   ],
-  "url": "https://github.com/Lyynix/MoreJournalEnrichers",
-  "manifest": "https://raw.githubusercontent.com/Lyynix/MoreJournalEnrichers/main/releases/latestManifest/manifest.json",
-  "download": "https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.2.0/lmje.zip"
+  "url": "#{URL}#",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#"
 }
