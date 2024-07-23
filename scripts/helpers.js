@@ -29,7 +29,9 @@ import {
 export const templates = {
   prosemirror: {
     insertEnricher:
-    "modules/lyynix-more-journal-enrichers/templates/prosemirror/inser-enricher.hbs",
+      "modules/lyynix-more-journal-enrichers/templates/prosemirror/inser-enricher.hbs",
+    enterTextFormApplication:
+      "modules/lyynix-more-journal-enrichers/templates/prosemirror/enterText-Application.hbs",
   },
   system: {
     welcomeMessage:

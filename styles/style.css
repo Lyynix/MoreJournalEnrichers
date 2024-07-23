@@ -194,3 +194,8 @@
   margin: 5px;
   padding: 1px 4px;
 }
+
+#lmje-enricher-text {
+  font-family: var(--font-primary);
+}
+

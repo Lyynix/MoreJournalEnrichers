@@ -1,0 +1,13 @@
+{{!-- {
+  multiline: this.multiline,
+  text: this.text,
+}; --}}
+
+<div>
+  <p>{{description}}</p>
+  {{#if multiline}}
+  <textarea name="lmjeEnricherText" id="lmje-enricher-text" cols="40" rows="10"></textarea>
+  {{else}}
+  <input type="text" name="lmjeEnricherText" id="lmje-enricher-text">
+  {{/if}}
+</div>

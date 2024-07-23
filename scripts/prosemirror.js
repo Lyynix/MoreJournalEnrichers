@@ -169,6 +169,18 @@ async function selectDocument(expectedType) {
   activeSelectDocumentPrevMaxed = [];
   activeSelectDocumentPrevWindows = [];
 
+  // teach user how to cancel selection
+  let humanBinding = KeybindingsConfig._humanizeBinding(
+    game.keybindings.bindings.get(
+      "lyynix-more-journal-enrichers.escapeFromSelectDocument"
+    )[0]
+  );
+  ui.notifications.info(
+    game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", {
+      keybinding: humanBinding,
+    })
+  );
+
   // loop over all windows
   Object.values(ui.windows).forEach(async (w) => {
     activeSelectDocumentPrevWindows.push(w);
@@ -255,7 +267,7 @@ async function selectDocument(expectedType) {
       }
       activeSelectDocumentPromiseResolve = undefined;
       activeSelectDocumentPromiseReject = undefined;
-    }, 500);
+    }, 100);
   });
 
   return result;
@@ -350,11 +362,17 @@ var functions = {
     selectDocument(docType)
       .then((document) => {
         // console.log(document);
-        this.prosemirror.view.dispatch(
-          this.prosemirror.view.state.tr
-            .insertText(`@${type}Full${getIdentifier(document, docType)}`)
-            .scrollIntoView()
-        );
+        getTextInputWithDialog(
+        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Chat"),
+        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Chat"),
+        false
+      ).then((text) => {
+          this.prosemirror.view.dispatch(
+            this.prosemirror.view.state.tr
+              .insertText(`@${type}Full${getIdentifier(document, docType)}{${text}}`)
+              .scrollIntoView()
+          );
+        });
       })
       .catch((reason) => {
         ui.notifications.warn(reason, { localize: true });
@@ -367,25 +385,76 @@ var functions = {
     selectDocument(docType)
       .then((document) => {
         // console.log(document);
-        this.prosemirror.view.dispatch(
-          this.prosemirror.view.state.tr
-            .insertText(`@${type}Inline${getIdentifier(document, docType)}`)
-            .scrollIntoView()
-        );
+
+        getTextInputWithDialog(
+          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Chat"),
+          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Chat"),
+          false
+        ).then((text) => {
+          this.prosemirror.view.dispatch(
+            this.prosemirror.view.state.tr
+              .insertText(`@${type}Inline${getIdentifier(document, docType)}{${text}}`)
+              .scrollIntoView()
+          );
+        })
       })
       .catch((reason) => {
         ui.notifications.warn(reason, { localize: true });
         resetPrevWindows();
       });
   },
-  insertChat: function (type) {
-    this.prosemirror.view.dispatch(
-      this.prosemirror.view.state.tr
-        .insertText(`@Chat${type}{}`)
-        .scrollIntoView()
-    );
+  insertChat: async function (type) {
+    try {
+      let text = await getTextInputWithDialog(
+        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Chat"),
+        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Chat"),
+        true
+      );
+      text = text.replace(/\n\s*/gm, "; ")
+
+      this.prosemirror.view.dispatch(
+        this.prosemirror.view.state.tr
+          .insertText(`@Chat${type}{${text}}`)
+          .scrollIntoView()
+      );
+    } catch (error) {
+            
+    }
   },
 };
+
+/**
+ * Prompts a Dialog window where the user should enter text.
+ * @param {String} title The title of the dialog window
+ * @param {Boolean} multiline is the text input multiline
+ * @returns 
+ */
+async function getTextInputWithDialog(title, description, multiline) {
+  return new Promise(async (resolve, reject) => {
+    new Dialog({
+      title: title,
+      content: await renderTemplate(templates.prosemirror.enterTextFormApplication, {description: description, multiline: multiline}),
+      buttons: {
+        accept: {
+          icon: '<i class="fas fa-check"></i>',
+          label: game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.Accept"),
+          callback: () => {
+            let text = $("#lmje-enricher-text").first().val();
+            resolve(text);
+          },
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.Cancel"),
+          callback: () => {
+            reject();
+          },
+        },
+      },
+      default: "accept",
+    }).render(true);
+  });
+}
 
 function notifyCancelBinding() {
   let humanBinding = KeybindingsConfig._humanizeBinding(

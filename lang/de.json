@@ -103,6 +103,18 @@
         "WrongType": "Das ausgewählte Dokument ist vom falschen Typ.",
         "AddedDocument": "Das ausgewählte Dokument wurde zum Enricher hinzugefügt: {docName}"
       },
+      "TEXTINPUTDIALOG": {
+        "TITLE": {
+          "Alias": "Alias eingeben.",
+          "Chat": "Chatnachricht eingeben"
+        },
+        "DESCRIPTION": {
+          "Alias": "Gib einen alternativen Titel ein. Leer lassen oder Abbrechen klicken, um keinen Alias zu vergeben",
+          "Chat": "Gib die Nachricht ein, die in den Chat geschickt werden soll."
+        },
+        "Accept": "Akzeptieren",
+        "Cancel": "Abbrechen"
+      },
       "ENRICHERS": {
         "MenuTitle": "Enricher",
         "TOC": {
