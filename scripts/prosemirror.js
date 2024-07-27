@@ -1,4 +1,4 @@
-import { templates } from "./helpers.js";
+import { log, templates } from "./helpers.js";
 
 var activeSelectDocumentPromiseResolve;
 var activeSelectDocumentPromiseReject;
@@ -267,7 +267,7 @@ async function selectDocument(expectedType) {
           if (config.document.documentName === expectedType) {
             activeSelectDocumentPromiseResolve(config.document);
           } else {
-            console.log(expectedType);
+            log(expectedType);
             activeSelectDocumentPromiseReject(
               "LMJE.PROSEMIRROR.INFO.WrongType"
             );

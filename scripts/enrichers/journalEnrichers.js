@@ -1,7 +1,7 @@
-import { getDocument, invalidHtml, templates } from "../helpers.js";
+import { getDocument, invalidHtml, log, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
-  console.log(match);
+  log(match);
   var page;
   try {
     // Try to get JournalEntryPage with Reference from match[1] {}
@@ -60,9 +60,9 @@ export async function insertPage(match, options) {
   switch (page.type) {
     case "text":
       var enrichedContent = await TextEditor.enrichHTML(page.text.content);
-      // console.log("LMJE | enriched Page", $(enrichedContent));
+      // log("enriched Page", $(enrichedContent));
       var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
-      // console.log("LMJE | decoded HTML", decodedHtml);
+      // log("decoded HTML", decodedHtml);
 
       return $(/* html */ `
         <table class="LMJE-Table LMJE-PageMedia">
@@ -254,7 +254,7 @@ export function editVariables() {
                   "LMJE.JOURNAL.VARIABLE.editVariablesDialog.submitResponse"
                 )
               );
-              console.log("LMJE | Variables updated");
+              log("Variables updated");
             },
             icon: `<i class="fas fa-save"></i>`,
           },
@@ -286,7 +286,7 @@ export function editVariables() {
                   "LMJE.JOURNAL.VARIABLE.editVariablesDialog.deleteResponse"
                 )
               );
-              console.log("LMJE | Variable removed");
+              log("Variable removed");
             },
             icon: `<i class="fas fa-x"></i>`,
           },

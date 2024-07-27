@@ -6,6 +6,7 @@ import {
   postChangelogDifference,
   postWelcomeMessage,
   templates,
+  log,
 } from "./helpers.js";
 import { initProsemirrorButtons } from "./prosemirror.js";
 
@@ -27,7 +28,7 @@ Hooks.on("init", () => {
       templates.system.changeLog,
       templates.modules.polyglot,
     ]);
-    console.log("LMJE | Loaded templates");
+    log("Loaded templates");
   } catch (error) {
     console.error("LMJE | Failed to load templates\n", error);
   }
@@ -66,7 +67,7 @@ Hooks.on("init", () => {
     type: Object,
     default: {},
   });
-  console.log("LMJE | Registered settings");
+  log("Registered settings");
 
   //add generic enrichers to TextEditor
   try {
@@ -168,7 +169,7 @@ Hooks.on("init", () => {
         enricher: enricherFunctions.modules.polyglot,
       }
     );
-    console.log("LMJE | Initialized generic enrichers");
+    log("Initialized generic enrichers");
   } catch (error) {
     console.error("LMJE | Failed to initialize generic enrichers\n", error);
   }
@@ -180,14 +181,14 @@ Hooks.on("init", () => {
     case "dnd5e":
       try {
         // loadTemplates([]);
-        console.log("LMJE | Loaded templates for dnd5e");
+        log("Loaded templates for dnd5e");
       } catch (error) {
         console.error("LMJE | Failed to load dnd5 templates\n", error);
       }
 
       try {
         // CONFIG.TextEditor.enrichers.push();
-        console.log("LMJE | Initialized enrichers for dnd5e");
+        log("Initialized enrichers for dnd5e");
       } catch (error) {
         console.error("LMJE | Failed to initialize dnd5 enrichers\n", error);
       }
@@ -196,14 +197,14 @@ Hooks.on("init", () => {
     case "pf2e":
       try {
         // loadTemplates([]);
-        console.log("LMJE | Loaded templates for pf2e");
+        log("Loaded templates for pf2e");
       } catch (error) {
         console.error("LMJE | Failed to load pf2e templates\n", error);
       }
 
       try {
         // CONFIG.TextEditor.enrichers.push();
-        console.log("LMJE | Initialized enrichers for pf2e");
+        log("Initialized enrichers for pf2e");
       } catch (error) {
         console.error("LMJE | Failed to initialize pf2e enrichers\n", error);
       }
@@ -236,5 +237,9 @@ Hooks.on("ready", () => {
     "lyynix-more-journal-enrichers"
   ).version;
   if (currentVersion !== lastLoggedVersion)
-    postChangelogDifference(currentVersion, lastLoggedVersion);
+    try {
+      postChangelogDifference(currentVersion, lastLoggedVersion);
+    } catch (error) {
+      log(error)
+    }
 });
