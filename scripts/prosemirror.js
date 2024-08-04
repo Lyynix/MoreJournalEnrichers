@@ -363,8 +363,8 @@ var functions = {
       .then((document) => {
         // console.log(document);
         getTextInputWithDialog(
-        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Chat"),
-        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Chat"),
+        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Alias"),
+        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Alias"),
         false
       ).then((text) => {
           this.prosemirror.view.dispatch(
@@ -387,8 +387,8 @@ var functions = {
         // console.log(document);
 
         getTextInputWithDialog(
-          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Chat"),
-          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Chat"),
+          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Alias"),
+          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Alias"),
           false
         ).then((text) => {
           this.prosemirror.view.dispatch(
@@ -426,6 +426,7 @@ var functions = {
 /**
  * Prompts a Dialog window where the user should enter text.
  * @param {String} title The title of the dialog window
+ * @param {String} description The description of the dialog window
  * @param {Boolean} multiline is the text input multiline
  * @returns 
  */
