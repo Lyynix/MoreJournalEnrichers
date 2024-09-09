@@ -1,3 +1,4 @@
+import { editVariables } from "./enrichers/journalEnrichers.js";
 import { templates } from "./helpers.js";
 
 var activeSelectDocumentPromiseResolve;
@@ -54,6 +55,17 @@ export function initProsemirrorButtons() {
               title: "LMJE.PROSEMIRROR.ENRICHERS.TOC.otocs",
               action: "otocs",
               cmd: functions.insertToC.bind(options, true, true),
+            },
+          ],
+        },
+        {
+          title: "LMJE.PROSEMIRROR.ENRICHERS.JOURNAL.Category",
+          action: "journal-list",
+          children: [
+            {
+              title: "LMJE.PROSEMIRROR.ENRICHERS.JOURNAL.Variable",
+              action: "journal-variable",
+              cmd: functions.insertVariable.bind(options),
             },
           ],
         },
@@ -363,13 +375,17 @@ var functions = {
       .then((document) => {
         // console.log(document);
         getTextInputWithDialog(
-        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Alias"),
-        game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Alias"),
-        false
-      ).then((text) => {
+          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Alias"),
+          game.i18n.localize(
+            "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Alias"
+          ),
+          false
+        ).then((text) => {
           this.prosemirror.view.dispatch(
             this.prosemirror.view.state.tr
-              .insertText(`@${type}Full${getIdentifier(document, docType)}{${text}}`)
+              .insertText(
+                `@${type}Full${getIdentifier(document, docType)}{${text}}`
+              )
               .scrollIntoView()
           );
         });
@@ -388,15 +404,19 @@ var functions = {
 
         getTextInputWithDialog(
           game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Alias"),
-          game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Alias"),
+          game.i18n.localize(
+            "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Alias"
+          ),
           false
         ).then((text) => {
           this.prosemirror.view.dispatch(
             this.prosemirror.view.state.tr
-              .insertText(`@${type}Inline${getIdentifier(document, docType)}{${text}}`)
+              .insertText(
+                `@${type}Inline${getIdentifier(document, docType)}{${text}}`
+              )
               .scrollIntoView()
           );
-        })
+        });
       })
       .catch((reason) => {
         ui.notifications.warn(reason, { localize: true });
@@ -410,31 +430,90 @@ var functions = {
         game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Chat"),
         true
       );
-      text = text.replace(/\n\s*/gm, "; ")
+      text = text.replace(/\n\s*/gm, "; ");
 
       this.prosemirror.view.dispatch(
         this.prosemirror.view.state.tr
           .insertText(`@Chat${type}{${text}}`)
           .scrollIntoView()
       );
-    } catch (error) {
-            
-    }
+    } catch (error) {}
+  },
+  insertVariable: async function () {
+    getVariableName().then(
+      (key) => {
+        this.prosemirror.view.dispatch(
+          this.prosemirror.view.state.tr
+            .insertText(`@Var[${key}]`)
+            .scrollIntoView()
+        );
+      },
+      () => {}
+    );
   },
 };
+
+/**
+ * Lets the User pick a valid Variable key or create a new one.
+ * @returns
+ */
+async function getVariableName() {
+  return new Promise(async (resolve, reject) => {
+    var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
+    renderTemplate(templates.journal.chooseVariable, { keys: vars.keys }).then(
+      (html) => {
+        new Dialog({
+          title: game.i18n.localize(
+            "LMJE.JOURNAL.VARIABLE.chooseVariablesDialog.title"
+          ),
+          content: html,
+          buttons: {
+            submit: {
+              label: game.i18n.localize(
+                "LMJE.JOURNAL.VARIABLE.chooseVariablesDialog.submit"
+              ),
+              callback: () => {
+                var key = document.getElementById("LMJE_choosekey").value;
+                // console.log("LMJE |", key);
+
+                if (key === "new") {
+                  editVariables().then(
+                    (edit) => {
+                      if (edit.mode !== "edit") reject();
+
+                      resolve(edit.key);
+                    },
+                    () => reject()
+                  );
+                } else {
+                  resolve(key);
+                }
+              },
+              icon: `<i class="fas fa-save"></i>`,
+            },
+          },
+          default: "submit",
+        }).render(true);
+      }
+    );
+  });
+}
 
 /**
  * Prompts a Dialog window where the user should enter text.
  * @param {String} title The title of the dialog window
  * @param {String} description The description of the dialog window
  * @param {Boolean} multiline is the text input multiline
- * @returns 
+ * @returns
  */
 async function getTextInputWithDialog(title, description, multiline) {
   return new Promise(async (resolve, reject) => {
     new Dialog({
       title: title,
-      content: await renderTemplate(templates.prosemirror.enterTextFormApplication, {description: description, multiline: multiline}),
+      content: await renderTemplate(
+        templates.prosemirror.enterTextFormApplication,
+        { description: description, multiline: multiline }
+      ),
       buttons: {
         accept: {
           icon: '<i class="fas fa-check"></i>',

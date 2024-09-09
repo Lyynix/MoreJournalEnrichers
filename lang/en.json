@@ -50,6 +50,10 @@
           "delete": "Delete",
           "deleteResponse": "Successfully deleted variable"
         },
+        "chooseVariablesDialog": {
+          "title": "Choose Variable",
+          "submit": "Submit"
+        },
         "keyNotFound": "The key has no value"
       }
     },
@@ -123,6 +127,10 @@
           "tocs": "Table of Contents - This Journal",
           "otoc": "Ordered Table of Contents - Other Journal",
           "otocs": "Ordered Table of Contents - This Journal"
+        },
+        "JOURNAL": {
+          "Category": "Journal Enrichers",
+          "Variable": "Placeholder Text"
         },
         "SCENES": {
           "Category": "Scene Enrichers",

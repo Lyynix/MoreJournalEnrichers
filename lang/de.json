@@ -50,6 +50,10 @@
           "delete": "Löschen",
           "deleteResponse": "Variable wurde erfolgreich gelöscht"
         },
+        "chooseVariablesDialog": {
+          "title": "Variable auswählen",
+          "submit": "Einfügen"
+        },
         "keyNotFound": "Dieses Schlüsselwort hat keinen Inhalt"
       }
     },
@@ -123,6 +127,10 @@
           "tocs": "Inhaltsverzeichnis - Dieses Journal",
           "otoc": "Nummeriertes Inhaltsverzeichnis - Anderes Journal",
           "otocs": "Nummeriertes Inhaltsverzeichnis - Dieses Journal"
+        },
+        "JOURNAL": {
+          "Category": "Journal Enricher",
+          "Variable": "Platzhalter Text"
         },
         "SCENES": {
           "Category": "Szenen Enricher",

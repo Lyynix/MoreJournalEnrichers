@@ -61,11 +61,13 @@ export const templates = {
       "modules/lyynix-more-journal-enrichers/templates/journal/checkbox.hbs",
     editVariables:
       "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs",
+    chooseVariable:
+      "modules/lyynix-more-journal-enrichers/templates/journal/chooseVariableDialog.hbs",
     refPage:
       "modules/lyynix-more-journal-enrichers/templates/journal/refPage.hbs",
   },
   modules: {
-    polyglot: 
+    polyglot:
       "modules/lyynix-more-journal-enrichers/templates/polyglot/polyglot.hbs",
   },
 };
@@ -185,8 +187,8 @@ export const patterns = {
       .addName("Translate")
       .setReferenceTypes("TEXT", "SINGLE", false)
       .setLabelTypes("TEXT", "MULTIPLE", false)
-      .getRegex()
-  }
+      .getRegex(),
+  },
 };
 
 export const enricherFunctions = {
@@ -223,8 +225,8 @@ export const enricherFunctions = {
     inline: inlinePlaylist,
   },
   modules: {
-    polyglot: polyglot
-  }
+    polyglot: polyglot,
+  },
 };
 
 export async function getDocument(identifier, expectedDocumentType) {
