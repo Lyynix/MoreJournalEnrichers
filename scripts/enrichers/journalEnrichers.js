@@ -1,7 +1,7 @@
 import { getDocument, invalidHtml, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
-  console.log(match);
+  // console.log(match);
   var page;
   try {
     // Try to get JournalEntryPage with Reference from match[1] {}
