@@ -180,7 +180,7 @@ export async function checkbox(match, options) {
 }
 
 export async function ifChecked(match, options) {
-  console.log(match);
+  // console.log(match);
 
   var cbId = match[1];
   var content = match[2];
