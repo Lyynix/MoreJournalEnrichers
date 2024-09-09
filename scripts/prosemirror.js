@@ -176,115 +176,7 @@ export function initProsemirrorButtons() {
   });
 }
 
-async function selectDocument(expectedType) {
-  // array to store all maximized windows
-  activeSelectDocumentPrevMaxed = [];
-  activeSelectDocumentPrevWindows = [];
-
-  // teach user how to cancel selection
-  let humanBinding = KeybindingsConfig._humanizeBinding(
-    game.keybindings.bindings.get(
-      "lyynix-more-journal-enrichers.escapeFromSelectDocument"
-    )[0]
-  );
-  ui.notifications.info(
-    game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", {
-      keybinding: humanBinding,
-    })
-  );
-
-  // loop over all windows
-  Object.values(ui.windows).forEach(async (w) => {
-    activeSelectDocumentPrevWindows.push(w);
-    // ignore minimized windows
-    if (w._minimized) return;
-
-    // add maximized window and position to list
-    activeSelectDocumentPrevMaxed.push({
-      window: w,
-      position: { ...w.position },
-      minimized: w._minimized,
-      id: w.id,
-    });
-
-    // minimize window and move to top left
-    await w.maximize();
-    w.setPosition({ ...w.position, ...{ left: 0, top: 0 } });
-    w.minimize();
-  });
-
-  let result = new Promise((resolve, reject) => {
-    activeSelectDocumentPromiseResolve = resolve;
-    activeSelectDocumentPromiseReject = reject;
-  });
-
-  let hook;
-  let sidebarTab;
-  switch (expectedType) {
-    case "CompendiumCollection":
-      hook = "renderCompendium";
-      sidebarTab = "compendium";
-      break;
-    case "Scene":
-      hook = "renderDocumentSheet";
-      sidebarTab = "scenes";
-      break;
-    case "Playlist":
-      hook = "renderDocumentSheet";
-      sidebarTab = "playlists";
-      break;
-    case "RollTable":
-      hook = "renderDocumentSheet";
-      sidebarTab = "tables";
-      break;
-    case "JournalEntry":
-      hook = "renderDocumentSheet";
-      sidebarTab = "journal";
-      break;
-
-    default:
-      hook = "renderDocumentSheet";
-      sidebarTab = ui.sidebar.activeTab;
-      break;
-  }
-
-  ui.sidebar.activateTab(sidebarTab);
-
-  // Hooks on open Document Sheet (needs to be edited)
-  Hooks.once(hook, (config, dom, options) => {
-    setTimeout(() => {
-      resetPrevWindows();
-
-      switch (expectedType) {
-        case "CompendiumCollection":
-          if (config.collection.name === expectedType) {
-            activeSelectDocumentPromiseResolve(config.collection);
-          } else {
-            activeSelectDocumentPromiseReject(
-              "LMJE.PROSEMIRROR.INFO.WrongType"
-            );
-          }
-          break;
-
-        default:
-          if (config.document.documentName === expectedType) {
-            activeSelectDocumentPromiseResolve(config.document);
-          } else {
-            console.log(expectedType);
-            activeSelectDocumentPromiseReject(
-              "LMJE.PROSEMIRROR.INFO.WrongType"
-            );
-          }
-          break;
-      }
-      activeSelectDocumentPromiseResolve = undefined;
-      activeSelectDocumentPromiseReject = undefined;
-    }, 100);
-  });
-
-  return result;
-}
-
+//#region Functions
 var functions = {
   prosemirror: null,
   insertToC: function (selfDocument, ordered) {
@@ -452,6 +344,8 @@ var functions = {
     );
   },
 };
+//#endregion
+
 
 /**
  * Lets the User pick a valid Variable key or create a new one.
@@ -574,4 +468,114 @@ function getIdentifier(document, docType = "nan") {
     default:
       return `[${document.uuid}]`;
   }
+}
+
+
+async function selectDocument(expectedType) {
+  // array to store all maximized windows
+  activeSelectDocumentPrevMaxed = [];
+  activeSelectDocumentPrevWindows = [];
+
+  // teach user how to cancel selection
+  let humanBinding = KeybindingsConfig._humanizeBinding(
+    game.keybindings.bindings.get(
+      "lyynix-more-journal-enrichers.escapeFromSelectDocument"
+    )[0]
+  );
+  ui.notifications.info(
+    game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", {
+      keybinding: humanBinding,
+    })
+  );
+
+  // loop over all windows
+  Object.values(ui.windows).forEach(async (w) => {
+    activeSelectDocumentPrevWindows.push(w);
+    // ignore minimized windows
+    if (w._minimized) return;
+
+    // add maximized window and position to list
+    activeSelectDocumentPrevMaxed.push({
+      window: w,
+      position: { ...w.position },
+      minimized: w._minimized,
+      id: w.id,
+    });
+
+    // minimize window and move to top left
+    await w.maximize();
+    w.setPosition({ ...w.position, ...{ left: 0, top: 0 } });
+    w.minimize();
+  });
+
+  let result = new Promise((resolve, reject) => {
+    activeSelectDocumentPromiseResolve = resolve;
+    activeSelectDocumentPromiseReject = reject;
+  });
+
+  let hook;
+  let sidebarTab;
+  switch (expectedType) {
+    case "CompendiumCollection":
+      hook = "renderCompendium";
+      sidebarTab = "compendium";
+      break;
+    case "Scene":
+      hook = "renderDocumentSheet";
+      sidebarTab = "scenes";
+      break;
+    case "Playlist":
+      hook = "renderDocumentSheet";
+      sidebarTab = "playlists";
+      break;
+    case "RollTable":
+      hook = "renderDocumentSheet";
+      sidebarTab = "tables";
+      break;
+    case "JournalEntry":
+      hook = "renderDocumentSheet";
+      sidebarTab = "journal";
+      break;
+
+    default:
+      hook = "renderDocumentSheet";
+      sidebarTab = ui.sidebar.activeTab;
+      break;
+  }
+
+  ui.sidebar.activateTab(sidebarTab);
+
+  // Hooks on open Document Sheet (needs to be edited)
+  Hooks.once(hook, (config, dom, options) => {
+    setTimeout(() => {
+      resetPrevWindows();
+
+      switch (expectedType) {
+        case "CompendiumCollection":
+          if (config.collection.name === expectedType) {
+            activeSelectDocumentPromiseResolve(config.collection);
+          } else {
+            activeSelectDocumentPromiseReject(
+              "LMJE.PROSEMIRROR.INFO.WrongType"
+            );
+          }
+          break;
+
+        default:
+          if (config.document.documentName === expectedType) {
+            activeSelectDocumentPromiseResolve(config.document);
+          } else {
+            console.log(expectedType);
+            activeSelectDocumentPromiseReject(
+              "LMJE.PROSEMIRROR.INFO.WrongType"
+            );
+          }
+          break;
+      }
+      activeSelectDocumentPromiseResolve = undefined;
+      activeSelectDocumentPromiseReject = undefined;
+    }, 100);
+  });
+
+  return result;
 }
