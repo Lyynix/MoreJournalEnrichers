@@ -110,11 +110,19 @@
       "TEXTINPUTDIALOG": {
         "TITLE": {
           "Alias": "Alias eingeben.",
-          "Chat": "Chatnachricht eingeben"
+          "Chat": "Chatnachricht eingeben",
+          "Checkbox": "Name der Checkbox eingeben",
+          "CBLabel": "Beschriftung der Checkbox eingeben",
+          "IfChecked": "Name der Checkbox eingeben",
+          "IfCheckedContent": "Text eingeben"
         },
         "DESCRIPTION": {
-          "Alias": "Gib einen alternativen Titel ein. Leer lassen oder Abbrechen klicken, um keinen Alias zu vergeben",
-          "Chat": "Gib die Nachricht ein, die in den Chat geschickt werden soll."
+          "Alias": "Gib einen alternativen Titel ein. Leer lassen oder Abbrechen klicken, um keinen Alias zu vergeben.",
+          "Chat": "Gib die Nachricht ein, die in den Chat geschickt werden soll.",
+          "Checkbox": "Gib den einzigartigen Namen für die Checkbox ein. Der Name wird nicht neben der Checkbox angezeigt und dient der internen Identifikation.",
+          "CBLabel": "Gib die Beschriftung der Checkbox ein. Die Beschriftung wird neben der Checkbox angezeigt. Leer lassen oder Abbrechen klicken um keine Beschriftung zu vergeben.",
+          "IfChecked": "Gib den einzigartigen Namen der Checkbox ein, die verwendet werden soll.",
+          "IfCheckedContent": "Gib den Text ein, der beim aktivieren der Checkbox gezeigt werden soll."
         },
         "Accept": "Akzeptieren",
         "Cancel": "Abbrechen"
@@ -130,7 +138,9 @@
         },
         "JOURNAL": {
           "Category": "Journal Enricher",
-          "Variable": "Platzhalter Text"
+          "Variable": "Platzhalter Text",
+          "Checkbox": "Checkbox",
+          "IfChecked": "Bedingter Text"
         },
         "SCENES": {
           "Category": "Szenen Enricher",

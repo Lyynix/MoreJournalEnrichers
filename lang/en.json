@@ -110,11 +110,19 @@
       "TEXTINPUTDIALOG": {
         "TITLE": {
           "Alias": "Enter alias",
-          "Chat": "Enter chat message"
+          "Chat": "Enter chat message",
+          "Checkbox": "Enter checkbox name",
+          "CBLabel": "Enter the label for the checkbox",
+          "IfChecked": "Enter checkbox name",
+          "IfCheckedContent": "Enter text"
         },
         "DESCRIPTION": {
           "Alias": "Enter an alternative label. Leave blank or click on cancel to not assign an alias.",
-          "Chat": "Enter the message that should be sent to the chat."
+          "Chat": "Enter the message that should be sent to the chat.",
+          "Checkbox": "Enter the unique name for the Checkbox. This name will not be shown next to the checkbox and is used internally as an identifier.",
+          "CBLabel": "Enter the Label that will be displayed next to the checkbox. Leave blank or press Cancel to not have a label.",
+          "IfChecked": "Enter the unique name of the checkbox that should be used.",
+          "IfCheckedContent": "Enter the text, that should be shown when the checkbox is checked."
         },
         "Accept": "Accept",
         "Cancel": "Cancel"
@@ -130,7 +138,9 @@
         },
         "JOURNAL": {
           "Category": "Journal Enrichers",
-          "Variable": "Placeholder Text"
+          "Variable": "Placeholder Text",
+          "Checkbox": "Checkbox",
+          "IfChecked": "Conditional Text"
         },
         "SCENES": {
           "Category": "Scene Enrichers",

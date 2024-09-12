@@ -1,17 +1,19 @@
 import { editVariables } from "./enrichers/journalEnrichers.js";
 import { templates } from "./helpers.js";
 
+// static variables
 var activeSelectDocumentPromiseResolve;
 var activeSelectDocumentPromiseReject;
 var activeSelectDocumentPrevMaxed;
 var activeSelectDocumentPrevWindows;
 
+//#region initialization
 export function initProsemirrorButtons() {
   game.keybindings.register(
     "lyynix-more-journal-enrichers",
     "escapeFromSelectDocument",
     {
-      name: "Excape from select Socument",
+      name: "Escape from select Socument",
       editable: [{ key: "Escape" }],
       onDown: () => {
         if (activeSelectDocumentPromiseReject != undefined)
@@ -67,17 +69,27 @@ export function initProsemirrorButtons() {
               action: "journal-variable",
               cmd: functions.insertVariable.bind(options),
             },
+            {
+              title: "LMJE.PROSEMIRROR.ENRICHERS.JOURNAL.Checkbox",
+              action: "journal-checkbox",
+              cmd: functions.insertCheckbox.bind(options),
+            },
+            {
+              title: "LMJE.PROSEMIRROR.ENRICHERS.JOURNAL.IfChecked",
+              action: "journal-ifchecked",
+              cmd: functions.insertIfChecked.bind(options),
+            },
           ],
         },
         {
           title: "LMJE.PROSEMIRROR.ENRICHERS.SCENES.Category",
           action: "scene-list",
           children: [
-            {
-              title: "LMJE.PROSEMIRROR.ENRICHERS.SCENES.Menu",
-              action: "scene-menu",
-              cmd: functions.insertMenu.bind(options, "Scene", "Scene"),
-            },
+            // {
+            //   title: "LMJE.PROSEMIRROR.ENRICHERS.SCENES.Menu",
+            //   action: "scene-menu",
+            //   cmd: functions.insertMenu.bind(options, "Scene", "Scene"),
+            // },
             {
               title: "LMJE.PROSEMIRROR.ENRICHERS.SCENES.Full",
               action: "scene-full",
@@ -94,11 +106,11 @@ export function initProsemirrorButtons() {
           title: "LMJE.PROSEMIRROR.ENRICHERS.ROLLTABLES.Category",
           action: "roltable-list",
           children: [
-            {
-              title: "LMJE.PROSEMIRROR.ENRICHERS.ROLLTABLES.Menu",
-              action: "rolltable-menu",
-              cmd: functions.insertMenu.bind(options, "RollTable", "RollTable"),
-            },
+            // {
+            //   title: "LMJE.PROSEMIRROR.ENRICHERS.ROLLTABLES.Menu",
+            //   action: "rolltable-menu",
+            //   cmd: functions.insertMenu.bind(options, "RollTable", "RollTable"),
+            // },
             {
               title: "LMJE.PROSEMIRROR.ENRICHERS.ROLLTABLES.Full",
               action: "rolltable-full",
@@ -119,11 +131,11 @@ export function initProsemirrorButtons() {
           title: "LMJE.PROSEMIRROR.ENRICHERS.PLAYLIST.Category",
           action: "playlist-list",
           children: [
-            {
-              title: "LMJE.PROSEMIRROR.ENRICHERS.PLAYLIST.Menu",
-              action: "playlist-menu",
-              cmd: functions.insertMenu.bind(options, "Playlist", "Playlist"),
-            },
+            // {
+            //   title: "LMJE.PROSEMIRROR.ENRICHERS.PLAYLIST.Menu",
+            //   action: "playlist-menu",
+            //   cmd: functions.insertMenu.bind(options, "Playlist", "Playlist"),
+            // },
             {
               title: "LMJE.PROSEMIRROR.ENRICHERS.PLAYLIST.Inline",
               action: "playlist-inline",
@@ -175,6 +187,7 @@ export function initProsemirrorButtons() {
     };
   });
 }
+//#endregion
 
 //#region Functions
 var functions = {
@@ -276,7 +289,9 @@ var functions = {
           this.prosemirror.view.dispatch(
             this.prosemirror.view.state.tr
               .insertText(
-                `@${type}Full${getIdentifier(document, docType)}{${text}}`
+                !text
+                  ? `@${type}Full${getIdentifier(document, docType)}`
+                  : `@${type}Full${getIdentifier(document, docType)}{${text}}`
               )
               .scrollIntoView()
           );
@@ -304,7 +319,9 @@ var functions = {
           this.prosemirror.view.dispatch(
             this.prosemirror.view.state.tr
               .insertText(
-                `@${type}Inline${getIdentifier(document, docType)}{${text}}`
+                !text
+                  ? `@${type}Inline${getIdentifier(document, docType)}`
+                  : `@${type}Inline${getIdentifier(document, docType)}{${text}}`
               )
               .scrollIntoView()
           );
@@ -322,7 +339,7 @@ var functions = {
         game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Chat"),
         true
       );
-      text = text.replace(/\n\s*/gm, "; ");
+      text = convertLineBreak(text);
 
       this.prosemirror.view.dispatch(
         this.prosemirror.view.state.tr
@@ -343,9 +360,64 @@ var functions = {
       () => {}
     );
   },
-};
-//#endregion
+  insertCheckbox: async function () {
+    let cbname = await getTextInputWithDialog(
+      game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Checkbox"),
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Checkbox"
+      ),
+      false
+    );
+    let cbalias;
+    cbalias = await getTextInputWithDialog(
+      game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.CBLabel"),
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.CBLabel"
+      ),
+      false
+    ).catch(() => (cbalias = ""));
+    this.prosemirror.view.dispatch(
+      this.prosemirror.view.state.tr
+        .insertText(!cbalias ? `@CB[${cbname}]` : `@CB[${cbname}]{${cbalias}}`)
+        .scrollIntoView()
+    );
+  },
+  insertIfChecked: async function () {
+    let checkboxes = game.settings.get('lyynix-more-journal-enrichers', 'checkboxes');
+    let checkboxnames = Object.keys(checkboxes)
 
+    let cbname = await getTextInputWithDialog(
+      game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.IfChecked"),
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.IfChecked"
+      ),
+      false,
+      checkboxnames
+    );
+    let cbcontent = await getTextInputWithDialog(
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.IfCheckedContent"
+      ),
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.IfCheckedContent"
+      ),
+      true
+    );
+    cbcontent = convertLineBreak(cbcontent);
+
+    this.prosemirror.view.dispatch(
+      this.prosemirror.view.state.tr
+        .insertText(`@IfChecked[${cbname}]{${cbcontent}}`)
+        .scrollIntoView()
+    );
+  },
+};
+function convertLineBreak(text) {
+  text = text.replace(/(\n+\s*)+/gm, "; ");
+  return text;
+}
+
+//#endregion
 
 /**
  * Lets the User pick a valid Variable key or create a new one.
@@ -400,13 +472,13 @@ async function getVariableName() {
  * @param {Boolean} multiline is the text input multiline
  * @returns
  */
-async function getTextInputWithDialog(title, description, multiline) {
+async function getTextInputWithDialog(title, description, multiline, autocompletelist) {
   return new Promise(async (resolve, reject) => {
     new Dialog({
       title: title,
       content: await renderTemplate(
         templates.prosemirror.enterTextFormApplication,
-        { description: description, multiline: multiline }
+        { description: description, multiline: multiline, autocompletelist: autocompletelist }
       ),
       buttons: {
         accept: {
@@ -469,7 +541,6 @@ function getIdentifier(document, docType = "nan") {
       return `[${document.uuid}]`;
   }
 }
-
 
 async function selectDocument(expectedType) {
   // array to store all maximized windows
