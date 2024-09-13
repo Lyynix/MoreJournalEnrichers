@@ -183,6 +183,11 @@ export function initProsemirrorButtons() {
             },
           ],
         },
+        {
+          title: "LMJE.PROSEMIRROR.ENRICHERS.Polyglot",
+          action: "polyglot",
+          cmd: functions.insertPolyglot.bind(options),
+        },
       ],
     };
   });
@@ -411,6 +416,31 @@ var functions = {
         .scrollIntoView()
     );
   },
+  insertPolyglot: async function () {
+    let polyglotLanguage = await getTextInputWithDialog(
+      game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.PolyglotLanguage"),
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.PolyglotLanguage"
+      ),
+      false,
+      game.polyglot.knownLanguages
+    );
+    let polyglotText = await getTextInputWithDialog(
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.PolyglotText"
+      ),
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.PolyglotText"
+      ),
+      true
+    );
+
+    this.prosemirror.view.dispatch(
+      this.prosemirror.view.state.tr
+        .insertText(`@Polyglot[${polyglotLanguage}]{${convertLineBreak(polyglotText)}}`)
+        .scrollIntoView()
+    );
+  }
 };
 function convertLineBreak(text) {
   text = text.replace(/(\n+\s*)+/gm, "; ");
