@@ -1,7 +1,8 @@
+import { EnricherPattern } from "../enricherPattern.js";
 import { splitMultiline, templates } from "../helpers.js";
 
 export async function chat(match, options) {
-  var message = splitMultiline(match[1]);
+  var message = splitMultiline(match[1], EnricherPattern.SEPARATOR);
 
   var onClick = `
     ChatMessage.create({
@@ -21,7 +22,7 @@ export async function chat(match, options) {
 }
 
 export async function whisper(match, options) {
-  var message = splitMultiline(match[1]);
+  var message = splitMultiline(match[1], EnricherPattern.SEPARATOR);
 
   var otherUsers = game.users.filter((x) => {
     return !x.isSelf;
