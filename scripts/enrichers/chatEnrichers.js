@@ -1,7 +1,7 @@
-import { templates } from "../helpers.js";
+import { splitMultiline, templates } from "../helpers.js";
 
 export async function chat(match, options) {
-  var message = match[1];
+  var message = splitMultiline(match[1]);
 
   var onClick = `
     ChatMessage.create({
@@ -21,7 +21,7 @@ export async function chat(match, options) {
 }
 
 export async function whisper(match, options) {
-  var message = match[1];
+  var message = splitMultiline(match[1]);
 
   var otherUsers = game.users.filter((x) => {
     return !x.isSelf;

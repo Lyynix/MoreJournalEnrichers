@@ -1,4 +1,5 @@
-import { getDocument, invalidHtml, templates } from "../helpers.js";
+import { EnricherPattern } from "../enricherPattern.js";
+import { getDocument, invalidHtml, splitMultiline, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
   // console.log(match);
@@ -200,10 +201,14 @@ export async function ifChecked(match, options) {
       invalidHtml(game.i18n.localize("LMJE.JOURNAL.CHECKBOX.idNotFound"))
     )[0];
 
-  var html = "<span>" + content + "</span>";
+  var html = splitMultiline(content);
   var enriched = await TextEditor.enrichHTML(html, options);
-  var dependent = checkboxes[cbId] ? enriched : "<span/>";
-  return $(dependent)[0];
+  var conditional = checkboxes[cbId] ? enriched : "<span/>";
+
+  console.log("LMJE | \n\n", html, "\n\n", enriched, $(conditional));
+  
+
+  return $(conditional)[0];
 }
 //#endregion
 

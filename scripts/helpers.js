@@ -388,6 +388,18 @@ export async function postChangelogDifference(current, lastLogged) {
   console.log("LMJE | created changelog");
 }
 
+
+/**
+ * Splits a String into multiple <p> at a separator
+ * @param {String} content The string that should be split at the given separator
+ * @param {RegExp | String} separator The separator at wich the content gets split
+ * @returns String as html with multiple <p> elements
+ */
+export function splitMultiline(content, separator) {
+  return `<span><p>${content.split(separator).join("</p><p>")}</p></span>`;
+}
+
+
 export function invalidHtml(error) {
   return /* html */ `
     <a class="content-link broken" draggable="true" data-id="null" data-uuid="asd">
