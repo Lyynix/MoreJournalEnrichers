@@ -201,7 +201,7 @@ export async function ifChecked(match, options) {
       invalidHtml(game.i18n.localize("LMJE.JOURNAL.CHECKBOX.idNotFound"))
     )[0];
 
-  var html = splitMultiline(content);
+  var html = splitMultiline(content, EnricherPattern.SEPARATOR);
   var enriched = await TextEditor.enrichHTML(html, options);
   var conditional = checkboxes[cbId] ? enriched : "<span/>";
 
