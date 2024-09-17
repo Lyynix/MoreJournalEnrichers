@@ -515,7 +515,7 @@ async function getTextInputWithDialog(title, description, multiline, autocomplet
           icon: '<i class="fas fa-check"></i>',
           label: game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.Accept"),
           callback: () => {
-            let text = $("#lmje-enricher-text").first().val();
+            let text = $("#lmje-enricher-text").first().val().trim();
             resolve(text);
           },
         },
