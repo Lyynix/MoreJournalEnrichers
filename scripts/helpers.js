@@ -57,6 +57,8 @@ export const templates = {
     full: "modules/lyynix-more-journal-enrichers/templates/scene/sceneFull.hbs",
   },
   journal: {
+    chooseString:
+      "modules/lyynix-more-journal-enrichers/templates/journal/chooseStringDialog.hbs",
     checkbox:
       "modules/lyynix-more-journal-enrichers/templates/journal/checkbox.hbs",
     editVariables:
@@ -388,7 +390,6 @@ export async function postChangelogDifference(current, lastLogged) {
   console.log("LMJE | created changelog");
 }
 
-
 /**
  * Splits a String into multiple <p> at a separator
  * @param {String} content The string that should be split at the given separator
@@ -398,7 +399,6 @@ export async function postChangelogDifference(current, lastLogged) {
 export function splitMultiline(content, separator) {
   return `<span><p>${content.split(separator).join("</p><p>")}</p></span>`;
 }
-
 
 export function invalidHtml(error) {
   return /* html */ `

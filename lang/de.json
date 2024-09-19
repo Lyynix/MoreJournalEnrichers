@@ -116,7 +116,8 @@
           "IfChecked": "Name der Checkbox eingeben",
           "IfCheckedContent": "Text eingeben",
           "PolyglotLanguage": "Sprache eingeben",
-          "PolyglotText": "Text eingeben"
+          "PolyglotText": "Text eingeben",
+          "Page": "Seite auswählen"
         },
         "DESCRIPTION": {
           "Alias": "Gib einen alternativen Titel ein. Leer lassen oder Abbrechen klicken, um keinen Alias zu vergeben.",
@@ -126,7 +127,8 @@
           "IfChecked": "Gib den einzigartigen Namen der Checkbox ein, die verwendet werden soll.",
           "IfCheckedContent": "Gib den Text ein, der beim aktivieren der Checkbox gezeigt werden soll.",
           "PolyglotLanguage": "Gib die Sprache ein, in der der Text angezeigt werden soll.",
-          "PolyglotText": "Gib den Text ein, der in der eingegebenen Sprache angezeigt werden soll."
+          "PolyglotText": "Gib den Text ein, der in der eingegebenen Sprache angezeigt werden soll.",
+          "Page": "Bitte wähle eine Seite aus dem Journal, die eingefügt werden soll."
         },
         "Accept": "Akzeptieren",
         "Cancel": "Abbrechen"
@@ -141,6 +143,7 @@
           "otocs": "Nummeriertes Inhaltsverzeichnis - Dieses Journal"
         },
         "JOURNAL": {
+          "Page": "Jouranlseite",
           "Category": "Journal Enricher",
           "Variable": "Platzhalter Text",
           "Checkbox": "Checkbox",

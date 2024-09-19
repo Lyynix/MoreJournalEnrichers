@@ -65,6 +65,11 @@ export function initProsemirrorButtons() {
           action: "journal-list",
           children: [
             {
+              title: "LMJE.PROSEMIRROR.ENRICHERS.JOURNAL.Page",
+              action: "journal-page",
+              cmd: functions.insertPage.bind(options),
+            },
+            {
               title: "LMJE.PROSEMIRROR.ENRICHERS.JOURNAL.Variable",
               action: "journal-variable",
               cmd: functions.insertVariable.bind(options),
@@ -388,8 +393,11 @@ var functions = {
     );
   },
   insertIfChecked: async function () {
-    let checkboxes = game.settings.get('lyynix-more-journal-enrichers', 'checkboxes');
-    let checkboxnames = Object.keys(checkboxes)
+    let checkboxes = game.settings.get(
+      "lyynix-more-journal-enrichers",
+      "checkboxes"
+    );
+    let checkboxnames = Object.keys(checkboxes);
 
     let cbname = await getTextInputWithDialog(
       game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.IfChecked"),
@@ -418,7 +426,9 @@ var functions = {
   },
   insertPolyglot: async function () {
     let polyglotLanguage = await getTextInputWithDialog(
-      game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.PolyglotLanguage"),
+      game.i18n.localize(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.PolyglotLanguage"
+      ),
       game.i18n.localize(
         "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.PolyglotLanguage"
       ),
@@ -426,9 +436,7 @@ var functions = {
       game.polyglot.knownLanguages
     );
     let polyglotText = await getTextInputWithDialog(
-      game.i18n.localize(
-        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.PolyglotText"
-      ),
+      game.i18n.localize("LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.PolyglotText"),
       game.i18n.localize(
         "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.PolyglotText"
       ),
@@ -437,10 +445,37 @@ var functions = {
 
     this.prosemirror.view.dispatch(
       this.prosemirror.view.state.tr
-        .insertText(`@Polyglot[${polyglotLanguage}]{${convertLineBreak(polyglotText)}}`)
+        .insertText(
+          `@Polyglot[${polyglotLanguage}]{${convertLineBreak(polyglotText)}}`
+        )
         .scrollIntoView()
     );
-  }
+  },
+  insertPage: function () {
+    selectDocument("JournalEntry", false).then((document) => {
+      var pageNames = document.pages.contents.map((d) => d.name);
+
+      setTimeout(() => {
+        document.sheet.minimize();
+      }, 150);
+
+      getFromListWithDialog(
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.TITLE.Page",
+        "LMJE.PROSEMIRROR.TEXTINPUTDIALOG.DESCRIPTION.Page",
+        pageNames
+      ).then((pageName) => {
+        var page = document.pages.getName(pageName);
+
+        resetPrevWindows();
+
+        this.prosemirror.view.dispatch(
+          this.prosemirror.view.state.tr
+            .insertText(`@Page[${page.uuid}]`)
+            .scrollIntoView()
+        );
+      });
+    });
+  },
 };
 function convertLineBreak(text) {
   text = text.replace(/(\n+\s*)+/gm, "; ");
@@ -448,6 +483,33 @@ function convertLineBreak(text) {
 }
 
 //#endregion
+
+async function getFromListWithDialog(title, description, strings) {
+  return new Promise(async (resolve, reject) => {
+    var html = await renderTemplate(templates.journal.chooseString, {
+      description: description,
+      strings: strings,
+    });
+    new Dialog({
+      title: game.i18n.localize(title),
+      content: html,
+      buttons: {
+        submit: {
+          label: game.i18n.localize(
+            "LMJE.JOURNAL.VARIABLE.chooseVariablesDialog.submit"
+          ),
+          callback: () => {
+            var selected = document.querySelector('input[name="selectFromList"]:checked')
+            resolve(
+              selected.value
+            );
+          },
+        },
+      },
+      default: "submit",
+    }).render(true);
+  });
+}
 
 /**
  * Lets the User pick a valid Variable key or create a new one.
@@ -502,13 +564,22 @@ async function getVariableName() {
  * @param {Boolean} multiline is the text input multiline
  * @returns
  */
-async function getTextInputWithDialog(title, description, multiline, autocompletelist) {
+async function getTextInputWithDialog(
+  title,
+  description,
+  multiline,
+  autocompletelist
+) {
   return new Promise(async (resolve, reject) => {
     new Dialog({
       title: title,
       content: await renderTemplate(
         templates.prosemirror.enterTextFormApplication,
-        { description: description, multiline: multiline, autocompletelist: autocompletelist }
+        {
+          description: description,
+          multiline: multiline,
+          autocompletelist: autocompletelist,
+        }
       ),
       buttons: {
         accept: {
@@ -572,7 +643,13 @@ function getIdentifier(document, docType = "nan") {
   }
 }
 
-async function selectDocument(expectedType) {
+/**
+ * Prompts the user to select a document by clicking.
+ * @param {String} expectedType The type of the document (CompendiumCollection, Scene, Playlist, RollTable, JournalEntry)
+ * @param {Boolean} resetWindows optionally does not reset opened windows. Need to be reset manually by calling resetPrevWindows()
+ * @returns Promise that resolves into the document that got selected by the user
+ */
+async function selectDocument(expectedType, resetWindows = true) {
   // array to store all maximized windows
   activeSelectDocumentPrevMaxed = [];
   activeSelectDocumentPrevWindows = [];
@@ -649,7 +726,7 @@ async function selectDocument(expectedType) {
   // Hooks on open Document Sheet (needs to be edited)
   Hooks.once(hook, (config, dom, options) => {
     setTimeout(() => {
-      resetPrevWindows();
+      if (resetWindows) resetPrevWindows();
 
       switch (expectedType) {
         case "CompendiumCollection":
@@ -666,7 +743,7 @@ async function selectDocument(expectedType) {
           if (config.document.documentName === expectedType) {
             activeSelectDocumentPromiseResolve(config.document);
           } else {
-            console.log(expectedType);
+            // console.log(expectedType);
             activeSelectDocumentPromiseReject(
               "LMJE.PROSEMIRROR.INFO.WrongType"
             );

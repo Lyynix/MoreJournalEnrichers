@@ -116,7 +116,8 @@
           "IfChecked": "Enter checkbox name",
           "IfCheckedContent": "Enter text",
           "PolyglotLanguage": "Enter Language",
-          "PolyglotText": "Enter text"
+          "PolyglotText": "Enter text",
+          "Page": "Select Page"
         },
         "DESCRIPTION": {
           "Alias": "Enter an alternative label. Leave blank or click on cancel to not assign an alias.",
@@ -126,7 +127,8 @@
           "IfChecked": "Enter the unique name of the checkbox that should be used.",
           "IfCheckedContent": "Enter the text, that should be shown when the checkbox is checked.",
           "PolyglotLanguage": "Enter the Language in which the Text should be displayed.",
-          "PolyglotText": "Enter the Text that should be displayed in the chosen language."
+          "PolyglotText": "Enter the Text that should be displayed in the chosen language.",
+          "Page": "Please select a page from the journal that should be inserted."
         },
         "Accept": "Accept",
         "Cancel": "Cancel"
@@ -141,6 +143,7 @@
           "otocs": "Ordered Table of Contents - This Journal"
         },
         "JOURNAL": {
+          "Page": "Journal Page",
           "Category": "Journal Enrichers",
           "Variable": "Placeholder Text",
           "Checkbox": "Checkbox",
