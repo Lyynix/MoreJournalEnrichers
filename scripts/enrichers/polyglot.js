@@ -1,12 +1,11 @@
 import { EnricherPattern } from "../enricherPattern.js";
-import { invalidHtml, templates } from "../helpers.js";
+import { invalidHtml, splitMultiline, templates } from "../helpers.js";
 
 export async function polyglot(match, options) {
   let langIn = match[1].toLowerCase();
-  let paragraphs = match[2].split(EnricherPattern.SEPARATOR);
 
   if (!game.modules.get("polyglot").active) {
-    let html = `<div>${paragraphs.map((p) => `<p>${p}</p>`).join("")}</div>`;
+    let html = splitMultiline(match[2], EnricherPattern.SEPARATOR);
     return $(html)[0];
   }
 
@@ -14,6 +13,8 @@ export async function polyglot(match, options) {
   if (!lang) {
     return $(invalidHtml("Polyglot: " + game.i18n.localize("LMJE.POLYGLOT.UnknownLanguage")))[0];
   }
+  
+  let paragraphs = match[2].split(EnricherPattern.SEPARATOR);
   let scrambledParagraphs = paragraphs.map(p => game.polyglot.scrambleString(p))
   let canUserUnderstand = game.polyglot.isLanguageknownOrUnderstood(langIn)
 

@@ -1,0 +1,21 @@
+{{!-- {
+  multiline: this.multiline,
+  text: this.text,
+  autocompletelist [string, ...]
+}; --}}
+
+<div>
+  <p>{{description}}</p>
+  {{#if multiline}}
+  <textarea name="lmjeEnricherText" id="lmje-enricher-text" cols="40" rows="10"></textarea>
+  {{else}}
+  <input type="text" name="lmjeEnricherText" id="lmje-enricher-text" list="lmjeEnricherCompleteList" autocomplete="on">
+    {{#if (isdefined autocompletelist)}}
+    <datalist id="lmjeEnricherCompleteList">
+      {{#each autocompletelist as |autocompleteelement|}}
+      <option value="{{autocompleteelement}}">
+      {{/each}}
+    </datalist>
+    {{/if}}
+  {{/if}}
+</div>

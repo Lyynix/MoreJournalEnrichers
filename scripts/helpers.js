@@ -29,7 +29,9 @@ import {
 export const templates = {
   prosemirror: {
     insertEnricher:
-    "modules/lyynix-more-journal-enrichers/templates/prosemirror/inser-enricher.hbs",
+      "modules/lyynix-more-journal-enrichers/templates/prosemirror/inser-enricher.hbs",
+    enterTextFormApplication:
+      "modules/lyynix-more-journal-enrichers/templates/prosemirror/enterText-Application.hbs",
   },
   system: {
     welcomeMessage:
@@ -55,15 +57,19 @@ export const templates = {
     full: "modules/lyynix-more-journal-enrichers/templates/scene/sceneFull.hbs",
   },
   journal: {
+    chooseString:
+      "modules/lyynix-more-journal-enrichers/templates/journal/chooseStringDialog.hbs",
     checkbox:
       "modules/lyynix-more-journal-enrichers/templates/journal/checkbox.hbs",
     editVariables:
       "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs",
+    chooseVariable:
+      "modules/lyynix-more-journal-enrichers/templates/journal/chooseVariableDialog.hbs",
     refPage:
       "modules/lyynix-more-journal-enrichers/templates/journal/refPage.hbs",
   },
   modules: {
-    polyglot: 
+    polyglot:
       "modules/lyynix-more-journal-enrichers/templates/polyglot/polyglot.hbs",
   },
 };
@@ -183,8 +189,8 @@ export const patterns = {
       .addName("Translate")
       .setReferenceTypes("TEXT", "SINGLE", false)
       .setLabelTypes("TEXT", "MULTIPLE", false)
-      .getRegex()
-  }
+      .getRegex(),
+  },
 };
 
 export const enricherFunctions = {
@@ -221,8 +227,8 @@ export const enricherFunctions = {
     inline: inlinePlaylist,
   },
   modules: {
-    polyglot: polyglot
-  }
+    polyglot: polyglot,
+  },
 };
 
 export async function getDocument(identifier, expectedDocumentType) {
@@ -383,6 +389,16 @@ export async function postChangelogDifference(current, lastLogged) {
     game.modules.get("lyynix-more-journal-enrichers").version
   );
   log("created changelog");
+}
+
+/**
+ * Splits a String into multiple <p> at a separator
+ * @param {String} content The string that should be split at the given separator
+ * @param {RegExp | String} separator The separator at wich the content gets split
+ * @returns String as html with multiple <p> elements
+ */
+export function splitMultiline(content, separator) {
+  return `<span><p>${content.split(separator).join("</p><p>")}</p></span>`;
 }
 
 export function invalidHtml(error) {

@@ -50,6 +50,10 @@
           "delete": "Löschen",
           "deleteResponse": "Variable wurde erfolgreich gelöscht"
         },
+        "chooseVariablesDialog": {
+          "title": "Variable auswählen",
+          "submit": "Einfügen"
+        },
         "keyNotFound": "Dieses Schlüsselwort hat keinen Inhalt"
       }
     },
@@ -100,16 +104,50 @@
       "INFO": {
         "Cancel": "[{keybinding}] drücken, um das Auswählen abzubrechen.",
         "Cancelled": "Auswählen wurde abgebrochen.",
-        "WrongType": "Das ausgewählte Dokument ist vom falschen Typ."
+        "WrongType": "Das ausgewählte Dokument ist vom falschen Typ.",
+        "AddedDocument": "Das ausgewählte Dokument wurde zum Enricher hinzugefügt: {docName}"
+      },
+      "TEXTINPUTDIALOG": {
+        "TITLE": {
+          "Alias": "Alias eingeben.",
+          "Chat": "Chatnachricht eingeben",
+          "Checkbox": "Name der Checkbox eingeben",
+          "CBLabel": "Beschriftung der Checkbox eingeben",
+          "IfChecked": "Name der Checkbox eingeben",
+          "IfCheckedContent": "Text eingeben",
+          "PolyglotLanguage": "Sprache eingeben",
+          "PolyglotText": "Text eingeben",
+          "Page": "Seite auswählen"
+        },
+        "DESCRIPTION": {
+          "Alias": "Gib einen alternativen Titel ein. Leer lassen oder Abbrechen klicken, um keinen Alias zu vergeben.",
+          "Chat": "Gib die Nachricht ein, die in den Chat geschickt werden soll.",
+          "Checkbox": "Gib den einzigartigen Namen für die Checkbox ein. Der Name wird nicht neben der Checkbox angezeigt und dient der internen Identifikation.",
+          "CBLabel": "Gib die Beschriftung der Checkbox ein. Die Beschriftung wird neben der Checkbox angezeigt. Leer lassen oder Abbrechen klicken um keine Beschriftung zu vergeben.",
+          "IfChecked": "Gib den einzigartigen Namen der Checkbox ein, die verwendet werden soll.",
+          "IfCheckedContent": "Gib den Text ein, der beim aktivieren der Checkbox gezeigt werden soll.",
+          "PolyglotLanguage": "Gib die Sprache ein, in der der Text angezeigt werden soll.",
+          "PolyglotText": "Gib den Text ein, der in der eingegebenen Sprache angezeigt werden soll.",
+          "Page": "Bitte wähle eine Seite aus dem Journal, die eingefügt werden soll."
+        },
+        "Accept": "Akzeptieren",
+        "Cancel": "Abbrechen"
       },
       "ENRICHERS": {
-        "MenuTitle": "Enricher Einfügen",
+        "MenuTitle": "Enricher",
         "TOC": {
           "Category": "Inhaltsverzeichnis",
           "toc": "Inhaltsverzeichnis - Anderes Journal",
           "tocs": "Inhaltsverzeichnis - Dieses Journal",
           "otoc": "Nummeriertes Inhaltsverzeichnis - Anderes Journal",
           "otocs": "Nummeriertes Inhaltsverzeichnis - Dieses Journal"
+        },
+        "JOURNAL": {
+          "Page": "Jouranlseite",
+          "Category": "Journal Enricher",
+          "Variable": "Platzhalter Text",
+          "Checkbox": "Checkbox",
+          "IfChecked": "Bedingter Text"
         },
         "SCENES": {
           "Category": "Szenen Enricher",
@@ -130,14 +168,15 @@
         },
         "COMPENDIUM": {
           "Category": "Kompendium Enricher",
-          "Full": "Full Kompendium",
+          "Full": "Komplettes Kompendium",
           "Inline": "Inline Kompendium"
         },
         "CHAT": {
           "Category": "Chat Enricher",
           "Post": "Absatz im Chat Posten",
           "Whisper": "Absatz an Spieler flüstern"
-        }
+        },
+        "Polyglot": "Polyglot"
       }
     },
     "DND": {

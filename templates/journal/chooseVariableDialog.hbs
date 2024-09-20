@@ -1,0 +1,9 @@
+<div style="margin-bottom: 10px;">
+  <label for="LMJE_choosekey">{{localize 'LMJE.JOURNAL.VARIABLE.editVariablesDialog.chooseKey'}}</label>
+  <select name="LMJE_choosekey" id="LMJE_choosekey">
+    <option value="new">{{localize 'LMJE.JOURNAL.VARIABLE.editVariablesDialog.newKey'}}</option>
+    {{#each keys as |key|}}
+    <option value="{{key}}">{{key}}</option>
+    {{/each}}
+  </select>
+</div>

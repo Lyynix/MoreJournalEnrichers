@@ -1,0 +1,8 @@
+<div>
+  <div>{{localize description}}</div>
+  <div>
+    {{#each strings as |string|}}
+    <input type="radio" name="selectFromList" id="{{string}}" value="{{string}}"><label for="{{string}}">{{string}}</label><br>
+    {{/each}}
+  </div>
+</div>

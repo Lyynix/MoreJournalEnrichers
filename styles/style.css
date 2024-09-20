@@ -40,7 +40,7 @@
   padding: 9px 14px;
 }
 .LMJE-Table tr th a  {
-  color: var(--lmje-text-light) !important;
+  /* color: var(--lmje-text-light); */
 }
 .LMJE-Table tr th a:hover  {
   text-shadow: 0px 0px 15px var(--lmje-color-dark) !important;
@@ -57,8 +57,11 @@
   background: url(/ui/parchment.jpg) repeat;
   padding: 3px 5px;
 }
-.LMJE-Table tr:nth-child(2) td{
-  border-radius: 10px 10px 0 0;
+.LMJE-Table tr:nth-child(2) td:nth-child(1){
+  border-radius: 10px 0px 0 0;
+}
+.LMJE-Table tr:nth-child(2) td:nth-last-child(1){
+  border-radius: 0px 10px 0 0;
 }
 .LMJE-Table-Menu tr td:last-child {
   display: flex;
@@ -194,3 +197,8 @@
   margin: 5px;
   padding: 1px 4px;
 }
+
+#lmje-enricher-text {
+  font-family: var(--font-primary);
+}
+
