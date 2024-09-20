@@ -342,18 +342,19 @@ export async function postWelcomeMessage() {
     content: html,
   });
   game.settings.set("lyynix-more-journal-enrichers", "intro-message", false);
-  console.log("LMJE | Sent welcome message");
+  log("Sent welcome message");
 }
 
 export async function postChangelogDifference(current, lastLogged) {
-  const allVersions = ["1.0.0", "1.1.0", "1.2.0"];
-  console.log("LMJE | version difference detected", current, lastLogged);
+  // const allVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1", "1.3.0"];
+  const allVersions = Object.keys(changelog_en);
+  log("version difference detected", current, lastLogged);
 
   var firstIndex = allVersions.findIndex((e) => e === lastLogged);
   if (firstIndex < 0) throw "LMJE | unknown version";
   var unloggedVersions = allVersions.slice(firstIndex + 1);
 
-  // console.log("LMJE | those versions have not been logged:", unloggedVersions)
+  // log("those versions have not been logged:", unloggedVersions)
 
   var unloggedChangelog;
   switch (game.i18n.lang) {
@@ -387,7 +388,7 @@ export async function postChangelogDifference(current, lastLogged) {
     "lastLoggedVersion",
     game.modules.get("lyynix-more-journal-enrichers").version
   );
-  console.log("LMJE | created changelog");
+  log("created changelog");
 }
 
 /**
@@ -406,4 +407,8 @@ export function invalidHtml(error) {
       <i class="fas fa-unlink"></i>LMJE: ${error}
     </a>
   `;
+}
+
+export function log(...args) {
+  console.log("LMJE |", ...args)
 }

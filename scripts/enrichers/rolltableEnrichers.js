@@ -64,8 +64,8 @@ export async function rolltableFull(match, options) {
     rolltableData.results.push(resultData);
   }
 
-  // console.log("LMJE | ", rolltable);
-  // console.log("LMJE | ", rolltableData);
+  // log("", rolltable);
+  // log("", rolltableData);
 
   return $(await renderTemplate(templates.rolltable.full, rolltableData))[0];
 }

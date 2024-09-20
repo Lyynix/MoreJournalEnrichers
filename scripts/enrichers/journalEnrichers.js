@@ -1,5 +1,5 @@
 import { EnricherPattern } from "../enricherPattern.js";
-import { getDocument, invalidHtml, splitMultiline, templates } from "../helpers.js";
+import { getDocument, invalidHtml, log, splitMultiline, templates } from "../helpers.js";
 
 export async function insertPage(match, options) {
   // console.log(match);
@@ -61,9 +61,9 @@ export async function insertPage(match, options) {
   switch (page.type) {
     case "text":
       var enrichedContent = await TextEditor.enrichHTML(page.text.content);
-      // console.log("LMJE | enriched Page", $(enrichedContent));
+      // log("enriched Page", $(enrichedContent));
       var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
-      // console.log("LMJE | decoded HTML", decodedHtml);
+      // log("decoded HTML", decodedHtml);
 
       return $(/* html */ `
         <table class="LMJE-Table LMJE-PageMedia">
@@ -272,7 +272,7 @@ export function editVariables() {
                     "LMJE.JOURNAL.VARIABLE.editVariablesDialog.submitResponse"
                   )
                 );
-                console.log("LMJE | Variables updated");
+                log("Variables updated");
 
                 resolve({ mode: "edit", key: key, value: value });
               },
@@ -306,7 +306,7 @@ export function editVariables() {
                     "LMJE.JOURNAL.VARIABLE.editVariablesDialog.deleteResponse"
                   )
                 );
-                console.log("LMJE | Variable removed");
+                log("Variable removed");
                 resolve({ mode: "delete" });
               },
               icon: `<i class="fas fa-x"></i>`,

@@ -1,5 +1,5 @@
 import { editVariables } from "./enrichers/journalEnrichers.js";
-import { templates } from "./helpers.js";
+import { log, templates } from "./helpers.js";
 
 // static variables
 var activeSelectDocumentPromiseResolve;
