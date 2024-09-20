@@ -155,7 +155,7 @@ export async function checkbox(match, options) {
   var cbId;
   var cbLabel = match[2];
   if (match[1].length > 0) {
-    cbId = match[1];
+    cbId = match[1].replace(/\s/g, "-");
   } else return $(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))[0];
 
   var checkboxes = game.settings.get(
@@ -183,10 +183,10 @@ export async function checkbox(match, options) {
 export async function ifChecked(match, options) {
   // console.log(match);
 
-  var cbId = match[1];
+  var cbId;
   var content = match[2];
   if (match[1].length > 0) {
-    cbId = match[1];
+    cbId = match[1].replace(/\s/g, "-");
   } else
     return $(
       game.i18n.localize(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))
