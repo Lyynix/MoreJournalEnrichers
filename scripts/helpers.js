@@ -347,14 +347,15 @@ export async function postWelcomeMessage() {
 
 export async function postChangelogDifference(current, lastLogged) {
   // const allVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1", "1.3.0"];
-  const allVersions = Object.keys(changelog_en);
+  const allVersions = Object.keys(changelog_en).reverse();
+  // log(allVersions)
   log("version difference detected", current, lastLogged);
 
   var firstIndex = allVersions.findIndex((e) => e === lastLogged);
   if (firstIndex < 0) throw "LMJE | unknown version";
   var unloggedVersions = allVersions.slice(firstIndex + 1);
 
-  // log("those versions have not been logged:", unloggedVersions)
+  log("unlogged versions:", unloggedVersions)
 
   var unloggedChangelog;
   switch (game.i18n.lang) {
