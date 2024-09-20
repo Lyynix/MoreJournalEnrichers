@@ -22,7 +22,6 @@
   border-collapse: separate;
   border-radius: 10px;
   overflow: hidden;
-  border: 2px var(--lmje-color-light) solid;
 }
 
 .LMJE-Table {
@@ -58,10 +57,10 @@
   padding: 3px 5px;
 }
 .LMJE-Table tr:nth-child(2) td:nth-child(1){
-  border-radius: 10px 0px 0 0;
+  border-top-left-radius: 10px;
 }
 .LMJE-Table tr:nth-child(2) td:nth-last-child(1){
-  border-radius: 0px 10px 0 0;
+  border-top-right-radius: 10px;
 }
 .LMJE-Table-Menu tr td:last-child {
   display: flex;
