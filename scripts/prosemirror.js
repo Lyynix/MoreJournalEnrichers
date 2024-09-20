@@ -477,12 +477,15 @@ var functions = {
     });
   },
 };
+
+//#endregion
+
+//#region Helpers
+
 function convertLineBreak(text) {
   text = text.replace(/(\n+\s*)+/gm, "; ");
   return text;
 }
-
-//#endregion
 
 async function getFromListWithDialog(title, description, strings) {
   return new Promise(async (resolve, reject) => {
@@ -757,3 +760,5 @@ async function selectDocument(expectedType, resetWindows = true) {
 
   return result;
 }
+
+//#endregion
