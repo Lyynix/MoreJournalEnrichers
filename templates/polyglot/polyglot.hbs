@@ -13,21 +13,13 @@
     </th>
   </tr>
   <tr>
-    {{#if canUserUnderstand}}
-    <td colspan="2">
-      {{#each paragraphs as |p|}}
-      <p>{{{p}}}</p>
-      {{/each}}
-    </td>
-    {{else}}
     <td colspan="2" style="font-family: {{fontName}};">
       {{#each scrambledParagraphs as |p|}}
       <p>{{{p}}}</p>
       {{/each}}
     </td>
-    {{/if}}
   </tr>
-  {{#if isUserGm}}
+  {{#if (ifCond isUserGm "||" canUserUnderstand)}}
   <tr class="LMJE-Polyglot_translation">
     <td colspan="2">
       <div>

@@ -31,7 +31,7 @@ export async function polyglot(match, options) {
     scrambledParagraphs: scrambledParagraphs,
     fontName: lang.font,
     langString: canUserUnderstand ? lang.label : game.i18n.localize("LMJE.POLYGLOT.UnknownLanguage"),
-    showUnscrambled: canUserUnderstand && !game.user.isGM,
+    canUserUnderstand: canUserUnderstand,
     isUserGm: game.user.isGM,
     chatClick: chatClick
   }
