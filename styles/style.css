@@ -38,11 +38,11 @@
   color: var(--lmje-text-light);
   padding: 9px 14px;
 }
-.LMJE-Table tr th a  {
-  /* color: var(--lmje-text-light); */
+.LMJE-Table tr th:not(.LMJE-Table-body) a  {
+  color: var(--lmje-text-light);
 }
 .LMJE-Table tr th a:hover  {
-  text-shadow: 0px 0px 15px var(--lmje-color-dark) !important;
+  text-shadow: 0px 0px 15px var(--lmje-text-dark) !important;
 }
 .LMJE-Table tr th:not(.LMJE-Table-body) i {
   padding-right: 10px;
@@ -88,7 +88,7 @@
   text-decoration: none !important;
 }
 .LMJE-link {
-  border: 1px var(--color-border-dark-tertiary) solid;
+  border: 1px var(--color-text-dark-inactive) solid;
   border-radius: 3px;
   padding: 1px 0px 1px 4px;
   margin-right: 0.3em;
@@ -98,10 +98,13 @@
 
   background: #ddd;
 }
+.LMJE-link a:hover {
+  text-shadow: 0px 0px 15px var(--lmje-color-light) !important;
+}
 .LMJE-link a {
   text-decoration: none;
   padding: 0px;
-  color: var(--color-text-dark-primary);
+  color: var(--color-text-dark-inactive);
 }
 .LMJE-link span {
   margin-left: 1px;
