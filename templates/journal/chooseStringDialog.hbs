@@ -1,8 +1,12 @@
 <div>
   <div>{{localize description}}</div>
-  <div>
+  <div class="selectPageContainer">
     {{#each strings as |string|}}
-    <input type="radio" name="selectFromList" id="{{string}}" value="{{string}}"><label for="{{string}}">{{string}}</label><br>
+    <span>
+      <input type="radio" name="selectFromList" id="{{string}}" value="{{string}}">
+      <label for="{{string}}">{{string}}</label>
+      <br>
+    </span>
     {{/each}}
   </div>
 </div>

@@ -200,6 +200,42 @@
   padding: 1px 4px;
 }
 
+div.selectPageContainer span:has(input:checked) label {
+  /* color: var(--lmje-color-light); */
+  text-decoration: underline;
+  margin-left: 5px;
+  animation: selectString 0.1s ease-out 0s 1;
+}
+div.selectPageContainer span label {
+  color: var(--lmje-text-dark);
+  cursor: pointer;
+  margin-left: 0px;
+  animation: deselectString 0.1s ease-out 0s 1;
+} 
+div.selectPageContainer span input {
+  display: none;
+}
+div.selectPageContainer {
+  margin-block: 10px;
+  margin-left: 5px;
+}
+@keyframes selectString {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 5px;
+  }
+}
+@keyframes deselectString {
+  0% {
+    margin-left: 5px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
 #lmje-enricher-text {
   font-family: var(--font-primary);
 }

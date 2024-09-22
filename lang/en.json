@@ -128,7 +128,7 @@
           "IfCheckedContent": "Enter the text, that should be shown when the checkbox is checked.",
           "PolyglotLanguage": "Enter the Language in which the Text should be displayed.",
           "PolyglotText": "Enter the Text that should be displayed in the chosen language.",
-          "Page": "Please select a page from the journal that should be inserted."
+          "Page": "Please select a page from the journal that should be inserted:"
         },
         "Accept": "Accept",
         "Cancel": "Cancel"
