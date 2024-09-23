@@ -40,6 +40,7 @@ export async function insertPage(match, options) {
     )[0];
 
   var refTitle =
+    options.relativeTo.documentName === "JournalEntryPage" &&
     page.parent.uuid === options.relativeTo.parent.uuid
       ? page.name
       : `${page.parent.name} > ${page.name}`;

@@ -67,6 +67,9 @@
         "Edit": "Szene bearbeiten"
       }
     },
+    "ROLLTABLE": {
+      "Title": "Würfeltabellenmenü"
+    },
     "COMPENDIUM": {
       "INLINE": {
         "Show": "Kompendium anzeigen"
