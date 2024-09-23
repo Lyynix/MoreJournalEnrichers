@@ -8,6 +8,10 @@
 }
 
 /* Base Elements */
+.LMJE-Checkbox input {
+  vertical-align: middle;
+}
+
 .LMJE-InsertPage {
   padding: 5px 10px;
 
@@ -18,7 +22,6 @@
   border-collapse: separate;
   border-radius: 10px;
   overflow: hidden;
-  border: 2px var(--lmje-color-light) solid;
 }
 
 .LMJE-Table {
@@ -27,11 +30,19 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1.5px var(--lmje-color-light) solid;
+
+  background-color: var(--lmje-color-light) !important;
 }
 .LMJE-Table tr th {
   background-color: var(--lmje-color-light);
   color: var(--lmje-text-light);
   padding: 9px 14px;
+}
+.LMJE-Table tr th:not(.LMJE-Table-body) a  {
+  color: var(--lmje-text-light);
+}
+.LMJE-Table tr th a:hover  {
+  text-shadow: 0px 0px 15px var(--lmje-text-dark) !important;
 }
 .LMJE-Table tr th:not(.LMJE-Table-body) i {
   padding-right: 10px;
@@ -42,8 +53,14 @@
   font-weight: initial;
 }
 .LMJE-Table tr td {
-  background-color: #00000008;
+  background: url(/ui/parchment.jpg) repeat;
   padding: 3px 5px;
+}
+.LMJE-Table tr:nth-child(2) td:nth-child(1){
+  border-top-left-radius: 10px;
+}
+.LMJE-Table tr:nth-child(2) td:nth-last-child(1){
+  border-top-right-radius: 10px;
 }
 .LMJE-Table-Menu tr td:last-child {
   display: flex;
@@ -68,9 +85,10 @@
   background: none !important;
   border: none !important;
   white-space: nowrap !important;
+  text-decoration: none !important;
 }
 .LMJE-link {
-  border: 1px var(--color-border-dark-tertiary) solid;
+  border: 1px var(--color-text-dark-inactive) solid;
   border-radius: 3px;
   padding: 1px 0px 1px 4px;
   margin-right: 0.3em;
@@ -80,10 +98,13 @@
 
   background: #ddd;
 }
+.LMJE-link a:hover {
+  text-shadow: 0px 0px 15px var(--lmje-color-light) !important;
+}
 .LMJE-link a {
   text-decoration: none;
   padding: 0px;
-  color: var(--color-text-dark-primary);
+  color: var(--color-text-dark-inactive);
 }
 .LMJE-link span {
   margin-left: 1px;
@@ -96,6 +117,28 @@
 }
 
 /* Changes for enrichers */
+
+.LMJE-Polyglot tr td p {
+  margin: 0.5em 0 !important;
+}
+.LMJE-Polyglot tr td{
+  padding: 10px 10px;
+}
+.LMJE-Polyglot tr.LMJE-Polyglot_translation {
+  background-color: var(--lmje-text-light);
+  border-radius: 0;
+}
+.LMJE-Polyglot tr.LMJE-Polyglot_translation td {
+  color: var(--lmje-text-light);
+  background: url(/ui/parchment.jpg);
+  border-radius: 0px;
+  padding: 0px;
+}
+.LMJE-Polyglot_translation td div {
+  background: var(--lmje-color-dark);
+  padding: 10px;
+  border-radius: 10px;
+}
 
 .LMJE-Whisper_Table {
   border-color: var(--lmje-color-dark);
@@ -156,3 +199,44 @@
   margin: 5px;
   padding: 1px 4px;
 }
+
+div.selectPageContainer span:has(input:checked) label {
+  /* color: var(--lmje-color-light); */
+  text-decoration: underline;
+  margin-left: 5px;
+  animation: selectString 0.1s ease-out 0s 1;
+}
+div.selectPageContainer span label {
+  color: var(--lmje-text-dark);
+  cursor: pointer;
+  margin-left: 0px;
+  animation: deselectString 0.1s ease-out 0s 1;
+} 
+div.selectPageContainer span input {
+  display: none;
+}
+div.selectPageContainer {
+  margin-block: 10px;
+  margin-left: 5px;
+}
+@keyframes selectString {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 5px;
+  }
+}
+@keyframes deselectString {
+  0% {
+    margin-left: 5px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+#lmje-enricher-text {
+  font-family: var(--font-primary);
+}
+

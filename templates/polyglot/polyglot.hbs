@@ -1,0 +1,33 @@
+<table class="LMJE-Polyglot LMJE-Table">
+  <tr>
+    <th align="left">
+      <i class="fas fa-globe"></i>
+      {{langString}}
+    </th>
+    <th width="30px">
+      {{#if isUserGm}}
+      <a onclick="{{chatClick}}" title="{{localize 'LMJE.CHAT.Title'}}">
+        <i class="fas fa-message"></i>
+      </a>
+      {{/if}}
+    </th>
+  </tr>
+  <tr>
+    <td colspan="2" style="font-family: {{fontName}};">
+      {{#each scrambledParagraphs as |p|}}
+      <p>{{{p}}}</p>
+      {{/each}}
+    </td>
+  </tr>
+  {{#if (ifCond isUserGm "||" canUserUnderstand)}}
+  <tr class="LMJE-Polyglot_translation">
+    <td colspan="2">
+      <div>
+      {{#each paragraphs as |p|}}
+      <p>{{p}}</p>
+      {{/each}}
+      </div>
+    </td>
+  </tr>
+  {{/if}}
+</table>

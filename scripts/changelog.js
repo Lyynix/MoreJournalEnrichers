@@ -1,5 +1,49 @@
 export const allVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
 export const changelog_en = {
+  '1.3.0': {
+    name: "1.3.0",
+    additions: [
+      {
+        change: "Enrichers can now be added with the Prosemirror editor",
+        explanations: [
+          "In the Prosemirror editor, you can now select the enrichers from a dropdown menu.",
+          "The module lets you select documents, enter aliases etc automatically.",
+          "Currently menus can't be added with the Prosemirror editor"
+        ]
+      },
+      {
+        change: "Checkboxes and conditional text",
+        explanations: [
+          "The @​Checkbox or @​CB enricher lets you add functional Checkboxes, that store wether they are selected or not.",
+          "The @​IfChecked lets you add text, that is shown when the connected checkbox is checked."
+        ]
+      },
+      {
+        change: "Polyglot integration",
+        explanations: [
+          "If the module Polyglot is installed and active, you can use the @​Polyglot or @​Translate enricher.",
+          "This enricher lets you enter text, that gets scrambled if the players character doesn't understand the language. The text can also be posted to the chat."
+        ]
+      },
+      {
+        change: "Text can be multiline",
+        explanations: [
+          "Many enrichers that handle text (ChatPost, ChatWhisper, Polyglot, ...) can now have multiline text.",
+          "To make a new line, separate lines using a semicolon ';'."
+        ]
+      }
+    ],
+    fixes: [
+      {
+        change: "Menus can now be separated by ';'. No space needed anymore.",
+        explanations: []
+      },
+      {
+        change: "RollTableMenu now has the correct Title",
+        explanations: []
+      }
+    ]
+  },
   "1.2.1": {
     name: "1.2.1",
     additions: [],
@@ -86,6 +130,51 @@ export const changelog_en = {
 };
 
 export const changelog_de = {
+  '1.3.0': {
+    name: "1.3.0",
+    additions: [
+      {
+        change: "Enricher können jetzt mit dem Prosemirror Editor eingefügt werden.",
+        explanations: [
+          "Im Prosemirror Editor können die Enricher aus einem Dropdownmenü ausgewählt werden.",
+          "Der/die Nutzer*in wird automatisch zum Auswählen der benötigten Informationen aufgefordert.",
+          "Zur Zeit können keine Listen/Menüs über Prosemirror eingefügt"
+        ]
+      },
+      {
+        change: "Checkboxes and conditional text",
+        change: "Checkboxen und bedingter Text",
+        explanations: [
+          "Der @​Checkbox oder @​CB Enricher fügt funktionale Checkboxen ein, die ihren Zustand speichern können.",
+          "Der @​IfChecked Enricher fügt Text ein, der nur gezeigt wird, wenn die verbundene Checkbox aktiv ist."
+        ]
+      },
+      {
+        change: "Polyglot Integration",
+        explanations: [
+          "Wenn das Modul Polyglot installiert und aktiviert ist, kann der @​Polyglot oder @​Translate Enricher verwendet werden.",
+          "Dieser Enricher fügt Text ein, der gemäß Polyglot unkenntlich gemacht wird, wenn der Spielercharakter die Sprache nicht versteht. Der Text kann dann auch im Chat gepostet werden."
+        ]
+      },
+      {
+        change: "Text kann jetzt Mehrzeilig sein",
+        explanations: [
+          "Viele Enricher, die Text handhaben können jetzt mehrzeilig verwendet werden. (ChatPost, ChatWhisper, Polyglot, ...)",
+          "Um eine neue Zeile zu erstellen, trenne die Zeilen mit einem Semikolon ';'."
+        ]
+      }
+    ],
+    fixes: [
+      {
+        change: "Listen/Menüs können jetzt nur durch ein Semikolon ';' getrennt werden. Kein Leerzeichen mehr nötig.",
+        explanations: []
+      },
+      {
+        change: "RollTableMenu hat jetzt den korrekten Titel",
+        explanations: []
+      }
+    ]
+  },
   "1.2.1": {
     name: "1.2.1",
     additions: [],

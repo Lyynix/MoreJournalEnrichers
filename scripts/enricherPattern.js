@@ -1,11 +1,15 @@
 export class EnricherPattern {
   static ID = /[a-zA-Z0-9]{16}/;
-  static UUID = new RegExp(`${/(?:[a-zA-Z0-9-]+\.)+/.source}${EnricherPattern.ID.source}`)
+  static UUID = new RegExp(
+    `${/(?:[a-zA-Z0-9-]+\.)+/.source}${EnricherPattern.ID.source}`
+  );
   static TEXT = /[\S\s]+/;
-  static IDENTIFIER = new RegExp(`(?:${EnricherPattern.ID.source}|${EnricherPattern.UUID.source}|${EnricherPattern.TEXT.source})`)
+  static IDENTIFIER = new RegExp(
+    `(?:${EnricherPattern.ID.source}|${EnricherPattern.UUID.source}|${EnricherPattern.TEXT.source})`
+  );
   static WORD = /\S+/;
   static SIZE = /(?:big|bigger|medium|smaller|small)/;
-  static SEPARATOR = /(?:\;\s+)/;
+  static SEPARATOR = /(?:\;\s*)/;
 
   #ready = false;
   names = [];
@@ -73,7 +77,7 @@ export class EnricherPattern {
       if (this.#labels.optional) regexSource += `?`;
     }
 
-    return new RegExp(regexSource, "g");
+    return new RegExp(regexSource, "gy");
   }
 
   /**

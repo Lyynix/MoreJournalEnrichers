@@ -42,7 +42,7 @@ export async function compendiumFull(match, options) {
   var dataFolders = {};
   var dataContents = [];
 
-  // console.log("LMJE | Folders: ", folders)
+  // log("Folders: ", folders)
 
   contents.forEach((item) => {
     if (item.folder == null) dataContents.push(item);
@@ -50,8 +50,8 @@ export async function compendiumFull(match, options) {
       if (dataFolders[item.folder] === undefined) {
         var folderName = undefined;
         try {
-          // console.log("LMJE | Get Folder:", folders.get(item.folder))
-          // console.log("LMJE | Saved Folder:", item.folder)
+          // log("Get Folder:", folders.get(item.folder))
+          // log("Saved Folder:", item.folder)
 
           folderName = folders.get(item.folder).name;
         } catch (error) {}

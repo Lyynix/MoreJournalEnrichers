@@ -55,6 +55,8 @@ A list of all added enrichers can be found under [Usage & Features](#usage--feat
   - [Journals](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal)
     - `@Var` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#variable) - Define and use Placeholders
     - `@Page` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#page) - Insert content of another page
+    - `@Checkbox` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#checkbox) - Working Checkbox
+    - `@IfChecked` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#ifchecked) - Conditional Content
     - `@ToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#toc) - Table of contents
     - `@OrderedToC` - [wiki page](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Journal#ordered-toc) - Numbered table of contents
   - [Scenes](https://github.com/Lyynix/MoreJournalEnrichers/wiki/Enricher_Scenes)

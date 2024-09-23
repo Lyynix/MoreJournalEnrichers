@@ -10,8 +10,11 @@ import {
   otoc,
   variable,
   insertPage,
+  checkbox,
+  ifChecked,
 } from "./enrichers/journalEnrichers.js";
 import { inlinePlaylist, playlistMenu } from "./enrichers/playlistEnrichers.js";
+import { polyglot } from "./enrichers/polyglot.js";
 import {
   rolltableFull,
   rolltableInline,
@@ -24,6 +27,12 @@ import {
 } from "./enrichers/sceneEnrichers.js";
 
 export const templates = {
+  prosemirror: {
+    insertEnricher:
+      "modules/lyynix-more-journal-enrichers/templates/prosemirror/inser-enricher.hbs",
+    enterTextFormApplication:
+      "modules/lyynix-more-journal-enrichers/templates/prosemirror/enterText-Application.hbs",
+  },
   system: {
     welcomeMessage:
       "modules/lyynix-more-journal-enrichers/templates/system/welcomeMessage.hbs",
@@ -48,15 +57,36 @@ export const templates = {
     full: "modules/lyynix-more-journal-enrichers/templates/scene/sceneFull.hbs",
   },
   journal: {
+    chooseString:
+      "modules/lyynix-more-journal-enrichers/templates/journal/chooseStringDialog.hbs",
+    checkbox:
+      "modules/lyynix-more-journal-enrichers/templates/journal/checkbox.hbs",
     editVariables:
       "modules/lyynix-more-journal-enrichers/templates/journal/editVariablesDialog.hbs",
+    chooseVariable:
+      "modules/lyynix-more-journal-enrichers/templates/journal/chooseVariableDialog.hbs",
     refPage:
       "modules/lyynix-more-journal-enrichers/templates/journal/refPage.hbs",
+  },
+  modules: {
+    polyglot:
+      "modules/lyynix-more-journal-enrichers/templates/polyglot/polyglot.hbs",
   },
 };
 
 export const patterns = {
   journal: {
+    checkbox: new EnricherPattern()
+      .addName("Checkbox")
+      .addName("CB")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", true)
+      .getRegex(),
+    ifChecked: new EnricherPattern()
+      .addName("IfChecked")
+      .setReferenceTypes("IDENTIFIER", "SINGLE", false)
+      .setLabelTypes("TEXT", "SINGLE", false)
+      .getRegex(),
     variable: new EnricherPattern()
       .addName("Var")
       .addName("Replace")
@@ -153,10 +183,20 @@ export const patterns = {
       .setLabelTypes("TEXT", "SINGLE", true)
       .getRegex(),
   },
+  modules: {
+    polyglot: new EnricherPattern()
+      .addName("Polyglot")
+      .addName("Translate")
+      .setReferenceTypes("TEXT", "SINGLE", false)
+      .setLabelTypes("TEXT", "MULTIPLE", false)
+      .getRegex(),
+  },
 };
 
 export const enricherFunctions = {
   journal: {
+    checkbox: checkbox,
+    ifChecked: ifChecked,
     variable: variable,
     page: insertPage,
   },
@@ -185,6 +225,9 @@ export const enricherFunctions = {
   playlist: {
     menu: playlistMenu,
     inline: inlinePlaylist,
+  },
+  modules: {
+    polyglot: polyglot,
   },
 };
 
@@ -299,17 +342,20 @@ export async function postWelcomeMessage() {
     content: html,
   });
   game.settings.set("lyynix-more-journal-enrichers", "intro-message", false);
-  console.log("LMJE | Sent welcome message");
+  log("Sent welcome message");
 }
 
 export async function postChangelogDifference(current, lastLogged) {
-  console.log("LMJE | version difference detected", current, lastLogged);
+  // const allVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1", "1.3.0"];
+  const allVersions = Object.keys(changelog_en).reverse();
+  // log(allVersions)
+  log("version difference detected", current, lastLogged);
 
   var firstIndex = allVersions.findIndex((e) => e === lastLogged);
   if (firstIndex < 0) throw "LMJE | unknown version";
   var unloggedVersions = allVersions.slice(firstIndex + 1);
 
-  // console.log("LMJE | those versions have not been logged:", unloggedVersions)
+  log("unlogged versions:", unloggedVersions)
 
   var unloggedChangelog;
   switch (game.i18n.lang) {
@@ -343,7 +389,17 @@ export async function postChangelogDifference(current, lastLogged) {
     "lastLoggedVersion",
     game.modules.get("lyynix-more-journal-enrichers").version
   );
-  console.log("LMJE | created changelog");
+  log("created changelog");
+}
+
+/**
+ * Splits a String into multiple <p> at a separator
+ * @param {String} content The string that should be split at the given separator
+ * @param {RegExp | String} separator The separator at wich the content gets split
+ * @returns String as html with multiple <p> elements
+ */
+export function splitMultiline(content, separator) {
+  return `<span><p>${content.split(separator).join("</p><p>")}</p></span>`;
 }
 
 export function invalidHtml(error) {
@@ -352,4 +408,8 @@ export function invalidHtml(error) {
       <i class="fas fa-unlink"></i>LMJE: ${error}
     </a>
   `;
+}
+
+export function log(...args) {
+  console.log("LMJE |", ...args)
 }
