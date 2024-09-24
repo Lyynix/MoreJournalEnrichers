@@ -1,5 +1,18 @@
-export const allVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
 export const changelog_en = {
+  '1.3.1': {
+    name: "1.3.1",
+    additions: [],
+    fixes: [
+      {
+        change: "Fixed missing journals",
+        explanations: []
+      },
+      {
+        change: "Fixed links to journals in welcome message",
+        explanations: []
+      }
+    ]
+  },
   '1.3.0': {
     name: "1.3.0",
     additions: [
@@ -130,6 +143,20 @@ export const changelog_en = {
 };
 
 export const changelog_de = {
+  '1.3.1': {
+    name: "1.3.1",
+    additions: [],
+    fixes: [
+      {
+        change: "Fehlende Journale wieder hinzugefügt",
+        explanations: []
+      },
+      {
+        change: "Kaputte Links in der Willkommensnachricht repariert",
+        explanations: []
+      }
+    ]
+  },
   '1.3.0': {
     name: "1.3.0",
     additions: [

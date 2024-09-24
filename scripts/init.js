@@ -1,3 +1,4 @@
+import { changelog_en } from "./changelog.js";
 import { editVariables } from "./enrichers/journalEnrichers.js";
 import {
   enricherFunctions,
@@ -52,7 +53,7 @@ Hooks.on("init", () => {
     scope: "world",
     config: false,
     type: String,
-    default: "1.3.0", //game.modules.get('lyynix-more-journal-enrichers').version
+    default: Object.keys(changelog_en)[0], //game.modules.get('lyynix-more-journal-enrichers').version
   });
 
   game.settings.register("lyynix-more-journal-enrichers", "variables", {
