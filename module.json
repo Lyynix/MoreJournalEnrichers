@@ -4,8 +4,8 @@
   "description": "Beautify your journals, by adding interactive enrichers and get easy access to your prepared stuff!",
   "version": "#{VERSION}#",
   "compatibility": {
-    "minimum": "11",
-    "verified": "11"
+    "minimum": "12",
+    "verified": "12"
   },
   "authors": [
     {
