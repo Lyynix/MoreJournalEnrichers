@@ -142,7 +142,6 @@ export const changelog_de = {
         ]
       },
       {
-        change: "Checkboxes and conditional text",
         change: "Checkboxen und bedingter Text",
         explanations: [
           "Der @​Checkbox oder @​CB Enricher fügt funktionale Checkboxen ein, die ihren Zustand speichern können.",
