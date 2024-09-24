@@ -6,6 +6,10 @@ export const changelog_en = {
       {
         change: "Fixed missing journals",
         explanations: []
+      },
+      {
+        change: "Fixed links to journals in welcome message",
+        explanations: []
       }
     ]
   },
@@ -144,7 +148,11 @@ export const changelog_de = {
     additions: [],
     fixes: [
       {
-        change: "Fixed missing journals",
+        change: "Fehlende Journale wieder hinzugefügt",
+        explanations: []
+      },
+      {
+        change: "Kaputte Links in der Willkommensnachricht repariert",
         explanations: []
       }
     ]

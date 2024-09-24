@@ -1,4 +1,4 @@
-import { allVersions, changelog_de, changelog_en } from "./changelog.js";
+import { changelog_de, changelog_en } from "./changelog.js";
 import { EnricherPattern } from "./enricherPattern.js";
 import { chat, whisper } from "./enrichers/chatEnrichers.js";
 import {
