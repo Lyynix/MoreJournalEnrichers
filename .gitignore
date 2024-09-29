@@ -2,3 +2,9 @@
 releases/v*
 *.code-workspace
 *.vscode/
+
+packs/journals/*.log
+packs/journals/LOCK
+packs/journals/LOG
+packs/journals/LOG.old
+packs/journals/MANIFEST-*

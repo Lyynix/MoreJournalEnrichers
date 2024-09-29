@@ -1,4 +1,13 @@
 export const changelog_en = {
+  '1.3.2': {
+    name: "1.3.2",
+    additions: [],
+    fixes: [
+      {
+        change: "Fixed Enrichers not matching when in a single line"
+      },
+    ],
+  },
   '1.3.1': {
     name: "1.3.1",
     additions: [],
@@ -143,6 +152,15 @@ export const changelog_en = {
 };
 
 export const changelog_de = {
+  '1.3.2': {
+    name: "1.3.2",
+    additions: [],
+    fixes: [
+      {
+        change: "Enricher matchen jetzt, auch wenn sie in einer Zeile sind"
+      },
+    ],
+  },
   '1.3.1': {
     name: "1.3.1",
     additions: [],
