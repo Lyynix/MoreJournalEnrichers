@@ -3,7 +3,7 @@ export class EnricherPattern {
   static UUID = new RegExp(
     `${/(?:[a-zA-Z0-9-]+\.)+/.source}${EnricherPattern.ID.source}`
   );
-  static TEXT = /[\S\s]+/;
+  static TEXT = /[^\[\]\{\}\(\)]+/;
   static IDENTIFIER = new RegExp(
     `(?:${EnricherPattern.ID.source}|${EnricherPattern.UUID.source}|${EnricherPattern.TEXT.source})`
   );
@@ -77,7 +77,7 @@ export class EnricherPattern {
       if (this.#labels.optional) regexSource += `?`;
     }
 
-    return new RegExp(regexSource, "gy");
+    return new RegExp(regexSource, "g");
   }
 
   /**
