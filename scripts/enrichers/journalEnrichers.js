@@ -190,7 +190,7 @@ export async function ifChecked(match, options) {
     cbId = match[1].replace(/\s/g, "-");
   } else
     return $(
-      game.i18n.localize(invalidHtml("LMJE.JOURNAL.CHECKBOX.invalidId"))
+      invalidHtml(game.i18n.localize("LMJE.JOURNAL.CHECKBOX.invalidId"))
     )[0];
 
   var checkboxes = game.settings.get(
@@ -199,7 +199,7 @@ export async function ifChecked(match, options) {
   );
   if (checkboxes[cbId] === undefined)
     return $(
-      invalidHtml(game.i18n.localize("LMJE.JOURNAL.CHECKBOX.idNotFound"))
+      invalidHtml(game.i18n.localize("LMJE.JOURNAL.CHECKBOX.idNotFound") + `: "${cbId}"`)
     )[0];
 
   var html = splitMultiline(content, EnricherPattern.SEPARATOR);

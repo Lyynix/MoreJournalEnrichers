@@ -399,7 +399,11 @@ export async function postChangelogDifference(current, lastLogged) {
  * @returns String as html with multiple <p> elements
  */
 export function splitMultiline(content, separator) {
-  return `<span><p>${content.split(separator).join("</p><p>")}</p></span>`;
+  let lines = content.split(separator);
+  if (lines.length > 1)
+    return `<span><p>${lines.join("</p><p>")}</p></span>`;
+  else 
+    return `<span>${lines[0]}</span>`
 }
 
 export function invalidHtml(error) {
