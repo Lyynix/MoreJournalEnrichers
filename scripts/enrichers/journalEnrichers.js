@@ -205,10 +205,7 @@ export async function ifChecked(match, options) {
   var html = splitMultiline(content, EnricherPattern.SEPARATOR);
   var enriched = await TextEditor.enrichHTML(html, options);
   var conditional = checkboxes[cbId] ? enriched : "<span/>";
-
-  // console.log("LMJE | \n\n", html, "\n\n", enriched, $(conditional));
   
-
   return $(conditional)[0];
 }
 //#endregion
