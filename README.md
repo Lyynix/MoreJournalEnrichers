@@ -1,5 +1,4 @@
 [![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.3.2/lmje.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.3.2/module.json)
-[![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.3.1/lmje.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.3.1/module.json)
 [![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.2.1/lmje-v1_2_1.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.2.1/manifest.json)
 [![The Forge installs](https://img.shields.io/badge/dynamic/json?label=The%20Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Flyynix-more-journal-enrichers&colorB=4aa94a)](https://forge-vtt.com/bazaar/package/lyynix-more-journal-enrichers)
 
