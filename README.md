@@ -89,3 +89,6 @@ Contact me on discord (lyynix, formerly Lyynix#7777) or create an issue in this 
 
 You can also join our Map-Making oriented [Discord Server](https://discord.gg/3fA4VGQeup). It is a german Server, but most members are able and happy to speak in english if you have something to talk about.
 Also you can ping me anytime at the official (and english) [Foundry VTT Discord Server](https://discord.gg/foundryvtt).
+
+If you like my work, you can support me via Ko-fi:\
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-support_me-505050.svg?logo=ko-fi&logoColor=white&labelColor=F16061&logoSize=auto&style=for-the-badge)](https://ko-fi.com/lyynix)
