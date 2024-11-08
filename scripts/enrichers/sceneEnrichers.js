@@ -6,7 +6,7 @@ export async function sceneMenu(match, options) {
   const label = match[2] !== undefined ? match[2] : game.i18n.localize("LMJE.SCENEMENU.Title");
 
   var menuHtml = /* html */ `
-    <table class="LMJE-SceneMenu_Table LMJE-Table LMJE-Table-Menu">
+    <table class="LMJE LMJE-SceneMenu_Table LMJE-Table LMJE-Table-Menu">
         <tr>
           <th align="left" colspan="2">
             <i class="fas fa-map"></i>
