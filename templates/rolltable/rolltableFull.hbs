@@ -33,13 +33,16 @@
   <tr class="LMJE-RolltableResult">
     <td align="left">
       <div>
-      <img class="RollTableResultImage" src="{{result.img}}" height="40px">
-      {{#if result.type}}
+      {{#if result.img}}
+      <img class="RollTableResultImage" src="{{result.img}}">
+      {{/if}}
+      {{#if (ifCond result.type "!=" "text")}}
       <a class="content-link LMJE-no-link" 
         draggable="true" 
         data-uuid="{{result.document.uuid}}"
         data-id="{{result.document.id}}" 
-        data-type="{{result.document.type}}">
+        data-type="{{result.document.type}}"
+        data-link>
         {{result.text}}
       </a>
       {{else}}

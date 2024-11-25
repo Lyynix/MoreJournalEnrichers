@@ -31,11 +31,11 @@ export async function rolltableFull(match, options) {
       type: result.type,
       range: result.range,
       text: result.text,
-      img: result.img,
+      img: result.icon,
     };
 
     switch (result.type) {
-      case 1:
+      case "document":
         var doc = game.collections
           .get(result.documentCollection)
           .get(result.documentId);
@@ -46,7 +46,7 @@ export async function rolltableFull(match, options) {
         };
         break;
 
-      case 2:
+      case "pack":
         var doc = game.packs
           .get(result.documentCollection)
           .index.get(result.documentId);
