@@ -3,8 +3,8 @@
   --lmje-color-light: #756481;
   --lmje-color-dark: #403a44;
 
-  --lmje-text-light: #f0f0e0;
-  --lmje-text-dark: #1a1a17;
+  --lmje-text-light: #e8e2dd;
+  --lmje-text-dark: #544d48;
 }
 
 /* Base Elements */
@@ -16,7 +16,7 @@
   padding: 5px 10px;
 
   background: url(/ui/parchment.jpg) repeat;
-  color: var(--color-text-dark-primary);
+  color: var(--lmje-text-dark);
 
   border-spacing: 0;
   border-collapse: separate;
@@ -84,8 +84,7 @@ table.LMJE.LMJE-Table tr td a {
 table.LMJE.LMJE-Table tr td a:hover {
   text-shadow: 0 0 8px var(--lmje-color-light);
 }
-table.LMJE.LMJE-Table tr td a
-.LMJE-no-link {
+a.content-link.LMJE-no-link {
   background: none !important;
   border: none !important;
   white-space: nowrap !important;
