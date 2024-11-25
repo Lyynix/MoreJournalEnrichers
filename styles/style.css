@@ -61,10 +61,6 @@ table.LMJE.LMJE-Table tr td {
     height: 40px;
     object-fit: fill;
   }
-
-  & :last-child {
-    width: fit-content;
-  }
 }
 table.LMJE.LMJE-Table tr:nth-child(2) td:nth-child(1){
   border-top-left-radius: 10px;
