@@ -6,6 +6,7 @@ var activeSelectDocumentPromiseResolve;
 var activeSelectDocumentPromiseReject;
 var activeSelectDocumentPrevMaxed;
 var activeSelectDocumentPrevWindows;
+var wasSidebarExpanded;
 
 //#region initialization
 export function initProsemirrorButtons() {
@@ -14,10 +15,11 @@ export function initProsemirrorButtons() {
     "escapeFromSelectDocument",
     {
       name: "Escape from select Socument",
-      editable: [{ key: "Escape" }],
+      editable: [{ key: "KeyX", modifiers: ["Alt"] }],
       onDown: () => {
         if (activeSelectDocumentPromiseReject != undefined)
-          activeSelectDocumentPromiseReject("LMJE.PROSEMIRROR.INFO.Cancelled");
+          resetPrevWindows()
+        activeSelectDocumentPromiseReject("LMJE.PROSEMIRROR.INFO.Cancelled");
       },
     }
   );
@@ -213,7 +215,7 @@ var functions = {
       );
     } else {
       // teach user how to cancel selection
-      notifyCancelBinding();
+      let notiID = notifyCancelBinding();
 
       selectDocument("JournalEntry")
         .then((document) => {
@@ -225,10 +227,12 @@ var functions = {
               )
               .scrollIntoView()
           );
+          ui.notifications.remove(notiID)
         })
         .catch((reason) => {
           ui.notifications.warn(reason, { localize: true });
           resetPrevWindows();
+          ui.notifications.remove(notiID)
         });
     }
   },
@@ -236,7 +240,7 @@ var functions = {
     let cancelled = false;
     let selectedIds = [];
 
-    notifyCancelBinding();
+    let notiID = notifyCancelBinding();
 
     while (!cancelled) {
       try {
@@ -276,6 +280,7 @@ var functions = {
       }
     }
     resetPrevWindows();
+    ui.notifications.remove(notiID)
 
     this.prosemirror.view.dispatch(
       this.prosemirror.view.state.tr
@@ -284,7 +289,7 @@ var functions = {
     );
   },
   insertFull: function (type, docType) {
-    notifyCancelBinding();
+    let notiID = notifyCancelBinding();
 
     selectDocument(docType)
       .then((document) => {
@@ -296,6 +301,8 @@ var functions = {
           ),
           false
         ).then((text) => {
+          ui.notifications.remove(notiID)
+
           this.prosemirror.view.dispatch(
             this.prosemirror.view.state.tr
               .insertText(
@@ -310,10 +317,11 @@ var functions = {
       .catch((reason) => {
         ui.notifications.warn(reason, { localize: true });
         resetPrevWindows();
+        ui.notifications.remove(notiID)
       });
   },
   insertInline: function (type, docType) {
-    notifyCancelBinding();
+    let notiID = notifyCancelBinding();
 
     selectDocument(docType)
       .then((document) => {
@@ -326,6 +334,7 @@ var functions = {
           ),
           false
         ).then((text) => {
+          ui.notifications.remove(notiID)
           this.prosemirror.view.dispatch(
             this.prosemirror.view.state.tr
               .insertText(
@@ -340,6 +349,7 @@ var functions = {
       .catch((reason) => {
         ui.notifications.warn(reason, { localize: true });
         resetPrevWindows();
+        ui.notifications.remove(notiID)
       });
   },
   insertChat: async function (type) {
@@ -356,7 +366,7 @@ var functions = {
           .insertText(`@Chat${type}{${text}}`)
           .scrollIntoView()
       );
-    } catch (error) {}
+    } catch (error) { }
   },
   insertVariable: async function () {
     getVariableName().then(
@@ -367,7 +377,7 @@ var functions = {
             .scrollIntoView()
         );
       },
-      () => {}
+      () => { }
     );
   },
   insertCheckbox: async function () {
@@ -612,11 +622,13 @@ function notifyCancelBinding() {
       "lyynix-more-journal-enrichers.escapeFromSelectDocument"
     )[0]
   );
-  ui.notifications.info(
+  let noti = ui.notifications.info(
     game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", {
       keybinding: humanBinding,
-    })
+    }),
+    { permanent: true, console: false }
   );
+  return noti.id
 }
 
 function resetPrevWindows() {
@@ -634,6 +646,10 @@ function resetPrevWindows() {
     prev.window.setPosition(prev.position);
     if (!prev.minimized) prev.window.maximize();
   });
+  if (wasSidebarExpanded) 
+    ui.sidebar.collapse()
+  else 
+    ui.sidebar.expand()
 }
 
 function getIdentifier(document, docType = "nan") {
@@ -676,6 +692,7 @@ async function selectDocument(expectedType, resetWindows = true) {
     w.setPosition({ ...w.position, ...{ left: 0, top: 0 } });
     w.minimize();
   });
+  wasSidebarExpanded = ui.sidebar.expanded
 
   let result = new Promise((resolve, reject) => {
     activeSelectDocumentPromiseResolve = resolve;
@@ -712,37 +729,33 @@ async function selectDocument(expectedType, resetWindows = true) {
       break;
   }
 
-  ui.sidebar.activateTab(sidebarTab);
+  ui.sidebar.changeTab(sidebarTab, "primary")
+  if (!ui.sidebar.expanded) ui.sidebar.expand()
 
   // Hooks on open Document Sheet (needs to be edited)
-  Hooks.once(hook, (config, dom, options) => {
+  let hookFn = Hooks.on(hook, (config, dom, options) => {
     setTimeout(() => {
       if (resetWindows) resetPrevWindows();
 
       switch (expectedType) {
         case "CompendiumCollection":
           if (config.collection.name === expectedType) {
+            Hooks.off(hook, hookFn)
             activeSelectDocumentPromiseResolve(config.collection);
-          } else {
-            activeSelectDocumentPromiseReject(
-              "LMJE.PROSEMIRROR.INFO.WrongType"
-            );
+            activeSelectDocumentPromiseResolve = undefined;
+            activeSelectDocumentPromiseReject = undefined;
           }
           break;
 
         default:
           if (config.document.documentName === expectedType) {
+            Hooks.off(hook, hookFn)
             activeSelectDocumentPromiseResolve(config.document);
-          } else {
-            // console.log(expectedType);
-            activeSelectDocumentPromiseReject(
-              "LMJE.PROSEMIRROR.INFO.WrongType"
-            );
+            activeSelectDocumentPromiseResolve = undefined;
+            activeSelectDocumentPromiseReject = undefined;
           }
           break;
       }
-      activeSelectDocumentPromiseResolve = undefined;
-      activeSelectDocumentPromiseReject = undefined;
     }, 100);
   });
 
