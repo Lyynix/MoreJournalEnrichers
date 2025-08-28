@@ -85,7 +85,7 @@ export async function compendiumFull(match, options) {
   };
   // console.log("LMJE |", compendiumData);
 
-  var returnHtml = await renderTemplate(
+  var returnHtml = await foundry.applications.handlebars.renderTemplate(
     templates.compendium.full,
     compendiumData
   );
@@ -109,7 +109,7 @@ export async function inlineCompendium(match, options) {
     id: compendium.metadata.id,
   };
 
-  var returnHtml = await renderTemplate(
+  var returnHtml = await foundry.applications.handlebars.renderTemplate(
     templates.compendium.inline,
     compendiumData
   );

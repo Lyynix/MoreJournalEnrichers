@@ -118,7 +118,7 @@ export async function inlinePlaylist(match, options) {
     ]
   };
 
-  var html = await renderTemplate(templates.inline, templateData)
+  var html = await foundry.applications.handlebars.renderTemplate(templates.inline, templateData)
 
   return $(html)[0];
 }

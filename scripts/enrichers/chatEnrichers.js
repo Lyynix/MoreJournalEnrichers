@@ -16,7 +16,7 @@ export async function chat(match, options) {
     message: message,
   };
 
-  var html = await renderTemplate(templates.chatTable, enricherData);
+  var html = await foundry.applications.handlebars.renderTemplate(templates.chatTable, enricherData);
 
   return $(html)[0];
 }
@@ -80,7 +80,7 @@ export async function whisper(match, options) {
     message: message,
   };
 
-  var html = await renderTemplate(templates.whisperTable, enricherData);
+  var html = await foundry.applications.handlebars.renderTemplate(templates.whisperTable, enricherData);
 
   return $(html)[0];
 }

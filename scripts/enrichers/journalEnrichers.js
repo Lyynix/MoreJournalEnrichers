@@ -57,7 +57,7 @@ export async function insertPage(match, options) {
     refTitle: refTitle,
     decodedHtml: decodedHtml,
   };
-  return $(await renderTemplate(templates.journal.refPage, pageData))[0];
+  return $(await foundry.applications.handlebars.renderTemplate(templates.journal.refPage, pageData))[0];
 
   switch (page.type) {
     case "text":
@@ -172,7 +172,7 @@ export async function checkbox(match, options) {
     );
   }
 
-  var html = await renderTemplate(templates.journal.checkbox, {
+  var html = await foundry.applications.handlebars.renderTemplate(templates.journal.checkbox, {
     label: cbLabel,
     id: cbId,
     checked: checkboxes[cbId],
@@ -229,7 +229,7 @@ export function editVariables() {
   var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
 
   return new Promise((resolve, reject) => {
-    renderTemplate(templates.journal.editVariables, { keys: vars.keys }).then(
+    foundry.applications.handlebars.renderTemplate(templates.journal.editVariables, { keys: vars.keys }).then(
       (html) => {
         new Dialog({
           title: game.i18n.localize(

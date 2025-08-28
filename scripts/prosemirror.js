@@ -489,7 +489,7 @@ function convertLineBreak(text) {
 
 async function getFromListWithDialog(title, description, strings) {
   return new Promise(async (resolve, reject) => {
-    var html = await renderTemplate(templates.journal.chooseString, {
+    var html = await foundry.applications.handlebars.renderTemplate(templates.journal.chooseString, {
       description: description,
       strings: strings,
     });
@@ -521,7 +521,7 @@ async function getFromListWithDialog(title, description, strings) {
 async function getVariableName() {
   return new Promise(async (resolve, reject) => {
     var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
-    renderTemplate(templates.journal.chooseVariable, { keys: vars.keys }).then(
+    foundry.applications.handlebars.renderTemplate(templates.journal.chooseVariable, { keys: vars.keys }).then(
       (html) => {
         new Dialog({
           title: game.i18n.localize(
@@ -576,7 +576,7 @@ async function getTextInputWithDialog(
   return new Promise(async (resolve, reject) => {
     new Dialog({
       title: title,
-      content: await renderTemplate(
+      content: await foundry.applications.handlebars.renderTemplate(
         templates.prosemirror.enterTextFormApplication,
         {
           description: description,
@@ -607,7 +607,7 @@ async function getTextInputWithDialog(
 }
 
 function notifyCancelBinding() {
-  let humanBinding = KeybindingsConfig._humanizeBinding(
+  let humanBinding = foundry.applications.sidebar.apps.ControlsConfig.humanizeBinding(
     game.keybindings.bindings.get(
       "lyynix-more-journal-enrichers.escapeFromSelectDocument"
     )[0]
@@ -620,7 +620,7 @@ function notifyCancelBinding() {
 }
 
 function resetPrevWindows() {
-  Object.values(ui.windows).forEach((window) => {
+  foundry.applications.instances.values().toArray().filter(e => e.hasFrame).forEach((window) => {
     let included = false;
     activeSelectDocumentPrevWindows.forEach((prevWindow) => {
       if (window.id === prevWindow.id) {
@@ -657,20 +657,8 @@ async function selectDocument(expectedType, resetWindows = true) {
   activeSelectDocumentPrevMaxed = [];
   activeSelectDocumentPrevWindows = [];
 
-  // teach user how to cancel selection
-  let humanBinding = KeybindingsConfig._humanizeBinding(
-    game.keybindings.bindings.get(
-      "lyynix-more-journal-enrichers.escapeFromSelectDocument"
-    )[0]
-  );
-  ui.notifications.info(
-    game.i18n.format("LMJE.PROSEMIRROR.INFO.Cancel", {
-      keybinding: humanBinding,
-    })
-  );
-
   // loop over all windows
-  Object.values(ui.windows).forEach(async (w) => {
+  foundry.applications.instances.values().toArray().filter(e => e.hasFrame).forEach(async (w) => {
     activeSelectDocumentPrevWindows.push(w);
     // ignore minimized windows
     if (w._minimized) return;
@@ -702,24 +690,24 @@ async function selectDocument(expectedType, resetWindows = true) {
       sidebarTab = "compendium";
       break;
     case "Scene":
-      hook = "renderDocumentSheet";
+      hook = "renderDocumentSheetV2";
       sidebarTab = "scenes";
       break;
     case "Playlist":
-      hook = "renderDocumentSheet";
+      hook = "renderDocumentSheetV2";
       sidebarTab = "playlists";
       break;
     case "RollTable":
-      hook = "renderDocumentSheet";
+      hook = "renderDocumentSheetV2";
       sidebarTab = "tables";
       break;
     case "JournalEntry":
-      hook = "renderDocumentSheet";
+      hook = "renderDocumentSheetV2";
       sidebarTab = "journal";
       break;
 
     default:
-      hook = "renderDocumentSheet";
+      hook = "renderDocumentSheetV2";
       sidebarTab = ui.sidebar.activeTab;
       break;
   }

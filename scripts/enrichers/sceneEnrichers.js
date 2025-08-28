@@ -109,7 +109,7 @@ export async function sceneFull(match, options) {
     img: sceneDocument.background.src
   }
   
-  var sceneHtml = await renderTemplate(templates.scene.full, templateData);
+  var sceneHtml = await foundry.applications.handlebars.renderTemplate(templates.scene.full, templateData);
   return $(sceneHtml)[0]
 }
 
@@ -182,7 +182,7 @@ export async function inlineScene(match, options) {
     ]
   }
   
-  var sceneHtml = await renderTemplate(templates.inline, templateData);
+  var sceneHtml = await foundry.applications.handlebars.renderTemplate(templates.inline, templateData);
 
   return $(sceneHtml)[0];
 }
