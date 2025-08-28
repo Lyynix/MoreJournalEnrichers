@@ -1,6 +1,4 @@
 [![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.3.2/lmje.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.3.2/module.json)
-[![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.3.1/lmje.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.3.1/module.json)
-[![GitHub release (latest by SemVer and asset)](https://img.shields.io/github/downloads/Lyynix/MoreJournalEnrichers/v1.2.1/lmje-v1_2_1.zip)](https://github.com/Lyynix/MoreJournalEnrichers/releases/download/v1.2.1/manifest.json)
 [![The Forge installs](https://img.shields.io/badge/dynamic/json?label=The%20Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Flyynix-more-journal-enrichers&colorB=4aa94a)](https://forge-vtt.com/bazaar/package/lyynix-more-journal-enrichers)
 
 ![Banner Image of Lyynix](.github/Assets/LyynixBanner.png)
@@ -90,3 +88,6 @@ Contact me on discord (lyynix, formerly Lyynix#7777) or create an issue in this 
 
 You can also join our Map-Making oriented [Discord Server](https://discord.gg/3fA4VGQeup). It is a german Server, but most members are able and happy to speak in english if you have something to talk about.
 Also you can ping me anytime at the official (and english) [Foundry VTT Discord Server](https://discord.gg/foundryvtt).
+
+If you like my work, you can support me via Ko-fi:\
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-support_me-505050.svg?logo=ko-fi&logoColor=white&labelColor=F16061&logoSize=auto&style=for-the-badge)](https://ko-fi.com/lyynix)
