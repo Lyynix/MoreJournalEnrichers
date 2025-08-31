@@ -216,12 +216,12 @@ Hooks.on("init", () => {
   }
 });
 
-Hooks.on("getJournalTextPageSheetHeaderButtons", (app, buttons) => {
+Hooks.on("getHeaderControlsJournalEntryPageTextSheet", (app, buttons) => {
   var button = {
     class: "edit-variables",
     label: "Edit Variables",
     icon: "fa-regular fa-code",
-    onclick: (event) => editVariables(),
+    onClick: (event) => editVariables(),
   };
   buttons.unshift(button);
 });
