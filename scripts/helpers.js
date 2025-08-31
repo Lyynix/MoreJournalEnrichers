@@ -334,7 +334,7 @@ export async function postWelcomeMessage() {
   var data = {
     isGerman: game.settings.get("core", "language") === "de",
   };
-  var html = await renderTemplate(templates.system.welcomeMessage, data);
+  var html = await foundry.applications.handlebars.renderTemplate(templates.system.welcomeMessage, data);
   ChatMessage.create({
     user: game.users.current,
     whisper: [game.users.current._id],
@@ -371,7 +371,7 @@ export async function postChangelogDifference(current, lastLogged) {
       };
       break;
   }
-  var html = await renderTemplate(
+  var html = await foundry.applications.handlebars.renderTemplate(
     templates.system.changeLog,
     unloggedChangelog
   );

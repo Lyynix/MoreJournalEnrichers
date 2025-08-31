@@ -35,6 +35,6 @@ export async function polyglot(match, options) {
     isUserGm: game.user.isGM,
     chatClick: chatClick
   }
-  let html = await renderTemplate(templates.modules.polyglot, obj)
+  let html = await foundry.applications.handlebars.renderTemplate(templates.modules.polyglot, obj)
   return $(html)[0]
 }

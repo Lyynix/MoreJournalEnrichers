@@ -67,7 +67,7 @@ export async function rolltableFull(match, options) {
   // log("", rolltable);
   // log("", rolltableData);
 
-  return $(await renderTemplate(templates.rolltable.full, rolltableData))[0];
+  return $(await foundry.applications.handlebars.renderTemplate(templates.rolltable.full, rolltableData))[0];
 }
 
 export async function rolltableMenu(match, options) {
@@ -100,7 +100,7 @@ export async function rolltableMenu(match, options) {
     });
   }
 
-  return $(await renderTemplate(templates.rolltable.menu, menuData))[0];
+  return $(await foundry.applications.handlebars.renderTemplate(templates.rolltable.menu, menuData))[0];
 }
 
 export async function rolltableInline(match, options) {
@@ -142,5 +142,5 @@ export async function rolltableInline(match, options) {
     ],
   };
 
-  return $(await renderTemplate(templates.inline, rolltableData))[0];
+  return $(await foundry.applications.handlebars.renderTemplate(templates.inline, rolltableData))[0];
 }
