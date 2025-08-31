@@ -21,7 +21,7 @@ export async function insertPage(match, options) {
           return $(
             invalidHtml(
               "Page: " +
-                game.i18n.localize("LMJE.SYSTEM.getDocument.noDocumentFound")
+              game.i18n.localize("LMJE.SYSTEM.getDocument.noDocumentFound")
             )
           )[0];
       } catch (error) {
@@ -41,14 +41,14 @@ export async function insertPage(match, options) {
 
   var refTitle =
     options.relativeTo.documentName === "JournalEntryPage" &&
-    page.parent.uuid === options.relativeTo.parent.uuid
+      page.parent.uuid === options.relativeTo.parent.uuid
       ? page.name
       : `${page.parent.name} > ${page.name}`;
 
   var decodedHtml;
   if (page.type === "text") {
-    var enrichedContent = await TextEditor.enrichHTML(page.text.content);
-    decodedHtml = await TextEditor.decodeHTML(enrichedContent);
+    var enrichedContent = await foundry.applications.ux.TextEditor.implementation.enrichHTML(page.text.content);
+    decodedHtml = await foundry.applications.ux.TextEditor.implementation.decodeHTML(enrichedContent);
   }
 
   var pageData = {
@@ -61,9 +61,9 @@ export async function insertPage(match, options) {
 
   switch (page.type) {
     case "text":
-      var enrichedContent = await TextEditor.enrichHTML(page.text.content);
+      var enrichedContent = await foundry.applications.ux.TextEditor.implementation.enrichHTML(page.text.content);
       // log("enriched Page", $(enrichedContent));
-      var decodedHtml = await TextEditor.decodeHTML(enrichedContent);
+      var decodedHtml = await foundry.applications.ux.TextEditor.implementation.decodeHTML(enrichedContent);
       // log("decoded HTML", decodedHtml);
 
       return $(/* html */ `
@@ -203,18 +203,24 @@ export async function ifChecked(match, options) {
     )[0];
 
   var html = splitMultiline(content, EnricherPattern.SEPARATOR);
-  var enriched = await TextEditor.enrichHTML(html, options);
+  var enriched = await foundry.applications.ux.TextEditor.implementation.enrichHTML(html, options);
   var conditional = checkboxes[cbId] ? enriched : "<span/>";
-  
+
   return $(conditional)[0];
 }
 //#endregion
 
 //#region Variable
-export function variable(match, options) {
+export async function variable(match, options) {
   var vars = game.settings.get("lyynix-more-journal-enrichers", "variables");
   var val = vars[match[1]];
-  if (val !== undefined) return vars[match[1]];
+  if (val !== undefined) {
+    let content = await foundry.applications.ux.TextEditor.implementation.decodeHTML(
+      await foundry.applications.ux.TextEditor.implementation.enrichHTML(vars[match[1]], options)
+    );
+    log(content);
+    return $(content)[0]
+  }
   else
     return $(
       invalidHtml(game.i18n.localize("LMJE.JOURNAL.VARIABLE.keyNotFound"))
@@ -382,16 +388,17 @@ export async function tableOfContents(match, options, ordered) {
         if (ordered)
           tocHtml += /* html */ `
             <ul style="
+                  padding: 0 0 0 1.75rem; 
                   list-style: none;
-                  font-size: ${
-                    (7 - (page.title.level + headerOffset)) * 2 + 6
-                  }pt" 
+                  font-size: ${(7 - (page.title.level + headerOffset)) * 2 + 6
+            }pt" 
                 class="no-list-style">
           `;
         else
           tocHtml += /* html */ `
-            <ol style="font-size: ${
-              (7 - (page.title.level + headerOffset)) * 2 + 6
+            <ol style="
+                  padding: 0 0 0 1.75rem; 
+                  font-size: ${(7 - (page.title.level + headerOffset)) * 2 + 6
             }pt">
           `;
       }
