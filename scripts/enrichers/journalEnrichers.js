@@ -218,7 +218,8 @@ export async function variable(match, options) {
     let content = await foundry.applications.ux.TextEditor.implementation.decodeHTML(
       await foundry.applications.ux.TextEditor.implementation.enrichHTML(vars[match[1]], options)
     );
-    log(content);
+    if (!(content.match(/^<[a-zA-Z]+>/) && content.match(/<\/[a-zA-Z]+>$/)))
+      content = "<span>" + content + "</span>"
     return $(content)[0]
   }
   else
@@ -424,7 +425,7 @@ export async function tableOfContents(match, options, ordered) {
           data-type="JournalEntryPage"
           data-tooltip="${journal.name}: ${page.name}"
           data-link
-          style="white-space: normal;">
+          style="white-space: normal; font-weight: normal;">
             ${page.name}
         </a>
       </li>
