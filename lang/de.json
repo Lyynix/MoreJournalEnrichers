@@ -64,7 +64,8 @@
         "Activate": "Szene aktivieren",
         "ToggleNav": "Szene in Navigation umschalten",
         "Preload": "Szene vorladen",
-        "Edit": "Szene bearbeiten"
+        "Edit": "Szene bearbeiten",
+        "Collapse": "Vorschau aus-/einklappen"
       }
     },
     "ROLLTABLE": {

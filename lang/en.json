@@ -64,7 +64,8 @@
         "Activate": "Acitvate scene",
         "ToggleNav": "Toggle scene in navigation",
         "Preload": "Preload scene",
-        "Edit": "Edit scene"
+        "Edit": "Edit scene",
+        "Collapse": "Show/Hide preview"
       }
     },
     "ROLLTABLE": {

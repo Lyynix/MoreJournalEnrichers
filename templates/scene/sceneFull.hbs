@@ -40,11 +40,22 @@
         ">
           <i class="fas fa-cogs"></i>
         </a>
+        <a title="{{localize LMJE.SCENEMENU.Tooltip.Collapse}}" onclick="
+          let display = document.getElementById(`scene-{{uuid}}`).style.display
+          if (display === 'none') {
+            document.getElementById(`scene-{{uuid}}`).style.display = 'table-cell'
+          } else {
+            document.getElementById(`scene-{{uuid}}`).style.display = 'none'
+          }
+          return false;
+        ">
+          <i class="fas fa-arrows-up-down"></i>
+        </a>
       </div>
     </th>
   </tr>
   <tr>
-    <th colspan="2" align="right" class="LMJE-Table-body">
+    <th colspan="2" align="right" class="LMJE-Table-body" id="scene-{{uuid}}">
       <div>
         <img src="{{img}}" onerror="this.style.display='none'">
         <video src="{{img}}" autoplay="" loop="" muted="" onerror="this.style.display='none'">
